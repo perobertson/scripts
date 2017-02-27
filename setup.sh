@@ -18,22 +18,19 @@ mkdir -p "$HOME/Downloads"
 mkdir -p "$HOME/bin"
 mkdir -p "$HOME/workspace"
 
-# Check if we are running the script directly from curl
-if [[ $0 = "bash" ]]; then
-  which dnf > /dev/null 2&>1
-  if [ $? -eq 0 ]; then
-    sudo dnf install -y git
-  else
-    sudo apt-get install -y git
-  fi
-
-  if [ -d "$HOME/workspace/scripts" ]; then
-    cd "$HOME/workspace/scripts"
-  else
-    git clone git@gitlab.com:perobertson/scripts.git "$HOME/workspace/scripts"
-    cd "$HOME/workspace/scripts"
-  fi
+which dnf > /dev/null 2&>1
+if [ $? -eq 0 ]; then
+  sudo dnf install -y git
+else
+  sudo apt-get install -y git
 fi
 
-$HOME/workspace/scripts/install_heroku.sh
-$HOME/workspace/scripts/dnf_config.sh
+if [ -d "$HOME/workspace/scripts" ]; then
+  cd "$HOME/workspace/scripts"
+else
+  git clone git@gitlab.com:perobertson/scripts.git "$HOME/workspace/scripts"
+  cd "$HOME/workspace/scripts"
+fi
+
+./install_heroku.sh
+./dnf_config.sh
