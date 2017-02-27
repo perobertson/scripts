@@ -4,7 +4,7 @@
 set -e
 
 # Display Commands
-# set -x
+set -x
 
 # Clear any previous sudo permission
 sudo -k
