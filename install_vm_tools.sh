@@ -7,6 +7,10 @@ sudo dnf -y install virt-what
 
 if [[ $(sudo virt-what | grep virtualbox) != '' ]]; then
   sudo dnf -y install dkms \
+                      make \
+                      automake \
+                      gcc \
+                      gcc-c++ \
                       kernel-devel-$(uname -r) \
                       akmod-VirtualBox
 else
