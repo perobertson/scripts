@@ -35,9 +35,10 @@ else
   cd "$HOME/workspace/scripts"
 fi
 
-if [ -f /etc/fedora-release ]; then
+os=$(. /etc/os-release && echo $ID)
+if [ "$os" = "fedora" ]; then
   ./setup_fedora.sh
 else
-  echo "unknown OS"
+  echo "unknown OS: $os"
   exit 1
 fi
