@@ -15,6 +15,11 @@ mkdir -p "$HOME/Downloads"
 mkdir -p "$HOME/bin"
 mkdir -p "$HOME/workspace"
 
+# Install heroku toolbelt first since it clears sudo and asks again
+if [ ! -x /usr/local/heroku/bin/heroku ]; then
+  /usr/bin/curl -s https://toolbelt.heroku.com/install.sh | sh
+fi
+
 if [ -x /usr/bin/dnf ]; then
   sudo dnf install -y git
 else
@@ -31,5 +36,4 @@ fi
 
 pwd
 
-./install_heroku.sh
 ./dnf_config.sh
