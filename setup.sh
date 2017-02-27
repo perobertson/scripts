@@ -28,6 +28,7 @@ fi
 
 if [ -d "$HOME/workspace/scripts" ]; then
   cd "$HOME/workspace/scripts"
+  git pull
 else
   ssh-keyscan >> "$HOME/.ssh/known_hosts" 2>/dev/null
   git clone https://gitlab.com/perobertson/scripts.git "$HOME/workspace/scripts"
