@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Attempt to exit on errors
-set -e
+# set -e
 
 # Display Commands
 # set -x
