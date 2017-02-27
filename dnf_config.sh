@@ -9,3 +9,6 @@ sudo dnf -y install --nogpgcheck \
 
 # Allows for managing repos fromo cli
 sudo dnf -y install dnf-plugins-core
+
+# VirtualBox repo
+sudo dnf config-manager --add-repo http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
