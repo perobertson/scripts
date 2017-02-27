@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
 set -x
 
 # Install RPM Fusion - Free & Non-Free
