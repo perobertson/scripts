@@ -25,7 +25,7 @@ if [ -d "$HOME/workspace/scripts" ]; then
   cd "$HOME/workspace/scripts"
 else
   ssh-keyscan >> "$HOME/.ssh/known_hosts" 2>/dev/null
-  git clone git@gitlab.com:perobertson/scripts.git "$HOME/workspace/scripts"
+  git clone https://gitlab.com/perobertson/scripts.git "$HOME/workspace/scripts"
   cd "$HOME/workspace/scripts"
 fi
 
