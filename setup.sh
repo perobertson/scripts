@@ -15,8 +15,7 @@ mkdir -p "$HOME/Downloads"
 mkdir -p "$HOME/bin"
 mkdir -p "$HOME/workspace"
 
-which dnf > /dev/null 2&>1
-if [ $? -eq 0 ]; then
+if [ -x /usr/bin/dnf ]; then
   sudo dnf install -y git
 else
   sudo apt-get install -y git
