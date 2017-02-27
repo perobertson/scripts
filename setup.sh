@@ -34,3 +34,6 @@ if [[ $0 = "bash" ]]; then
     cd "$HOME/workspace/scripts"
   fi
 fi
+
+$HOME/workspace/scripts/install_heroku.sh
+$HOME/workspace/scripts/dnf_config.sh
