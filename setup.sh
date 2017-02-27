@@ -35,6 +35,9 @@ else
   cd "$HOME/workspace/scripts"
 fi
 
-pwd
-
-./dnf_config.sh
+if [ -f /etc/fedora-release ]; then
+  ./setup_fedora.sh
+else
+  echo "unknown OS"
+  exit 1
+fi
