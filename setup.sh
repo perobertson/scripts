@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Run this script by doing:
-# /usr/bin/curl -sSL __FILE__ | bash
-
 # Attempt to exit on errors
 set -e
 
