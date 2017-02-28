@@ -42,7 +42,7 @@ fi
 # Run the setup
 os=$(. /etc/os-release && echo $ID)
 if [ "$os" = "fedora" ]; then
-  ./fedora/setup.sh
+  . fedora/setup.sh
 else
   echo "unknown OS: $os"
   exit 1

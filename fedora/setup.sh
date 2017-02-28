@@ -1,8 +1,3 @@
-#!/usr/bin/env bash
-
-# Display Commands
-set -x
-
 # Allows for managing repos fromo cli
 sudo dnf -y install dnf-plugins-core
 
