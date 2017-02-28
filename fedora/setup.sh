@@ -1,25 +1,13 @@
 #!/usr/bin/env bash
 
-# Run this script by doing:
-# \curl -sSL https://gist.githubusercontent.com/perobertson/a393ec9360d0573265b1/raw | bash
-
 # Display Commands
-# set -x
-
-# Clear any previous sudo permission
-sudo -k
-
-# Check for root
-[[ $(id -u) -eq 0 ]] && echo 'script must be run as a normal user' && exit 1
+set -x
 
 # Set up app directories
 mkdir -p "$HOME/Applications"
 mkdir -p "$HOME/Downloads"
 mkdir -p "$HOME/bin"
 mkdir -p "$HOME/workspace"
-
-# Install Heroku toolbelt
-curl -s https://toolbelt.heroku.com/install.sh | sh
 
 # Allows for managing repos fromo cli
 sudo dnf -y install dnf-plugins-core
