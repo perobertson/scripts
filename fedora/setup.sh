@@ -3,8 +3,6 @@
 # Display Commands
 set -x
 
-../create_user_directories.sh
-
 # Allows for managing repos fromo cli
 sudo dnf -y install dnf-plugins-core
 
