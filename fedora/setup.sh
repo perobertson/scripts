@@ -39,7 +39,7 @@ gpgkey=https://www.virtualbox.org/download/oracle_vbox.asc
 EOF"
 
 # Install RPM Fusion - Free & Non-Free
-sudo dnf -y install --nogpgcheck \
+sudo dnf -y install \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
