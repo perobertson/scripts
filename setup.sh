@@ -20,12 +20,16 @@ if [ ! -x /usr/local/heroku/bin/heroku ]; then
   /usr/bin/curl -s https://toolbelt.heroku.com/install.sh | sh
 fi
 
-if [ -x /usr/bin/dnf ]; then
-  sudo dnf install -y git
-else
-  sudo apt-get install -y git
+# Check if git needs installed
+if [ ! -x /usr/bin/git ]; then
+  if [ -x /usr/bin/dnf ]; then
+    sudo dnf install -y git
+  else
+    sudo apt-get install -y git
+  fi
 fi
 
+# Fetch the latest version of the setup
 if [ -d "$HOME/workspace/scripts" ]; then
   cd "$HOME/workspace/scripts"
   git pull
@@ -35,9 +39,10 @@ else
   cd "$HOME/workspace/scripts"
 fi
 
+# Run the setup
 os=$(. /etc/os-release && echo $ID)
 if [ "$os" = "fedora" ]; then
-  ./setup_fedora.sh
+  ./fedora/setup.sh
 else
   echo "unknown OS: $os"
   exit 1
