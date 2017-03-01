@@ -1,33 +1,6 @@
 # Perf tools
 sudo dnf -y install htop dstat sysstat
 
-# Package to help determine if running in a VM
-sudo dnf -y install virt-what
-
-if [[ $(sudo virt-what | grep virtualbox) != '' ]]; then
-  echo 'Installing VirtualBox guest additions'
-  sudo dnf -y install dkms \
-                      kernel-devel-$(uname -r)
-                      # VirtualBox-guest-additions
-  echo 'You must manually install guest additions from the CD because akmods does not update the additions after a kernel upgrade'
-else
-  echo 'Installing virt-manager'
-  sudo dnf -y install virt-manager libvirt qemu qemu-kvm
-  # VirtualBox will fail to setup boxes on non UEFI systems
-  echo 'Installiing VirtualBox'
-  sudo dnf -y install binutils \
-                      gcc \
-                      make \
-                      patch \
-                      libgomp \
-                      glibc-headers glibc-devel \
-                      kernel-headers kernel-headers-$(uname -r) \
-                      kernel-devel-$(uname -r) \
-                      dkms
-  sudo dnf -y install VirtualBox-5.1
-  sudo usermod -a -G vboxusers $(whoami)
-fi
-
 # Dependencies for Ruby
 sudo dnf -y install libyaml-devel \
                     libffi-devel \
