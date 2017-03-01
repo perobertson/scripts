@@ -1,24 +1,5 @@
-# Allows for managing repos fromo cli
-sudo dnf -y install dnf-plugins-core
-
 # Perf tools
 sudo dnf -y install htop dstat sysstat
-
-# Add VirtualBox Repo
-sudo su -c "cat >/etc/yum.repos.d/virtualbox.repo <<-EOF
-[virtualbox]
-name=Fedora $(rpm -E %fedora) - x86_64 - VirtualBox
-baseurl=http://download.virtualbox.org/virtualbox/rpm/fedora/$(rpm -E %fedora)/x86_64
-enabled=1
-gpgcheck=1
-repo_gpgcheck=1
-gpgkey=https://www.virtualbox.org/download/oracle_vbox.asc
-EOF"
-
-# Install RPM Fusion - Free & Non-Free
-sudo dnf -y install \
-  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Package to help determine if running in a VM
 sudo dnf -y install virt-what
