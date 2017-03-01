@@ -42,5 +42,6 @@ fi
 # Run the setup
 os=$(. /etc/os-release && echo $ID)
 . "${os}/setup_package_managers.sh" || exit 1
+. "${os}/setup_dev_depends.sh" || exit 1
 . "${os}/setup_virtualization.sh" || exit 1
 . "${os}/setup.sh" || exit 1

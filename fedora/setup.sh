@@ -1,39 +1,3 @@
-# Perf tools
-sudo dnf -y install htop dstat sysstat
-
-# Dependencies for Ruby
-sudo dnf -y install libyaml-devel \
-                    libffi-devel \
-                    autoconf \
-                    gcc-c++ \
-                    readline-devel \
-                    zlib-devel \
-                    openssl-devel \
-                    automake \
-                    libtool \
-                    bison \
-                    patch \
-                    sqlite-devel
-
-# Development dependencies
-sudo dnf -y upgrade vim-minimal
-sudo dnf -y install vim
-sudo dnf -y install i3 \
-                    zsh \
-                    git \
-                    wget \
-                    ImageMagick \
-                    graphviz \
-                    samba \
-                    redis \
-                    sl \
-                    p7zip bzip2 \
-                    postgresql postgresql-server postgresql-contrib postgresql-devel \
-                    levien-inconsolata-fonts \
-                    freetype-freeworld \
-                    dropbox pygpgme \
-                    redhat-lsb
-
 # Vagrant
 \curl -sSL https://gist.githubusercontent.com/perobertson/ec90be267134180b1906439ff5667ac8/raw | bash
 
