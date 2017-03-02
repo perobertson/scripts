@@ -18,23 +18,6 @@ sudo systemctl enable redis
 # Install updates
 sudo dnf -y update kernel\* selinux\*
 
-# Install rbenv
-echo 'Installing rbenv'
-git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-cd ~/.rbenv && src/configure && make -C src
-git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
-. "$HOME/.bash_profile"
-rbenv install 2.4.0
-rbenv global 2.4.0
-rbenv exec gem install bundler rake
-
-# Set up dotfiles
-echo 'Installing dotfiles'
-git clone https://gitlab.com/perobertson/dotfiles.git "$HOME/workspace/dotfiles"
-cd "$HOME/workspace/dotfiles"
-rbenv exec rake install[true]
-
 # Install Sublime Text 3
 \curl -sSL https://gist.githubusercontent.com/perobertson/bbe9d0cced8ff2549a778ca718780a9b/raw | bash
 

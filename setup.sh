@@ -46,3 +46,7 @@ os=$(. /etc/os-release && echo $ID)
 . "${os}/setup_databases.sh" || exit 1
 . "${os}/setup_virtualization.sh" || exit 1
 . "${os}/setup.sh" || exit 1
+
+# These do not require root
+. "${os}/setup_ruby.sh" || exit 1
+. "${os}/setup_dotfiles.sh" || exit 1
