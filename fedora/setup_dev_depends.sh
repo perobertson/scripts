@@ -38,3 +38,7 @@ sudo dnf -y install autoconf \
 # Common gems that are used all the time
 gem install bundler \
             rake
+
+sudo systemctl enable smb
+sudo systemctl enable nmb
+sudo systemctl enable redis

@@ -50,3 +50,6 @@ os=$(. /etc/os-release && echo $ID)
 # These do not require root
 . "${os}/setup_ruby.sh" || exit 1
 . "${os}/setup_dotfiles.sh" || exit 1
+
+echo -e '\nEverything installed. Be sure to reboot at your earliest convenience'
+echo 'Remember to manually install guest additions from the CD if needed after reboot'
