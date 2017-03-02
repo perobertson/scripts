@@ -1,5 +1,5 @@
 # Setup Postgres
-sudo dnf -y isntall postgresql \
+sudo dnf -y install postgresql \
                     postgresql-contrib \
                     postgresql-devel \
                     postgresql-server
