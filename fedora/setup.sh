@@ -9,19 +9,11 @@ ln -s "$HOME/Applications/phantomjs-2.1.1-linux-x86_64/bin/phantomjs" "$HOME/bin
 # Switch to zsh
 sudo usermod -s $(which zsh) $(whoami)
 
-# Setup Postgres
-echo 'Installing Postgres'
-sudo postgresql-setup --initdb
-sudo systemctl start postgresql
-sudo su --command="perl -p -i -e 's/host([\w :\/\.]*)ident/host\$1trust/g' /var/lib/pgsql/data/pg_hba.conf" --login postgres
-sudo su --command="psql --command='CREATE ROLE $(whoami) WITH SUPERUSER LOGIN;'" --login postgres
-
 # Enable services
 echo 'Enabling Services'
 sudo systemctl enable smb
 sudo systemctl enable nmb
 sudo systemctl enable redis
-sudo systemctl enable postgresql
 
 # Install updates
 sudo dnf -y update kernel\* selinux\*

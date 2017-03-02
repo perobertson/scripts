@@ -21,10 +21,6 @@ sudo dnf -y install autoconf \
                     openssl-devel \
                     p7zip \
                     patch \
-                    postgresql \
-                    postgresql-contrib \
-                    postgresql-devel \
-                    postgresql-server \
                     pygpgme \
                     redhat-lsb \
                     redis \
