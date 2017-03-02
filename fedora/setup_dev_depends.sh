@@ -24,6 +24,7 @@ sudo dnf -y install autoconf \
                     pygpgme \
                     redhat-lsb \
                     redis \
+                    ruby \
                     samba \
                     sl \
                     sqlite-devel \
@@ -33,3 +34,7 @@ sudo dnf -y install autoconf \
                     wget \
                     zlib-devel \
                     zsh
+
+# Common gems that are used all the time
+gem install bundler \
+            rake
