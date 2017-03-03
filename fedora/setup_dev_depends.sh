@@ -35,6 +35,8 @@ sudo dnf -y install autoconf \
                     zlib-devel \
                     zsh
 
+sudo dnf -y install https://releases.hashicorp.com/vagrant/1.9.2/vagrant_1.9.2_x86_64.rpm
+
 # Common gems that are used all the time
 gem install bundler \
             rake
