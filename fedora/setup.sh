@@ -1,8 +1,3 @@
-# PhantomJS
-wget -P "$HOME/Downloads" https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
-tar xvjf "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" -C "$HOME/Applications"
-ln -s "$HOME/Applications/phantomjs-2.1.1-linux-x86_64/bin/phantomjs" "$HOME/bin/phantomjs"
-
 # Switch to zsh
 sudo usermod -s $(which zsh) $(whoami)
 
