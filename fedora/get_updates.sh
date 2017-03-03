@@ -1,3 +1,3 @@
 # Install updates
-sudo dnf -y update kernel\*
+sudo dnf -y update kernel\* \
                    selinux\*
