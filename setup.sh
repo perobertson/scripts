@@ -29,6 +29,7 @@ if [ ! -x /usr/bin/git ]; then
   if [ -x /usr/bin/dnf ]; then
     sudo dnf install -y git
   else
+    sudo apt update
     sudo apt install -y git
   fi
 fi
@@ -38,6 +39,10 @@ if [ -d "$HOME/workspace/scripts" ]; then
   cd "$HOME/workspace/scripts"
   git pull
 else
+  if [ ! -d "$HOME/.ssh" ]; then
+    mkdir "$HOME/.ssh"
+    chmod 700 "$HOME/.ssh"
+  fi
   ssh-keyscan >> "$HOME/.ssh/known_hosts" 2>/dev/null
   git clone https://gitlab.com/perobertson/scripts.git "$HOME/workspace/scripts"
   cd "$HOME/workspace/scripts"
