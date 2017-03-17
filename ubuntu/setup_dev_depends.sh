@@ -1,6 +1,9 @@
 sudo apt -y install build-essential \
                     curl \
+                    dstat \
+                    htop \
                     ruby \
+                    sysstat \
                     wget \
                     zsh
 
