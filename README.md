@@ -6,3 +6,8 @@ To run the script, all you need to do is run this from a console on the machine 
 ```bash
 /usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/master/setup.sh | time bash
 ```
+
+For the users out there who prefer `wget`
+```bash
+/usr/bin/wget -qO- https://gitlab.com/perobertson/scripts/raw/master/setup.sh | time bash
+```
