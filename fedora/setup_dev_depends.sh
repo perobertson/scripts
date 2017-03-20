@@ -1,5 +1,7 @@
 # Need to upgrade vim first, otherwise there are conflicts
 sudo dnf -y upgrade vim-minimal
+# Install vim separately due to conflicts in upgrade / install
+sudo dnf -y install vim
 
 sudo dnf -y install autoconf \
                     automake \
@@ -33,7 +35,6 @@ sudo dnf -y install autoconf \
                     sqlite-devel \
                     sysstat \
                     readline-devel \
-                    vim \
                     wget \
                     zlib-devel \
                     zsh
