@@ -8,6 +8,7 @@ sudo dnf -y install autoconf \
                     dropbox \
                     dstat \
                     freetype-freeworld \
+                    gcc \
                     gcc-c++ \
                     git \
                     graphviz \
@@ -18,9 +19,11 @@ sudo dnf -y install autoconf \
                     libffi-devel \
                     libtool \
                     libyaml-devel \
+                    make \
                     openssl-devel \
                     p7zip \
                     patch \
+                    perl \
                     pygpgme \
                     redhat-lsb \
                     redis \
