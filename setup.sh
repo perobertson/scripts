@@ -43,7 +43,8 @@ else
     mkdir "$HOME/.ssh"
     chmod 700 "$HOME/.ssh"
   fi
-  ssh-keyscan >> "$HOME/.ssh/known_hosts" 2>/dev/null
+  ssh-keyscan 'gitlab.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
+  ssh-keyscan 'github.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
   git clone https://gitlab.com/perobertson/scripts.git "$HOME/workspace/scripts"
   cd "$HOME/workspace/scripts"
 fi
