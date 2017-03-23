@@ -18,6 +18,7 @@ sudo dnf -y install autoconf \
                     i3 \
                     ImageMagick \
                     levien-inconsolata-fonts \
+                    libcurl-devel \
                     libffi-devel \
                     libtool \
                     libyaml-devel \
@@ -27,6 +28,7 @@ sudo dnf -y install autoconf \
                     patch \
                     perl \
                     pygpgme \
+                    python-devel \
                     redhat-lsb \
                     redis \
                     ruby \
@@ -38,6 +40,9 @@ sudo dnf -y install autoconf \
                     wget \
                     zlib-devel \
                     zsh
+
+sudo pip install --upgrade pip
+sudo pip install virtualenv
 
 sudo dnf -y install https://releases.hashicorp.com/vagrant/1.9.2/vagrant_1.9.2_x86_64.rpm
 

@@ -11,6 +11,7 @@ sudo su --command="psql --command='CREATE ROLE $(whoami) WITH SUPERUSER LOGIN;'"
 
 # Setup MySql
 sudo dnf -y install mariadb \
+                    mariadb-devel \
                     mariadb-server \
                     expect
 sudo systemctl start mariadb
