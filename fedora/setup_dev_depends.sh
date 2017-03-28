@@ -13,6 +13,8 @@ sudo dnf -y install autoconf \
                     gcc \
                     gcc-c++ \
                     git \
+                    git-cola \
+                    gitk \
                     graphviz \
                     htop \
                     i3 \
