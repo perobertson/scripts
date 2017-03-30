@@ -20,12 +20,14 @@ tee "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" <<
   "ensure_newline_at_eof_on_save": true,
   "folder_exclude_patterns": [
     ".git",
+    "__pycache__",
     "_site",
     "coverage",
+    "env",
+    "htmlcov",
     "log",
     "test/reports",
-    "tmp/cache",
-    "vendor/assets/bower_components"
+    "tmp/cache"
   ],
   "font_face": "Inconsolata",
   "font_options": [ "gray_antialias" ],
