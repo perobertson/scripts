@@ -10,3 +10,6 @@ gsettings set org.cinnamon.desktop.interface icon-theme 'Mint-X-Aqua'
 
 # Clean up fonts
 echo "Xft.lcdfilter: lcddefault" > ~/.Xresources
+
+# Install custom zsh themes and overrides
+ln -s ~/workspace/scripts/.oh-my-zsh/themes ~/.oh-my-zsh/custom
