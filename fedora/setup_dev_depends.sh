@@ -25,6 +25,7 @@ sudo dnf -y install autoconf \
                     libtool \
                     libyaml-devel \
                     make \
+                    nodejs \
                     openssl-devel \
                     p7zip \
                     patch \
