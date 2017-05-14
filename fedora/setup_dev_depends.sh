@@ -33,6 +33,7 @@ sudo dnf -y install autoconf \
                     pygpgme \
                     python-devel \
                     redhat-lsb \
+                    redhat-rpm-config \
                     redis \
                     ruby \
                     samba \
