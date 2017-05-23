@@ -10,7 +10,7 @@ Version=1.0
 Terminal=false
 Name=Sublime
 Exec=subl
-Icon=$(echo $HOME)/Applications/sublime_text_3/Icon/48x48/sublime-text.png
+Icon=$(echo $HOME)/Applications/sublime_text_3/Icon/256x256/sublime-text.png
 Categories=Development;TextEditor;
 Type=Application" > "$HOME/.local/share/applications/sublime.desktop"
 mkdir -p "$HOME/.config/sublime-text-3/Packages/User"
