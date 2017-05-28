@@ -16,6 +16,7 @@ Type=Application" > "$HOME/.local/share/applications/sublime.desktop"
 mkdir -p "$HOME/.config/sublime-text-3/Packages/User"
 tee "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" <<EOF
 {
+  "default_line_ending": "unix",
   "draw_white_space": "all",
   "ensure_newline_at_eof_on_save": true,
   "folder_exclude_patterns": [
@@ -27,7 +28,7 @@ tee "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" <<
     "htmlcov",
     "log",
     "test/reports",
-    "tmp/cache"
+    "tmp/cache",
   ],
   "font_face": "Inconsolata",
   "font_options": [ "gray_antialias" ],
