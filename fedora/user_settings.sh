@@ -13,3 +13,4 @@ echo "Xft.lcdfilter: lcddefault" > ~/.Xresources
 
 # Install custom zsh themes and overrides
 ln -s ~/workspace/scripts/.oh-my-zsh/themes ~/.oh-my-zsh/custom
+ln -s ~/workspace/scripts/.oh-my-zsh/plugins/pip ~/.oh-my-zsh/custom/plugins
