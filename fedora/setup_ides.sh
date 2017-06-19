@@ -33,6 +33,7 @@ tee "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" <<
   "font_face": "Inconsolata",
   "font_options": [ "gray_antialias" ],
   "font_size": 13,
+  "highlight_line": true,
   "highlight_modified_tabs": true,
   "ignored_packages": [ "Vintage" ],
   "indent_guide_options": [ "draw_normal", "draw_active" ],
