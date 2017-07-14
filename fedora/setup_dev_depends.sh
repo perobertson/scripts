@@ -45,8 +45,8 @@ sudo dnf -y install autoconf \
                     zlib-devel \
                     zsh
 
-sudo pip install --upgrade pip
-sudo pip install virtualenv
+pip install --user --upgrade pip
+pip install --user virtualenv
 
 sudo dnf -y install https://releases.hashicorp.com/vagrant/1.9.4/vagrant_1.9.4_x86_64.rpm
 
