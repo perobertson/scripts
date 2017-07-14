@@ -48,7 +48,7 @@ sudo dnf -y install autoconf \
 pip install --user --upgrade pip
 pip install --user virtualenv
 
-sudo dnf -y install https://releases.hashicorp.com/vagrant/1.9.4/vagrant_1.9.4_x86_64.rpm
+sudo dnf -y install https://releases.hashicorp.com/vagrant/1.9.7/vagrant_1.9.7_x86_64.rpm
 
 # Common gems that are used all the time
 gem install bundler \
