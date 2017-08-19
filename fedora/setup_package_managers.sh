@@ -9,3 +9,9 @@ sudo dnf -y install dnf-plugins-core
 # Add VirtualBox Repo
 sudo dnf config-manager --add-repo http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
 
+# Configure pip formatting
+mkdir -p "$HOME/.config/pip"
+cat > "$HOME/.config/pip/pip.conf" <<EOF
+[list]
+format=columns
+EOF
