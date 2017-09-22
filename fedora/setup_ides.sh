@@ -1,6 +1,6 @@
 # Install Sublime Text 3
-wget -P "$HOME/Downloads" https://download.sublimetext.com/sublime_text_3_build_3126_x64.tar.bz2
-tar xvjf "$HOME/Downloads/sublime_text_3_build_3126_x64.tar.bz2" -C "$HOME/Applications"
+wget -P "$HOME/Downloads" https://download.sublimetext.com/sublime_text_3_build_3143_x64.tar.bz2
+tar xvjf "$HOME/Downloads/sublime_text_3_build_3143_x64.tar.bz2" -C "$HOME/Applications"
 wget -P "$HOME/.config/sublime-text-3/Installed Packages" https://packagecontrol.io/Package%20Control.sublime-package
 ln -s "$HOME/Applications/sublime_text_3/sublime_text" "$HOME/bin/subl"
 mkdir -p "$HOME/.local/share/applications"
