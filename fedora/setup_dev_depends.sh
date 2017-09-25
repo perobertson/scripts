@@ -39,6 +39,7 @@ sudo dnf -y install autoconf \
                     samba \
                     sl \
                     sqlite-devel \
+                    sublime-text \
                     sysstat \
                     readline-devel \
                     wget \

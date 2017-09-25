@@ -1,18 +1,7 @@
-# Install Sublime Text 3
-wget -P "$HOME/Downloads" https://download.sublimetext.com/sublime_text_3_build_3143_x64.tar.bz2
-tar xvjf "$HOME/Downloads/sublime_text_3_build_3143_x64.tar.bz2" -C "$HOME/Applications"
+# Install Sublime Text 3 Package Manager
 wget -P "$HOME/.config/sublime-text-3/Installed Packages" https://packagecontrol.io/Package%20Control.sublime-package
-ln -s "$HOME/Applications/sublime_text_3/sublime_text" "$HOME/bin/subl"
-mkdir -p "$HOME/.local/share/applications"
-echo "[Desktop Entry]
-Encoding=UTF-8
-Version=1.0
-Terminal=false
-Name=Sublime
-Exec=subl
-Icon=$(echo $HOME)/Applications/sublime_text_3/Icon/256x256/sublime-text.png
-Categories=Development;TextEditor;
-Type=Application" > "$HOME/.local/share/applications/sublime.desktop"
+
+# Configure IDE and plugins
 mkdir -p "$HOME/.config/sublime-text-3/Packages/User"
 cat > "$HOME/.config/sublime-text-3/Packages/User/Flake8Lint.sublime-settings" <<EOF
 {
