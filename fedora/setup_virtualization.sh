@@ -8,10 +8,11 @@ sudo dnf -y install dkms \
 
 if [[ $(sudo virt-what | grep virtualbox) != '' ]]; then
   sudo dnf -y install akmod-VirtualBox
-  # TODO: delay before starting screensaver
   # TODO: lock computer when put to sleep
   # lock after screensaver starts
   gsettings set org.cinnamon.desktop.screensaver lock-enabled false
+  # delay before starting screensaver (disabled)
+  gsettings set org.cinnamon.desktop.session idle-delay 0
 else
   sudo dnf -y install libvirt \
                       qemu \
