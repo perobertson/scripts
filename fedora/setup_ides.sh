@@ -4,7 +4,7 @@ wget -P "$HOME/.config/sublime-text-3/Installed Packages" https://packagecontrol
 # Configure IDE and plugins
 mkdir -p "$HOME/.config/sublime-text-3/Packages/User"
 
-if [[ -f "$HOME/.config/sublime-text-3/Packages/User/Flake8Lint.sublime-settings" ]]; then
+if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Flake8Lint.sublime-settings" ]]; then
   cat > "$HOME/.config/sublime-text-3/Packages/User/Flake8Lint.sublime-settings" <<EOF
 {
   "popup": false,
@@ -25,7 +25,7 @@ if [[ -f "$HOME/.config/sublime-text-3/Packages/User/Flake8Lint.sublime-settings
 EOF
 fi
 
-if [[ -f "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" ]]; then
+if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" ]]; then
   cat > "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" <<EOF
 {
   "default_line_ending": "unix",
@@ -59,7 +59,7 @@ if [[ -f "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-setting
 EOF
 fi
 
-if [[ -f "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" ]]; then
+if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" ]]; then
   cat > "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" <<EOF
 {
   "tab_size": 4,
@@ -67,7 +67,7 @@ if [[ -f "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" ]]
 EOF
 fi
 
-if [[ -f "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" ]]; then
+if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" ]]; then
   cat > "$HOME/.config/sublime-text-3/Packages/User/python_fiximports.sublime-settings" <<EOF
 {
   "split_import_statements": false,
@@ -75,12 +75,12 @@ if [[ -f "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" ]]
 EOF
 fi
 
-if [[ -d "$HOME/.config/sublime-text-3/Packages/Jedi - Python autocompletion" ]]; then
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Jedi - Python autocompletion" ]]; then
   git clone https://github.com/srusskih/SublimeJEDI.git "$HOME/.config/sublime-text-3/Packages/Jedi - Python autocompletion"
 fi
-if [[ -d "$HOME/.config/sublime-text-3/Packages/Python Fix Imports" ]]; then
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Python Fix Imports" ]]; then
   git clone https://github.com/Stibbons/python-fiximports.git "$HOME/.config/sublime-text-3/Packages/Python Fix Imports"
 fi
-if [[ -d "$HOME/.config/sublime-text-3/Packages/Python Flake8 Lint" ]]; then
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Python Flake8 Lint" ]]; then
   git clone https://github.com/dreadatour/Flake8Lint.git "$HOME/.config/sublime-text-3/Packages/Python Flake8 Lint"
 fi
