@@ -36,6 +36,7 @@ sudo dnf -y install autoconf \
                     redhat-rpm-config \
                     redis \
                     ruby \
+                    ruby-devel \
                     samba \
                     sl \
                     sqlite-devel \
@@ -53,6 +54,7 @@ sudo dnf -y install https://releases.hashicorp.com/vagrant/1.9.7/vagrant_1.9.7_x
 
 # Common gems that are used all the time
 gem install bundler \
+            json \
             rake
 
 sudo systemctl enable smb
