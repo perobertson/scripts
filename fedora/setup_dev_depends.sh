@@ -77,4 +77,8 @@ mkdir -p "$HOME/Downloads/heroku"
 # Use globbing to get around that
 tar -xzf "$HOME/Downloads/heroku.tar.gz" -C "$HOME/Downloads/heroku/"
 mv "$HOME/Downloads/heroku/"* "$HOME/Applications/heroku/"
-ln -s "$HOME/Applications/heroku/bin/heroku" "$HOME/bin/heroku"
+if [[ -f "$HOME/bin/heroku" ]]; then
+  rm "$HOME/bin/heroku"
+else
+  ln -s "$HOME/Applications/heroku/bin/heroku" "$HOME/bin/heroku"
+fi
