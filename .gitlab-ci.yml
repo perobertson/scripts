@@ -11,3 +11,19 @@ fedora_rawhide:
   script:
     - ./setup.sh
   allow_failure: true
+
+
+ubuntu_16_04:
+  image: ubuntu:16.04
+  stage: build
+  script:
+    - ./setup.sh
+  allow_failure: true
+
+
+ubuntu_17_04:
+  image: ubuntu:17.04
+  stage: build
+  script:
+    - ./setup.sh
+  allow_failure: true

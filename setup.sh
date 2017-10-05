@@ -4,7 +4,13 @@
 set -x
 
 if [ ! -z "$CI" ]; then
-  dnf install -y sudo
+  os=$(. /etc/os-release && echo $ID)
+  if [ "$os" = 'fedora' ]; then
+    dnf install -y sudo
+  else
+    apt update
+    apt install -y sudo
+  fi
 fi
 
 # Clear any previous sudo permission
