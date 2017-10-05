@@ -3,11 +3,17 @@
 # Display Commands
 set -x
 
+if [ ! -z "$CI" ]; then
+  dnf install -y sudo
+fi
+
 # Clear any previous sudo permission
 sudo -k
 
 # Check for root
-[[ $(id -u) -eq 0 ]] && echo 'script must be run as a normal user' && exit 1
+if [ -z "$CI" ]; then
+  [[ $(id -u) -eq 0 ]] && echo 'script must be run as a normal user' && exit 1
+fi
 
 # Set up app directories
 mkdir -p "$HOME/Applications"
