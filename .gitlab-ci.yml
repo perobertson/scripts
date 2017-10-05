@@ -2,7 +2,12 @@ fedora_26:
   image: fedora:26
   stage: build
   script:
-    - pwd
-    - ls -lah
-    - env
     - ./setup.sh
+
+
+fedora_rawhide:
+  image: fedora:rawhide
+  stage: build
+  script:
+    - ./setup.sh
+  allow_failure: true
