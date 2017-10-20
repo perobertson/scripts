@@ -1,3 +1,10 @@
+fedora_25:
+  image: fedora:25
+  stage: build
+  script:
+    - ./setup.sh
+
+
 fedora_26:
   image: fedora:26
   stage: build
