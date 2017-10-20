@@ -56,7 +56,6 @@ fi
 
 # Common gems that are used all the time
 gem install bundler \
-            json \
             rake
 
 sudo systemctl enable smb
@@ -73,7 +72,7 @@ else
 fi
 
 # Setup Heroku CLI
-wget https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-linux-x64.tar.gz -O "$HOME/Downloads/heroku.tar.gz"
+[[ ! -f "$HOME/Downloads/heroku.tar.gz" ]] && wget https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-linux-x64.tar.gz -O "$HOME/Downloads/heroku.tar.gz"
 mkdir -p "$HOME/Downloads/heroku"
 # Heroku is annoying and does not put the version in the url so we have no idea what version just got downloaded
 # Use globbing to get around that

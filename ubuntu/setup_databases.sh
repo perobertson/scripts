@@ -1,6 +1,6 @@
 # Setup MySql
-sudo apt -y install mysql-server \
-                    expect
+sudo apt-get install -y mysql-server \
+                        expect
 sudo systemctl start mysql
 sudo systemctl enable mysql
 

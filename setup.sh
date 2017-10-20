@@ -3,15 +3,7 @@
 # Display Commands
 set -x
 
-if [ ! -z "$CI" ]; then
-  os=$(. /etc/os-release && echo $ID)
-  if [ "$os" = 'fedora' ]; then
-    dnf install -y sudo
-  else
-    apt update
-    apt install -y sudo
-  fi
-fi
+. ci.sh || exit 1
 
 # Clear any previous sudo permission
 sudo -k
@@ -32,8 +24,8 @@ if ! hash git 2>/dev/null; then
   if hash dnf 2>/dev/null; then
     sudo dnf install -y git
   else
-    sudo apt update
-    sudo apt install -y git
+    sudo apt-get update
+    sudo apt-get install -y git
   fi
 fi
 
