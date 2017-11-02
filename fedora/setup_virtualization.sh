@@ -28,4 +28,7 @@ else
                       glibc-headers
   sudo dnf -y install VirtualBox-5.1
   sudo usermod -a -G vboxusers $(whoami)
+
+  sudo dnf -y install docker-ce
+  sudo usermod -a -G docker $(whoami)
 fi
