@@ -12,6 +12,14 @@ fedora_26:
     - ./setup.sh
 
 
+fedora_27:
+  image: fedora:27
+  stage: build
+  script:
+    - ./setup.sh
+  allow_failure: true
+
+
 fedora_rawhide:
   image: fedora:rawhide
   stage: build
