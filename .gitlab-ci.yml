@@ -1,44 +1,45 @@
-fedora_25:
-  image: fedora:25
+.build: &build_definition
   stage: build
   script:
+    - whoami
+    - echo "$HOME"
+    - pwd
+    - ls -laH
+    - mkdir -p "$HOME/workspace/"
+    - ln -s "$(pwd)" "$HOME/workspace/"
+    - cd "$HOME/workspace/scripts"
+    - pwd
     - ./setup.sh
+
+fedora_25:
+  <<: *build_definition
+  image: fedora:25
 
 
 fedora_26:
+  <<: *build_definition
   image: fedora:26
-  stage: build
-  script:
-    - ./setup.sh
 
 
 fedora_27:
+  <<: *build_definition
   image: fedora:27
-  stage: build
-  script:
-    - ./setup.sh
   allow_failure: true
 
 
 fedora_rawhide:
+  <<: *build_definition
   image: fedora:rawhide
-  stage: build
-  script:
-    - ./setup.sh
   allow_failure: true
 
 
 ubuntu_16_04:
+  <<: *build_definition
   image: ubuntu:16.04
-  stage: build
-  script:
-    - ./setup.sh
   allow_failure: true
 
 
 ubuntu_17_04:
+  <<: *build_definition
   image: ubuntu:17.04
-  stage: build
-  script:
-    - ./setup.sh
   allow_failure: true
