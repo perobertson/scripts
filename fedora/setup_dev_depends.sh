@@ -25,6 +25,7 @@ sudo dnf -y install autoconf \
                     libtool \
                     libyaml-devel \
                     make \
+                    memcached \
                     nodejs \
                     openssl-devel \
                     p7zip \
@@ -60,6 +61,7 @@ gem install bundler \
 
 sudo systemctl enable smb
 sudo systemctl enable nmb
+sudo systemctl enable memcached
 sudo systemctl enable redis
 
 # Setup PhantomJS
