@@ -26,7 +26,7 @@ else
                       patch \
                       glibc-devel \
                       glibc-headers
-  sudo dnf -y install VirtualBox-5.1
+  sudo dnf -y install VirtualBox-5.2 || exit 1
   sudo usermod -a -G vboxusers $(whoami)
 
   sudo dnf -y install docker-ce || exit 1
