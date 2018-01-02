@@ -30,7 +30,6 @@ fedora_27:
   image: fedora:27
   before_script:
     - dnf install -y sudo
-  allow_failure: true
 
 
 fedora_rawhide:
