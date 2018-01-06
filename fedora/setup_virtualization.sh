@@ -32,6 +32,7 @@ else
   sudo dnf -y install docker-ce || exit 1
   sudo usermod -a -G docker $(whoami)
 
-  sudo curl -L "https://github.com/docker/compose/releases/download/1.17.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.18.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
+  [[ "$(docker-compose --version)" == 'docker-compose version 1.18.0, build 8dd22a9' ]] || exit 1
 fi
