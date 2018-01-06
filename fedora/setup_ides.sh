@@ -19,6 +19,8 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Flake8Lint.sublime-settin
     "D105", // doc magic
     "D200", // doc oneline
     "D400", // doc end with period
+    "D401", // doc imperative
+    "D403", // doc first work capitalized
     "E265", // block comments start with #
   ],
 }
@@ -28,10 +30,12 @@ fi
 if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" ]]; then
   cat > "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" <<EOF
 {
+  "color_scheme": "Packages/User/Monokai (Flake8Lint).tmTheme",
   "default_line_ending": "unix",
   "draw_white_space": "all",
   "ensure_newline_at_eof_on_save": true,
-  "folder_exclude_patterns": [
+  "folder_exclude_patterns":
+  [
     ".git",
     "__pycache__",
     "_site",
@@ -43,16 +47,27 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-setti
     "tmp/cache",
   ],
   "font_face": "Inconsolata",
-  "font_options": [ "gray_antialias" ],
+  "font_options":
+  [
+    "gray_antialias"
+  ],
   "font_size": 13,
   "highlight_line": true,
   "highlight_modified_tabs": true,
-  "ignored_packages": [ "Vintage" ],
-  "indent_guide_options": [ "draw_normal", "draw_active" ],
+  "ignored_packages":
+  [
+    "Vintage"
+  ],
+  "indent_guide_options":
+  [
+    "draw_normal",
+    "draw_active"
+  ],
   "insert_final_newline": true,
   "line_padding_bottom": 1,
   "line_padding_top": 1,
   "tab_size": 2,
+  "theme": "Adaptive.sublime-theme",
   "translate_tabs_to_spaces": true,
   "trim_trailing_white_space_on_save": true,
 }
