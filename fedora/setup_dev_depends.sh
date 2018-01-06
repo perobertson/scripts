@@ -51,8 +51,9 @@ sudo dnf -y install autoconf \
 pip install --user --upgrade pip
 pip install --user virtualenv
 
-if ! hash vagrant || [ "$(vagrant --version)" != 'Vagrant 2.0.0' ]; then
-  sudo dnf -y install https://releases.hashicorp.com/vagrant/2.0.0/vagrant_2.0.0_x86_64.rpm
+if ! hash vagrant || [ "$(vagrant --version)" != 'Vagrant 2.0.1' ]; then
+  sudo dnf -y install https://releases.hashicorp.com/vagrant/2.0.1/vagrant_2.0.1_x86_64.rpm
+  [[ "$(vagrant --version)" == 'Vagrant 2.0.1' ]] || exit 1
 fi
 
 # Common gems that are used all the time
