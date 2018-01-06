@@ -70,9 +70,9 @@ sudo systemctl enable redis
 [[ ! -d "$HOME/Applications/phantomjs-2.1.1-linux-x86_64" ]] && tar xvjf "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" -C "$HOME/Applications"
 if [[ -f "$HOME/bin/phantomjs" ]]; then
   rm "$HOME/bin/phantomjs"
-else
-  ln -s "$HOME/Applications/phantomjs-2.1.1-linux-x86_64/bin/phantomjs" "$HOME/bin/phantomjs"
 fi
+ln -s "$HOME/Applications/phantomjs-2.1.1-linux-x86_64/bin/phantomjs" "$HOME/bin/phantomjs"
+[[ "$($HOME/bin/phantomjs --version)" == '2.1.1' ]] || exit 1
 
 # Setup Heroku CLI
 [[ ! -f "$HOME/Downloads/heroku.tar.gz" ]] && wget https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-linux-x64.tar.gz -O "$HOME/Downloads/heroku.tar.gz"
