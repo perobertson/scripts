@@ -18,8 +18,8 @@ mkdir -p "$HOME/bin"
 mkdir -p "$HOME/workspace"
 
 # Check if git needs installed
-if ! hash git 2>/dev/null; then
-  if hash dnf 2>/dev/null; then
+if [ ! -x "$(command -v git)" ]; then
+  if [ -x "$(command -v dnf)" ]; then
     sudo dnf install -y git
   else
     sudo apt-get update
