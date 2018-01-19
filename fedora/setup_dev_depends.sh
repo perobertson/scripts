@@ -87,3 +87,12 @@ if [[ -f "$HOME/bin/heroku" ]]; then
 else
   ln -s "$HOME/Applications/heroku/bin/heroku" "$HOME/bin/heroku"
 fi
+
+# Setup Hub
+[[ ! -f "$HOME/Downloads/hub-linux-amd64-2.2.9.tgz" ]] && /usr/bin/curl -Lo "$HOME/Downloads/hub-linux-amd64-2.2.9.tgz" https://github.com/github/hub/releases/download/v2.2.9/hub-linux-amd64-2.2.9.tgz
+[[ ! -d "$HOME/Applications/hub-linux-amd64-2.2.9" ]] && tar xzfv "$HOME/Downloads/hub-linux-amd64-2.2.9.tgz" -C "$HOME/Applications"
+if [[ -f "$HOME/bin/hub" ]]; then
+  rm "$HOME/bin/hub"
+fi
+ln -s "$HOME/Applications/hub-linux-amd64-2.2.9/bin/hub" "$HOME/bin/hub"
+[[ "$($HOME/bin/hub --version | grep hub)" == 'hub version 2.2.9' ]] || exit 1
