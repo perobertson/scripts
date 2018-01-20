@@ -30,7 +30,6 @@ fi
 if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" ]]; then
   cat > "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" <<EOF
 {
-  "color_scheme": "Packages/User/Monokai (Flake8Lint).tmTheme",
   "default_line_ending": "unix",
   "draw_white_space": "all",
   "ensure_newline_at_eof_on_save": true,
