@@ -30,6 +30,7 @@ fedora_27:
   image: fedora:27
   before_script:
     - dnf install -y sudo systemd
+    - systemctl status systemd
 
 
 # fedora_rawhide:
