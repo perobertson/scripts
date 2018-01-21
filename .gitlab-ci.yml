@@ -11,49 +11,48 @@
     - pwd
     - ./setup.sh
 
-# fedora_25:
-#   <<: *build_definition
-#   image: fedora:25
-#   before_script:
-#     - dnf install -y sudo
+fedora_25:
+  <<: *build_definition
+  image: fedora:25
+  before_script:
+    - dnf install -y sudo
 
 
-# fedora_26:
-#   <<: *build_definition
-#   image: fedora:26
-#   before_script:
-#     - dnf install -y sudo
+fedora_26:
+  <<: *build_definition
+  image: fedora:26
+  before_script:
+    - dnf install -y sudo
 
 
 fedora_27:
   <<: *build_definition
   image: fedora:27
   before_script:
-    - dnf install -y sudo systemd
-    - systemctl status systemd
+    - dnf install -y sudo
 
 
-# fedora_rawhide:
-#   <<: *build_definition
-#   image: fedora:rawhide
-#   before_script:
-#     - dnf install -y sudo
-#   allow_failure: true
+fedora_rawhide:
+  <<: *build_definition
+  image: fedora:rawhide
+  before_script:
+    - dnf install -y sudo
+  allow_failure: true
 
 
-# ubuntu_16_04:
-#   <<: *build_definition
-#   image: ubuntu:16.04
-#   before_script:
-#     - apt-get update
-#     - apt-get install -y sudo
-#   allow_failure: true
+ubuntu_16_04:
+  <<: *build_definition
+  image: ubuntu:16.04
+  before_script:
+    - apt-get update
+    - apt-get install -y sudo
+  allow_failure: true
 
 
-# ubuntu_17_04:
-#   <<: *build_definition
-#   image: ubuntu:17.04
-#   before_script:
-#     - apt-get update
-#     - apt-get install -y sudo
-#   allow_failure: true
+ubuntu_17_04:
+  <<: *build_definition
+  image: ubuntu:17.04
+  before_script:
+    - apt-get update
+    - apt-get install -y sudo
+  allow_failure: true

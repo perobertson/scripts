@@ -3,11 +3,11 @@ sudo dnf -y install postgresql \
                     postgresql-contrib \
                     postgresql-devel \
                     postgresql-server
-sudo postgresql-setup --initdb
-sudo systemctl start postgresql
-sudo systemctl enable postgresql
-sudo su --command="perl -p -i -e 's/host([\w :\/\.]*)ident/host\$1trust/g' /var/lib/pgsql/data/pg_hba.conf" --login postgres
-sudo su --command="psql --command='CREATE ROLE $(whoami) WITH SUPERUSER LOGIN;'" --login postgres
+sudo postgresql-setup --initdb || true
+sudo systemctl start postgresql || true
+sudo systemctl enable postgresql || true
+sudo su --command="perl -p -i -e 's/host([\w :\/\.]*)ident/host\$1trust/g' /var/lib/pgsql/data/pg_hba.conf" --login postgres || true
+sudo su --command="psql --command='CREATE ROLE $(whoami) WITH SUPERUSER LOGIN;'" --login postgres || true
 
 # Setup MySql
 # sudo dnf -y install mariadb \
