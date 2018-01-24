@@ -49,8 +49,10 @@ sudo dnf -y install autoconf \
                     zsh
 
 pip install --user --upgrade pip
-pip install --user  virtualenv \
-                    tldr
+pip install --user  flake8 \
+                    pep8-naming \
+                    tldr \
+                    virtualenv
 
 if [ ! -x "$(command -v vagrant)" -o "$(vagrant --version)" != 'Vagrant 2.0.1' ]; then
   sudo dnf -y install https://releases.hashicorp.com/vagrant/2.0.1/vagrant_2.0.1_x86_64.rpm
