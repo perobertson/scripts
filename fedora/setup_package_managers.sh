@@ -22,3 +22,6 @@ sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x
 
 # Docker Repo
 sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
+# MySQL repo
+sudo dnf install -y "https://dev.mysql.com/get/mysql57-community-release-fc$(. /etc/os-release && echo $VERSION_ID)-10.noarch.rpm"
