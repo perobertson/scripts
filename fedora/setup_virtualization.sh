@@ -34,7 +34,7 @@ else
   sudo systemctl enable docker
   sudo systemctl start docker
 
-  sudo curl -L "https://github.com/docker/compose/releases/download/1.18.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.19.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
-  [[ "$(docker-compose --version)" == 'docker-compose version 1.18.0, build 8dd22a9' ]] || exit 1
+  [[ "$(docker-compose --version)" == 'docker-compose version 1.19.0, build 9e633ef' ]] || exit 1
 fi
