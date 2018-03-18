@@ -54,9 +54,9 @@ pip install --user  flake8 \
                     tldr \
                     virtualenv
 
-if [ ! -x "$(command -v vagrant)" -o "$(vagrant --version)" != 'Vagrant 2.0.1' ]; then
-  sudo dnf -y install https://releases.hashicorp.com/vagrant/2.0.1/vagrant_2.0.1_x86_64.rpm
-  [[ "$(vagrant --version)" == 'Vagrant 2.0.1' ]] || exit 1
+if [ ! -x "$(command -v vagrant)" -o "$(vagrant --version)" != 'Vagrant 2.0.3' ]; then
+  sudo dnf -y install https://releases.hashicorp.com/vagrant/2.0.3/vagrant_2.0.3_x86_64.rpm
+  [[ "$(vagrant --version)" == 'Vagrant 2.0.3' ]] || exit 1
 fi
 
 # Common gems that are used all the time
