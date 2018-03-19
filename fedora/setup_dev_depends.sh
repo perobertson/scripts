@@ -7,6 +7,7 @@ sudo dnf -y install autoconf \
                     automake \
                     bison \
                     bzip2 \
+                    certbot-nginx \
                     dropbox \
                     dstat \
                     freetype-freeworld \
