@@ -58,3 +58,21 @@ ubuntu_17_04:
     - apt-get update
     - apt-get install -y sudo
   allow_failure: true
+
+
+deploy_github:
+  stage: deploy
+  script:
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "${GITHUB_KEY}" > ~/.ssh/id_rsa
+    - echo "${GITHUB_KEY_PUB}" > ~/.ssh/id_rsa.pub
+    - chmod 700 ~/.ssh/id_rsa*
+    - ssh-keyscan 'github.com' >> ~/.ssh/known_hosts
+    - git remote add github -t master git@github.com:perobertson/scripts.git
+    - git fetch --all --verbose
+    - git checkout -B ${CI_COMMIT_REF_SLUG}
+    - git push --set-upstream github ${CI_COMMIT_REF_SLUG}
+  only:
+    refs:
+      - master
