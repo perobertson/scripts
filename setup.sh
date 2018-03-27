@@ -6,9 +6,21 @@ set -x
 # Clear any previous sudo permission
 sudo -k
 
-# Check for root
+# figure out which os/version we are on
+os=$(. /etc/os-release && echo $ID)
+version=$(. /etc/os-release && echo $VERSION_ID)
+if [ ! -d "${os}/${version}" ]; then
+  # Use the latest setup if there is no specific setup for the OS version
+  version='latest'
+fi
+
+# Check if we are in a CI environment
 if [ -z "$CI" ]; then
+  # Check for root
   [[ $(id -u) -eq 0 ]] && echo 'script must be run as a normal user' && exit 1
+
+  # Enable 'bash strict mode' from here on out
+  set -euo pipefail
 fi
 
 # Set up app directories
@@ -19,12 +31,7 @@ mkdir -p "$HOME/workspace"
 
 # Check if git needs installed
 if [ ! -x "$(command -v git)" ]; then
-  if [ -x "$(command -v dnf)" ]; then
-    sudo dnf install -y git
-  else
-    sudo apt-get update
-    sudo apt-get install -y git
-  fi
+  . "${os}/${version}/install_git.sh"
 fi
 
 # Fetch the latest version of the setup
@@ -40,23 +47,16 @@ if [ ! -d "$HOME/workspace/scripts" ]; then
 fi
 
 # Run the setup
-os=$(. /etc/os-release && echo $ID)
-version=$(. /etc/os-release && echo $VERSION_ID)
-if [ ! -d "${os}/${version}" ]; then
-  # Use the latest setup if there is no specific setup for the OS version
-  version='latest'
-fi
-
-. "${os}/${version}/setup_package_managers.sh" || exit 1
-. "${os}/${version}/setup_dev_depends.sh" || exit 1
-. "${os}/${version}/setup_databases.sh" || exit 1
-. "${os}/${version}/setup_ides.sh" || exit 1
-. "${os}/${version}/setup_virtualization.sh" || exit 1
+. "${os}/${version}/setup_package_managers.sh"
+. "${os}/${version}/setup_dev_depends.sh"
+. "${os}/${version}/setup_databases.sh"
+. "${os}/${version}/setup_ides.sh"
+. "${os}/${version}/setup_virtualization.sh"
 
 # These do not require root
-. "${os}/${version}/setup_ruby.sh" || exit 1
-. "${os}/${version}/setup_dotfiles.sh" || exit 1
-. "${os}/${version}/user_settings.sh" || exit 1
+. "${os}/${version}/setup_ruby.sh"
+. "${os}/${version}/setup_dotfiles.sh"
+. "${os}/${version}/user_settings.sh"
 
 echo -e '\nEverything installed. Be sure to reboot at your earliest convenience'
 echo 'Remember to manually install guest additions from the CD if needed after reboot'
