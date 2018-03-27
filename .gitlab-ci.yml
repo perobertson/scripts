@@ -51,9 +51,9 @@ ubuntu_16_04:
   allow_failure: true
 
 
-ubuntu_17_04:
+ubuntu_17_10:
   <<: *build_definition
-  image: ubuntu:17.04
+  image: ubuntu:17.10
   before_script:
     - apt-get update
     - apt-get install -y sudo
