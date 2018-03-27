@@ -73,6 +73,8 @@ deploy_github:
     - git fetch --all --verbose
     - git checkout -B ${CI_COMMIT_REF_SLUG}
     - git push --set-upstream github ${CI_COMMIT_REF_SLUG}
+  environment:
+    name: github
   only:
     refs:
       - master
