@@ -44,16 +44,22 @@ fi
 
 # Run the setup
 os=$(. /etc/os-release && echo $ID)
-. "${os}/setup_package_managers.sh" || exit 1
-. "${os}/setup_dev_depends.sh" || exit 1
-. "${os}/setup_databases.sh" || exit 1
-. "${os}/setup_ides.sh" || exit 1
-. "${os}/setup_virtualization.sh" || exit 1
+version=$(. /etc/os-release && echo $VERSION_ID)
+if [ ! -d "${os}/${version}" ]; then
+  # Use the latest setup if there is no specific setup for the OS version
+  version='latest'
+fi
+
+. "${os}/${version}/setup_package_managers.sh" || exit 1
+. "${os}/${version}/setup_dev_depends.sh" || exit 1
+. "${os}/${version}/setup_databases.sh" || exit 1
+. "${os}/${version}/setup_ides.sh" || exit 1
+. "${os}/${version}/setup_virtualization.sh" || exit 1
 
 # These do not require root
-. "${os}/setup_ruby.sh" || exit 1
-. "${os}/setup_dotfiles.sh" || exit 1
-. "${os}/user_settings.sh" || exit 1
+. "${os}/${version}/setup_ruby.sh" || exit 1
+. "${os}/${version}/setup_dotfiles.sh" || exit 1
+. "${os}/${version}/user_settings.sh" || exit 1
 
 echo -e '\nEverything installed. Be sure to reboot at your earliest convenience'
 echo 'Remember to manually install guest additions from the CD if needed after reboot'
