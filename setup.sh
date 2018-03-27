@@ -28,10 +28,7 @@ if [ ! -x "$(command -v git)" ]; then
 fi
 
 # Fetch the latest version of the setup
-if [ -d "$HOME/workspace/scripts" ]; then
-  cd "$HOME/workspace/scripts"
-  git pull
-else
+if [ ! -d "$HOME/workspace/scripts" ]; then
   if [ ! -d "$HOME/.ssh" ]; then
     mkdir "$HOME/.ssh"
     chmod 700 "$HOME/.ssh"
