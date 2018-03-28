@@ -31,14 +31,20 @@ if [ ! -x "$(command -v git)" ]; then
   fi
 fi
 
+# Setup ssh
+if [ ! -d "$HOME/.ssh" ]; then
+  mkdir "$HOME/.ssh"
+  chmod 700 "$HOME/.ssh"
+fi
+if [ "$(cat ~/.ssh/known_hosts | grep ^gitlab.com)" = '' ]; then
+  ssh-keyscan 'gitlab.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
+fi
+if [ "$(cat ~/.ssh/known_hosts | grep ^github.com)" = '' ]; then
+  ssh-keyscan 'github.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
+fi
+
 # Fetch the latest version of the setup
 if [ ! -d "$HOME/workspace/scripts" ]; then
-  if [ ! -d "$HOME/.ssh" ]; then
-    mkdir "$HOME/.ssh"
-    chmod 700 "$HOME/.ssh"
-  fi
-  ssh-keyscan 'gitlab.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
-  ssh-keyscan 'github.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
   git clone https://gitlab.com/perobertson/scripts.git "$HOME/workspace/scripts"
   cd "$HOME/workspace/scripts"
 fi
