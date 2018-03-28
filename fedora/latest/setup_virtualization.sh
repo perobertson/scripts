@@ -27,10 +27,10 @@ else
                       glibc-devel \
                       glibc-headers
   sudo dnf -y install VirtualBox-5.2 || exit 1
-  sudo usermod -a -G vboxusers $(whoami)
+  sudo usermod -a -G vboxusers "$(whoami)"
 
   sudo dnf -y install docker-ce || exit 1
-  sudo usermod -a -G docker $(whoami)
+  sudo usermod -a -G docker "$(whoami)"
   sudo systemctl enable docker
   sudo systemctl start docker
 
