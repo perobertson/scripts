@@ -30,6 +30,14 @@ fedora_27:
     - dnf install -y sudo
 
 
+fedora_28:
+  <<: *build_definition
+  image: fedora:28
+  before_script:
+    - dnf install -y sudo
+  allow_failure: true
+
+
 fedora_rawhide:
   <<: *build_definition
   image: fedora:rawhide
