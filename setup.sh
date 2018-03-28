@@ -10,7 +10,7 @@ set -u
 sudo -k
 
 # Check if we are in a CI environment
-if [ -z "$CI" ]; then
+if [ -z "${CI:-}" ]; then
   # Check for root
   [[ $(id -u) -eq 0 ]] && echo 'script must be run as a normal user' && exit 1
 
@@ -51,7 +51,7 @@ if [ ! -d "$HOME/workspace/scripts" ]; then
   git clone https://gitlab.com/perobertson/scripts.git "$HOME/workspace/scripts"
   cd "$HOME/workspace/scripts"
 
-  if [ -n "$CI" ]; then
+  if [ -n "${CI:-}" ]; then
     # if we are in CI, then checkout the specific version for testing
     git reset --hard "${CI_COMMIT_SHA}"
   fi
