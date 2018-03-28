@@ -6,14 +6,6 @@ set -x
 # Clear any previous sudo permission
 sudo -k
 
-# figure out which os/version we are on
-os=$(. /etc/os-release && echo $ID)
-version=$(. /etc/os-release && echo $VERSION_ID)
-if [ ! -d "${os}/${version}" ]; then
-  # Use the latest setup if there is no specific setup for the OS version
-  version='latest'
-fi
-
 # Check if we are in a CI environment
 if [ -z "$CI" ]; then
   # Check for root
@@ -31,7 +23,12 @@ mkdir -p "$HOME/workspace"
 
 # Check if git needs installed
 if [ ! -x "$(command -v git)" ]; then
-  . "${os}/${version}/install_git.sh"
+  if [ -x "$(command -v dnf)" ]; then
+    sudo dnf install -y git
+  else
+    sudo apt-get update
+    sudo apt-get install -y git
+  fi
 fi
 
 # Fetch the latest version of the setup
@@ -47,6 +44,13 @@ if [ ! -d "$HOME/workspace/scripts" ]; then
 fi
 
 # Run the setup
+os=$(. /etc/os-release && echo $ID)
+version=$(. /etc/os-release && echo $VERSION_ID)
+if [ ! -d "${os}/${version}" ]; then
+  # Use the latest setup if there is no specific setup for the OS version
+  version='latest'
+fi
+
 . "${os}/${version}/setup_package_managers.sh"
 . "${os}/${version}/setup_dev_depends.sh"
 . "${os}/${version}/setup_databases.sh"
