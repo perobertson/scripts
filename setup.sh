@@ -3,6 +3,9 @@
 # Display Commands
 set -x
 
+# Check for undeclared variables
+set -u
+
 # Clear any previous sudo permission
 sudo -k
 
@@ -12,7 +15,7 @@ if [ -z "$CI" ]; then
   [[ $(id -u) -eq 0 ]] && echo 'script must be run as a normal user' && exit 1
 
   # Enable 'bash strict mode' from here on out
-  set -euo pipefail
+  set -eo pipefail
 fi
 
 # Set up app directories
