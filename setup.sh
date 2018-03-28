@@ -46,10 +46,15 @@ if [ "$(cat ~/.ssh/known_hosts | grep ^github.com)" = '' ]; then
   ssh-keyscan 'github.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
 fi
 
-# Fetch the latest version of the setup
+# Fetch the scripts
 if [ ! -d "$HOME/workspace/scripts" ]; then
   git clone https://gitlab.com/perobertson/scripts.git "$HOME/workspace/scripts"
   cd "$HOME/workspace/scripts"
+
+  if [ -n "$CI" ]; then
+    # if we are in CI, then checkout the specific version for testing
+    git reset --hard "${CI_COMMIT_SHA}"
+  fi
 fi
 
 # Run the setup

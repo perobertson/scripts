@@ -7,11 +7,7 @@
     - echo "$HOME"
     - pwd
     - ls -laH
-    - mkdir -p "$HOME/workspace/"
-    - ln -s "$(pwd)" "$HOME/workspace/"
-    - cd "$HOME/workspace/scripts"
-    - pwd
-    - ./setup.sh
+    - /usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash
 
 fedora_25:
   <<: *build_definition
