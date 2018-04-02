@@ -32,6 +32,7 @@ sudo dnf -y install autoconf \
                     p7zip \
                     patch \
                     perl \
+                    pv \
                     pygpgme \
                     python-devel \
                     redhat-lsb \
