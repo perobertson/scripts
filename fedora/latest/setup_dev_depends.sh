@@ -51,7 +51,8 @@ sudo dnf -y install autoconf \
                     zsh
 
 pip install --user --upgrade pip
-pip install --user  flake8 \
+pip install --user  bashate \
+                    flake8 \
                     pep8-naming \
                     tldr \
                     virtualenv

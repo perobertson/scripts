@@ -96,6 +96,9 @@ if [[ ! -d "$HOME/.config/sublime-text-3/Packages/SublimeLinter" ]]; then
   # only need to enable this checkout when breaking changes are happening
   # cd "$HOME/.config/sublime-text-3/Packages/SublimeLinter" && git checkout 4.1.1 && cd - || exit 1
 fi
+if [[ -d "$HOME/.config/sublime-text-3/Packages/SublimeLinter-contrib-bashate" ]]; then
+  git clone git@github.com:maristgeek/SublimeLinter-contrib-bashate.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter-contrib-bashate"
+fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/SublimeLinter-flake8" ]]; then
   git clone https://github.com/SublimeLinter/SublimeLinter-flake8.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter-flake8"
   # only need to enable this checkout when breaking changes are happening
