@@ -61,6 +61,8 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-setti
   "insert_final_newline": true,
   "line_padding_bottom": 1,
   "line_padding_top": 1,
+  "show_encoding": true,
+  "show_line_endings": true,
   "tab_size": 2,
   "theme": "Adaptive.sublime-theme",
   "translate_tabs_to_spaces": true,
@@ -77,7 +79,7 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" 
 EOF
 fi
 
-if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" ]]; then
+if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/python_fiximports.sublime-settings" ]]; then
   cat > "$HOME/.config/sublime-text-3/Packages/User/python_fiximports.sublime-settings" <<EOF
 {
   "split_import_statements": false,
