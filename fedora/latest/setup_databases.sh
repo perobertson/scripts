@@ -10,6 +10,10 @@ sudo su --command="perl -p -i -e 's/host([\w :\/\.]*)ident/host\$1trust/g' /var/
 sudo su --command="psql --command='CREATE ROLE $(whoami) WITH SUPERUSER LOGIN;'" --login postgres || true
 
 # Setup MySql
+# Just the header files, dev applications should use containters
+sudo dnf -y install mysql-community-devel
+
+# Setup mariadb
 # sudo dnf -y install mariadb \
 #                     mariadb-devel \
 #                     mariadb-server \
