@@ -8,6 +8,24 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-set
   cat > "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings" <<EOF
 // SublimeLinter Settings - User
 {
+  "linters": {
+    "bashate": {
+      "ignore": "E006",
+    },
+    "flake8": {
+      "python": null,
+      "disable": false,
+      "args": ["--ignore=E501"],
+      "excludes": [],
+      "ignore": "",
+      "max-complexity": 10,
+      "max-line-length": null,
+      "select": ""
+    },
+    "rubocop": {
+      "use_bundle_exec": true
+    }
+  },
   "paths": {
     "linux": [
       "~/.rbenv/shims",
@@ -27,6 +45,7 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-setti
   cat > "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" <<EOF
 {
   "default_line_ending": "unix",
+  "drag_text": false,
   "draw_white_space": "all",
   "ensure_newline_at_eof_on_save": true,
   "folder_exclude_patterns":
@@ -74,6 +93,20 @@ fi
 if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" ]]; then
   cat > "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" <<EOF
 {
+  "tab_size": 4,
+}
+EOF
+fi
+
+if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Shell-Unix-Generic.sublime-settings" ]]; then
+    cat > "$HOME/.config/sublime-text-3/Packages/User/Shell-Unix-Generic.sublime-settings" <<EOF
+{
+  "extensions":
+  [
+    "bash",
+    "sh",
+    "zsh"
+  ],
   "tab_size": 4,
 }
 EOF
