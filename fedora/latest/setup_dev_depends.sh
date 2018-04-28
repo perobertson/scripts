@@ -58,8 +58,8 @@ pip install --user  bashate \
                     virtualenv
 
 if [ ! -x "$(command -v vagrant)" -o "$(vagrant --version)" != 'Vagrant 2.0.3' ]; then
-  sudo dnf -y install https://releases.hashicorp.com/vagrant/2.0.3/vagrant_2.0.3_x86_64.rpm
-  [[ "$(vagrant --version)" == 'Vagrant 2.0.3' ]] || exit 1
+    sudo dnf -y install https://releases.hashicorp.com/vagrant/2.0.3/vagrant_2.0.3_x86_64.rpm
+    [[ "$(vagrant --version)" == 'Vagrant 2.0.3' ]] || exit 1
 fi
 
 # Common gems that are used all the time
@@ -75,7 +75,7 @@ sudo systemctl enable redis
 [[ ! -f "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" ]] && /usr/bin/curl -Lo "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
 [[ ! -d "$HOME/Applications/phantomjs-2.1.1-linux-x86_64" ]] && tar xvjf "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" -C "$HOME/Applications"
 if [[ -f "$HOME/bin/phantomjs" ]]; then
-  rm "$HOME/bin/phantomjs"
+    rm "$HOME/bin/phantomjs"
 fi
 ln -s "$HOME/Applications/phantomjs-2.1.1-linux-x86_64/bin/phantomjs" "$HOME/bin/phantomjs"
 [[ "$($HOME/bin/phantomjs --version)" == '2.1.1' ]] || exit 1
@@ -88,16 +88,16 @@ mkdir -p "$HOME/Downloads/heroku"
 tar -xzf "$HOME/Downloads/heroku.tar.gz" -C "$HOME/Downloads/heroku/"
 mv "$HOME/Downloads/heroku/"* "$HOME/Applications/heroku/"
 if [[ -f "$HOME/bin/heroku" ]]; then
-  rm "$HOME/bin/heroku"
+    rm "$HOME/bin/heroku"
 else
-  ln -s "$HOME/Applications/heroku/bin/heroku" "$HOME/bin/heroku"
+    ln -s "$HOME/Applications/heroku/bin/heroku" "$HOME/bin/heroku"
 fi
 
 # Setup Hub
 [[ ! -f "$HOME/Downloads/hub-linux-amd64-2.2.9.tgz" ]] && /usr/bin/curl -Lo "$HOME/Downloads/hub-linux-amd64-2.2.9.tgz" https://github.com/github/hub/releases/download/v2.2.9/hub-linux-amd64-2.2.9.tgz
 [[ ! -d "$HOME/Applications/hub-linux-amd64-2.2.9" ]] && tar xzfv "$HOME/Downloads/hub-linux-amd64-2.2.9.tgz" -C "$HOME/Applications"
 if [[ -f "$HOME/bin/hub" ]]; then
-  rm "$HOME/bin/hub"
+    rm "$HOME/bin/hub"
 fi
 ln -s "$HOME/Applications/hub-linux-amd64-2.2.9/bin/hub" "$HOME/bin/hub"
 [[ "$($HOME/bin/hub --version | grep hub)" == 'hub version 2.2.9' ]] || exit 1

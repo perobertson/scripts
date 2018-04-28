@@ -11,11 +11,11 @@ sudo -k
 
 # Check if we are in a CI environment
 if [ -z "${CI:-}" ]; then
-  # Check for root
-  [[ $(id -u) -eq 0 ]] && echo 'script must be run as a normal user' && exit 1
+    # Check for root
+    [[ $(id -u) -eq 0 ]] && echo 'script must be run as a normal user' && exit 1
 
-  # Enable 'bash strict mode' from here on out
-  set -eo pipefail
+    # Enable 'bash strict mode' from here on out
+    set -eo pipefail
 fi
 
 # Set up app directories
@@ -26,43 +26,43 @@ mkdir -p "$HOME/workspace"
 
 # Check if git needs installed
 if [ ! -x "$(command -v git)" ]; then
-  if [ -x "$(command -v dnf)" ]; then
-    sudo dnf install -y git
-  else
-    sudo apt-get update
-    sudo apt-get install -y git
-  fi
+    if [ -x "$(command -v dnf)" ]; then
+        sudo dnf install -y git
+    else
+        sudo apt-get update
+        sudo apt-get install -y git
+    fi
 fi
 
 # Setup ssh
 if [ ! -d "$HOME/.ssh" ]; then
-  mkdir "$HOME/.ssh"
-  chmod 700 "$HOME/.ssh"
+    mkdir "$HOME/.ssh"
+    chmod 700 "$HOME/.ssh"
 fi
 if [ "$(cat ~/.ssh/known_hosts | grep ^gitlab.com)" = '' ]; then
-  ssh-keyscan 'gitlab.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
+    ssh-keyscan 'gitlab.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
 fi
 if [ "$(cat ~/.ssh/known_hosts | grep ^github.com)" = '' ]; then
-  ssh-keyscan 'github.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
+    ssh-keyscan 'github.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
 fi
 
 # Fetch the scripts
 if [ ! -d "$HOME/workspace/scripts" ]; then
-  git clone https://gitlab.com/perobertson/scripts.git "$HOME/workspace/scripts"
-  cd "$HOME/workspace/scripts"
+    git clone https://gitlab.com/perobertson/scripts.git "$HOME/workspace/scripts"
+    cd "$HOME/workspace/scripts"
 
-  if [ -n "${CI:-}" ]; then
-    # if we are in CI, then checkout the specific version for testing
-    git reset --hard "${CI_COMMIT_SHA}"
-  fi
+    if [ -n "${CI:-}" ]; then
+        # if we are in CI, then checkout the specific version for testing
+        git reset --hard "${CI_COMMIT_SHA}"
+    fi
 fi
 
 # Run the setup
 os=$(. /etc/os-release && echo $ID)
 version=$(. /etc/os-release && echo $VERSION_ID)
 if [ ! -d "${os}/${version}" ]; then
-  # Use the latest setup if there is no specific setup for the OS version
-  version='latest'
+    # Use the latest setup if there is no specific setup for the OS version
+    version='latest'
 fi
 
 . "${os}/${version}/setup_package_managers.sh"

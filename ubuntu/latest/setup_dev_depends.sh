@@ -15,7 +15,7 @@ gem install bundler \
 [[ ! -f "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" ]] && /usr/bin/curl -Lo "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
 [[ ! -d "$HOME/Applications/phantomjs-2.1.1-linux-x86_64" ]] && tar xvjf "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" -C "$HOME/Applications"
 if [[ -f "$HOME/bin/phantomjs" ]]; then
-  rm "$HOME/bin/phantomjs"
+    rm "$HOME/bin/phantomjs"
 fi
 ln -s "$HOME/Applications/phantomjs-2.1.1-linux-x86_64/bin/phantomjs" "$HOME/bin/phantomjs"
 
@@ -27,6 +27,6 @@ mkdir -p "$HOME/Downloads/heroku"
 tar -xzf "$HOME/Downloads/heroku.tar.gz" -C "$HOME/Downloads/heroku/"
 mv "$HOME/Downloads/heroku/"* "$HOME/Applications/heroku/"
 if [[ -f "$HOME/bin/heroku" ]]; then
-  rm "$HOME/bin/heroku"
+    rm "$HOME/bin/heroku"
 fi
 ln -s "$HOME/Applications/heroku/bin/heroku" "$HOME/bin/heroku"

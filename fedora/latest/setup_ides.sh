@@ -5,7 +5,7 @@ wget -P "$HOME/.config/sublime-text-3/Installed Packages" https://packagecontrol
 mkdir -p "$HOME/.config/sublime-text-3/Packages/User"
 
 if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings" ]]; then
-  cat > "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings" <<EOF
+    cat > "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings" <<EOF
 // SublimeLinter Settings - User
 {
   "linters": {
@@ -42,7 +42,7 @@ EOF
 fi
 
 if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" ]]; then
-  cat > "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" <<EOF
+    cat > "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" <<EOF
 {
   "default_line_ending": "unix",
   "drag_text": false,
@@ -91,7 +91,7 @@ EOF
 fi
 
 if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" ]]; then
-  cat > "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" <<EOF
+    cat > "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" <<EOF
 {
   "tab_size": 4,
 }
@@ -121,21 +121,21 @@ EOF
 fi
 
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Jedi - Python autocompletion" ]]; then
-  git clone https://github.com/srusskih/SublimeJEDI.git "$HOME/.config/sublime-text-3/Packages/Jedi - Python autocompletion"
+    git clone https://github.com/srusskih/SublimeJEDI.git "$HOME/.config/sublime-text-3/Packages/Jedi - Python autocompletion"
 fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Python Fix Imports" ]]; then
-  git clone https://github.com/Stibbons/python-fiximports.git "$HOME/.config/sublime-text-3/Packages/Python Fix Imports"
+    git clone https://github.com/Stibbons/python-fiximports.git "$HOME/.config/sublime-text-3/Packages/Python Fix Imports"
 fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/SublimeLinter" ]]; then
-  git clone https://github.com/SublimeLinter/SublimeLinter.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter"
-  # only need to enable this checkout when breaking changes are happening
-  # cd "$HOME/.config/sublime-text-3/Packages/SublimeLinter" && git checkout 4.1.1 && cd - || exit 1
+    git clone https://github.com/SublimeLinter/SublimeLinter.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter"
+    # only need to enable this checkout when breaking changes are happening
+    # cd "$HOME/.config/sublime-text-3/Packages/SublimeLinter" && git checkout 4.1.1 && cd - || exit 1
 fi
 if [[ -d "$HOME/.config/sublime-text-3/Packages/SublimeLinter-contrib-bashate" ]]; then
-  git clone git@github.com:maristgeek/SublimeLinter-contrib-bashate.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter-contrib-bashate"
+    git clone git@github.com:maristgeek/SublimeLinter-contrib-bashate.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter-contrib-bashate"
 fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/SublimeLinter-flake8" ]]; then
-  git clone https://github.com/SublimeLinter/SublimeLinter-flake8.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter-flake8"
-  # only need to enable this checkout when breaking changes are happening
-  # cd "$HOME/.config/sublime-text-3/Packages/SublimeLinter-flake8" && git checkout 4.0.1 && cd - || exit 1
+    git clone https://github.com/SublimeLinter/SublimeLinter-flake8.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter-flake8"
+    # only need to enable this checkout when breaking changes are happening
+    # cd "$HOME/.config/sublime-text-3/Packages/SublimeLinter-flake8" && git checkout 4.0.1 && cd - || exit 1
 fi
