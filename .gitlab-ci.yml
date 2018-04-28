@@ -9,6 +9,7 @@
     - ls -laH
     - /usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash
 
+
 lint:
   stage: build
   image: python:latest
@@ -17,6 +18,7 @@ lint:
   script:
     - pip install --user --upgrade bashate
     - ~/.local/bin/bashate --ignore=E006 $(find . -name '*.sh')
+
 
 fedora_25:
   <<: *build_definition

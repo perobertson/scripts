@@ -57,6 +57,9 @@ pip install --user  bashate \
                     tldr \
                     virtualenv
 
+# Switch to zsh
+sudo usermod -s "$(which zsh)" "$(whoami)"
+
 if [ ! -x "$(command -v vagrant)" -o "$(vagrant --version)" != 'Vagrant 2.0.3' ]; then
     sudo dnf -y install https://releases.hashicorp.com/vagrant/2.0.3/vagrant_2.0.3_x86_64.rpm
     [[ "$(vagrant --version)" == 'Vagrant 2.0.3' ]] || exit 1

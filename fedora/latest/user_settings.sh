@@ -1,6 +1,3 @@
-# Switch to zsh
-sudo usermod -s "$(which zsh)" "$(whoami)"
-
 # Change settings
 gsettings set org.cinnamon.desktop.interface clock-show-seconds true
 gsettings set org.cinnamon.desktop.interface icon-theme 'Mint-X-Aqua'
