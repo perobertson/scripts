@@ -6,6 +6,9 @@ set -x
 # Check for undeclared variables
 set -u
 
+# Fail if any exit code in a pipeline is a fail
+set -o pipefail
+
 # Clear any previous sudo permission
 sudo -k
 
@@ -14,8 +17,8 @@ if [ -z "${CI:-}" ]; then
     # Check for root
     [[ $(id -u) -eq 0 ]] && echo 'script must be run as a normal user' && exit 1
 
-    # Enable 'bash strict mode' from here on out
-    set -eo pipefail
+    # Exit on non 0 exit codes
+    set -e
 fi
 
 # Set up app directories
