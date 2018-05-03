@@ -66,10 +66,10 @@ if [ ! -d "${os}/${version}" ]; then
 fi
 
 . "${os}/${version}/setup_package_managers.sh"
+. "${os}/${version}/setup_virtualization.sh"
 . "${os}/${version}/setup_dev_depends.sh"
 . "${os}/${version}/setup_databases.sh"
 . "${os}/${version}/setup_ides.sh"
-. "${os}/${version}/setup_virtualization.sh"
 
 # These do not require root
 . "${os}/${version}/setup_ruby.sh"

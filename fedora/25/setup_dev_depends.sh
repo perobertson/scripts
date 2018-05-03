@@ -35,7 +35,7 @@ sudo dnf -y install autoconf \
                     pv \
                     pygpgme \
                     python-devel \
-                    python2-pip \
+                    python-pip \
                     python3-pip \
                     redhat-lsb \
                     redhat-rpm-config \
@@ -52,9 +52,6 @@ sudo dnf -y install autoconf \
                     zlib-devel \
                     zsh
 
-# TODO: This breaks the system install in CI and maybe for the user as well
-# pip install --user --upgrade pip
-# hash -r
 pip install --user  bashate \
                     flake8 \
                     pep8-naming \
