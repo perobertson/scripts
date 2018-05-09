@@ -7,7 +7,11 @@
     - echo "$HOME"
     - pwd
     - ls -laH
-    - /usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash
+    - "echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
+    - useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
+    - cat /etc/passwd
+    - cat /etc/group
+    - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | PATH=$HOME/bin:$PATH bash'
 
 
 lint:
