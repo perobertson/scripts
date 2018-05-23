@@ -3,11 +3,22 @@
 # Display Commands
 set -x
 
-# Check for undeclared variables
-set -u
+if test "$BASH" = "" || "$BASH" -uc "a=();true \"\${a[@]}\"" 2>/dev/null; then
+    # Bash 4.4, Zsh
+    # e: Exit on non 0 exit codes
+    # u: Check for undeclared variables
+    # o pipefail: Fail if any exit code in a pipeline is a fail
+    set -euo pipefail
+else
+    # Bash 4.3 and older chokes on empty arrays with set -u.
+    set -eo pipefail
+fi
+# null the glob when nothing matches
+# TODO: figure out why this breaks `rake`
+# shopt -s nullglob
 
-# Fail if any exit code in a pipeline is a fail
-set -o pipefail
+# enable recursive globbing
+shopt -s globstar
 
 # Clear any previous sudo permission
 sudo -k
@@ -16,9 +27,6 @@ sudo -k
 if [ -z "${CI:-}" ]; then
     # Check for root
     [[ $(id -u) -eq 0 ]] && echo 'script must be run as a normal user' && exit 1
-
-    # Exit on non 0 exit codes
-    set -e
 fi
 
 # Set up app directories

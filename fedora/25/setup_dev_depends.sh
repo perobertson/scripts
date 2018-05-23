@@ -70,10 +70,19 @@ fi
 gem install bundler \
             rake
 
+# Enable these for better hostname finding
 sudo systemctl enable smb
 sudo systemctl enable nmb
-sudo systemctl enable memcached
-sudo systemctl enable redis
+
+if [[ $(sudo virt-what) = '' ]]; then
+    # Applications should be using containers
+    sudo systemctl disable memcached
+    sudo systemctl disable redis
+else
+    # Start caches when inside a VM
+    sudo systemctl enable memcached
+    sudo systemctl enable redis
+fi
 
 # Setup PhantomJS
 [[ ! -f "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" ]] && /usr/bin/curl -Lo "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2

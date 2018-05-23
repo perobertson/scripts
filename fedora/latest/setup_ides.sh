@@ -11,6 +11,7 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-set
   "linters": {
     "bashate": {
       "ignore": "E006",
+      "selector": "source.shell",
     },
     "flake8": {
       "python": null,
