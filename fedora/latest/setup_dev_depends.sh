@@ -58,6 +58,7 @@ sudo dnf -y install autoconf \
 pip install --user  bashate \
                     flake8 \
                     pep8-naming \
+                    pipenv \
                     tldr \
                     virtualenv
 
