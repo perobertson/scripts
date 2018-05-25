@@ -54,22 +54,18 @@ set_guest_settings(){
     fi
 }
 
-virttype="$(sudo virt-what)"
-case "$virttype" in
-    '') # Bare Metal
-        install_kvm
-        install_virtualbox
-        install_docker
-        ;;
-    'kvm')
-        install_docker
-        set_guest_settings
-        ;;
-    'virtualbox')
-        install_virtualbox_guest
-        set_guest_settings
-        ;;
-    *)
-        echo "[WARN] Unknown virtualization detected: $virttype skipping install of virtualization tools"
-        ;;
-esac
+# use grep because multiple results can be returned
+if [[ "$(sudo virt-what)" = '' ]]; then
+    # Bare Metal
+    install_kvm
+    install_virtualbox
+    install_docker
+elif [[ "$(sudo virt-what | grep virtualbox)" != '' ]]; then
+    install_virtualbox_guest
+    set_guest_settings
+elif [[ "$(sudo virt-what | grep kvm)" != '' ]]; then
+    install_docker
+    set_guest_settings
+else
+    echo "[WARN] Unknown virtualization detected: '$(sudo virt-what)' skipping install of virtualization tools"
+fi

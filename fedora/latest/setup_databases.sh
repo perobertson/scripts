@@ -20,18 +20,17 @@ disable_postgres(){
     sudo systemctl disable postgresql
 }
 
-virttype="$(sudo virt-what)"
-case "$virttype" in
-    '') # Bare Metal
-        disable_postgres
-        ;;
-    'virtualbox')
-        setup_postgres
-        ;;
-    *)
-        echo "[WARN] Unknown virtualization detected: $virttype skipping configuration of postgres"
-        ;;
-esac
+# use grep because multiple results can be returned
+if [[ "$(sudo virt-what)" = '' ]]; then
+    # Bare Metal
+    disable_postgres
+elif [[ "$(sudo virt-what | grep virtualbox)" != '' ]]; then
+    setup_postgres
+elif [[ "$(sudo virt-what | grep kvm)" != '' ]]; then
+    disable_postgres
+else
+    echo "[WARN] Unknown virtualization detected: '$(sudo virt-what)' skipping configuration of postgres"
+fi
 
 # Setup MySql
 # Just the header files, applications should use containters
