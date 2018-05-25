@@ -69,24 +69,13 @@ if [ ! -d "$HOME/workspace/scripts" ]; then
 fi
 
 # Run the setup
-os=$(. /etc/os-release && echo $ID)
-version=$(. /etc/os-release && echo $VERSION_ID)
-if [ ! -d "${os}/${version}" ]; then
+os="$(. /etc/os-release && echo $ID)"
+version="$(. /etc/os-release && echo $VERSION_ID)"
+if [ ! -d "$os/$version" ]; then
     # Use the latest setup if there is no specific setup for the OS version
     version='latest'
 fi
-
-. "${os}/${version}/setup_package_managers.sh"
-. "${os}/${version}/setup_virtualization.sh"
-. "${os}/${version}/setup_dev_depends.sh"
-. "${os}/${version}/setup_databases.sh"
-. "${os}/${version}/setup_ides.sh"
-
-# These do not require root
-. "${os}/${version}/setup_python.sh"
-. "${os}/${version}/setup_ruby.sh"
-. "${os}/${version}/setup_dotfiles.sh"
-. "${os}/${version}/user_settings.sh"
+. "$os/$version/setup.sh"
 
 echo -e '\nEverything installed. Be sure to reboot at your earliest convenience'
 echo 'Remember to manually install guest additions from the CD if needed after reboot'
