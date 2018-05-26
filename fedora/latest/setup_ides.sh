@@ -121,6 +121,9 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/python_fiximports.sublime
 EOF
 fi
 
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/FileIcons" ]]; then
+    git clone https://github.com/braver/FileIcons.git "$HOME/.config/sublime-text-3/Packages/FileIcons"
+fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Jedi - Python autocompletion" ]]; then
     git clone https://github.com/srusskih/SublimeJEDI.git "$HOME/.config/sublime-text-3/Packages/Jedi - Python autocompletion"
 fi
