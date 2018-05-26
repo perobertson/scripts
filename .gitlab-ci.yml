@@ -29,6 +29,7 @@ fedora_25:
   image: fedora:25
   before_script:
     - dnf install -y sudo
+  allow_failure: true
 
 
 fedora_26:
@@ -36,6 +37,7 @@ fedora_26:
   image: fedora:26
   before_script:
     - dnf install -y sudo
+  allow_failure: true
 
 
 fedora_27:
@@ -48,6 +50,13 @@ fedora_27:
 fedora_28:
   <<: *build_definition
   image: fedora:28
+  before_script:
+    - dnf install -y sudo
+
+
+fedora_29:
+  <<: *build_definition
+  image: fedora:29
   before_script:
     - dnf install -y sudo
   allow_failure: true

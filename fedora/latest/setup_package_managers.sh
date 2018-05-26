@@ -22,6 +22,8 @@ sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x
 
 # Docker Repo
 sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+# Updates are released monthly instead of quarterly
+sudo dnf config-manager --set-enabled docker-ce-edge
 
 # MySQL repo
-sudo dnf install -y "https://dev.mysql.com/get/mysql57-community-release-fc$(. /etc/os-release && echo $VERSION_ID)-10.noarch.rpm"
+sudo dnf install -y "https://dev.mysql.com/get/mysql80-community-release-fc$(. /etc/os-release && echo $VERSION_ID)-1.noarch.rpm"
