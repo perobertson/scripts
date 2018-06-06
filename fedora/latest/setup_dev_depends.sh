@@ -52,14 +52,17 @@ sudo dnf -y install autoconf \
                     zlib-devel \
                     zsh
 
-# TODO: This breaks the system install in CI and maybe for the user as well
+# get the latest pip version
 pip install --user --upgrade pip
 # force the shell to forget all remembered locations
 hash -r
 pip install --user  bashate \
                     flake8 \
+                    flake8-import-order \
+                    jedi \
                     pep8-naming \
                     pipenv \
+                    pre-commit \
                     tldr \
                     virtualenv
 
