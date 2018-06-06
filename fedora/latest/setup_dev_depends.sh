@@ -53,8 +53,9 @@ sudo dnf -y install autoconf \
                     zsh
 
 # TODO: This breaks the system install in CI and maybe for the user as well
-# pip install --user --upgrade pip
-# hash -r
+pip install --user --upgrade pip
+# force the shell to forget all remembered locations
+hash -r
 pip install --user  bashate \
                     flake8 \
                     pep8-naming \
