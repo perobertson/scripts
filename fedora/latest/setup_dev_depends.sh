@@ -17,6 +17,7 @@ sudo dnf -y install autoconf \
                     git-cola \
                     gitk \
                     graphviz \
+                    gtk-murrine-engine \
                     htop \
                     i3 \
                     ImageMagick \
