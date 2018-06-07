@@ -58,6 +58,8 @@ pip install --user --upgrade pip
 hash -r
 pip install --user  bashate \
                     flake8 \
+                    flake8-docstrings \
+                    flake8-future-import \
                     flake8-import-order \
                     jedi \
                     pep8-naming \
