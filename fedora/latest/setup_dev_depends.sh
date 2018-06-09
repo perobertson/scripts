@@ -44,6 +44,7 @@ sudo dnf -y install autoconf \
                     ruby \
                     ruby-devel \
                     samba \
+                    ShellCheck \
                     sl \
                     sqlite-devel \
                     sublime-text \

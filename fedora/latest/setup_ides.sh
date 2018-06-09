@@ -1,8 +1,11 @@
-# Install Sublime Text 3 Package Manager
-wget -P "$HOME/.config/sublime-text-3/Installed Packages" https://packagecontrol.io/Package%20Control.sublime-package
-
 # Configure IDE and plugins
+mkdir -p "$HOME/.config/sublime-text-3/Installed Packages"
 mkdir -p "$HOME/.config/sublime-text-3/Packages/User"
+
+# Install Sublime Text 3 Package Manager
+if [[ ! -f "$HOME/.config/sublime-text-3/Installed Packages/Package Control.sublime-package" ]]; then
+    curl -o "$HOME/.config/sublime-text-3/Installed Packages/Package Control.sublime-package" -L 'https://packagecontrol.io/Package%20Control.sublime-package'
+fi
 
 if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings" ]]; then
     cat > "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings" <<EOF
@@ -16,7 +19,14 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-set
     "flake8": {
       "python": null,
       "disable": false,
-      "args": ["--ignore=E501"],
+      "args": [
+        // E501: line length
+        // D100: Docstring public module
+        // D101: Docstring public class
+        // D102: Docstring public method
+        // I100: imports groups in wrong order
+        "--ignore=E501,D100,D101,D102,I100"
+      ],
       "excludes": [],
       "ignore": "",
       "max-complexity": 10,
@@ -121,14 +131,23 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/python_fiximports.sublime
 EOF
 fi
 
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/ApplySyntax" ]]; then
+    git clone https://github.com/facelessuser/ApplySyntax.git "$HOME/.config/sublime-text-3/Packages/ApplySyntax"
+fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Docker.tmbundle" ]]; then
     git clone https://github.com/asbjornenge/Docker.tmbundle.git "$HOME/.config/sublime-text-3/Packages/Docker.tmbundle"
 fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/FileIcons" ]]; then
     git clone https://github.com/braver/FileIcons.git "$HOME/.config/sublime-text-3/Packages/FileIcons"
 fi
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/GitGutter" ]]; then
+    git clone https://github.com/jisaacks/GitGutter.git "$HOME/.config/sublime-text-3/Packages/GitGutter"
+fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Jedi - Python autocompletion" ]]; then
     git clone https://github.com/srusskih/SublimeJEDI.git "$HOME/.config/sublime-text-3/Packages/Jedi - Python autocompletion"
+fi
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/json_reindent" ]]; then
+    git clone https://github.com/ThomasKliszowski/json_reindent.git "$HOME/.config/sublime-text-3/Packages/json_reindent"
 fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Python Fix Imports" ]]; then
     git clone https://github.com/Stibbons/python-fiximports.git "$HOME/.config/sublime-text-3/Packages/Python Fix Imports"
@@ -138,11 +157,20 @@ if [[ ! -d "$HOME/.config/sublime-text-3/Packages/SublimeLinter" ]]; then
     # only need to enable this checkout when breaking changes are happening
     # cd "$HOME/.config/sublime-text-3/Packages/SublimeLinter" && git checkout 4.1.1 && cd - || exit 1
 fi
-if [[ -d "$HOME/.config/sublime-text-3/Packages/SublimeLinter-contrib-bashate" ]]; then
-    git clone git@github.com:maristgeek/SublimeLinter-contrib-bashate.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter-contrib-bashate"
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/SublimeLinter-contrib-bashate" ]]; then
+    git clone https://github.com/maristgeek/SublimeLinter-contrib-bashate.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter-contrib-bashate"
 fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/SublimeLinter-flake8" ]]; then
     git clone https://github.com/SublimeLinter/SublimeLinter-flake8.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter-flake8"
     # only need to enable this checkout when breaking changes are happening
     # cd "$HOME/.config/sublime-text-3/Packages/SublimeLinter-flake8" && git checkout 4.0.1 && cd - || exit 1
+fi
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/SublimeLinter-shellcheck" ]]; then
+    git clone https://github.com/SublimeLinter/SublimeLinter-shellcheck.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter-shellcheck"
+fi
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/sublime-text-2-ini" ]]; then
+    git clone https://github.com/clintberry/sublime-text-2-ini.git "$HOME/.config/sublime-text-3/Packages/sublime-text-2-ini"
+fi
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/sublime-text-git" ]]; then
+    git clone https://github.com/kemayo/sublime-text-git.git "$HOME/.config/sublime-text-3/Packages/sublime-text-git"
 fi
