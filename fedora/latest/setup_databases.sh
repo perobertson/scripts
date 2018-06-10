@@ -23,6 +23,7 @@ disable_postgres(){
 # use grep because multiple results can be returned
 if [[ "$(sudo virt-what)" = '' ]]; then
     # Bare Metal
+    setup_postgres
     disable_postgres
 elif [[ "$(sudo virt-what | grep virtualbox)" != '' ]]; then
     setup_postgres
