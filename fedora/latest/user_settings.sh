@@ -4,7 +4,11 @@ if [[ "$(gsettings list-schemas | grep org.cinnamon.desktop.interface)" != '' ]]
     gsettings set org.cinnamon.desktop.interface icon-theme 'Mint-X-Aqua'
 fi
 if [[ "$(gsettings list-schemas | grep org.gnome.desktop.interface)" != '' ]]; then
-    gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata Medium 10'
+    gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata Medium 11'
+fi
+if [[ "$(gsettings list-schemas | grep org.nemo.preferences)" != '' ]]; then
+    gsettings set org.nemo.preferences date-format 'iso'
+    gsettings set org.nemo.preferences default-folder-viewer 'list-view'
 fi
 
 # Clean up fonts

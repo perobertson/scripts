@@ -69,8 +69,8 @@ if [ ! -d "$HOME/workspace/scripts" ]; then
 fi
 
 # Run the setup
-os="$(. /etc/os-release && echo $ID)"
-version="$(. /etc/os-release && echo $VERSION_ID)"
+os="$(. /etc/os-release && echo "$ID")"
+version="$(. /etc/os-release && echo "$VERSION_ID")"
 if [ ! -d "$os/$version" ]; then
     # Use the latest setup if there is no specific setup for the OS version
     version='latest'

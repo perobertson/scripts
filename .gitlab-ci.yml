@@ -20,6 +20,7 @@ lint:
   tags:
     - docker
   script:
+    - pip install --user --upgrade pip
     - pip install --user --upgrade bashate
     - ~/.local/bin/bashate --ignore=E006 $(find . -name '*.sh')
 
