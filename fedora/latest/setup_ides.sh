@@ -62,6 +62,7 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-setti
   "folder_exclude_patterns":
   [
     ".git",
+    ".pytest_cache",
     "__pycache__",
     "_site",
     "coverage",
