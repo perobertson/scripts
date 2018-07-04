@@ -65,7 +65,7 @@ pip install --user  bashate \
                     flake8-import-order \
                     jedi \
                     pep8-naming \
-                    pipenv==2018.5.18 \
+                    pipenv==2018.7.1 \
                     pre-commit \
                     tldr \
                     virtualenv
