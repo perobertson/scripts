@@ -20,6 +20,10 @@ fi
 # enable recursive globbing
 shopt -s globstar
 
+# Set the path here so that any commands we install in user space will be available during setup
+# This is setup in the dotfiles, but we also need it here for setup
+PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+
 # Clear any previous sudo permission
 sudo -k
 
