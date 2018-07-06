@@ -54,10 +54,10 @@ if [ ! -d "$HOME/.ssh" ]; then
     mkdir "$HOME/.ssh"
     chmod 700 "$HOME/.ssh"
 fi
-if [ "$(cat ~/.ssh/known_hosts | grep ^gitlab.com)" = '' ]; then
+if [ "$(grep ^gitlab.com "$HOME/.ssh/known_hosts")" = '' ]; then
     ssh-keyscan 'gitlab.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
 fi
-if [ "$(cat ~/.ssh/known_hosts | grep ^github.com)" = '' ]; then
+if [ "$(grep ^github.com "$HOME/.ssh/known_hosts")" = '' ]; then
     ssh-keyscan 'github.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
 fi
 
@@ -74,12 +74,12 @@ fi
 
 # Run the setup
 os="$(. /etc/os-release && echo "$ID")"
-version="$(. /etc/os-release && echo "$VERSION_ID")"
-if [ ! -d "$os/$version" ]; then
-    # Use the latest setup if there is no specific setup for the OS version
-    version='latest'
+if [ "$os" == 'fedora' ]; then
+    . "fedora/setup.sh"
+else
+    echo "$os not supported"
+    exit 1
 fi
-. "$os/$version/setup.sh"
 
 echo -e '\nEverything installed. Be sure to reboot at your earliest convenience'
 echo 'Remember to manually install guest additions from the CD if needed after reboot'

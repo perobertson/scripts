@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Package to help determine if running in a VM
 sudo dnf -y install dkms \
                     virt-what

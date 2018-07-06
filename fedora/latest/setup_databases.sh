@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Setup Postgres
 sudo dnf -y install postgresql \
                     postgresql-contrib \
@@ -10,6 +12,8 @@ setup_postgres(){
     sudo systemctl start postgresql
     sudo systemctl enable postgresql
     # trust all connections from the host
+    # disable the shellcheck since this has been working for a while
+    # shellcheck disable=SC1117
     sudo su --command="perl -p -i -e 's/host([\w :\/\.]*)ident/host\$1trust/g' /var/lib/pgsql/data/pg_hba.conf" --login postgres || true
     # create a db user for the currently logged in user
     sudo su --command="psql --command='CREATE ROLE $(whoami) WITH SUPERUSER LOGIN;'" --login postgres

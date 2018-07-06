@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Change settings
 if [[ "$(gsettings list-schemas | grep org.cinnamon.desktop.interface)" != '' ]]; then
     gsettings set org.cinnamon.desktop.interface clock-show-seconds true

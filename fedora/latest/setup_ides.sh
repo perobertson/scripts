@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Configure IDE and plugins
 mkdir -p "$HOME/.config/sublime-text-3/Installed Packages"
 mkdir -p "$HOME/.config/sublime-text-3/Packages/User"
@@ -35,6 +37,11 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-set
     },
     "rubocop": {
       "use_bundle_exec": true
+    },
+    "shellcheck": {
+      "args": [
+        "--external-sources"
+      ]
     }
   },
   "paths": {

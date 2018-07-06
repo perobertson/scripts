@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Setup MySql
 # sudo apt-get install -y mysql-server \
 #                         expect

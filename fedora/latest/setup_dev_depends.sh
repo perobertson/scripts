@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Need to upgrade vim first, otherwise there are conflicts
 sudo dnf -y upgrade vim-minimal
 # Install vim separately due to conflicts in upgrade / install
@@ -74,10 +76,12 @@ pip install --user  bashate \
 # Switch to zsh
 sudo usermod -s "$(which zsh)" "$(whoami)"
 
-if [ ! -x "$(command -v vagrant)" -o "$(vagrant --version)" != 'Vagrant 2.0.3' ]; then
+if [ ! -x "$(command -v vagrant)" ]; then
     sudo dnf -y install https://releases.hashicorp.com/vagrant/2.0.3/vagrant_2.0.3_x86_64.rpm
-    [[ "$(vagrant --version)" == 'Vagrant 2.0.3' ]] || exit 1
+elif [ "$(vagrant --version)" != 'Vagrant 2.0.3' ]; then
+    sudo dnf -y install https://releases.hashicorp.com/vagrant/2.0.3/vagrant_2.0.3_x86_64.rpm
 fi
+[[ "$(vagrant --version)" == 'Vagrant 2.0.3' ]] || exit 1
 
 # Common gems that are used all the time
 gem install bundler \
@@ -104,7 +108,7 @@ if [[ -f "$HOME/bin/phantomjs" ]]; then
     rm "$HOME/bin/phantomjs"
 fi
 ln -s "$HOME/Applications/phantomjs-2.1.1-linux-x86_64/bin/phantomjs" "$HOME/bin/phantomjs"
-[[ "$($HOME/bin/phantomjs --version)" == '2.1.1' ]] || exit 1
+[[ "$("$HOME/bin/phantomjs" --version)" == '2.1.1' ]] || exit 1
 
 # Setup Heroku CLI
 [[ ! -f "$HOME/Downloads/heroku.tar.gz" ]] && wget https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-linux-x64.tar.gz -O "$HOME/Downloads/heroku.tar.gz"
@@ -126,4 +130,4 @@ if [[ -f "$HOME/bin/hub" ]]; then
     rm "$HOME/bin/hub"
 fi
 ln -s "$HOME/Applications/hub-linux-amd64-2.2.9/bin/hub" "$HOME/bin/hub"
-[[ "$($HOME/bin/hub --version | grep hub)" == 'hub version 2.2.9' ]] || exit 1
+[[ "$("$HOME/bin/hub" --version | grep hub)" == 'hub version 2.2.9' ]] || exit 1

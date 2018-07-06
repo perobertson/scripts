@@ -1,7 +1,9 @@
+#!/usr/bin/env bash
+
 # Install RPM Fusion - Free & Non-Free
 sudo dnf -y install \
-    https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-    https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
+    "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 
 # Allows for managing repos fromo cli
 sudo dnf -y install dnf-plugins-core
@@ -26,4 +28,4 @@ sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/dock
 sudo dnf config-manager --set-enabled docker-ce-edge
 
 # MySQL repo
-sudo dnf install -y "https://dev.mysql.com/get/mysql80-community-release-fc$(. /etc/os-release && echo $VERSION_ID)-1.noarch.rpm"
+sudo dnf install -y "https://dev.mysql.com/get/mysql80-community-release-fc$(. /etc/os-release && echo "$VERSION_ID")-1.noarch.rpm"
