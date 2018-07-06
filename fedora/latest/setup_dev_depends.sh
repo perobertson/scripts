@@ -55,9 +55,10 @@ sudo dnf -y install autoconf \
                     zsh
 
 # get the latest pip version
-pip install --user --upgrade pip
+pip install --user --upgrade pip==10.0.1
 # force the shell to forget all remembered locations
 hash -r
+[[ "$(pip --version)" == "pip 10.0.1 from $HOME/.local/lib/python2.7/site-packages/pip (python 2.7)" ]]
 pip install --user  bashate \
                     flake8 \
                     flake8-docstrings \

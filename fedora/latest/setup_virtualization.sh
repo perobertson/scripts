@@ -57,8 +57,8 @@ set_guest_settings(){
 # use grep because multiple results can be returned
 if [[ "$(sudo virt-what)" = '' ]]; then
     # Bare Metal
+    # dont install virtualbox because it breaks SecureBoot
     install_kvm
-    install_virtualbox
     install_docker
 elif [[ "$(sudo virt-what | grep virtualbox)" != '' ]]; then
     install_virtualbox_guest
