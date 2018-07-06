@@ -147,6 +147,9 @@ fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Jedi - Python autocompletion" ]]; then
     git clone https://github.com/srusskih/SublimeJEDI.git "$HOME/.config/sublime-text-3/Packages/Jedi - Python autocompletion"
 fi
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/jinja2-tmbundle" ]]; then
+    git clone https://github.com/kudago/jinja2-tmbundle.git "$HOME/.config/sublime-text-3/Packages/jinja2-tmbundle"
+fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/json_reindent" ]]; then
     git clone https://github.com/ThomasKliszowski/json_reindent.git "$HOME/.config/sublime-text-3/Packages/json_reindent"
 fi
