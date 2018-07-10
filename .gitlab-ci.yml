@@ -1,17 +1,35 @@
+.ubuntu_setup: &ubuntu_setup
+  before_script:
+    - whoami
+    - echo "$HOME"
+    - pwd
+    - ls -laH
+    - apt-get update
+    - apt-get install -y curl sudo
+    - "echo '%sudo  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
+    - useradd --user-group --create-home --groups=sudo --shell=/bin/bash public
+    - cat /etc/passwd
+    - cat /etc/group
+
+
+.fedora_setup: &fedora_setup
+  before_script:
+    - whoami
+    - echo "$HOME"
+    - pwd
+    - ls -laH
+    - dnf install -y sudo
+    - "echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
+    - useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
+    - cat /etc/passwd
+    - cat /etc/group
+
 .build: &build_definition
   stage: build
   tags:
     - docker
   script:
-    - whoami
-    - echo "$HOME"
-    - pwd
-    - ls -laH
-    - "echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
-    - useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
-    - cat /etc/passwd
-    - cat /etc/group
-    - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | PATH=$HOME/bin:$PATH bash'
+    - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash'
 
 
 lint:
@@ -28,66 +46,56 @@ lint:
 
 
 fedora_25:
+  <<: *fedora_setup
   <<: *build_definition
   image: fedora:25
-  before_script:
-    - dnf install -y sudo
   allow_failure: true
 
 
 fedora_26:
+  <<: *fedora_setup
   <<: *build_definition
   image: fedora:26
-  before_script:
-    - dnf install -y sudo
   allow_failure: true
 
 
 fedora_27:
+  <<: *fedora_setup
   <<: *build_definition
   image: fedora:27
-  before_script:
-    - dnf install -y sudo
 
 
 fedora_28:
+  <<: *fedora_setup
   <<: *build_definition
   image: fedora:28
-  before_script:
-    - dnf install -y sudo
 
 
 fedora_29:
+  <<: *fedora_setup
   <<: *build_definition
   image: fedora:29
-  before_script:
-    - dnf install -y sudo
   allow_failure: true
 
 
 fedora_rawhide:
+  <<: *fedora_setup
   <<: *build_definition
   image: fedora:rawhide
-  before_script:
-    - dnf install -y sudo
   allow_failure: true
 
 
 ubuntu_16_04:
+  <<: *ubuntu_setup
   <<: *build_definition
   image: ubuntu:16.04
-  before_script:
-    - apt-get update
-    - apt-get install -y sudo
   allow_failure: true
 
 
 ubuntu_18_04:
+  <<: *ubuntu_setup
   <<: *build_definition
   image: ubuntu:18.04
-  before_script:
-    - apt-get update
-    - apt-get install -y sudo
   allow_failure: true
 
 

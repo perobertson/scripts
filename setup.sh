@@ -76,6 +76,8 @@ fi
 os="$(. /etc/os-release && echo "$ID")"
 if [ "$os" == 'fedora' ]; then
     . "fedora/setup.sh"
+elif [ "$os" == 'ubuntu' ]; then
+    . "ubuntu/setup.sh"
 else
     echo "$os not supported"
     exit 1
