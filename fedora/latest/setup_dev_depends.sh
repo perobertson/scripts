@@ -35,6 +35,7 @@ sudo dnf -y install autoconf \
                     p7zip \
                     patch \
                     perl \
+                    pssh \
                     pv \
                     pygpgme \
                     python-devel \
