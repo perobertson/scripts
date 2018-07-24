@@ -44,6 +44,18 @@ install_docker(){
     [[ "$(docker-compose --version)" == 'docker-compose version 1.21.2, build a133471' ]] || exit 1
 }
 
+install_kubernetes(){
+    if [ ! -x "$(command -v kubectl)" ]; then
+        sudo dnf -y install kubectl
+    fi
+    if [ ! -x "$(command -v minikube)" ]; then
+        mkdir -p "$HOME/Applications/minikube/v0.28.2"
+        curl -Lo "$HOME/Applications/minikube/v0.28.2/minikube" https://storage.googleapis.com/minikube/releases/v0.28.2/minikube-linux-amd64
+        chmod +x "$HOME/Applications/minikube/v0.28.2/minikube"
+        ln -s "$HOME/Applications/minikube/v0.28.2/minikube" "$HOME/bin"
+    fi
+}
+
 set_guest_settings(){
     # TODO: lock computer when put to sleep
     if [[ "$(gsettings list-schemas | grep org.cinnamon.desktop.screensaver)" != '' ]]; then
@@ -62,11 +74,13 @@ if [[ "$(sudo virt-what)" = '' ]]; then
     # dont install virtualbox because it breaks SecureBoot
     install_kvm
     install_docker
+    install_kubernetes
 elif [[ "$(sudo virt-what | grep virtualbox)" != '' ]]; then
     install_virtualbox_guest
     set_guest_settings
 elif [[ "$(sudo virt-what | grep kvm)" != '' ]]; then
     install_docker
+    install_kubernetes
     set_guest_settings
 else
     echo "[WARN] Unknown virtualization detected: '$(sudo virt-what)' skipping install of virtualization tools"
