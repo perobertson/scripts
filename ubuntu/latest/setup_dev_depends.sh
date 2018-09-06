@@ -10,8 +10,9 @@ sudo apt-get install -y build-essential \
                         zsh
 
 # Common gems that are used all the time
-gem install bundler \
-            rake
+sudo gem install \
+    bundler \
+    rake
 
 # Switch to zsh
 sudo usermod -s "$(which zsh)" "$(whoami)"
