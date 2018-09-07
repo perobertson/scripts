@@ -89,14 +89,12 @@ ubuntu_16_04:
   <<: *ubuntu_setup
   <<: *build_definition
   image: ubuntu:16.04
-  allow_failure: true
 
 
 ubuntu_18_04:
   <<: *ubuntu_setup
   <<: *build_definition
   image: ubuntu:18.04
-  allow_failure: true
 
 
 deploy_github:
