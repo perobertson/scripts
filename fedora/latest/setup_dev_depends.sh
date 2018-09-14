@@ -9,6 +9,7 @@ sudo dnf -y install autoconf \
                     automake \
                     bison \
                     bzip2 \
+                    bzip2-devel \
                     certbot-nginx \
                     dropbox \
                     dstat \
