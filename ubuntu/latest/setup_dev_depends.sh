@@ -4,6 +4,7 @@ sudo apt-get install -y build-essential \
                         curl \
                         dstat \
                         htop \
+                        python3 \
                         ruby \
                         sysstat \
                         wget \
