@@ -19,15 +19,18 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-set
       "selector": "source.shell",
     },
     "flake8": {
-      "python": null,
+      "python": "~/.pyenv/shims/python",
       "disable": false,
       "args": [
         // E501: line length
         // D100: Docstring public module
         // D101: Docstring public class
         // D102: Docstring public method
+        // D102: Docstring public function
         // I100: imports groups in wrong order
-        "--ignore=E501,D100,D101,D102,I100"
+        "--ignore=E501,D100,D101,D102,D103",
+        // Override any project setting
+        "--select=A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"
       ],
       "excludes": [],
       "ignore": "",
@@ -68,6 +71,7 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-setti
   "ensure_newline_at_eof_on_save": true,
   "folder_exclude_patterns":
   [
+    ".eggs",
     ".git",
     ".pytest_cache",
     "__pycache__",
