@@ -74,6 +74,7 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-setti
     ".eggs",
     ".git",
     ".pytest_cache",
+    ".tox",
     "__pycache__",
     "_site",
     "coverage",
