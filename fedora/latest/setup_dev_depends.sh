@@ -5,7 +5,8 @@ sudo dnf -y upgrade vim-minimal
 # Install vim separately due to conflicts in upgrade / install
 sudo dnf -y install vim
 
-sudo dnf -y install autoconf \
+sudo dnf -y install ansible \
+                    autoconf \
                     automake \
                     bison \
                     bzip2 \
