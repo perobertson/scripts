@@ -72,6 +72,7 @@ pip install --user  bashate \
                     jedi \
                     pep8-naming \
                     pipenv==2018.10.13 \
+                    poetry \
                     pre-commit \
                     tldr \
                     virtualenv
