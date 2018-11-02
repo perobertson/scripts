@@ -152,4 +152,4 @@ if [[ -f "$HOME/bin/terraform" ]]; then
     rm "$HOME/bin/terraform"
 fi
 ln -s "$HOME/Applications/terraform_0.11.9/terraform" "$HOME/bin/terraform"
-[[ "$("$HOME/bin/terraform" --version)" == 'Terraform v0.11.9' ]] || exit 1
+[[ "$("$HOME/bin/terraform" version | head -1)" == 'Terraform v0.11.9' ]] || exit 1
