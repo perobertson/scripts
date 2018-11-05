@@ -19,16 +19,21 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-set
       "selector": "source.shell",
     },
     "flake8": {
-      "python": "~/.pyenv/shims/python",
+      "python": null,
       "disable": false,
       "args": [
+        // D100: Missing docstring in public module
+        // D101: Missing docstring in public class
+        // D102: Missing docstring in public method
+        // D103: Missing docstring in public function
+        // D104: Missing docstring in public package
+        // D105: Missing docstring in magic method
+        // D106: Missing docstring in public nested class
+        // D107: Missing docstring in __init__
         // E501: line length
-        // D100: Docstring public module
-        // D101: Docstring public class
-        // D102: Docstring public method
-        // D102: Docstring public function
         // I100: imports groups in wrong order
-        "--ignore=E501,D100,D101,D102,D103",
+        // I101: import names in wrong order
+        "--ignore=D100,D101,D102,D103,D104,D105,D106,D107,E501",
         // Override any project setting
         "--select=A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"
       ],
@@ -51,6 +56,7 @@ if [[ ! -f "$HOME/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-set
     "linux": [
       "~/.rbenv/shims",
       "~/.rbenv/bin",
+      "~/.pyenv/shims",
       "~/bin",
       "~/.bin",
       "~/.local/bin"
