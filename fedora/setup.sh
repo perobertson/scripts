@@ -10,6 +10,8 @@ fi
 
 if [ "$version" == 'latest' ]; then
     . "fedora/latest/setup.sh"
+elif [ "$version" == '27' ]; then
+    . "fedora/27/setup.sh"
 elif [ "$version" == '26' ]; then
     . "fedora/26/setup.sh"
 elif [ "$version" == '25' ]; then
