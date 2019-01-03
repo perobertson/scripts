@@ -66,26 +66,29 @@ hash -r
 [[ "$(pip --version)" == "pip 18.1 from $HOME/.local/lib/python2.7/site-packages/pip (python 2.7)" ]]
 pip install --user  bashate \
                     flake8 \
+                    flake8-coding \
                     flake8-docstrings \
                     flake8-future-import \
                     flake8-import-order \
+                    'ipython<6' \
                     jedi \
+                    pdbpp \
                     pep8-naming \
-                    pipenv==2018.10.13 \
+                    'pipenv==2018.11.26' \
                     poetry \
                     pre-commit \
                     tldr \
                     virtualenv
 
 # Switch to zsh
-sudo usermod -s "$(which zsh)" "$(whoami)"
+sudo usermod -s "$(command -v zsh)" "$(whoami)"
 
 if [ ! -x "$(command -v vagrant)" ]; then
-    sudo dnf -y install https://releases.hashicorp.com/vagrant/2.0.3/vagrant_2.0.3_x86_64.rpm
-elif [ "$(vagrant --version)" != 'Vagrant 2.0.3' ]; then
-    sudo dnf -y install https://releases.hashicorp.com/vagrant/2.0.3/vagrant_2.0.3_x86_64.rpm
+    sudo dnf -y install https://releases.hashicorp.com/vagrant/2.2.2/vagrant_2.2.2_x86_64.rpm
+elif [ "$(vagrant --version)" != 'Vagrant 2.2.2' ]; then
+    sudo dnf -y install https://releases.hashicorp.com/vagrant/2.2.2/vagrant_2.2.2_x86_64.rpm
 fi
-[[ "$(vagrant --version)" == 'Vagrant 2.0.3' ]] || exit 1
+[[ "$(vagrant --version)" == 'Vagrant 2.2.2' ]] || exit 1
 
 # Common gems that are used all the time
 gem install bundler \
@@ -128,28 +131,28 @@ else
 fi
 
 # Setup Hub
-[[ ! -f "$HOME/Downloads/hub-linux-amd64-2.2.9.tgz" ]] && /usr/bin/curl -Lo "$HOME/Downloads/hub-linux-amd64-2.2.9.tgz" https://github.com/github/hub/releases/download/v2.2.9/hub-linux-amd64-2.2.9.tgz
-[[ ! -d "$HOME/Applications/hub-linux-amd64-2.2.9" ]] && tar xzfv "$HOME/Downloads/hub-linux-amd64-2.2.9.tgz" -C "$HOME/Applications"
+[[ ! -f "$HOME/Downloads/hub-linux-amd64-2.7.0.tgz" ]] && /usr/bin/curl -Lo "$HOME/Downloads/hub-linux-amd64-2.7.0.tgz" https://github.com/github/hub/releases/download/v2.7.0/hub-linux-amd64-2.7.0.tgz
+[[ ! -d "$HOME/Applications/hub-linux-amd64-2.7.0" ]] && tar xzfv "$HOME/Downloads/hub-linux-amd64-2.7.0.tgz" -C "$HOME/Applications"
 if [[ -f "$HOME/bin/hub" ]]; then
     rm "$HOME/bin/hub"
 fi
-ln -s "$HOME/Applications/hub-linux-amd64-2.2.9/bin/hub" "$HOME/bin/hub"
-[[ "$("$HOME/bin/hub" --version | grep hub)" == 'hub version 2.2.9' ]] || exit 1
+ln -s "$HOME/Applications/hub-linux-amd64-2.7.0/bin/hub" "$HOME/bin/hub"
+[[ "$("$HOME/bin/hub" --version | grep hub)" == 'hub version 2.7.0' ]] || exit 1
 
 # Setup Julia
-[[ ! -f "$HOME/Downloads/julia-1.0.0-linux-x86_64.tar.gz" ]] && /usr/bin/curl -Lo "$HOME/Downloads/julia-1.0.0-linux-x86_64.tar.gz" https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-1.0.0-linux-x86_64.tar.gz
-[[ ! -d "$HOME/Applications/julia-1.0.0" ]] && tar xzfv "$HOME/Downloads/julia-1.0.0-linux-x86_64.tar.gz" -C "$HOME/Applications"
+[[ ! -f "$HOME/Downloads/julia-1.0.3-linux-x86_64.tar.gz" ]] && /usr/bin/curl -Lo "$HOME/Downloads/julia-1.0.3-linux-x86_64.tar.gz" https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-1.0.3-linux-x86_64.tar.gz
+[[ ! -d "$HOME/Applications/julia-1.0.3" ]] && tar xzfv "$HOME/Downloads/julia-1.0.3-linux-x86_64.tar.gz" -C "$HOME/Applications"
 if [[ -f "$HOME/bin/julia" ]]; then
     rm "$HOME/bin/julia"
 fi
-ln -s "$HOME/Applications/julia-1.0.0/bin/julia" "$HOME/bin/julia"
-[[ "$("$HOME/bin/julia" --version)" == 'julia version 1.0.0' ]] || exit 1
+ln -s "$HOME/Applications/julia-1.0.3/bin/julia" "$HOME/bin/julia"
+[[ "$("$HOME/bin/julia" --version)" == 'julia version 1.0.3' ]] || exit 1
 
 # Setup Terraform
-[[ ! -f "$HOME/Downloads/terraform_0.11.9_linux_amd64.zip" ]] && /usr/bin/curl -Lo "$HOME/Downloads/terraform_0.11.9_linux_amd64.zip" https://releases.hashicorp.com/terraform/0.11.9/terraform_0.11.9_linux_amd64.zip
-[[ ! -d "$HOME/Applications/terraform_0.11.9" ]] && /usr/bin/unzip "$HOME/Downloads/terraform_0.11.9_linux_amd64.zip" -d "$HOME/Applications/terraform_0.11.9"
+[[ ! -f "$HOME/Downloads/terraform_0.11.11_linux_amd64.zip" ]] && /usr/bin/curl -Lo "$HOME/Downloads/terraform_0.11.11_linux_amd64.zip" https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
+[[ ! -d "$HOME/Applications/terraform_0.11.11" ]] && /usr/bin/unzip "$HOME/Downloads/terraform_0.11.11_linux_amd64.zip" -d "$HOME/Applications/terraform_0.11.11"
 if [[ -f "$HOME/bin/terraform" ]]; then
     rm "$HOME/bin/terraform"
 fi
-ln -s "$HOME/Applications/terraform_0.11.9/terraform" "$HOME/bin/terraform"
-[[ "$("$HOME/bin/terraform" version | head -1)" == 'Terraform v0.11.9' ]] || exit 1
+ln -s "$HOME/Applications/terraform_0.11.11/terraform" "$HOME/bin/terraform"
+[[ "$("$HOME/bin/terraform" version | head -1)" == 'Terraform v0.11.11' ]] || exit 1
