@@ -79,8 +79,6 @@ elif [[ "$(sudo virt-what | grep virtualbox)" != '' ]]; then
     install_virtualbox_guest
     set_guest_settings
 elif [[ "$(sudo virt-what | grep kvm)" != '' ]]; then
-    install_docker
-    install_kubernetes
     set_guest_settings
 else
     echo "[WARN] Unknown virtualization detected: '$(sudo virt-what)' skipping install of virtualization tools"
