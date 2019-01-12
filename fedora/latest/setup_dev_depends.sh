@@ -39,7 +39,6 @@ sudo dnf -y install ansible \
                     perl \
                     pssh \
                     pv \
-                    pygpgme \
                     python-devel \
                     python2-pip \
                     python3-pip \
