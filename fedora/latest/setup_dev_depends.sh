@@ -62,7 +62,8 @@ sudo dnf -y install ansible \
 pip install --user --upgrade pip==18.1
 # force the shell to forget all remembered locations
 hash -r
-[[ "$(pip --version)" == "pip 18.1 from $HOME/.local/lib/python2.7/site-packages/pip (python 2.7)" ]]
+[[ "$(pip --version)" == "pip 18.1 from $HOME/.local/lib/python2.7/site-packages/pip (python 2.7)" ]] || \
+    [[ "$(pip --version)" == "pip 18.1 from /usr/lib/python2.7/site-packages/pip (python 2.7)" ]]
 pip install --user  bashate \
                     flake8 \
                     flake8-coding \
@@ -88,10 +89,6 @@ elif [ "$(vagrant --version)" != 'Vagrant 2.2.2' ]; then
     sudo dnf -y install https://releases.hashicorp.com/vagrant/2.2.2/vagrant_2.2.2_x86_64.rpm
 fi
 [[ "$(vagrant --version)" == 'Vagrant 2.2.2' ]] || exit 1
-
-# Common gems that are used all the time
-gem install bundler \
-            rake
 
 # Enable these for better hostname finding
 sudo systemctl enable smb

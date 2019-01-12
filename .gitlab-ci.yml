@@ -63,6 +63,7 @@ fedora_27:
   <<: *fedora_setup
   <<: *build_definition
   image: fedora:27
+  allow_failure: true
 
 
 fedora_28:
@@ -75,7 +76,6 @@ fedora_29:
   <<: *fedora_setup
   <<: *build_definition
   image: fedora:29
-  allow_failure: true
 
 
 fedora_rawhide:
