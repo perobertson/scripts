@@ -20,6 +20,7 @@ sudo dnf -y install ansible \
                     git \
                     git-cola \
                     gitk \
+                    google-cloud-sdk \
                     graphviz \
                     gtk-murrine-engine \
                     htop \

@@ -7,8 +7,9 @@ This repo is a collection of scripts that are handy for setting up a new pc.
 Supported Operating Systems:
 - Fedora 25 (Deprecated)
 - Fedora 26 (Deprecated)
-- Fedora 27
+- Fedora 27 (Deprecated)
 - Fedora 28
+- Fedora 29
 
 Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches) for `master` to see the complete list of supported operating systems.
 

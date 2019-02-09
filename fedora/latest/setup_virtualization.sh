@@ -49,10 +49,13 @@ install_kubernetes(){
         sudo dnf -y install kubectl
     fi
     if [ ! -x "$(command -v minikube)" ]; then
-        mkdir -p "$HOME/Applications/minikube/v0.28.2"
-        curl -Lo "$HOME/Applications/minikube/v0.28.2/minikube" https://storage.googleapis.com/minikube/releases/v0.28.2/minikube-linux-amd64
-        chmod +x "$HOME/Applications/minikube/v0.28.2/minikube"
-        ln -s "$HOME/Applications/minikube/v0.28.2/minikube" "$HOME/bin"
+        mkdir -p "$HOME/Applications/minikube"
+        curl -Lo "$HOME/Applications/minikube/minikube" https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        chmod +x "$HOME/Applications/minikube/minikube"
+        version="$("$HOME/Applications/minikube/minikube" version | cut -d' ' -f3)"
+        mkdir -p "$HOME/Applications/minikube/$version"
+        mv "$HOME/Applications/minikube/minikube" "$HOME/Applications/minikube/$version/"
+        ln -s "$HOME/Applications/minikube/$version/minikube" "$HOME/bin"
     fi
 }
 
