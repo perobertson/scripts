@@ -49,21 +49,21 @@ fedora_25:
   <<: *fedora_setup
   <<: *build_definition
   image: fedora:25
-  allow_failure: true
+  when: manual
 
 
 fedora_26:
   <<: *fedora_setup
   <<: *build_definition
   image: fedora:26
-  allow_failure: true
+  when: manual
 
 
 fedora_27:
   <<: *fedora_setup
   <<: *build_definition
   image: fedora:27
-  allow_failure: true
+  when: manual
 
 
 fedora_28:
@@ -96,6 +96,7 @@ ubuntu_16_04:
   <<: *ubuntu_setup
   <<: *build_definition
   image: ubuntu:16.04
+  when: manual
 
 
 ubuntu_18_04:
