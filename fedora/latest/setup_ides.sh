@@ -65,3 +65,6 @@ fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/sublime-text-git" ]]; then
     git clone https://github.com/kemayo/sublime-text-git.git "$HOME/.config/sublime-text-3/Packages/sublime-text-git"
 fi
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/TOML" ]]; then
+    git clone https://github.com/jasonwilliams/sublime_toml_highlighting.git "$HOME/.config/sublime-text-3/Packages/TOML"
+fi

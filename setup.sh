@@ -83,5 +83,6 @@ else
     exit 1
 fi
 
-echo -e '\nEverything installed. Be sure to reboot at your earliest convenience'
-echo 'Remember to manually install guest additions from the CD if needed after reboot'
+set +x
+echo ''
+echo 'Everything installed. Be sure to reboot at your earliest convenience'
