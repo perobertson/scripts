@@ -31,6 +31,9 @@ fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/json_reindent" ]]; then
     git clone https://github.com/ThomasKliszowski/json_reindent.git "$HOME/.config/sublime-text-3/Packages/json_reindent"
 fi
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/StGitlab" ]]; then
+    git clone https://github.com/tosher/StGitlab.git "$HOME/.config/sublime-text-3/Packages/StGitlab"
+fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/sublime-nginx" ]]; then
     git clone https://github.com/brandonwamboldt/sublime-nginx.git "$HOME/.config/sublime-text-3/Packages/sublime-nginx"
 fi
