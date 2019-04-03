@@ -147,10 +147,10 @@ ln -s "$HOME/Applications/julia-1.0.3/bin/julia" "$HOME/bin/julia"
 [[ "$("$HOME/bin/julia" --version)" == 'julia version 1.0.3' ]] || exit 1
 
 # Setup Terraform
-[[ ! -f "$HOME/Downloads/terraform_0.11.11_linux_amd64.zip" ]] && /usr/bin/curl -Lo "$HOME/Downloads/terraform_0.11.11_linux_amd64.zip" https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
-[[ ! -d "$HOME/Applications/terraform_0.11.11" ]] && /usr/bin/unzip "$HOME/Downloads/terraform_0.11.11_linux_amd64.zip" -d "$HOME/Applications/terraform_0.11.11"
+[[ ! -f "$HOME/Downloads/terraform_0.11.13_linux_amd64.zip" ]] && /usr/bin/curl -Lo "$HOME/Downloads/terraform_0.11.13_linux_amd64.zip" https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
+[[ ! -d "$HOME/Applications/terraform_0.11.13" ]] && /usr/bin/unzip "$HOME/Downloads/terraform_0.11.13_linux_amd64.zip" -d "$HOME/Applications/terraform_0.11.13"
 if [[ -f "$HOME/bin/terraform" ]]; then
     rm "$HOME/bin/terraform"
 fi
-ln -s "$HOME/Applications/terraform_0.11.11/terraform" "$HOME/bin/terraform"
-[[ "$("$HOME/bin/terraform" version | head -1)" == 'Terraform v0.11.11' ]] || exit 1
+ln -s "$HOME/Applications/terraform_0.11.13/terraform" "$HOME/bin/terraform"
+[[ "$("$HOME/bin/terraform" version | head -1)" == 'Terraform v0.11.13' ]] || exit 1
