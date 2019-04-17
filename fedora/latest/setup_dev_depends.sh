@@ -77,7 +77,6 @@ pip install --user  bashate \
                     jedi \
                     pdbpp \
                     pep8-naming \
-                    'pipenv==2018.11.26' \
                     poetry \
                     pre-commit \
                     tldr \
