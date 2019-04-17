@@ -62,11 +62,11 @@ sudo dnf -y install ansible \
                     zsh
 
 # get the latest pip version
-pip install --user --upgrade pip==18.1
+pip install --user --upgrade pip==19.0.3
 # force the shell to forget all remembered locations
 hash -r
-[[ "$(pip --version)" == "pip 18.1 from $HOME/.local/lib/python2.7/site-packages/pip (python 2.7)" ]] || \
-    [[ "$(pip --version)" == "pip 18.1 from /usr/lib/python2.7/site-packages/pip (python 2.7)" ]]
+[[ "$(pip --version)" == "pip 19.0.3 from $HOME/.local/lib/python2.7/site-packages/pip (python 2.7)" ]] || \
+    [[ "$(pip --version)" == "pip 19.0.3 from /usr/lib/python2.7/site-packages/pip (python 2.7)" ]]
 pip install --user  bashate \
                     flake8 \
                     flake8-coding \
