@@ -15,6 +15,7 @@ sudo dnf -y install ansible \
                     dropbox \
                     dstat \
                     freetype-freeworld \
+                    fzf \
                     gcc \
                     gcc-c++ \
                     git \
