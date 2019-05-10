@@ -62,11 +62,11 @@ sudo dnf -y install ansible \
                     zsh
 
 # get the latest pip version
-pip install --user --upgrade pip==19.0.3
+pip install --user --upgrade pip==19.1.1
 # force the shell to forget all remembered locations
 hash -r
-[[ "$(pip --version)" == "pip 19.0.3 from $HOME/.local/lib/python2.7/site-packages/pip (python 2.7)" ]] || \
-    [[ "$(pip --version)" == "pip 19.0.3 from /usr/lib/python2.7/site-packages/pip (python 2.7)" ]]
+[[ "$(pip --version)" == "pip 19.1.1 from $HOME/.local/lib/python2.7/site-packages/pip (python 2.7)" ]] || \
+    [[ "$(pip --version)" == "pip 19.1.1 from /usr/lib/python2.7/site-packages/pip (python 2.7)" ]]
 pip install --user  bashate \
                     flake8 \
                     flake8-coding \
@@ -86,11 +86,11 @@ pip install --user  bashate \
 sudo usermod -s "$(command -v zsh)" "$(whoami)"
 
 if [ ! -x "$(command -v vagrant)" ]; then
-    sudo dnf -y install https://releases.hashicorp.com/vagrant/2.2.2/vagrant_2.2.2_x86_64.rpm
-elif [ "$(vagrant --version)" != 'Vagrant 2.2.2' ]; then
-    sudo dnf -y install https://releases.hashicorp.com/vagrant/2.2.2/vagrant_2.2.2_x86_64.rpm
+    sudo dnf -y install https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.rpm
+elif [ "$(vagrant --version)" != 'Vagrant 2.2.4' ]; then
+    sudo dnf -y install https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.rpm
 fi
-[[ "$(vagrant --version)" == 'Vagrant 2.2.2' ]] || exit 1
+[[ "$(vagrant --version)" == 'Vagrant 2.2.4' ]] || exit 1
 
 # Enable these for better hostname finding
 sudo systemctl enable smb
