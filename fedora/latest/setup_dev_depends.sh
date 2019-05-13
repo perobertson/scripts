@@ -44,6 +44,7 @@ sudo dnf -y install ansible \
                     python-devel \
                     python2-pip \
                     python3-pip \
+                    readline-devel \
                     redhat-lsb \
                     redhat-rpm-config \
                     redis \
@@ -56,7 +57,7 @@ sudo dnf -y install ansible \
                     sublime-merge \
                     sublime-text \
                     sysstat \
-                    readline-devel \
+                    vlc \
                     wget \
                     zlib-devel \
                     zsh
