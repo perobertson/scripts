@@ -86,13 +86,6 @@ pip install --user  bashate \
 # Switch to zsh
 sudo usermod -s "$(command -v zsh)" "$(whoami)"
 
-if [ ! -x "$(command -v vagrant)" ]; then
-    sudo dnf -y install https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.rpm
-elif [ "$(vagrant --version)" != 'Vagrant 2.2.4' ]; then
-    sudo dnf -y install https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.rpm
-fi
-[[ "$(vagrant --version)" == 'Vagrant 2.2.4' ]] || exit 1
-
 # Enable these for better hostname finding
 sudo systemctl enable smb
 sudo systemctl enable nmb
