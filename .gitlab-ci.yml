@@ -70,6 +70,7 @@ fedora_28:
   <<: *fedora_setup
   <<: *build_definition
   image: fedora:28
+  when: manual
 
 
 fedora_29:
@@ -82,7 +83,6 @@ fedora_30:
   <<: *fedora_setup
   <<: *build_definition
   image: fedora:30
-  allow_failure: true
 
 
 fedora_rawhide:

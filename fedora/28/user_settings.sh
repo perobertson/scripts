@@ -15,7 +15,3 @@ fi
 
 # Clean up fonts
 echo "Xft.lcdfilter: lcddefault" > "$HOME/.Xresources"
-
-# Install custom zsh plugins, themes, and overrides
-ln -s "$HOME/workspace/scripts/.oh-my-zsh/plugins/pip" "$HOME/.oh-my-zsh/custom/plugins/"
-ln -s "$HOME/workspace/scripts/.oh-my-zsh/themes/pygmalion.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/"

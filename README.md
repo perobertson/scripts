@@ -8,8 +8,9 @@ Supported Operating Systems:
 - Fedora 25 (Deprecated)
 - Fedora 26 (Deprecated)
 - Fedora 27 (Deprecated)
-- Fedora 28
+- Fedora 28 (Deprecated)
 - Fedora 29
+- Fedora 30
 
 Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches) for `master` to see the complete list of supported operating systems.
 
