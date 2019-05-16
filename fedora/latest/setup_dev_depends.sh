@@ -80,8 +80,10 @@ pip install --user  bashate \
                     pep8-naming \
                     poetry \
                     pre-commit \
+                    termcolor \
                     tldr \
                     virtualenv
+pip check
 
 # Switch to zsh
 sudo usermod -s "$(command -v zsh)" "$(whoami)"
