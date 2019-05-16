@@ -24,12 +24,15 @@
     - cat /etc/passwd
     - cat /etc/group
 
+
 .build: &build_definition
   stage: build
   tags:
     - docker
   script:
     - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash'
+    - su public --command='git status --short && test "$(git status --short)" = ""'
+    - su public --command='cd "$HOME/workspace/dotfiles" && git status --short && test "$(git status --short)" = ""'
 
 
 lint:
