@@ -26,6 +26,7 @@ sudo dnf -y install ansible \
                     gtk-murrine-engine \
                     htop \
                     i3 \
+                    julia \
                     ImageMagick \
                     levien-inconsolata-fonts \
                     libcurl-devel \
@@ -132,15 +133,6 @@ if [[ -f "$HOME/bin/hub" ]]; then
 fi
 ln -s "$HOME/Applications/hub-linux-amd64-2.7.0/bin/hub" "$HOME/bin/hub"
 [[ "$("$HOME/bin/hub" --version | grep hub)" == 'hub version 2.7.0' ]] || exit 1
-
-# Setup Julia
-[[ ! -f "$HOME/Downloads/julia-1.0.3-linux-x86_64.tar.gz" ]] && /usr/bin/curl -Lo "$HOME/Downloads/julia-1.0.3-linux-x86_64.tar.gz" https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-1.0.3-linux-x86_64.tar.gz
-[[ ! -d "$HOME/Applications/julia-1.0.3" ]] && tar xzfv "$HOME/Downloads/julia-1.0.3-linux-x86_64.tar.gz" -C "$HOME/Applications"
-if [[ -f "$HOME/bin/julia" ]]; then
-    rm "$HOME/bin/julia"
-fi
-ln -s "$HOME/Applications/julia-1.0.3/bin/julia" "$HOME/bin/julia"
-[[ "$("$HOME/bin/julia" --version)" == 'julia version 1.0.3' ]] || exit 1
 
 # Setup Terraform
 TERRAFORM_VERSION=0.12.0
