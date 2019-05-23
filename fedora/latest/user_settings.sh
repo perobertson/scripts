@@ -6,7 +6,7 @@ if [[ "$(gsettings list-schemas | grep org.cinnamon.desktop.interface)" != '' ]]
     gsettings set org.cinnamon.desktop.interface icon-theme 'Mint-X-Aqua'
 fi
 if [[ "$(gsettings list-schemas | grep org.gnome.desktop.interface)" != '' ]]; then
-    gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata Medium 11'
+    gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata 13'
 fi
 if [[ "$(gsettings list-schemas | grep org.nemo.preferences)" != '' ]]; then
     gsettings set org.nemo.preferences date-format 'iso'
