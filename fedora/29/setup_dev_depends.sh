@@ -42,6 +42,7 @@ sudo dnf -y install ansible \
                     pssh \
                     pv \
                     python-devel \
+                    python2-dnf \
                     python2-pip \
                     python3-pip \
                     readline-devel \

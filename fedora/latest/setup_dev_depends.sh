@@ -44,6 +44,7 @@ sudo dnf -y install ansible \
                     pv \
                     python-devel \
                     python2-pip \
+                    python3-dnf \
                     python3-pip \
                     readline-devel \
                     redhat-lsb \
