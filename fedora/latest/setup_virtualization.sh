@@ -41,7 +41,7 @@ install_docker(){
 
     sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o '/usr/local/bin/docker-compose'
     sudo chmod +x '/usr/local/bin/docker-compose'
-    [[ "$(docker-compose --version)" == 'docker-compose version 1.24.0, build 0aa59064' ]] || exit 1
+    [[ "$(sudo /usr/local/bin/docker-compose --version)" == 'docker-compose version 1.24.0, build 0aa59064' ]] || exit 1
 }
 
 install_kubernetes(){
@@ -82,6 +82,8 @@ elif [[ "$(sudo virt-what | grep virtualbox)" != '' ]]; then
     install_virtualbox_guest
     set_guest_settings
 elif [[ "$(sudo virt-what | grep kvm)" != '' ]]; then
+    install_docker
+    install_kubernetes
     set_guest_settings
 else
     echo "[WARN] Unknown virtualization detected: '$(sudo virt-what)' skipping install of virtualization tools"
