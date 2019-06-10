@@ -16,6 +16,9 @@ fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Docker.tmbundle" ]]; then
     git clone https://github.com/asbjornenge/Docker.tmbundle.git "$HOME/.config/sublime-text-3/Packages/Docker.tmbundle"
 fi
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/EditorConfig" ]]; then
+    git clone https://github.com/sindresorhus/editorconfig-sublime.git "$HOME/.config/sublime-text-3/Packages/EditorConfig"
+fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/FileIcons" ]]; then
     git clone https://github.com/braver/FileIcons.git "$HOME/.config/sublime-text-3/Packages/FileIcons"
 fi
