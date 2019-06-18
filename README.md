@@ -10,7 +10,7 @@ Supported Operating Systems:
 - Fedora 27 (Deprecated)
 - Fedora 28 (Deprecated)
 - Fedora 29
-- Fedora 30 (Using docker-ce-test)
+- Fedora 30
 
 Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches) for `master` to see the complete list of supported operating systems.
 
