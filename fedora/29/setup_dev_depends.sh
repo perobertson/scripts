@@ -8,6 +8,7 @@ sudo dnf -y install vim
 sudo dnf -y install ansible \
                     autoconf \
                     automake \
+                    bat \
                     bison \
                     bzip2 \
                     bzip2-devel \
