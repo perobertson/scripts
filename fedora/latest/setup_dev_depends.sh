@@ -36,6 +36,7 @@ sudo dnf -y install ansible \
                     libyaml-devel \
                     make \
                     memcached \
+                    ncdu \
                     nodejs \
                     openssl-devel \
                     p7zip \
