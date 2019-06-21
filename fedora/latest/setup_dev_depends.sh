@@ -137,16 +137,6 @@ fi
 ln -s "$HOME/Applications/hub-linux-amd64-2.7.0/bin/hub" "$HOME/bin/hub"
 [[ "$("$HOME/bin/hub" --version | grep hub)" == 'hub version 2.7.0' ]] || exit 1
 
-# Setup Terraform
-TERRAFORM_VERSION=0.12.0
-[[ ! -f "$HOME/Downloads/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" ]] && /usr/bin/curl -Lo "$HOME/Downloads/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
-[[ ! -d "$HOME/Applications/terraform_${TERRAFORM_VERSION}" ]] && /usr/bin/unzip "$HOME/Downloads/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" -d "$HOME/Applications/terraform_${TERRAFORM_VERSION}"
-if [[ -f "$HOME/bin/terraform" ]]; then
-    rm "$HOME/bin/terraform"
-fi
-ln -s "$HOME/Applications/terraform_${TERRAFORM_VERSION}/terraform" "$HOME/bin/terraform"
-[[ "$("$HOME/bin/terraform" version | head -1)" == "Terraform v${TERRAFORM_VERSION}" ]] || exit 1
-
 # Install pyenv (Python version manager)
 git clone https://github.com/pyenv/pyenv.git "$HOME/.pyenv"
 

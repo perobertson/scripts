@@ -150,15 +150,6 @@ fi
 ln -s "$HOME/Applications/julia-1.0.3/bin/julia" "$HOME/bin/julia"
 [[ "$("$HOME/bin/julia" --version)" == 'julia version 1.0.3' ]] || exit 1
 
-# Setup Terraform
-[[ ! -f "$HOME/Downloads/terraform_0.11.14_linux_amd64.zip" ]] && /usr/bin/curl -Lo "$HOME/Downloads/terraform_0.11.14_linux_amd64.zip" https://releases.hashicorp.com/terraform/0.11.14/terraform_0.11.14_linux_amd64.zip
-[[ ! -d "$HOME/Applications/terraform_0.11.14" ]] && /usr/bin/unzip "$HOME/Downloads/terraform_0.11.14_linux_amd64.zip" -d "$HOME/Applications/terraform_0.11.14"
-if [[ -f "$HOME/bin/terraform" ]]; then
-    rm "$HOME/bin/terraform"
-fi
-ln -s "$HOME/Applications/terraform_0.11.14/terraform" "$HOME/bin/terraform"
-[[ "$("$HOME/bin/terraform" version | head -1)" == 'Terraform v0.11.14' ]] || exit 1
-
 # Install pyenv (Python version manager)
 git clone https://github.com/pyenv/pyenv.git "$HOME/.pyenv"
 
