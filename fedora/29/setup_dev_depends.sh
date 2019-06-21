@@ -158,3 +158,14 @@ if [[ -f "$HOME/bin/terraform" ]]; then
 fi
 ln -s "$HOME/Applications/terraform_0.11.14/terraform" "$HOME/bin/terraform"
 [[ "$("$HOME/bin/terraform" version | head -1)" == 'Terraform v0.11.14' ]] || exit 1
+
+# Install pyenv (Python version manager)
+git clone https://github.com/pyenv/pyenv.git "$HOME/.pyenv"
+
+# Install rbenv (Ruby version manager)
+git clone https://github.com/rbenv/rbenv.git "$HOME/.rbenv"
+cd "$HOME/.rbenv" && src/configure && make -C src && cd - || exit 1
+git clone https://github.com/rbenv/ruby-build.git "$HOME/.rbenv/plugins/ruby-build"
+
+# Install tfenv (Terraform version manager)
+git clone https://github.com/tfutils/tfenv.git "$HOME/.tfenv"

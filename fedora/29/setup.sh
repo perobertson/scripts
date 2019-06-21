@@ -7,7 +7,5 @@
 . "fedora/latest/setup_ides.sh"
 
 # These do not require root
-. "fedora/latest/setup_python.sh"
-. "fedora/latest/setup_ruby.sh"
 . "fedora/latest/setup_dotfiles.sh"
 . "fedora/latest/user_settings.sh"
