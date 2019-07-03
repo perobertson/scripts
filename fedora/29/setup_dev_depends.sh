@@ -12,7 +12,6 @@ sudo dnf -y install ansible \
                     bison \
                     bzip2 \
                     bzip2-devel \
-                    certbot-nginx \
                     dropbox \
                     dstat \
                     freetype-freeworld \
