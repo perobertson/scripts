@@ -16,7 +16,7 @@ sudo gem install \
     rake
 
 # Switch to zsh
-sudo usermod -s "$(which zsh)" "$(whoami)"
+sudo usermod -s "$(command -v zsh)" "$(whoami)"
 
 # Setup PhantomJS
 [[ ! -f "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" ]] && /usr/bin/curl -Lo "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
