@@ -5,10 +5,10 @@ This repo is a collection of scripts that are handy for setting up a new pc.
 [![pipeline status](https://gitlab.com/perobertson/scripts/badges/master/pipeline.svg)](https://gitlab.com/perobertson/scripts/commits/master)
 
 Supported Operating Systems:
-- Fedora 25 (Deprecated)
-- Fedora 26 (Deprecated)
-- Fedora 27 (Deprecated)
-- Fedora 28 (Deprecated)
+- Fedora 25 (EOL)
+- Fedora 26 (EOL)
+- Fedora 27 (EOL)
+- Fedora 28 (EOL)
 - Fedora 29
 - Fedora 30
 
