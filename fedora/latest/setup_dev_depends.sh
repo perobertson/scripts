@@ -53,7 +53,7 @@ sudo dnf -y install ansible \
                     redis \
                     ruby \
                     ruby-devel \
-                    samba \
+                    samba-client \
                     ShellCheck \
                     sl \
                     sqlite-devel \
@@ -90,10 +90,6 @@ pip check
 
 # Switch to zsh
 sudo usermod -s "$(command -v zsh)" "$(whoami)"
-
-# Enable these for better hostname finding
-sudo systemctl enable smb
-sudo systemctl enable nmb
 
 if [[ $(sudo virt-what) = '' ]]; then
     # Applications should be using containers
