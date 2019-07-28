@@ -72,22 +72,20 @@ pip install --user --upgrade "pip==${PIP_VERSION}"
 hash -r
 [[ "$(pip --version)" == "pip ${PIP_VERSION} from $HOME/.local/lib/python2.7/site-packages/pip (python 2.7)" ]] || \
     [[ "$(pip --version)" == "pip ${PIP_VERSION} from /usr/lib/python2.7/site-packages/pip (python 2.7)" ]]
-pip install --user  bashate \
+pip3 install --user bashate \
                     flake8 \
                     flake8-coding \
                     flake8-docstrings \
                     flake8-future-import \
                     flake8-import-order \
-                    'ipython<6' \
+                    ipython \
                     jedi \
                     pdbpp \
                     pep8-naming \
                     poetry \
                     pre-commit \
-                    termcolor \
-                    tldr \
-                    virtualenv
-pip check
+                    termcolor
+pip3 check
 
 # Switch to zsh
 sudo usermod -s "$(command -v zsh)" "$(whoami)"
