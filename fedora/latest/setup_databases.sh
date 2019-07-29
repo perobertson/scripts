@@ -40,3 +40,4 @@ fi
 # Setup MySql
 # Just the header files, applications should use containters
 sudo dnf -y install mysql-community-devel
+sudo systemctl disable mysqld.service
