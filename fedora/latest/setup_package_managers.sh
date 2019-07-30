@@ -27,9 +27,6 @@ sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/dock
 
 # MySQL repo
 sudo dnf install -y "https://dev.mysql.com/get/mysql80-community-release-fc$(. /etc/os-release && echo "$VERSION_ID")-1.noarch.rpm"
-# Use 5.7 repo since most projects I work on need those headers
-sudo dnf config-manager --set-disabled mysql80-community
-sudo dnf config-manager --set-enabled mysql57-community
 
 # Kubernetes repo
 sudo tee -a /etc/yum.repos.d/kubernetes.repo << EOF
