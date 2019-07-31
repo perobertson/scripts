@@ -88,6 +88,13 @@ fedora_30:
   image: fedora:30
 
 
+fedora_31:
+  <<: *fedora_setup
+  <<: *build_definition
+  image: fedora:31
+  allow_failure: true
+
+
 fedora_rawhide:
   <<: *fedora_setup
   <<: *build_definition

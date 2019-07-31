@@ -17,23 +17,6 @@ install_kvm(){
                         virt-manager
 }
 
-install_virtualbox(){
-    # VirtualBox will fail to setup boxes on non UEFI systems
-    sudo dnf -y install binutils \
-                        gcc \
-                        libgomp \
-                        make \
-                        patch \
-                        glibc-devel \
-                        glibc-headers
-    sudo dnf -y install VirtualBox-5.2
-    sudo usermod -a -G vboxusers "$(whoami)"
-}
-
-install_virtualbox_guest(){
-    sudo dnf -y install akmod-VirtualBox
-}
-
 install_docker(){
     sudo dnf -y install docker-ce
     sudo usermod -a -G docker "$(whoami)"
@@ -78,9 +61,6 @@ if [[ "$(sudo virt-what)" = '' ]]; then
     install_kvm
     install_docker
     install_kubernetes
-elif [[ "$(sudo virt-what | grep virtualbox)" != '' ]]; then
-    install_virtualbox_guest
-    set_guest_settings
 elif [[ "$(sudo virt-what | grep kvm)" != '' ]]; then
     install_docker
     install_kubernetes

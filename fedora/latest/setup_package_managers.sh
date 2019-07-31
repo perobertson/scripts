@@ -8,9 +8,6 @@ sudo dnf -y install \
 # Allows for managing repos fromo cli
 sudo dnf -y install dnf-plugins-core
 
-# Add VirtualBox Repo
-sudo dnf config-manager --add-repo https://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
-
 # Sublime Text Repo
 sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
 sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
