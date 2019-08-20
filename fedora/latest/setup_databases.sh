@@ -3,11 +3,11 @@
 # Setup Postgres
 sudo dnf -y install postgresql \
                     postgresql-contrib \
-                    postgresql-devel \
-                    postgresql-server
+                    postgresql-devel
 
 setup_postgres(){
     # Setup postgres
+    sudo dnf -y install postgresql-server
     sudo postgresql-setup --initdb
     sudo systemctl start postgresql
     sudo systemctl enable postgresql
