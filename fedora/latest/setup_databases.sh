@@ -27,11 +27,11 @@ disable_postgres(){
 # use grep because multiple results can be returned
 if [[ "$(sudo virt-what)" = '' ]]; then
     # Bare Metal
-    disable_postgres
+    : # nop
 elif [[ "$(sudo virt-what | grep virtualbox)" != '' ]]; then
     setup_postgres
 elif [[ "$(sudo virt-what | grep kvm)" != '' ]]; then
-    disable_postgres
+    : # nop
 else
     echo "[WARN] Unknown virtualization detected: '$(sudo virt-what)' skipping configuration of postgres"
 fi
