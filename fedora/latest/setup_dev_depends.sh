@@ -114,6 +114,9 @@ mkdir -p "$HOME/Downloads/heroku"
 # Heroku is annoying and does not put the version in the url so we have no idea what version just got downloaded
 # Use globbing to get around that
 tar -xzf "$HOME/Downloads/heroku.tar.gz" -C "$HOME/Downloads/heroku/"
+if [[ -d "$HOME/Applications/heroku" ]]; then
+    rm -rf "$HOME/Applications/heroku"
+fi
 mv "$HOME/Downloads/heroku/"* "$HOME/Applications/heroku/"
 if [[ -f "$HOME/bin/heroku" ]]; then
     rm "$HOME/bin/heroku"
@@ -131,12 +134,20 @@ ln -s "$HOME/Applications/hub-linux-amd64-2.7.0/bin/hub" "$HOME/bin/hub"
 [[ "$("$HOME/bin/hub" --version | grep hub)" == 'hub version 2.7.0' ]] || exit 1
 
 # Install pyenv (Python version manager)
-git clone https://github.com/pyenv/pyenv.git "$HOME/.pyenv"
+if [[ ! -d "$HOME/.pyenv" ]]; then
+    git clone https://github.com/pyenv/pyenv.git "$HOME/.pyenv"
+fi
 
 # Install rbenv (Ruby version manager)
-git clone https://github.com/rbenv/rbenv.git "$HOME/.rbenv"
+if [[ ! -d "$HOME/.rbenv" ]]; then
+    git clone https://github.com/rbenv/rbenv.git "$HOME/.rbenv"
+fi
 cd "$HOME/.rbenv" && src/configure && make -C src && cd - || exit 1
-git clone https://github.com/rbenv/ruby-build.git "$HOME/.rbenv/plugins/ruby-build"
+if [[ ! -d "$HOME/.rbenv/plugins/ruby-build" ]]; then
+    git clone https://github.com/rbenv/ruby-build.git "$HOME/.rbenv/plugins/ruby-build"
+fi
 
 # Install tfenv (Terraform version manager)
-git clone https://github.com/tfutils/tfenv.git "$HOME/.tfenv"
+if [[ ! -d "$HOME/.tfenv" ]]; then
+    git clone https://github.com/tfutils/tfenv.git "$HOME/.tfenv"
+fi

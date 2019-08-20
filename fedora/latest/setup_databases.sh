@@ -7,7 +7,7 @@ sudo dnf -y install postgresql \
                     postgresql-server
 
 setup_postgres(){
-    # Setup postgres when inside a VM
+    # Setup postgres
     sudo postgresql-setup --initdb
     sudo systemctl start postgresql
     sudo systemctl enable postgresql
@@ -27,7 +27,6 @@ disable_postgres(){
 # use grep because multiple results can be returned
 if [[ "$(sudo virt-what)" = '' ]]; then
     # Bare Metal
-    setup_postgres
     disable_postgres
 elif [[ "$(sudo virt-what | grep virtualbox)" != '' ]]; then
     setup_postgres
@@ -40,4 +39,3 @@ fi
 # Setup MySql
 # Just the header files, applications should use containters
 sudo dnf -y install mysql-community-devel
-sudo systemctl disable mysqld.service
