@@ -118,6 +118,7 @@ if [[ -d "$HOME/Applications/heroku" ]]; then
     rm -rf "$HOME/Applications/heroku"
 fi
 mv "$HOME/Downloads/heroku/"* "$HOME/Applications/heroku/"
+rmdir "$HOME/Downloads/heroku/"
 if [[ -f "$HOME/bin/heroku" ]]; then
     rm "$HOME/bin/heroku"
 else
