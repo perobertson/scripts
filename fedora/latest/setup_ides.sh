@@ -31,14 +31,14 @@ fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/json_reindent" ]]; then
     git clone https://github.com/ThomasKliszowski/json_reindent.git "$HOME/.config/sublime-text-3/Packages/json_reindent"
 fi
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Python Fix Imports" ]]; then
+    git clone https://github.com/Stibbons/python-fiximports.git "$HOME/.config/sublime-text-3/Packages/Python Fix Imports"
+fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/StGitlab" ]]; then
     git clone https://github.com/tosher/StGitlab.git "$HOME/.config/sublime-text-3/Packages/StGitlab"
 fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/sublime-nginx" ]]; then
     git clone https://github.com/brandonwamboldt/sublime-nginx.git "$HOME/.config/sublime-text-3/Packages/sublime-nginx"
-fi
-if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Python Fix Imports" ]]; then
-    git clone https://github.com/Stibbons/python-fiximports.git "$HOME/.config/sublime-text-3/Packages/Python Fix Imports"
 fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/SublimeLinter" ]]; then
     git clone https://github.com/SublimeLinter/SublimeLinter.git "$HOME/.config/sublime-text-3/Packages/SublimeLinter"
@@ -64,6 +64,9 @@ if [[ ! -d "$HOME/.config/sublime-text-3/Packages/sublime-text-2-ini" ]]; then
 fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/sublime-text-git" ]]; then
     git clone https://github.com/kemayo/sublime-text-git.git "$HOME/.config/sublime-text-3/Packages/sublime-text-git"
+fi
+if [[ ! -d "$HOME/.config/sublime-text-3/Packages/Terraform.tmLanguage" ]]; then
+    git clone https://github.com/alexlouden/Terraform.tmLanguage.git "$HOME/.config/sublime-text-3/Packages/Terraform.tmLanguage"
 fi
 if [[ ! -d "$HOME/.config/sublime-text-3/Packages/TOML" ]]; then
     git clone https://github.com/jasonwilliams/sublime_toml_highlighting.git "$HOME/.config/sublime-text-3/Packages/TOML"
