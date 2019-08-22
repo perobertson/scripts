@@ -26,6 +26,7 @@ sudo dnf -y install ansible \
                     gtk-murrine-engine \
                     htop \
                     i3 \
+                    jq \
                     julia \
                     ImageMagick \
                     levien-inconsolata-fonts \
