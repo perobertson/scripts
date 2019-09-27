@@ -63,6 +63,7 @@ sudo dnf -y install ansible \
                     sysstat \
                     vlc \
                     wget \
+                    xz \
                     zlib-devel \
                     zsh
 
