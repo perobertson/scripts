@@ -37,14 +37,11 @@
 
 lint:
   stage: build
-  image: python:latest
+  image: alpine:edge # 3.11+
   tags:
     - docker
   script:
-    - pip install --user --upgrade pip
-    - pip install --user --upgrade bashate
-    - ~/.local/bin/bashate --ignore=E006 $(find . -name '*.sh')
-    - apt-get update && apt-get install shellcheck
+    - apk add --upgrade shellcheck
     - shellcheck --external-sources setup.sh $(find . -name '*.sh' -path '**/latest/**')
 
 

@@ -74,8 +74,7 @@ pip install --user --upgrade "pip==${PIP_VERSION}"
 hash -r
 [[ "$(pip --version)" == "pip ${PIP_VERSION} from $HOME/.local/lib/python2.7/site-packages/pip (python 2.7)" ]] || \
     [[ "$(pip --version)" == "pip ${PIP_VERSION} from /usr/lib/python2.7/site-packages/pip (python 2.7)" ]]
-pip3 install --user bashate \
-                    flake8 \
+pip3 install --user flake8 \
                     flake8-docstrings \
                     flake8-future-import \
                     flake8-import-order \
