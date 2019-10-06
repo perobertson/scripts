@@ -58,19 +58,16 @@ set_guest_settings(){
     fi
 }
 
-# Always install podman
 install_podman
+install_docker
+install_kubernetes
 
 # use grep because multiple results can be returned
 if [[ "$(sudo virt-what)" = '' ]]; then
     # Bare Metal
     # dont install virtualbox because it breaks SecureBoot
-    install_docker
-    install_kubernetes
-    install_kvm
+    :
 elif [[ "$(sudo virt-what | grep kvm)" != '' ]]; then
-    install_docker
-    install_kubernetes
     set_guest_settings
 else
     echo "[WARN] Unknown virtualization detected: '$(sudo virt-what)' skipping install of virtualization tools"

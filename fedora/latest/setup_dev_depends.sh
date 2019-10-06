@@ -35,7 +35,6 @@ sudo dnf -y install ansible \
                     libtool \
                     libyaml-devel \
                     make \
-                    memcached \
                     ncdu \
                     nodejs \
                     openssl-devel \
@@ -51,7 +50,6 @@ sudo dnf -y install ansible \
                     readline-devel \
                     redhat-lsb \
                     redhat-rpm-config \
-                    redis \
                     ruby \
                     ruby-devel \
                     samba-client \
@@ -89,16 +87,6 @@ pip3 check
 
 # Switch to zsh
 sudo usermod -s "$(command -v zsh)" "$(whoami)"
-
-if [[ $(sudo virt-what) = '' ]]; then
-    # Applications should be using containers
-    sudo systemctl disable memcached
-    sudo systemctl disable redis
-else
-    # Start caches when inside a VM
-    sudo systemctl enable memcached
-    sudo systemctl enable redis
-fi
 
 # Setup PhantomJS
 [[ ! -f "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" ]] && /usr/bin/curl -Lo "$HOME/Downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
