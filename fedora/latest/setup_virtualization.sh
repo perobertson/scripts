@@ -10,27 +10,20 @@ sudo dnf -y install kernel-headers \
                     kernel-devel
 sudo dnf config-manager --set-enabled updates
 
-install_kvm(){
-    sudo dnf -y install libvirt \
-                        qemu \
-                        qemu-kvm \
-                        virt-manager
-}
-
 install_docker(){
     sudo dnf -y install docker-ce
     sudo usermod -a -G docker "$(whoami)"
     sudo systemctl enable docker
 
-    sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o '/usr/local/bin/docker-compose'
-    sudo chmod +x '/usr/local/bin/docker-compose'
-    [[ "$(sudo /usr/local/bin/docker-compose --version)" == 'docker-compose version 1.24.1, build 4667896b' ]] || exit 1
+    if [ ! -x "$(command -v docker-compose)" ]; then
+        sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o '/usr/local/bin/docker-compose'
+        sudo chmod +x '/usr/local/bin/docker-compose'
+        [[ "$(sudo /usr/local/bin/docker-compose --version)" == 'docker-compose version 1.24.1, build 4667896b' ]] || exit 1
+    fi
 }
 
 install_kubernetes(){
-    if [ ! -x "$(command -v kubectl)" ]; then
-        sudo dnf -y install kubectl
-    fi
+    sudo dnf -y install kubectl
     if [ ! -x "$(command -v minikube)" ]; then
         mkdir -p "$HOME/Applications/minikube"
         curl -Lo "$HOME/Applications/minikube/minikube" https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -40,6 +33,17 @@ install_kubernetes(){
         mv "$HOME/Applications/minikube/minikube" "$HOME/Applications/minikube/$version/"
         ln -s "$HOME/Applications/minikube/$version/minikube" "$HOME/bin"
     fi
+}
+
+install_kvm(){
+    sudo dnf -y install libvirt \
+                        qemu \
+                        qemu-kvm \
+                        virt-manager
+}
+
+install_podman(){
+    sudo dnf -y install podman
 }
 
 set_guest_settings(){
@@ -54,13 +58,16 @@ set_guest_settings(){
     fi
 }
 
+# Always install podman
+install_podman
+
 # use grep because multiple results can be returned
 if [[ "$(sudo virt-what)" = '' ]]; then
     # Bare Metal
     # dont install virtualbox because it breaks SecureBoot
-    install_kvm
     install_docker
     install_kubernetes
+    install_kvm
 elif [[ "$(sudo virt-what | grep kvm)" != '' ]]; then
     install_docker
     install_kubernetes
