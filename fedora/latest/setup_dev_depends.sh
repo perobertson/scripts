@@ -76,6 +76,7 @@ pip3 install --user flake8 \
                     flake8-docstrings \
                     flake8-future-import \
                     flake8-import-order \
+                    ipdb \
                     ipython \
                     jedi \
                     pdbpp \
