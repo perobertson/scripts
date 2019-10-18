@@ -56,6 +56,7 @@ sudo dnf -y install ansible \
                     ShellCheck \
                     sl \
                     sqlite-devel \
+                    sshfs \
                     sublime-merge \
                     sublime-text \
                     sysstat \
