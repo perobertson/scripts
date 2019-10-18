@@ -67,15 +67,16 @@ sudo dnf -y install ansible \
                     zsh
 
 # get the latest pip version
-PIP_VERSION=19.2.1
-pip install --user --upgrade "pip==${PIP_VERSION}"
+pip install --user --upgrade pip
 # force the shell to forget all remembered locations
 hash -r
-[[ "$(pip --version)" == "pip ${PIP_VERSION} from $HOME/.local/lib/python2.7/site-packages/pip (python 2.7)" ]] || \
-    [[ "$(pip --version)" == "pip ${PIP_VERSION} from /usr/lib/python2.7/site-packages/pip (python 2.7)" ]]
+
+# use python3 as the default
+pip3 install --user --upgrade pip
+hash -r
+
 pip3 install --user flake8 \
                     flake8-docstrings \
-                    flake8-future-import \
                     flake8-import-order \
                     ipdb \
                     ipython \
