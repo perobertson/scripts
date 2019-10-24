@@ -19,7 +19,7 @@ sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/dock
 sudo dnf install -y "https://dev.mysql.com/get/mysql80-community-release-fc$(. /etc/os-release && echo "$VERSION_ID")-1.noarch.rpm"
 
 # Kubernetes repo
-sudo tee -a /etc/yum.repos.d/kubernetes.repo << EOF
+sudo tee /etc/yum.repos.d/kubernetes.repo <<EOF
 [kubernetes]
 name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
@@ -29,7 +29,7 @@ repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
 
-sudo tee -a /etc/yum.repos.d/google-cloud-sdk.repo << EOM
+sudo tee /etc/yum.repos.d/google-cloud-sdk.repo <<EOF
 [google-cloud-sdk]
 name=Google Cloud SDK
 baseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el7-x86_64
@@ -38,4 +38,15 @@ gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-EOM
+EOF
+
+# VS Code
+sudo rpm -v --import https://packages.microsoft.com/keys/microsoft.asc
+sudo tee /etc/yum.repos.d/vscode.repo <<EOF
+[code]
+name=Visual Studio Code
+baseurl=https://packages.microsoft.com/yumrepos/vscode
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+EOF
