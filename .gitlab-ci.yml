@@ -1,4 +1,4 @@
-.ubuntu_setup: &ubuntu_setup
+.ubuntu_setup:
   before_script:
     - whoami
     - echo "$HOME"
@@ -12,7 +12,7 @@
     - cat /etc/group
 
 
-.fedora_setup: &fedora_setup
+.fedora_setup:
   before_script:
     - whoami
     - echo "$HOME"
@@ -25,14 +25,14 @@
     - cat /etc/group
 
 
-.build: &build_definition
+.build:
   stage: build
   tags:
     - docker
   script:
     - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash'
     - su public --command='git status --short && test "$(git status --short)" = ""'
-    - su public --command='cd "$HOME/workspace/dotfiles" && git status --short && test "$(git status --short)" = ""'
+    - su public --command='cd "$HOME/Applications/dotfiles" && git status --short && test "$(git status --short)" = ""'
 
 
 lint:
@@ -46,69 +46,79 @@ lint:
 
 
 fedora_25:
-  <<: *fedora_setup
-  <<: *build_definition
+  extends:
+    - .build
+    - .fedora_setup
   image: fedora:25
   when: manual
 
 
 fedora_26:
-  <<: *fedora_setup
-  <<: *build_definition
+  extends:
+    - .build
+    - .fedora_setup
   image: fedora:26
   when: manual
 
 
 fedora_27:
-  <<: *fedora_setup
-  <<: *build_definition
+  extends:
+    - .build
+    - .fedora_setup
   image: fedora:27
   when: manual
 
 
 fedora_28:
-  <<: *fedora_setup
-  <<: *build_definition
+  extends:
+    - .build
+    - .fedora_setup
   image: fedora:28
   when: manual
 
 
 fedora_29:
-  <<: *fedora_setup
-  <<: *build_definition
+  extends:
+    - .build
+    - .fedora_setup
   image: fedora:29
 
 
 fedora_30:
-  <<: *fedora_setup
-  <<: *build_definition
+  extends:
+    - .build
+    - .fedora_setup
   image: fedora:30
 
 
 fedora_31:
-  <<: *fedora_setup
-  <<: *build_definition
+  extends:
+    - .build
+    - .fedora_setup
   image: fedora:31
   allow_failure: true
 
 
 fedora_rawhide:
-  <<: *fedora_setup
-  <<: *build_definition
+  extends:
+    - .build
+    - .fedora_setup
   image: fedora:rawhide
   allow_failure: true
 
 
 ubuntu_16_04:
-  <<: *ubuntu_setup
-  <<: *build_definition
+  extends:
+    - .build
+    - .ubuntu_setup
   image: ubuntu:16.04
   when: manual
 
 
 ubuntu_18_04:
-  <<: *ubuntu_setup
-  <<: *build_definition
+  extends:
+    - .build
+    - .ubuntu_setup
   image: ubuntu:18.04
 
 
