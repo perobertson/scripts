@@ -128,20 +128,20 @@ ln -s "$HOME/Applications/hub-linux-amd64-2.7.0/bin/hub" "$HOME/bin/hub"
 [[ "$("$HOME/bin/hub" --version | grep hub)" == 'hub version 2.7.0' ]] || exit 1
 
 # Install pyenv (Python version manager)
-if [[ ! -d "$HOME/.pyenv" ]]; then
-    git clone https://github.com/pyenv/pyenv.git "$HOME/.pyenv"
+if [[ ! -d "$HOME/Applications/pyenv" ]]; then
+    git clone https://github.com/pyenv/pyenv.git "$HOME/Applications/pyenv"
 fi
 
 # Install rbenv (Ruby version manager)
-if [[ ! -d "$HOME/.rbenv" ]]; then
-    git clone https://github.com/rbenv/rbenv.git "$HOME/.rbenv"
+if [[ ! -d "$HOME/Applications/rbenv" ]]; then
+    git clone https://github.com/rbenv/rbenv.git "$HOME/Applications/rbenv"
 fi
-cd "$HOME/.rbenv" && src/configure && make -C src && cd - || exit 1
-if [[ ! -d "$HOME/.rbenv/plugins/ruby-build" ]]; then
-    git clone https://github.com/rbenv/ruby-build.git "$HOME/.rbenv/plugins/ruby-build"
+if [[ ! -d "$HOME/Applications/rbenv/plugins/ruby-build" ]]; then
+    git clone https://github.com/rbenv/ruby-build.git "$HOME/Applications/rbenv/plugins/ruby-build"
 fi
+cd "$HOME/Applications/rbenv" && src/configure && make -C src && cd - || exit 1
 
 # Install tfenv (Terraform version manager)
-if [[ ! -d "$HOME/.tfenv" ]]; then
-    git clone https://github.com/tfutils/tfenv.git "$HOME/.tfenv"
+if [[ ! -d "$HOME/Applications/tfenv" ]]; then
+    git clone https://github.com/tfutils/tfenv.git "$HOME/Applications/tfenv"
 fi
