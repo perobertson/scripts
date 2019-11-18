@@ -62,9 +62,9 @@ if [ "$(grep ^github.com "$HOME/.ssh/known_hosts")" = '' ]; then
 fi
 
 # Fetch the scripts
-if [ ! -d "$HOME/workspace/scripts" ]; then
-    git clone https://gitlab.com/perobertson/scripts.git "$HOME/workspace/scripts"
-    cd "$HOME/workspace/scripts"
+if [ ! -d "$HOME/Applications/scripts" ]; then
+    git clone https://gitlab.com/perobertson/scripts.git "$HOME/Applications/scripts"
+    cd "$HOME/Applications/scripts"
 
     if [ -n "${CI:-}" ]; then
         # if we are in CI, then checkout the specific version for testing
