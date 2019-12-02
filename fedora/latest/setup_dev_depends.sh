@@ -32,6 +32,7 @@ sudo dnf -y install ansible \
                     levien-inconsolata-fonts \
                     libcurl-devel \
                     libffi-devel \
+                    libnotify \
                     libtool \
                     libyaml-devel \
                     make \
