@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-. "fedora/latest/setup_package_managers.sh"
-. "fedora/latest/setup_virtualization.sh"
-. "fedora/latest/setup_dev_depends.sh"
-. "fedora/latest/setup_databases.sh"
-. "fedora/latest/setup_ides.sh"
+. "fedora/28/setup_package_managers.sh"
+. "fedora/28/setup_virtualization.sh"
+. "fedora/28/setup_dev_depends.sh"
+. "fedora/28/setup_databases.sh"
+. "fedora/28/setup_ides.sh"
 
 # These do not require root
-. "fedora/latest/setup_python.sh"
-. "fedora/latest/setup_ruby.sh"
-. "fedora/latest/setup_dotfiles.sh"
-. "fedora/latest/user_settings.sh"
+. "fedora/28/setup_python.sh"
+. "fedora/28/setup_ruby.sh"
+. "fedora/28/setup_dotfiles.sh"
+. "fedora/28/user_settings.sh"

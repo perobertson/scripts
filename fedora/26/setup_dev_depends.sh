@@ -61,6 +61,10 @@ pip install --user  bashate \
                     tldr \
                     virtualenv
 
+pip3 install --user \
+    ansible
+pip3 check
+
 # Switch to zsh
 sudo usermod -s "$(which zsh)" "$(whoami)"
 

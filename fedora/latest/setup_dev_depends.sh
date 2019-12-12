@@ -5,7 +5,9 @@ sudo dnf -y upgrade vim-minimal
 # Install vim separately due to conflicts in upgrade / install
 sudo dnf -y install vim
 
-sudo dnf -y install ansible \
+echo "latest"
+
+sudo dnf -y install \
                     autoconf \
                     automake \
                     bat \
@@ -77,7 +79,9 @@ hash -r
 pip3 install --user --upgrade pip
 hash -r
 
-pip3 install --user flake8 \
+pip3 install --user \
+                    ansible \
+                    flake8 \
                     flake8-docstrings \
                     flake8-import-order \
                     ipdb \

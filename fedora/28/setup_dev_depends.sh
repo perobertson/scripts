@@ -5,7 +5,7 @@ sudo dnf -y upgrade vim-minimal
 # Install vim separately due to conflicts in upgrade / install
 sudo dnf -y install vim
 
-sudo dnf -y install ansible \
+sudo dnf -y install \
                     autoconf \
                     automake \
                     bison \
@@ -68,20 +68,24 @@ pip install --user --upgrade pip==19.1.1
 hash -r
 [[ "$(pip --version)" == "pip 19.1.1 from $HOME/.local/lib/python2.7/site-packages/pip (python 2.7)" ]] || \
     [[ "$(pip --version)" == "pip 19.1.1 from /usr/lib/python2.7/site-packages/pip (python 2.7)" ]]
-pip install --user  bashate \
-                    flake8 \
-                    flake8-coding \
-                    flake8-docstrings \
-                    flake8-future-import \
-                    flake8-import-order \
-                    'ipython<6' \
-                    jedi \
-                    pdbpp \
-                    pep8-naming \
-                    poetry \
-                    pre-commit \
-                    tldr \
-                    virtualenv
+
+pip3 install --user \
+    ansible \
+    bashate \
+    flake8 \
+    flake8-coding \
+    flake8-docstrings \
+    flake8-future-import \
+    flake8-import-order \
+    ipython \
+    jedi \
+    pdbpp \
+    pep8-naming \
+    poetry \
+    pre-commit \
+    tldr \
+    virtualenv
+pip3 check
 
 # Switch to zsh
 sudo usermod -s "$(command -v zsh)" "$(whoami)"

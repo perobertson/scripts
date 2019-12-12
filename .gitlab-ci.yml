@@ -96,7 +96,6 @@ fedora_31:
     - .build
     - .fedora_setup
   image: fedora:31
-  allow_failure: true
 
 
 fedora_rawhide:

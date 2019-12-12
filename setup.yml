@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  tasks:
+    - name: debug info
+      debug:
+        msg: "{{ ansible_facts }}"
+      tags: [ never, debug ]
+
+    - name: Debian - Install common packages
+      become: true
+      apt:
+        pkg: &common_packages
+          - htop
+        state: latest
+        update_cache: yes
+      when: ansible_facts['os_family'] == 'Debian'
+
+    - name: RedHat - Install common packages
+      become: true
+      dnf:
+        name: *common_packages
+        state: latest
+      when: ansible_facts['os_family'] == 'RedHat'

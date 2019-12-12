@@ -4,7 +4,10 @@ sudo apt-get install -y build-essential \
                         curl \
                         dstat \
                         htop \
+                        libffi-dev \
+                        libssl-dev \
                         python3 \
+                        python3-pip \
                         ruby \
                         sysstat \
                         wget \
@@ -14,6 +17,13 @@ sudo apt-get install -y build-essential \
 sudo gem install \
     bundler \
     rake
+
+# Add python3 libs and tools
+pip3 install --user --upgrade pip
+hash -r
+pip3 install --user \
+    ansible
+pip3 check
 
 # Switch to zsh
 sudo usermod -s "$(command -v zsh)" "$(whoami)"

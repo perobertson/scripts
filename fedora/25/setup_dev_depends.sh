@@ -36,6 +36,7 @@ sudo dnf -y install autoconf \
                     pygpgme \
                     python-devel \
                     python-pip \
+                    python3-devel \
                     python3-pip \
                     redhat-lsb \
                     redhat-rpm-config \
@@ -57,6 +58,12 @@ pip install --user  bashate \
                     pep8-naming \
                     tldr \
                     virtualenv
+
+pip3 install --user --upgrade pip
+hash -r
+pip3 install --user \
+    ansible
+pip3 check
 
 # Switch to zsh
 sudo usermod -s "$(which zsh)" "$(whoami)"

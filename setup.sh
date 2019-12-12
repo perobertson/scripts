@@ -84,5 +84,8 @@ else
 fi
 
 set +x
+
+ansible-playbook -vvv setup.yml
+
 echo ''
 echo 'Everything installed. Be sure to reboot at your earliest convenience'

@@ -5,7 +5,7 @@ sudo dnf -y upgrade vim-minimal
 # Install vim separately due to conflicts in upgrade / install
 sudo dnf -y install vim
 
-sudo dnf -y install ansible \
+sudo dnf -y install \
                     autoconf \
                     automake \
                     bison \
@@ -76,6 +76,10 @@ pip install --user  bashate \
                     pre-commit \
                     tldr \
                     virtualenv
+
+pip3 install --user \
+    ansible
+pip3 check
 
 # Switch to zsh
 sudo usermod -s "$(which zsh)" "$(whoami)"
