@@ -21,3 +21,18 @@
         name: *common_packages
         state: latest
       when: ansible_facts['os_family'] == 'RedHat'
+
+    - name: Debian - Install packages
+      become: true
+      apt:
+        pkg: []
+        state: latest
+      when: ansible_facts['os_family'] == 'Debian'
+
+    - name: RedHat - Install packages
+      become: true
+      dnf:
+        name:
+          - pcp-system-tools # dstat
+        state: latest
+      when: ansible_facts['os_family'] == 'RedHat'

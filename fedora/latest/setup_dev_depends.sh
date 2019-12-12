@@ -15,7 +15,6 @@ sudo dnf -y install \
                     bzip2 \
                     bzip2-devel \
                     dropbox \
-                    dstat \
                     freetype-freeworld \
                     fzf \
                     gcc \
@@ -26,7 +25,6 @@ sudo dnf -y install \
                     google-cloud-sdk \
                     graphviz \
                     gtk-murrine-engine \
-                    htop \
                     i3 \
                     jq \
                     julia \

@@ -3,7 +3,6 @@
 sudo apt-get install -y build-essential \
                         curl \
                         dstat \
-                        htop \
                         libffi-dev \
                         libssl-dev \
                         python3 \

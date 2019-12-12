@@ -9,7 +9,6 @@ sudo dnf -y install autoconf \
                     bzip2 \
                     certbot-nginx \
                     dropbox \
-                    dstat \
                     freetype-freeworld \
                     gcc \
                     gcc-c++ \
@@ -17,7 +16,6 @@ sudo dnf -y install autoconf \
                     git-cola \
                     gitk \
                     graphviz \
-                    htop \
                     i3 \
                     ImageMagick \
                     levien-inconsolata-fonts \

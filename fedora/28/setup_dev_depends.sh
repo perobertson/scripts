@@ -13,7 +13,6 @@ sudo dnf -y install \
                     bzip2-devel \
                     certbot-nginx \
                     dropbox \
-                    dstat \
                     freetype-freeworld \
                     fzf \
                     gcc \
@@ -24,7 +23,6 @@ sudo dnf -y install \
                     google-cloud-sdk \
                     graphviz \
                     gtk-murrine-engine \
-                    htop \
                     i3 \
                     ImageMagick \
                     levien-inconsolata-fonts \

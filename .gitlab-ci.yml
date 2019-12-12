@@ -50,7 +50,6 @@ fedora_25:
     - .build
     - .fedora_setup
   image: fedora:25
-  when: manual
 
 
 fedora_26:
@@ -58,7 +57,6 @@ fedora_26:
     - .build
     - .fedora_setup
   image: fedora:26
-  when: manual
 
 
 fedora_27:
@@ -66,7 +64,6 @@ fedora_27:
     - .build
     - .fedora_setup
   image: fedora:27
-  when: manual
 
 
 fedora_28:
@@ -74,7 +71,6 @@ fedora_28:
     - .build
     - .fedora_setup
   image: fedora:28
-  when: manual
 
 
 fedora_29:
@@ -111,7 +107,6 @@ ubuntu_16_04:
     - .build
     - .ubuntu_setup
   image: ubuntu:16.04
-  when: manual
 
 
 ubuntu_18_04:
