@@ -23,7 +23,6 @@ sudo dnf -y install \
                     google-cloud-sdk \
                     graphviz \
                     gtk-murrine-engine \
-                    i3 \
                     ImageMagick \
                     levien-inconsolata-fonts \
                     libcurl-devel \

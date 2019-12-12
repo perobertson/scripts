@@ -21,7 +21,6 @@ sudo dnf -y install \
                     gitk \
                     graphviz \
                     gtk-murrine-engine \
-                    i3 \
                     ImageMagick \
                     levien-inconsolata-fonts \
                     libcurl-devel \

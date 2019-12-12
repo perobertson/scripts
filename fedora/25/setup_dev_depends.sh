@@ -16,7 +16,6 @@ sudo dnf -y install autoconf \
                     git-cola \
                     gitk \
                     graphviz \
-                    i3 \
                     ImageMagick \
                     levien-inconsolata-fonts \
                     libcurl-devel \
