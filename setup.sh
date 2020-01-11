@@ -75,9 +75,9 @@ fi
 # Run the setup
 os="$(. /etc/os-release && echo "$ID")"
 if [ "$os" == 'fedora' ]; then
-    . "fedora/setup.sh"
+    . "fedora/bootstrap.sh"
 elif [ "$os" == 'ubuntu' ]; then
-    . "ubuntu/setup.sh"
+    . "ubuntu/bootstrap.sh"
 else
     echo "$os not supported"
     exit 1
@@ -85,7 +85,7 @@ fi
 
 set +x
 
-ansible-playbook -vvv setup.yml
+ansible-playbook -v --diff setup.yml
 
 echo ''
 echo 'Everything installed. Be sure to reboot at your earliest convenience'

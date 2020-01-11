@@ -6,33 +6,555 @@
         msg: "{{ ansible_facts }}"
       tags: [ never, debug ]
 
+    - name: Debian - Add Docker signing key
+      become: true
+      apt_key:
+        url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+        state: present
+      when: ansible_os_family == 'Debian'
+      tags: [ dev, repo ]
+    - name: Debian - Add Docker repo
+      become: true
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_lsb['codename'] }} stable"
+        filename: docker
+        state: present
+      when: ansible_os_family == 'Debian'
+      tags: [ dev, repo ]
+    - name: Debian - Add Sublime-Text signing key
+      become: true
+      apt_key:
+        url: https://download.sublimetext.com/sublimehq-pub.gpg
+        state: present
+      when: ansible_os_family == 'Debian'
+      tags: [ dev, repo ]
+    - name: Debian - Add Sublime Text Repo
+      become: true
+      apt_repository:
+        repo: deb https://download.sublimetext.com/ apt/stable/
+        filename: sublime-text
+        state: present
+      when: ansible_os_family == 'Debian'
+      tags: [ dev, repo ]
+
+    - name: RedHat - Add Docker repository
+      become: true
+      yum_repository:
+        file: docker-ce
+        name: docker-ce-stable
+        description: "Docker CE Stable - $basearch"
+        baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/stable"
+        enabled: yes
+        gpgcheck: yes
+        gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev, repo ]
+    - name: RedHat - Add Google Cloud SDK repository
+      become: true
+      yum_repository:
+        file: google-cloud-sdk
+        name: google-cloud-sdk
+        description: Google Cloud SDK
+        baseurl: https://packages.cloud.google.com/yum/repos/cloud-sdk-el7-x86_64
+        enabled: yes
+        gpgcheck: yes
+        repo_gpgcheck: yes
+        gpgkey:
+          - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+          - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev, repo ]
+    - name: RedHat - Add Keybase repository
+      become: true
+      yum_repository:
+        file: keybase
+        name: keybase
+        description: keybase
+        baseurl: http://prerelease.keybase.io/rpm/x86_64
+        enabled: yes
+        gpgcheck: yes
+        gpgkey: https://keybase.io/docs/server_security/code_signing_key.asc
+        metadata_expire: 60
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev, repo ]
+    - name: RedHat - Add Kubernetes repository
+      become: true
+      yum_repository:
+        file: kubernetes
+        name: kubernetes
+        description: Kubernetes
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+        enabled: yes
+        gpgcheck: yes
+        repo_gpgcheck: yes
+        gpgkey:
+          - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+          - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev, repo ]
+    - name: RedHat - Add Sublime-Text repository
+      become: true
+      yum_repository:
+        file: sublime-text
+        name: sublime-text
+        description: Sublime Text - x86_64 - Stable
+        baseurl: https://download.sublimetext.com/rpm/stable/x86_64
+        enabled: yes
+        gpgcheck: yes
+        gpgkey:
+          - https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev, repo ]
+    - name: RedHat - Add VSCode repository
+      become: true
+      yum_repository:
+        file: vscode
+        name: code
+        description: Visual Studio Code
+        baseurl: https://packages.microsoft.com/yumrepos/vscode
+        enabled: yes
+        gpgcheck: yes
+        gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev, repo ]
+
+    - name: Fedora <= 25 - Add MySQL repository
+      become: true
+      dnf:
+        name:
+          - "https://dev.mysql.com/get/mysql57-community-release-fc{{ ansible_distribution_major_version|int }}-10.noarch.rpm"
+        state: present
+      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int <= 25
+      tags: [ dev, repo ]
+    - name: Fedora 26+ - Add MySQL repository
+      become: true
+      dnf:
+        name:
+          - "https://dev.mysql.com/get/mysql80-community-release-fc{{ ansible_distribution_major_version|int }}-1.noarch.rpm"
+        state: present
+      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 26
+      tags: [ dev, repo ]
+    - name: Fedora - Add RPMFusion repository
+      become: true
+      dnf:
+        name:
+          - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
+          - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
+        state: present
+      when: ansible_distribution == 'Fedora'
+      tags: [ dev, repo ]
+
     - name: Debian - Install common packages
       become: true
       apt:
-        pkg: &common_packages
+        name: &common_packages
+          - docker-ce
           - htop
-        state: latest
+          - sublime-merge
+          - sublime-text
+          - sysstat # iostat
+          - zsh
+        state: present
         update_cache: yes
-      when: ansible_facts['os_family'] == 'Debian'
+      when: ansible_os_family == 'Debian'
+      tags: [ dev ]
 
     - name: RedHat - Install common packages
       become: true
       dnf:
         name: *common_packages
-        state: latest
-      when: ansible_facts['os_family'] == 'RedHat'
+        state: present
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev ]
 
     - name: Debian - Install packages
       become: true
       apt:
-        pkg: []
+        pkg:
+          - libglib2.0-bin # gsettings
+        state: present
+      when: ansible_os_family == 'Debian'
+      tags: [ dev ]
+
+    # Need to upgrade vim-minimal first, otherwise there are conflicts
+    - name: RedHat - Update vim-minimal
+      become: true
+      dnf:
+        name:
+          - vim-minimal
         state: latest
-      when: ansible_facts['os_family'] == 'Debian'
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev ]
+
+    # Install vim separately due to conflicts in upgrade / install
+    - name: RedHat - Update vim
+      become: true
+      dnf:
+        name:
+          - vim
+        state: latest
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev ]
 
     - name: RedHat - Install packages
       become: true
       dnf:
         name:
+          - autoconf
+          - automake
+          - bison
+          - bzip2
+          - bzip2-devel
+          - curl
+          - dkms
+          - dnf-plugins-core
+          - fuse-sshfs
+          - gcc
+          - gcc-c++
+          - git
+          - gitk
+          - git-cola
+          - google-cloud-sdk
+          - graphviz
+          - gtk-murrine-engine
+          - ImageMagick
+          - jq
+          - julia
+          - keybase
+          - kubectl
+          - libcurl-devel
+          - libffi-devel
+          - libnotify
+          - libtool
+          - libyaml-devel
+          - levien-inconsolata-fonts
+          - make
+          - mysql-community-devel
+          - ncdu
+          - nodejs
+          - npm
+          - openssl-devel
+          - p7zip
+          - patch
           - pcp-system-tools # dstat
+          - perl
+          - pssh
+          - pv
+          - readline-devel
+          - redhat-lsb
+          - redhat-rpm-config
+          - samba-client
+          - ShellCheck
+          - sqlite-devel
+          - tree
+          - virt-what
+          - vlc
+          - wget
+          - xz
+          - xz-devel
+          - zlib-devel
+        state: present
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev ]
+
+    - name: Fedora 26+ - Install packages
+      become: true
+      dnf:
+        name:
+          - fzf
+        state: present
+      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 26
+      tags: [ dev ]
+
+    - name: Fedora 27+ - Install packages
+      become: true
+      dnf:
+        name:
+          - podman
+        state: present
+      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 27
+      tags: [ dev ]
+
+    - name: Fedora 28+ - Install packages
+      become: true
+      dnf:
+        name:
+          - code
+        state: present
+      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 28
+      tags: [ dev ]
+
+    - name: Fedora 29+ - Install packages
+      become: true
+      dnf:
+        name:
+          - bat
+        state: present
+      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 29
+      tags: [ dev ]
+
+    - name: RedHat - Kernel Devel
+      become: true
+      dnf:
+        # Disable updates so on fresh installs this will get the headers matching the current version
+        disablerepo: updates
+        name:
+          - kernel-headers
+          - kernel-devel
+        state: present
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev ]
+
+    - name: All - Install minikube
+      become: true
+      get_url:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        dest: /usr/local/bin/minikube
+      tags: [ dev ]
+
+    - name: All - Enable execue for minikube
+      become: true
+      file:
+        path: /usr/local/bin/minikube
+        mode: +x
+      tags: [ dev ]
+
+    - name: All - Install docker-compose 1.25.0
+      become: true
+      get_url:
+        url: "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-{{ ansible_system }}-{{ ansible_machine }}"
+        dest: /usr/local/bin/docker-compose
+      tags: [ dev ]
+
+    - name: All - Enable execue for docker-compose
+      become: true
+      file:
+        path: /usr/local/bin/docker-compose
+        mode: +x
+      tags: [ dev ]
+
+    - name: All - add user to docker group, use zsh
+      become: true
+      user:
+        name: "{{ ansible_user_id }}"
+        append: yes
+        groups: docker
+        shell: /usr/bin/zsh
+      tags: [ dev ]
+
+    - name: All - pip install dev tools
+      pip:
+        extra_args: --user
+        name:
+          - flake8
+          - flake8-docstrings
+          - flake8-import-order
+          - ipdb
+          - ipython
+          - jedi
+          - pdbpp
+          - pep8-naming
+          - poetry
+          - pre-commit
+          - six
+          - termcolor
+          - tldr
         state: latest
-      when: ansible_facts['os_family'] == 'RedHat'
+      tags: [ pip ]
+
+    - name: All - Git update pyenv
+      git:
+        repo: https://github.com/pyenv/pyenv.git
+        dest: ~/Applications/pyenv
+      tags: [ git ]
+
+    - name: All - Git update rbenv
+      git:
+        repo: https://github.com/rbenv/rbenv.git
+        dest: ~/Applications/rbenv
+      tags: [ git ]
+
+    - name: All - Git update rbenv - ruby build
+      git:
+        repo: https://github.com/rbenv/ruby-build.git
+        dest: ~/Applications/rbenv/plugins/ruby-build
+
+    - name: All - Configure rbenv
+      command:
+        chdir: ~/Applications/rbenv
+        cmd: src/configure
+      tags: [ git ]
+
+    - name: All - Make rbenv
+      command:
+        chdir: ~/Applications/rbenv
+        cmd: make -C src
+      tags: [ git ]
+
+    - name: All - Git update tfenv
+      git:
+        repo: https://github.com/tfutils/tfenv.git
+        dest: ~/Applications/tfenv
+      tags: [ git ]
+
+    ### ------------------ User Settings -----------------------------
+
+    - name: All - Fetch gsettings schemas
+      command: gsettings list-schemas
+      ignore_errors: yes
+      register: gsettings_schemas
+      tags: [ ui ]
+
+    - name: UI - Show clock seconds
+      command: gsettings set org.cinnamon.desktop.interface clock-show-seconds true
+      when: "'org.cinnamon.desktop.interface' in gsettings_schemas.stdout_lines"
+      tags: [ ui ]
+
+    - name: UI - Set monospace font
+      command: gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata 16'
+      when: "'org.gnome.desktop.interface' in gsettings_schemas.stdout_lines"
+      tags: [ ui ]
+
+    - name: UI - Files date format
+      command: gsettings set org.nemo.preferences date-format 'iso'
+      when: "'org.nemo.preferences' in gsettings_schemas.stdout_lines"
+      tags: [ ui ]
+
+    - name: UI - Files default folder view
+      command: gsettings set org.nemo.preferences default-folder-viewer 'list-view'
+      when: "'org.nemo.preferences' in gsettings_schemas.stdout_lines"
+      tags: [ ui ]
+
+    - name: UI - Xresources
+      copy:
+        src: files/.Xresources
+        dest: ~/.Xresources
+      tags: [ ui ]
+
+    ### --------------------- IDEs -------------------------------------------
+    - name: All - Sublime Create packages directory
+      file:
+        path: ~/.config/sublime-text-3/Installed Packages
+        state: directory
+      tags: [ ide ]
+
+    - name: All - Sublime Create user packages directory
+      file:
+        path: ~/.config/sublime-text-3/Packages/User
+        state: directory
+      tags: [ ide ]
+
+    - name: All - Sublime check if package control exists
+      stat:
+        path: ~/.config/sublime-text-3/Installed Packages/Package Control.sublime-package
+      register: sublime_package_control
+      tags: [ ide ]
+
+    - name: All - Sublime download package control
+      get_url:
+        url: https://packagecontrol.io/Package%20Control.sublime-package
+        dest: ~/.config/sublime-text-3/Installed Packages/Package Control.sublime-package
+      when: sublime_package_control.stat.exists == False
+      tags: [ ide ]
+
+    - name: All - Sublime git update ApplySyntax
+      git:
+        repo: https://github.com/facelessuser/ApplySyntax.git
+        dest: ~/.config/sublime-text-3/Packages/ApplySyntax
+      tags: [ ide ]
+    - name: All - Sublime git update Docker
+      git:
+        repo: https://github.com/asbjornenge/Docker.tmbundle.git
+        dest: ~/.config/sublime-text-3/Packages/Docker.tmbundle
+      tags: [ ide ]
+    - name: All - Sublime git update EditorConfig
+      git:
+        repo: https://github.com/sindresorhus/editorconfig-sublime.git
+        dest: ~/.config/sublime-text-3/Packages/EditorConfig
+      tags: [ ide ]
+    - name: All - Sublime git update FileIcons
+      git:
+        repo: https://github.com/braver/FileIcons.git
+        dest: ~/.config/sublime-text-3/Packages/FileIcons
+      tags: [ ide ]
+    - name: All - Sublime git update SublimeJEDI
+      git:
+        repo: https://github.com/srusskih/SublimeJEDI.git
+        dest: ~/.config/sublime-text-3/Packages/Jedi - Python autocompletion
+      tags: [ ide ]
+    - name: All - Sublime git update Jinja2
+      git:
+        repo: https://github.com/kudago/jinja2-tmbundle.git
+        dest: ~/.config/sublime-text-3/Packages/jinja2-tmbundle
+      tags: [ ide ]
+    - name: All - Sublime git update JSON ReIndent
+      git:
+        repo: https://github.com/ThomasKliszowski/json_reindent.git
+        dest: ~/.config/sublime-text-3/Packages/json_reindent
+      tags: [ ide ]
+    - name: All - Sublime git update Python Fix Imports
+      git:
+        repo: https://github.com/Stibbons/python-fiximports.git
+        dest: ~/.config/sublime-text-3/Packages/Python Fix Imports
+      tags: [ ide ]
+    - name: All - Sublime git update StGitlab
+      git:
+        repo: https://github.com/tosher/StGitlab.git
+        dest: ~/.config/sublime-text-3/Packages/StGitlab
+      tags: [ ide ]
+    - name: All - Sublime git update Sublime-NGINX
+      git:
+        repo: https://github.com/brandonwamboldt/sublime-nginx.git
+        dest: ~/.config/sublime-text-3/Packages/sublime-nginx
+      tags: [ ide ]
+    - name: All - Sublime git update SublimeLinter
+      git:
+        repo: https://github.com/SublimeLinter/SublimeLinter.git
+        dest: ~/.config/sublime-text-3/Packages/SublimeLinter
+      tags: [ ide ]
+    - name: All - Sublime git update SublimeLinter-flake8
+      git:
+        repo: https://github.com/SublimeLinter/SublimeLinter-flake8.git
+        dest: ~/.config/sublime-text-3/Packages/SublimeLinter-flake8
+      tags: [ ide ]
+    - name: All - Sublime git update SublimeLinter-rubocop
+      git:
+        repo: https://github.com/SublimeLinter/SublimeLinter-rubocop.git
+        dest: ~/.config/sublime-text-3/Packages/SublimeLinter-rubocop
+      tags: [ ide ]
+    - name: All - Sublime git update SublimeLinter-shellcheck
+      git:
+        repo: https://github.com/SublimeLinter/SublimeLinter-shellcheck.git
+        dest: ~/.config/sublime-text-3/Packages/SublimeLinter-shellcheck
+      tags: [ ide ]
+    - name: All - Sublime git update Sublime INI
+      git:
+        repo: https://github.com/clintberry/sublime-text-2-ini.git
+        dest: ~/.config/sublime-text-3/Packages/sublime-text-2-ini
+      tags: [ ide ]
+    - name: All - Sublime git update Sublime GIT
+      git:
+        repo: https://github.com/kemayo/sublime-text-git.git
+        dest: ~/.config/sublime-text-3/Packages/sublime-text-git
+      tags: [ ide ]
+    - name: All - Sublime git update Sublime Terraform
+      git:
+        repo: https://github.com/alexlouden/Terraform.tmLanguage.git
+        dest: ~/.config/sublime-text-3/Packages/Terraform.tmLanguage
+      tags: [ ide ]
+    - name: All - Sublime git update Sublime TOML
+      git:
+        repo: https://github.com/jasonwilliams/sublime_toml_highlighting.git
+        dest: ~/.config/sublime-text-3/Packages/TOML
+      tags: [ ide ]
+
+    ### --------------------- Dotfiles ---------------------------------------
+    - name: All - Git update dotfiles
+      git:
+        repo: https://gitlab.com/perobertson/dotfiles.git
+        dest: ~/Applications/dotfiles
+      tags: [ dotfiles ]
+
+    - name: All - Install Dotfiles
+      command: ~/Applications/dotfiles/install.py
+      tags: [ dotfiles ]
