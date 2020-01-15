@@ -86,6 +86,10 @@ fi
 set +x
 
 ansible-playbook -v --diff setup.yml
+if [ -z "${CI:-}" ]; then
+    # only start the services when outside of docker
+    ansible-playbook -v --diff -t systemd setup.yml
+fi
 
 echo ''
 echo 'Everything installed. Be sure to reboot at your earliest convenience'
