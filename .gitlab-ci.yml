@@ -11,7 +11,6 @@
     - cat /etc/passwd
     - cat /etc/group
 
-
 .fedora_setup:
   before_script:
     - whoami
@@ -24,7 +23,6 @@
     - cat /etc/passwd
     - cat /etc/group
 
-
 .build:
   stage: build
   tags:
@@ -33,7 +31,7 @@
     - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash'
     - su public --command='git status --short && test "$(git status --short)" = ""'
     - su public --command='cd "$HOME/Applications/dotfiles" && git status --short && test "$(git status --short)" = ""'
-
+  interruptible: true
 
 lint:
   stage: build
@@ -44,13 +42,11 @@ lint:
     - apk add --upgrade shellcheck
     - shellcheck --external-sources setup.sh $(find . -name '*.sh' -path '**/latest/**')
 
-
 fedora_25:
   extends:
     - .build
     - .fedora_setup
   image: fedora:25
-
 
 fedora_26:
   extends:
@@ -58,13 +54,11 @@ fedora_26:
     - .fedora_setup
   image: fedora:26
 
-
 fedora_27:
   extends:
     - .build
     - .fedora_setup
   image: fedora:27
-
 
 fedora_28:
   extends:
@@ -72,13 +66,11 @@ fedora_28:
     - .fedora_setup
   image: fedora:28
 
-
 fedora_29:
   extends:
     - .build
     - .fedora_setup
   image: fedora:29
-
 
 fedora_30:
   extends:
@@ -86,13 +78,18 @@ fedora_30:
     - .fedora_setup
   image: fedora:30
 
-
 fedora_31:
   extends:
     - .build
     - .fedora_setup
   image: fedora:31
 
+fedora_32:
+  extends:
+    - .build
+    - .fedora_setup
+  image: fedora:32
+  allow_failure: true
 
 fedora_rawhide:
   extends:
@@ -101,20 +98,17 @@ fedora_rawhide:
   image: fedora:rawhide
   allow_failure: true
 
-
 ubuntu_16_04:
   extends:
     - .build
     - .ubuntu_setup
   image: ubuntu:16.04
 
-
 ubuntu_18_04:
   extends:
     - .build
     - .ubuntu_setup
   image: ubuntu:18.04
-
 
 deploy_github:
   stage: deploy
