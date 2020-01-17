@@ -74,7 +74,7 @@
         enabled: yes
         gpgcheck: yes
         gpgkey: https://keybase.io/docs/server_security/code_signing_key.asc
-        metadata_expire: 60
+        metadata_expire: '60'
       when: ansible_os_family == 'RedHat'
       tags: [ dev, repo ]
     - name: RedHat - Add Kubernetes repository
@@ -90,6 +90,21 @@
         gpgkey:
           - https://packages.cloud.google.com/yum/doc/yum-key.gpg
           - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev, repo ]
+    - name: RedHat - Add Slack repository
+      become: true
+      yum_repository:
+        file: slack
+        name: slack
+        description: slack
+        baseurl: https://packagecloud.io/slacktechnologies/slack/{{ ansible_distribution | lower }}/21/x86_64
+        enabled: yes
+        gpgcheck: yes
+        gpgkey:
+          - https://packagecloud.io/gpg.key
+        sslverify: yes
+        sslcacert: /etc/pki/tls/certs/ca-bundle.crt
       when: ansible_os_family == 'RedHat'
       tags: [ dev, repo ]
     - name: RedHat - Add Sublime-Text repository
@@ -246,6 +261,7 @@
           - redhat-rpm-config
           - samba-client
           - ShellCheck
+          - slack
           - sqlite-devel
           - tree
           - virt-what
