@@ -596,6 +596,7 @@
       git:
         repo: https://gitlab.com/perobertson/dotfiles.git
         dest: ~/Applications/dotfiles
+        version: master
       tags: [ dotfiles ]
 
     - name: All - Install Dotfiles
