@@ -242,7 +242,6 @@
           - gcc-c++
           - git
           - gitk
-          - git-cola
           - google-cloud-sdk
           - graphviz
           - gtk-murrine-engine
