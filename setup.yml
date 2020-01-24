@@ -37,6 +37,13 @@
       when: ansible_os_family == 'Debian'
       tags: [ dev, repo ]
 
+    - name: RedHat - Add dnf plugins
+      become: true
+      dnf:
+        name:
+          - dnf-plugins-core
+      when: ansible_os_family == 'RedHat'
+      tags: [ dev, repo ]
     - name: RedHat - Add Docker repository
       become: true
       yum_repository:
@@ -158,6 +165,13 @@
         state: present
       when: ansible_distribution == 'Fedora'
       tags: [ dev, repo ]
+    - name: Fedora - Add lazygit repository
+      become: true
+      command:
+        cmd: dnf copr enable atim/lazygit -y
+        creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:atim:lazygit.repo
+      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 30
+      tags: [ dev, repo ]
 
     - name: Debian - Install common packages
       become: true
@@ -223,7 +237,6 @@
           - curl
           - dkms
           - dnf-automatic
-          - dnf-plugins-core
           - fuse-sshfs
           - gcc
           - gcc-c++
@@ -308,6 +321,15 @@
           - bat
         state: present
       when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 29
+      tags: [ dev ]
+
+    - name: Fedora 30+ - Install packages
+      become: true
+      dnf:
+        name:
+          - lazygit
+        state: present
+      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 30
       tags: [ dev ]
 
     - name: RedHat - Kernel Devel
