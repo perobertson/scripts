@@ -527,11 +527,32 @@
       tags: [ ide ]
 
     ### --------------------- Dotfiles ---------------------------------------
+    - name: All - Check if dotfiles exist
+      stat:
+        path: ~/Applications/dotfiles
+      register: dotfiles
+      tags: [ dotfiles ]
+
+    - name: All - Stash dotfile changes
+      command:
+        chdir: ~/Applications/dotfiles
+        cmd: git stash
+      when: dotfiles.stat.isdir is defined and dotfiles.stat.isdir
+      register: stashed_changes
+      tags: [ dotfiles ]
+
     - name: All - Git update dotfiles
       git:
         repo: https://gitlab.com/perobertson/dotfiles.git
         dest: ~/Applications/dotfiles
         version: master
+      tags: [ dotfiles ]
+
+    - name: All - UnStash dotfile changes
+      command:
+        chdir: ~/Applications/dotfiles
+        cmd: git stash pop
+      when: stashed_changes.stdout is defined and stashed_changes.stdout != 'No local changes to save'
       tags: [ dotfiles ]
 
     - name: All - Install Dotfiles
