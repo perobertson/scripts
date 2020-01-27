@@ -381,9 +381,11 @@
       tags: [ dev ]
 
     - name: All - pip install dev tools
+      no_log: true
       pip:
         extra_args: --user
         name:
+          - aws-credentials
           - flake8
           - flake8-docstrings
           - flake8-import-order
@@ -398,6 +400,11 @@
           - termcolor
           - tldr
         state: latest
+      register: pip_out
+      tags: [ pip ]
+    - name: All - pip show installed
+      debug:
+        msg: "{{ pip_out.stdout_lines }}"
       tags: [ pip ]
 
     - name: All - Git update pyenv
