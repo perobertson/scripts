@@ -386,6 +386,7 @@
         extra_args: --user
         name:
           - aws-credentials
+          - dlint
           - flake8
           - flake8-docstrings
           - flake8-import-order
