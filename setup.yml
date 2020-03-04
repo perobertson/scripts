@@ -388,11 +388,13 @@
           - aws-credentials
           - dlint
           - flake8
+          - flake8-annotations
           - flake8-docstrings
           - flake8-import-order
           - ipdb
           - ipython
           - jedi
+          - keyring
           - pdbpp
           - pep8-naming
           - poetry
