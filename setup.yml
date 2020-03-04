@@ -180,6 +180,7 @@
           - docker-ce
           - htop
           - python3-dbus
+          - seahorse # key management
           - sublime-merge
           - sublime-text
           - sysstat # iostat
