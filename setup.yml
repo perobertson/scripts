@@ -179,6 +179,7 @@
         name: &common_packages
           - docker-ce
           - htop
+          - python3-dbus
           - sublime-merge
           - sublime-text
           - sysstat # iostat

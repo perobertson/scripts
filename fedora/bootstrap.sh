@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 sudo dnf -y install \
-    python3-dbus \
     python3-devel \
     python3-dnf \
     python3-pip

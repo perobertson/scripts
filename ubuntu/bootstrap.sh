@@ -6,7 +6,6 @@ sudo apt-get install apt-transport-https
 
 sudo apt-get install -y \
     python3 \
-    python3-dbus \
     python3-pip
 
 # use python3 as the default
