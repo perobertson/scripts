@@ -389,6 +389,7 @@
       pip:
         extra_args: --user
         name:
+          - ansible-lint
           - aws-credentials
           - dlint
           - flake8
