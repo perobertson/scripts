@@ -234,6 +234,7 @@
       dnf:
         name:
           - autoconf
+          - autojump-zsh
           - automake
           - bison
           - bzip2
