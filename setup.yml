@@ -181,6 +181,7 @@
         name: &common_packages
           - docker-ce
           - htop
+          - flameshot
           - python3-dbus
           - seahorse # key management
           - sublime-merge
