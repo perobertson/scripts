@@ -423,6 +423,13 @@
         dest: ~/Applications/pyenv
       tags: [ git ]
 
+    - name: All - Git update pyenv-doctor
+      diff: false
+      git:
+        repo: https://github.com/pyenv/pyenv-doctor.git
+        dest: ~/Applications/pyenv/plugins/pyenv-doctor
+      tags: [ git ]
+
     - name: All - Git update rbenv
       diff: false
       git:
