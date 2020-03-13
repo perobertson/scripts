@@ -423,11 +423,16 @@
         dest: ~/Applications/pyenv
       tags: [ git ]
 
-    - name: All - Git update pyenv-doctor
+    - name: All - Git update pyenv plugins
       diff: false
       git:
-        repo: https://github.com/pyenv/pyenv-doctor.git
-        dest: ~/Applications/pyenv/plugins/pyenv-doctor
+        repo: "{{ item.repo }}"
+        dest: "~/Applications/pyenv/plugins/{{ item.name }}"
+      loop:
+        - repo: https://github.com/pyenv/pyenv-doctor.git
+          name: pyenv-doctor
+        - repo: https://github.com/pyenv/pyenv-virtualenv.git
+          name: pyenv-virtualenv
       tags: [ git ]
 
     - name: All - Git update rbenv
