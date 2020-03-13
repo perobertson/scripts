@@ -181,7 +181,6 @@
         name: &common_packages
           - docker-ce
           - htop
-          - flameshot
           - python3-dbus
           - seahorse # key management
           - sublime-merge
@@ -208,6 +207,15 @@
           - libglib2.0-bin # gsettings
         state: present
       when: ansible_os_family == 'Debian'
+      tags: [ dev ]
+
+    - name: Ubuntu 18+ - Install packages
+      become: true
+      apt:
+        pkg:
+          - flameshot
+        state: present
+      when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int >= 18
       tags: [ dev ]
 
     # Need to upgrade vim-minimal first, otherwise there are conflicts
@@ -296,6 +304,7 @@
       become: true
       dnf:
         name:
+          - flameshot
           - fzf
         state: present
       when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 26
