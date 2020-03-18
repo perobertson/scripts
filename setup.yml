@@ -400,30 +400,51 @@
       pip:
         extra_args: --user
         name:
-          - ansible-lint
+          - ansible-lint<5.0.0,>=4.2.0
+          - awscli<2.0.0,>=1.18.21
           - aws-credentials
+          - boto3<2.0.0,>=1.12.21
           - dlint
-          - flake8
+          - flake8<4.0.0,>=3.7.9
           - flake8-annotations
           - flake8-docstrings
           - flake8-import-order
+          - importlib-metadata<1.2.0,>=1.1.3
           - ipdb
-          - ipython
+          - ipython<8.0.0,>=7.0.0
           - jedi
           - keyring<21.0.0,>=20.0.1
           - pdbpp
           - pep8-naming
-          - poetry
-          - pre-commit
+          - poetry<2.0.0,>=1.0.5
+          - pre-commit<3.0.0,>=1.21.0 # 2.0.0 drops support for python 3.5
           - six
-          - termcolor
+          - termcolor<2.0.0,>=1.1.0
           - tldr
         state: latest
       register: pip_out
+      ignore_errors: True
+      tags: [ pip ]
+    - name: All - pip debug install failure
+      command: pip --version
+      when: pip_out.failed
+      tags: [ pip ]
+    - name: All - pip show install failure
+      debug:
+        msg: "{{ pip_out.msg.split('\n') }}"
+      failed_when: true
+      when: pip_out.failed
       tags: [ pip ]
     - name: All - pip show installed
       debug:
-        msg: "{{ pip_out.stdout_lines }}"
+        msg:
+          stdout: "{{ pip_out.stdout_lines }}"
+          stderr: "{{ pip_out.stderr_lines }}"
+      when: pip_out.changed
+      tags: [ pip ]
+    - name: All - pip check
+      command: pip check
+      when: pip_out.changed
       tags: [ pip ]
 
     - name: All - Git update pyenv
