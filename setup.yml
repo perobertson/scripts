@@ -106,12 +106,14 @@
       yum_repository:
         file: slack
         name: slack
-        description: slack
-        baseurl: https://packagecloud.io/slacktechnologies/slack/{{ ansible_distribution | lower }}/21/x86_64
+        description: Slack - $basearch
+        # Slack uploads everything to Fedora 21 for some reason
+        baseurl: https://packagecloud.io/slacktechnologies/slack/{{ ansible_distribution | lower }}/21/$basearch
         enabled: yes
         gpgcheck: yes
         gpgkey:
-          - https://packagecloud.io/gpg.key
+          - https://slack.com/gpg/slack_pubkey.gpg
+          - https://slack.com/gpg/slack_pubkey_2019.gpg
         sslverify: yes
         sslcacert: /etc/pki/tls/certs/ca-bundle.crt
       when: ansible_os_family == 'RedHat'
