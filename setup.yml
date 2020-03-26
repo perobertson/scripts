@@ -185,6 +185,7 @@
           - htop
           - python3-dbus
           - seahorse # key management
+          - sqlitebrowser
           - sublime-merge
           - sublime-text
           - sysstat # iostat
