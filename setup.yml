@@ -274,6 +274,9 @@
           - libyaml-devel
           - levien-inconsolata-fonts
           - make
+          - mozilla-fira-mono-fonts
+          - mozilla-fira-sans-fonts
+          - mozilla-fira-fonts-common
           - mysql-community-devel
           - ncdu
           - nodejs

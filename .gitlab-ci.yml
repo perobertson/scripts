@@ -35,11 +35,10 @@
 
 lint:
   stage: build
-  image: alpine:edge # 3.11+
+  image: koalaman/shellcheck-alpine
   tags:
     - docker
   script:
-    - apk add --upgrade shellcheck
     - shellcheck --external-sources setup.sh $(find . -name '*.sh' -path '**/latest/**')
 
 fedora_25:
