@@ -181,6 +181,7 @@
       become: true
       apt:
         name: &common_packages
+          - crudini
           - docker-ce
           - htop
           - python3-dbus
