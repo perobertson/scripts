@@ -560,6 +560,10 @@
       when: ansible_os_family == 'RedHat'
       tags: [ never, system, systemd ]
 
+    ### ------------------ Userspace ---------------------------------
+
+    - import_tasks: flatpacks.yml
+
     ### ------------------ User Settings -----------------------------
 
     - name: All - Fetch gsettings schemas
