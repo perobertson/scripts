@@ -268,7 +268,7 @@
           - curl
           - dkms
           - dnf-automatic
-          - flatpack
+          - flatpak
           - fuse-sshfs
           - gcc
           - gcc-c++
