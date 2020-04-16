@@ -169,11 +169,24 @@
         state: present
       when: ansible_distribution == 'Fedora'
       tags: [ dev, repo ]
-    - name: Fedora - Add lazygit repository
+    - name: Fedora 30+ - Add lazygit repository
       become: true
       command:
         cmd: dnf copr enable atim/lazygit -y
         creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:atim:lazygit.repo
+      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 30
+      tags: [ dev, repo ]
+    - name: Fedora 30+ - Add Razer repository
+      become: true
+      yum_repository:
+        file: razer
+        name: razer
+        description: Razer drivers (Fedora {{ ansible_distribution_major_version|int }})
+        baseurl: "https://download.opensuse.org/repositories/hardware:/razer/Fedora_{{ ansible_distribution_major_version|int }}/"
+        enabled: yes
+        gpgcheck: yes
+        gpgkey: "https://download.opensuse.org/repositories/hardware:/razer/Fedora_{{ ansible_distribution_major_version|int }}/repodata/repomd.xml.key"
+        repo_gpgcheck: yes
       when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 30
       tags: [ dev, repo ]
 
@@ -349,6 +362,7 @@
       dnf:
         name:
           - lazygit
+          - openrazer-meta
         state: present
       when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 30
       tags: [ dev ]
