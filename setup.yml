@@ -38,6 +38,11 @@
         state: present
       when: ansible_os_family == 'Debian'
       tags: [ dev, repo ]
+    - name: Ubuntu <18 - Add flatpak apt repository
+      become: true
+      apt_repository:
+        repo: ppa:alexlarsson/flatpak
+      when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int < 18
 
     - name: RedHat - Add dnf plugins
       become: true
@@ -196,6 +201,7 @@
         name: &common_packages
           - crudini
           - docker-ce
+          - flatpak
           - htop
           - python3-dbus
           - seahorse # key management
@@ -268,7 +274,6 @@
           - curl
           - dkms
           - dnf-automatic
-          - flatpak
           - fuse-sshfs
           - gcc
           - gcc-c++
