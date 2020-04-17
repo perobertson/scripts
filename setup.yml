@@ -369,6 +369,7 @@
         name:
           - lazygit
           - openrazer-meta
+          - polychromatic  # razer device configuration
         state: present
       when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 30
       tags: [ dev ]
