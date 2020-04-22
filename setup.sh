@@ -80,7 +80,7 @@ esac
 ansible-playbook -v setup.yml
 if [[ -z "${CI:-}" ]]; then
     # only start the services when outside of docker
-    ansible-playbook -v -t systemd setup.yml
+    ansible-playbook -v systemd.yml
 fi
 
 echo ''

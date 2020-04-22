@@ -542,24 +542,6 @@
         mode: '0644'
       when: ansible_os_family == 'RedHat'
       tags: [ system ]
-    - name: RedHat - Enable security updates
-      become: true
-      systemd:
-        name: dnf-automatic.timer
-        enabled: yes
-        state: started
-        daemon_reload: yes
-      when: ansible_os_family == 'RedHat'
-      tags: [ never, system, systemd ]
-    - name: RedHat - Enable docker
-      become: true
-      systemd:
-        name: docker.service
-        enabled: yes
-        state: started
-        daemon_reload: yes
-      when: ansible_os_family == 'RedHat'
-      tags: [ never, system, systemd ]
 
     ### ------------------ Userspace ---------------------------------
 
