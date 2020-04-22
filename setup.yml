@@ -149,7 +149,7 @@
       when: ansible_os_family == 'RedHat'
       tags: [ dev, repo ]
 
-    - name: Fedora <= 25 - Add MySQL repository
+    - name: Fedora <= 25 - Add MySQL community repository
       become: true
       dnf:
         name:
@@ -157,13 +157,13 @@
         state: present
       when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int <= 25
       tags: [ dev, repo ]
-    - name: Fedora 26+ - Add MySQL repository
+    - name: Fedora 26,27 - Add MySQL community repository
       become: true
       dnf:
         name:
           - "https://dev.mysql.com/get/mysql80-community-release-fc{{ ansible_distribution_major_version|int }}-1.noarch.rpm"
         state: present
-      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 26
+      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 26 and ansible_distribution_major_version|int <= 27
       tags: [ dev, repo ]
     - name: Fedora - Add RPMFusion repository
       become: true
@@ -297,7 +297,6 @@
           - mozilla-fira-mono-fonts
           - mozilla-fira-sans-fonts
           - mozilla-fira-fonts-common
-          - mysql-community-devel
           - ncdu
           - nodejs
           - npm
@@ -345,11 +344,21 @@
       when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 27
       tags: [ dev ]
 
+    - name: Fedora <= 27 - Install mysql-community-devel
+      become: true
+      dnf:
+        name:
+          - mysql-community-devel # from the community repository
+        state: present
+      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int <= 27
+      tags: [ dev ]
+
     - name: Fedora 28+ - Install packages
       become: true
       dnf:
         name:
           - code
+          - community-mysql-devel # from fedora modular
         state: present
       when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 28
       tags: [ dev ]
