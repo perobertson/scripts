@@ -92,10 +92,18 @@ fedora_rawhide:
   allow_failure: true
 
 ubuntu_18_04:
+  # EOL: 2023-04
   extends:
     - .build
     - .ubuntu_setup
   image: ubuntu:18.04
+
+ubuntu_20_04:
+  # EOL: 2025-04
+  extends:
+    - .build
+    - .ubuntu_setup
+  image: ubuntu:20.04
 
 deploy_github:
   stage: deploy
