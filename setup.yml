@@ -307,6 +307,7 @@
           - pcp-system-tools # dstat
           - perl
           - pssh
+          - pulseaudio-module-bluetooth-freeworld
           - pv
           - readline-devel
           - redhat-lsb
