@@ -307,7 +307,6 @@
           - pcp-system-tools # dstat
           - perl
           - pssh
-          - pulseaudio-module-bluetooth-freeworld
           - pv
           - readline-devel
           - redhat-lsb
@@ -370,6 +369,7 @@
       dnf:
         name:
           - bat
+          - pulseaudio-module-bluetooth-freeworld
         state: present
       when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 29
       tags: [ dev ]
