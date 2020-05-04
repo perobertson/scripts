@@ -434,6 +434,14 @@
         shell: /usr/bin/zsh
       tags: [ dev, docker ]
 
+    - name: All - pip install wheel
+      # Install wheel first which is needed to compile other packages
+      pip:
+        extra_args: --user
+        name:
+          - wheel
+        state: present
+      tags: [ pip ]
     - name: All - pip install dev tools
       no_log: true
       pip:
