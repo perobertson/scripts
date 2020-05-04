@@ -228,6 +228,8 @@
       become: true
       apt:
         pkg:
+          - containerd.io
+          - docker-ce-cli
           - libglib2.0-bin # gsettings
         state: present
       when: ansible_os_family == 'Debian'
@@ -340,6 +342,8 @@
       become: true
       dnf:
         name:
+          - containerd.io
+          - docker-ce-cli
           - podman
         state: present
       when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 27
