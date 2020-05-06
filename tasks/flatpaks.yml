@@ -7,6 +7,12 @@
     flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
     method: user
 
+- name: All - Create user systemd config directory
+  tags: [ user, flatpak ]
+  file:
+    path: ~/.config/systemd/user
+    state: directory
+
 - name: All - Add flatpak auto updates
   tags: [ user, flatpak ]
   diff: true
