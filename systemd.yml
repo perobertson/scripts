@@ -1,6 +1,15 @@
 ---
 - hosts: localhost
   tasks:
+    - name: RedHat - Enable flatpak updates
+      systemd:
+        name: flatpak-update.timer
+        enabled: yes
+        state: started
+        daemon_reload: yes
+        scope: user
+      when: ansible_os_family == 'RedHat'
+
     - name: RedHat - Enable security updates
       become: true
       systemd:

@@ -1,0 +1,25 @@
+---
+- name: All - Add the flathub flatpak repository remote to the user installation
+  tags: [ user, flatpak ]
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+    method: user
+
+- name: All - Add flatpak auto updates
+  tags: [ user, flatpak ]
+  diff: true
+  copy:
+    src: files/home/user/.config/systemd/user/{{ item }}
+    dest: ~/.config/systemd/user/{{ item }}
+  loop:
+    - flatpak-update.service
+    - flatpak-update.timer
+
+- name: All - Install the spotify flatpak
+  tags: [ user, flatpak ]
+  flatpak:
+    name: com.spotify.Client
+    state: present
+    method: user

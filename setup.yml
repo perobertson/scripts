@@ -568,7 +568,7 @@
 
     ### ------------------ Userspace ---------------------------------
 
-    - import_tasks: flatpacks.yml
+    - import_tasks: tasks/flatpaks.yml
 
     ### ------------------ User Settings -----------------------------
 
