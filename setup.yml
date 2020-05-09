@@ -512,6 +512,8 @@
         repo: "{{ item.repo }}"
         dest: "~/Applications/pyenv/plugins/{{ item.name }}"
       loop:
+        - repo: https://gitlab.com/perobertson/pyenv-default-requirements.git
+          name: pyenv-default-requirements
         - repo: https://github.com/pyenv/pyenv-doctor.git
           name: pyenv-doctor
         - repo: https://github.com/pyenv/pyenv-virtualenv.git
