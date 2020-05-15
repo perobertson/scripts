@@ -455,6 +455,7 @@
           - awscli<2.0.0,>=1.18.21
           - aws-credentials
           - boto3<2.0.0,>=1.12.21
+          - diagrams
           - dlint
           - flake8<4.0.0,>=3.7.9
           - flake8-annotations
