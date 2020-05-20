@@ -1,0 +1,33 @@
+---
+- name: All - Check if dotfiles exist
+  tags: [ user, dotfiles ]
+  stat:
+    path: ~/Applications/dotfiles
+  register: dotfiles
+
+- name: All - Stash dotfile changes
+  tags: [ user, dotfiles ]
+  command:
+    chdir: ~/Applications/dotfiles
+    cmd: git stash
+  when: dotfiles.stat.isdir is defined and dotfiles.stat.isdir
+  register: stashed_changes
+
+- name: All - Git update dotfiles
+  tags: [ user, dotfiles ]
+  git:
+    repo: https://gitlab.com/perobertson/dotfiles.git
+    dest: ~/Applications/dotfiles
+    version: master
+  tags: [ dotfiles ]
+
+- name: All - UnStash dotfile changes
+  tags: [ user, dotfiles ]
+  command:
+    chdir: ~/Applications/dotfiles
+    cmd: git stash pop
+  when: stashed_changes.stdout is defined and stashed_changes.stdout != 'No local changes to save'
+
+- name: All - Install Dotfiles
+  tags: [ user, dotfiles ]
+  command: ~/Applications/dotfiles/install.py
