@@ -1,0 +1,25 @@
+---
+- name: All - Sublime Create packages directory
+  tags: [ user, ide ]
+  file:
+    path: ~/.config/sublime-text-3/Installed Packages
+    state: directory
+
+- name: All - Sublime Create user packages directory
+  tags: [ user, ide ]
+  file:
+    path: ~/.config/sublime-text-3/Packages/User
+    state: directory
+
+- name: All - Sublime check if package control exists
+  tags: [ user, ide ]
+  stat:
+    path: ~/.config/sublime-text-3/Installed Packages/Package Control.sublime-package
+  register: sublime_package_control
+
+- name: All - Sublime download package control
+  tags: [ user, ide ]
+  get_url:
+    url: https://packagecontrol.io/Package%20Control.sublime-package
+    dest: ~/.config/sublime-text-3/Installed Packages/Package Control.sublime-package
+  when: not sublime_package_control.stat.exists

@@ -609,30 +609,5 @@
         dest: ~/.Xresources
       tags: [ ui ]
 
-    ### --------------------- IDEs -------------------------------------------
-    - name: All - Sublime Create packages directory
-      file:
-        path: ~/.config/sublime-text-3/Installed Packages
-        state: directory
-      tags: [ ide ]
-
-    - name: All - Sublime Create user packages directory
-      file:
-        path: ~/.config/sublime-text-3/Packages/User
-        state: directory
-      tags: [ ide ]
-
-    - name: All - Sublime check if package control exists
-      stat:
-        path: ~/.config/sublime-text-3/Installed Packages/Package Control.sublime-package
-      register: sublime_package_control
-      tags: [ ide ]
-
-    - name: All - Sublime download package control
-      get_url:
-        url: https://packagecontrol.io/Package%20Control.sublime-package
-        dest: ~/.config/sublime-text-3/Installed Packages/Package Control.sublime-package
-      when: not sublime_package_control.stat.exists
-      tags: [ ide ]
-
+    - import_tasks: tasks/ides.yml
     - import_tasks: tasks/dotfiles.yml
