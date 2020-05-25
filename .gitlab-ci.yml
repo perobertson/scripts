@@ -41,12 +41,6 @@ lint:
   script:
     - shellcheck --external-sources setup.sh $(find . -name '*.sh' -path '**/latest/**')
 
-fedora_25:
-  extends:
-    - .build
-    - .fedora_setup
-  image: fedora:25
-
 fedora_26:
   extends:
     - .build
@@ -96,12 +90,6 @@ fedora_rawhide:
     - .fedora_setup
   image: fedora:rawhide
   allow_failure: true
-
-ubuntu_16_04:
-  extends:
-    - .build
-    - .ubuntu_setup
-  image: ubuntu:16.04
 
 ubuntu_18_04:
   extends:
