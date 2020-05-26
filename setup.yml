@@ -509,59 +509,6 @@
       when: pip_out.changed
       tags: [ pip ]
 
-    - name: All - Git update pyenv
-      diff: false
-      git:
-        repo: https://github.com/pyenv/pyenv.git
-        dest: ~/Applications/pyenv
-      tags: [ git ]
-
-    - name: All - Git update pyenv plugins
-      diff: false
-      git:
-        repo: "{{ item.repo }}"
-        dest: "~/Applications/pyenv/plugins/{{ item.name }}"
-      loop:
-        - repo: https://gitlab.com/perobertson/pyenv-default-requirements.git
-          name: pyenv-default-requirements
-        - repo: https://github.com/pyenv/pyenv-doctor.git
-          name: pyenv-doctor
-        - repo: https://github.com/pyenv/pyenv-virtualenv.git
-          name: pyenv-virtualenv
-      tags: [ git ]
-
-    - name: All - Git update rbenv
-      diff: false
-      git:
-        repo: https://github.com/rbenv/rbenv.git
-        dest: ~/Applications/rbenv
-      tags: [ git ]
-
-    - name: All - Git update rbenv - ruby build
-      diff: false
-      git:
-        repo: https://github.com/rbenv/ruby-build.git
-        dest: ~/Applications/rbenv/plugins/ruby-build
-
-    - name: All - Configure rbenv
-      command:
-        chdir: ~/Applications/rbenv
-        cmd: src/configure
-      tags: [ git ]
-
-    - name: All - Make rbenv
-      command:
-        chdir: ~/Applications/rbenv
-        cmd: make -C src
-      tags: [ git ]
-
-    - name: All - Git update tfenv
-      diff: false
-      git:
-        repo: https://github.com/tfutils/tfenv.git
-        dest: ~/Applications/tfenv
-      tags: [ git ]
-
     - name: RedHat - Configure security updates
       become: true
       diff: true
@@ -580,7 +527,8 @@
 
     ### --- Userspace ---
     # Install dotfiles first so CI can detect drift
-    - import_tasks: tasks/dotfiles.yml
-    - import_tasks: tasks/flatpaks.yml
-    - import_tasks: tasks/ui.yml
-    - import_tasks: tasks/ides.yml
+    - import_tasks: tasks/user/dotfiles.yml
+    - import_tasks: tasks/user/applications.yml
+    - import_tasks: tasks/user/flatpaks.yml
+    - import_tasks: tasks/user/ui.yml
+    - import_tasks: tasks/user/ides.yml
