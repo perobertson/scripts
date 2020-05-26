@@ -578,45 +578,8 @@
       when: ansible_os_family == 'RedHat'
       tags: [ system ]
 
-    ### ------------------ Userspace ---------------------------------
-
+    ### --- Userspace ---
     - import_tasks: tasks/flatpaks.yml
-
-    ### ------------------ User Settings -----------------------------
-
-    - name: All - Fetch gsettings schemas
-      no_log: true
-      command: gsettings list-schemas
-      ignore_errors: yes
-      register: gsettings_schemas
-      tags: [ ui ]
-
-    - name: UI - Show clock seconds
-      command: gsettings set org.cinnamon.desktop.interface clock-show-seconds true
-      when: "'org.cinnamon.desktop.interface' in gsettings_schemas.stdout_lines"
-      tags: [ ui ]
-
-    - name: UI - Set monospace font
-      command: gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata 16'
-      when: "'org.gnome.desktop.interface' in gsettings_schemas.stdout_lines"
-      tags: [ ui ]
-
-    - name: UI - Files date format
-      command: gsettings set org.nemo.preferences date-format 'iso'
-      when: "'org.nemo.preferences' in gsettings_schemas.stdout_lines"
-      tags: [ ui ]
-
-    - name: UI - Files default folder view
-      command: gsettings set org.nemo.preferences default-folder-viewer 'list-view'
-      when: "'org.nemo.preferences' in gsettings_schemas.stdout_lines"
-      tags: [ ui ]
-
-    - name: UI - Xresources
-      diff: true
-      copy:
-        src: files/home/user/.Xresources
-        dest: ~/.Xresources
-      tags: [ ui ]
-
+    - import_tasks: tasks/ui.yml
     - import_tasks: tasks/ides.yml
     - import_tasks: tasks/dotfiles.yml

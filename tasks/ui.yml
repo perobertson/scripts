@@ -1,0 +1,34 @@
+---
+- name: All - Fetch gsettings schemas
+  tags: [ user, ui ]
+  no_log: true
+  command: gsettings list-schemas
+  ignore_errors: yes
+  register: gsettings_schemas
+
+- name: All - Show clock seconds
+  tags: [ user, ui ]
+  command: gsettings set org.cinnamon.desktop.interface clock-show-seconds true
+  when: "'org.cinnamon.desktop.interface' in gsettings_schemas.stdout_lines"
+
+- name: All - Set monospace font
+  tags: [ user, ui ]
+  command: gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata 16'
+  when: "'org.gnome.desktop.interface' in gsettings_schemas.stdout_lines"
+
+- name: All - Files date format
+  tags: [ user, ui ]
+  command: gsettings set org.nemo.preferences date-format 'iso'
+  when: "'org.nemo.preferences' in gsettings_schemas.stdout_lines"
+
+- name: All - Files default folder view
+  tags: [ user, ui ]
+  command: gsettings set org.nemo.preferences default-folder-viewer 'list-view'
+  when: "'org.nemo.preferences' in gsettings_schemas.stdout_lines"
+
+- name: All - Configure Xresources
+  tags: [ user, ui ]
+  diff: true
+  copy:
+    src: files/home/user/.Xresources
+    dest: ~/.Xresources
