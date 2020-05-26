@@ -579,7 +579,8 @@
       tags: [ system ]
 
     ### --- Userspace ---
+    # Install dotfiles first so CI can detect drift
+    - import_tasks: tasks/dotfiles.yml
     - import_tasks: tasks/flatpaks.yml
     - import_tasks: tasks/ui.yml
     - import_tasks: tasks/ides.yml
-    - import_tasks: tasks/dotfiles.yml
