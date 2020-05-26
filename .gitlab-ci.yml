@@ -142,6 +142,7 @@ archlinux:
   image: archlinux/base:latest
 
 fedora_28:
+  # EOL: 2019-05-28
   extends:
     - .build
     - .setup_fedora
@@ -149,6 +150,7 @@ fedora_28:
   image: fedora:28
 
 fedora_29:
+  # EOL: 2019-11-30
   extends:
     - .build
     - .setup_fedora
@@ -156,6 +158,7 @@ fedora_29:
   image: fedora:29
 
 fedora_30:
+  # EOL: 2020-05-26
   extends:
     - .build
     - .setup_fedora
@@ -175,6 +178,13 @@ fedora_32:
     - .setup_fedora
     - .rules_redhat
   image: fedora:32
+
+fedora_33:
+  extends:
+    - .build
+    - .setup_fedora
+    - .rules_redhat
+  image: fedora:33
   allow_failure: true
 
 fedora_rawhide:
