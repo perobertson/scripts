@@ -2,3 +2,7 @@
 - name: Debian Repositories
   import_tasks: tasks/system/debian/repositories.yml
   when: ansible_os_family == 'Debian'
+
+- name: RedHat Repositories
+  import_tasks: tasks/system/redhat/repositories.yml
+  when: ansible_os_family == 'RedHat'

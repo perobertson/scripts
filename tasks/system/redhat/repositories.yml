@@ -1,0 +1,96 @@
+---
+- name: RedHat - Add dnf plugins
+  dnf:
+    name:
+      - dnf-plugins-core
+
+- name: RedHat - Add Docker repository
+  tags: [ docker ]
+  yum_repository:
+    file: docker-ce
+    name: docker-ce-stable
+    description: "Docker CE Stable - $basearch"
+    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/stable"
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+    repo_gpgcheck: yes
+
+- name: RedHat - Add Google Cloud SDK repository
+  yum_repository:
+    file: google-cloud-sdk
+    name: google-cloud-sdk
+    description: Google Cloud SDK
+    baseurl: https://packages.cloud.google.com/yum/repos/cloud-sdk-el7-x86_64
+    enabled: yes
+    gpgcheck: yes
+    repo_gpgcheck: yes
+    gpgkey:
+      - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+      - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+- name: RedHat - Add Keybase repository
+  yum_repository:
+    file: keybase
+    name: keybase
+    description: keybase
+    baseurl: http://prerelease.keybase.io/rpm/x86_64
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://keybase.io/docs/server_security/code_signing_key.asc
+    metadata_expire: '60'
+
+- name: RedHat - Add Kubernetes repository
+  yum_repository:
+    file: kubernetes
+    name: kubernetes
+    description: Kubernetes
+    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+    enabled: yes
+    gpgcheck: yes
+    repo_gpgcheck: yes
+    gpgkey:
+      - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+      - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+- name: RedHat - Add Slack repository
+  yum_repository:
+    file: slack
+    name: slack
+    description: Slack - $basearch
+    # Slack uploads everything to Fedora 21 for some reason
+    baseurl: https://packagecloud.io/slacktechnologies/slack/{{ ansible_distribution | lower }}/21/$basearch
+    enabled: yes
+    gpgcheck: yes
+    gpgkey:
+      - https://slack.com/gpg/slack_pubkey.gpg
+      - https://slack.com/gpg/slack_pubkey_2019.gpg
+    sslverify: yes
+    sslcacert: /etc/pki/tls/certs/ca-bundle.crt
+
+- name: RedHat - Add Sublime-Text repository
+  yum_repository:
+    file: sublime-text
+    name: sublime-text
+    description: Sublime Text - x86_64 - Stable
+    baseurl: https://download.sublimetext.com/rpm/stable/x86_64
+    enabled: yes
+    gpgcheck: yes
+    gpgkey:
+      - https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+
+- name: RedHat - Add VSCode repository
+  yum_repository:
+    file: vscode
+    name: code
+    description: Visual Studio Code
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+
+### --- Distro specific ---
+
+- name: Fedora Repositories
+  import_tasks: tasks/system/redhat/fedora/repositories.yml
+  when: ansible_distribution == 'Fedora'

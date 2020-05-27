@@ -1,0 +1,42 @@
+---
+- name: Fedora <= 25 - Add MySQL community repository
+  dnf:
+    name:
+      - "https://dev.mysql.com/get/mysql57-community-release-fc{{ ansible_distribution_major_version|int }}-10.noarch.rpm"
+    state: present
+  when: ansible_distribution_major_version|int <= 25
+
+- name: Fedora 26,27 - Add MySQL community repository
+  dnf:
+    name:
+      - "https://dev.mysql.com/get/mysql80-community-release-fc{{ ansible_distribution_major_version|int }}-1.noarch.rpm"
+    state: present
+  when:
+    - ansible_distribution_major_version|int >= 26
+    - ansible_distribution_major_version|int <= 27
+
+- name: Fedora - Add RPMFusion repository
+  dnf:
+    name:
+      - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
+      - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
+    state: present
+  when: ansible_distribution == 'Fedora'
+
+- name: Fedora 30+ - Add lazygit repository
+  command:
+    cmd: dnf copr enable atim/lazygit -y
+    creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:atim:lazygit.repo
+  when: ansible_distribution_major_version|int >= 30
+
+- name: Fedora 30+ - Add Razer repository
+  yum_repository:
+    file: razer
+    name: razer
+    description: Razer drivers (Fedora {{ ansible_distribution_major_version|int }})
+    baseurl: "https://download.opensuse.org/repositories/hardware:/razer/Fedora_{{ ansible_distribution_major_version|int }}/"
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: "https://download.opensuse.org/repositories/hardware:/razer/Fedora_{{ ansible_distribution_major_version|int }}/repodata/repomd.xml.key"
+    repo_gpgcheck: yes
+  when: ansible_distribution_major_version|int >= 30
