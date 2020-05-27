@@ -1,0 +1,16 @@
+---
+- name: Debian - Install packages
+  apt:
+    pkg:
+      - containerd.io
+      - docker-ce-cli
+      - libcairo2-dev
+      - libglib2.0-bin # gsettings
+      - pkg-config
+    state: present
+
+### --- Distro specific ---
+
+- name: Ubuntu Packages
+  import_tasks: tasks/system/debian/ubuntu/packages.yml
+  when: ansible_distribution == 'Ubuntu'

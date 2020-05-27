@@ -1,0 +1,34 @@
+---
+- name: Debian - Install common packages
+  apt:
+    name: &common_packages
+      - crudini
+      - docker-ce
+      - flatpak
+      - htop
+      - python3-dbus
+      - seahorse # key management
+      - sqlitebrowser
+      - sublime-merge
+      - sublime-text
+      - sysstat # iostat
+      - zsh
+    state: present
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- name: RedHat - Install common packages
+  dnf:
+    name: *common_packages
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+### --- Family Specific Packages
+
+- name: Debian Packages
+  import_tasks: tasks/system/debian/packages.yml
+  when: ansible_os_family == 'Debian'
+
+- name: RedHat Packages
+  import_tasks: tasks/system/redhat/packages.yml
+  when: ansible_os_family == 'RedHat'

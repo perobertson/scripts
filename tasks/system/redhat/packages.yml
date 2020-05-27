@@ -1,0 +1,90 @@
+---
+- name: RedHat - Kernel Devel
+  dnf:
+    # Disable updates so on fresh installs this will get the headers matching the current version
+    disablerepo: updates
+    name:
+      - kernel-headers
+      - kernel-devel
+    state: present
+
+# Need to upgrade vim-minimal first, otherwise there are conflicts
+- name: RedHat - Update vim-minimal
+  dnf:
+    name:
+      - vim-minimal
+    state: latest
+
+# Install vim separately due to conflicts in upgrade / install
+- name: RedHat - Update vim
+  dnf:
+    name:
+      - vim
+    state: latest
+
+- name: RedHat - Install packages
+  dnf:
+    name:
+      - autoconf
+      - autojump-zsh
+      - automake
+      - bison
+      - bzip2
+      - bzip2-devel
+      - curl
+      - dkms
+      - dnf-automatic
+      - fuse-sshfs
+      - gcc
+      - gcc-c++
+      - git
+      - gitk
+      - google-cloud-sdk
+      - graphviz
+      - gtk-murrine-engine
+      - ImageMagick
+      - jq
+      - julia
+      - keybase
+      - kubectl
+      - libcurl-devel
+      - libffi-devel
+      - libnotify
+      - libtool
+      - libyaml-devel
+      - levien-inconsolata-fonts
+      - make
+      - mozilla-fira-mono-fonts
+      - mozilla-fira-sans-fonts
+      - mozilla-fira-fonts-common
+      - ncdu
+      - nodejs
+      - npm
+      - openssl-devel
+      - p7zip
+      - patch
+      - pcp-system-tools # dstat
+      - perl
+      - pssh
+      - pv
+      - readline-devel
+      - redhat-lsb
+      - redhat-rpm-config
+      - samba-client
+      - ShellCheck
+      - slack
+      - sqlite-devel
+      - tree
+      - virt-what
+      - vlc
+      - wget
+      - xz
+      - xz-devel
+      - zlib-devel
+    state: present
+
+### --- Distro specific ---
+
+- name: Fedora Packages
+  import_tasks: tasks/system/redhat/fedora/packages.yml
+  when: ansible_distribution == 'Fedora'

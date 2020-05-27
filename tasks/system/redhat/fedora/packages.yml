@@ -1,0 +1,49 @@
+---
+- name: Fedora 26+ - Install packages
+  dnf:
+    name:
+      - flameshot
+      - fzf
+    state: present
+  when: ansible_distribution_major_version|int >= 26
+
+- name: Fedora 27+ - Install packages
+  dnf:
+    name:
+      - containerd.io
+      - docker-ce-cli
+      - podman
+    state: present
+  when: ansible_distribution_major_version|int >= 27
+
+- name: Fedora <= 27 - Install mysql-community-devel
+  dnf:
+    name:
+      - mysql-community-devel # from the community repository
+    state: present
+  when: ansible_distribution_major_version|int <= 27
+
+- name: Fedora 28+ - Install packages
+  dnf:
+    name:
+      - code
+      - community-mysql-devel # from fedora modular
+    state: present
+  when: ansible_distribution_major_version|int >= 28
+
+- name: Fedora 29+ - Install packages
+  dnf:
+    name:
+      - bat
+      - pulseaudio-module-bluetooth-freeworld
+    state: present
+  when: ansible_distribution_major_version|int >= 29
+
+- name: Fedora 30+ - Install packages
+  dnf:
+    name:
+      - lazygit
+      - openrazer-meta
+      - polychromatic  # razer device configuration
+    state: present
+  when: ansible_distribution_major_version|int >= 30
