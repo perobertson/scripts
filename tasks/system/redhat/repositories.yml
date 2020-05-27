@@ -92,5 +92,5 @@
 ### --- Distro specific ---
 
 - name: Fedora Repositories
-  import_tasks: tasks/system/redhat/fedora/repositories.yml
+  import_tasks: fedora/repositories.yml
   when: ansible_distribution == 'Fedora'

@@ -26,5 +26,5 @@
 ### --- Distro specific ---
 
 - name: Ubuntu Repositories
-  import_tasks: tasks/system/debian/ubuntu/repositories.yml
+  import_tasks: ubuntu/repositories.yml
   when: ansible_distribution == 'Ubuntu'

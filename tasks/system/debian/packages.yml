@@ -12,5 +12,5 @@
 ### --- Distro specific ---
 
 - name: Ubuntu Packages
-  import_tasks: tasks/system/debian/ubuntu/packages.yml
+  import_tasks: ubuntu/packages.yml
   when: ansible_distribution == 'Ubuntu'

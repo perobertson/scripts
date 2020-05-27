@@ -26,9 +26,9 @@
 ### --- Family Specific Packages
 
 - name: Debian Packages
-  import_tasks: tasks/system/debian/packages.yml
+  import_tasks: debian/packages.yml
   when: ansible_os_family == 'Debian'
 
 - name: RedHat Packages
-  import_tasks: tasks/system/redhat/packages.yml
+  import_tasks: redhat/packages.yml
   when: ansible_os_family == 'RedHat'

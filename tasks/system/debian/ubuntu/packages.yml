@@ -1,5 +1,5 @@
 ---
-- name: Ubuntu 18+ - Install packages
+- name: Ubuntu >=18 - Install packages
   apt:
     pkg:
       - flameshot

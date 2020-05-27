@@ -86,5 +86,5 @@
 ### --- Distro specific ---
 
 - name: Fedora Packages
-  import_tasks: tasks/system/redhat/fedora/packages.yml
+  import_tasks: fedora/packages.yml
   when: ansible_distribution == 'Fedora'
