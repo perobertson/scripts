@@ -403,44 +403,12 @@
       when: ansible_os_family == 'RedHat'
       tags: [ dev ]
 
-    - name: All - Install minikube
-      become: true
-      get_url:
-        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-        dest: /usr/local/bin/minikube
-      tags: [ dev ]
-
-    - name: All - Enable execue for minikube
-      become: true
-      file:
-        path: /usr/local/bin/minikube
-        mode: +x
-      tags: [ dev ]
-
-    - name: All - Install docker-compose {{ docker_compose_version }}
-      become: true
-      get_url:
-        url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_machine }}"
-        dest: /usr/local/bin/docker-compose
-      tags: [ dev, docker ]
-
-    - name: All - Enable execue for docker-compose
-      become: true
-      file:
-        path: /usr/local/bin/docker-compose
-        mode: +x
-      tags: [ dev, docker ]
-
-    - name: All - add user to docker group, use zsh
-      become: true
-      user:
-        name: "{{ ansible_user_id }}"
-        append: yes
-        groups: docker
-        shell: /usr/bin/zsh
-      tags: [ dev, docker ]
-
     ### --- System ---
+    - name: Containers
+      tags: [ system, containers, dev ]
+      become: true
+      import_tasks: tasks/system/containers.yml
+
     - name: Security Settings
       tags: [ system, security ]
       become: true

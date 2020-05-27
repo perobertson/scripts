@@ -1,0 +1,30 @@
+---
+- name: All - Install minikube
+  get_url:
+    url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    dest: /usr/local/bin/minikube
+
+- name: All - Enable execue for minikube
+  file:
+    path: /usr/local/bin/minikube
+    mode: +x
+
+- name: All - Install docker-compose {{ docker_compose_version }}
+  tags: [ docker ]
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_machine }}"
+    dest: /usr/local/bin/docker-compose
+
+- name: All - Enable execue for docker-compose
+  tags: [ docker ]
+  file:
+    path: /usr/local/bin/docker-compose
+    mode: +x
+
+- name: All - add user to docker group, use zsh
+  tags: [ docker ]
+  user:
+    name: "{{ ansible_user_id }}"
+    append: yes
+    groups: docker
+    shell: /usr/bin/zsh
