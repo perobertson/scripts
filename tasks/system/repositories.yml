@@ -1,0 +1,4 @@
+---
+- name: Debian Repositories
+  import_tasks: tasks/system/debian/repositories.yml
+  when: ansible_os_family == 'Debian'
