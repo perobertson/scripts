@@ -440,21 +440,11 @@
         shell: /usr/bin/zsh
       tags: [ dev, docker ]
 
-    - name: RedHat - Configure security updates
+    ### --- System ---
+    - name: Security Settings
+      tags: [ system, security ]
       become: true
-      diff: true
-      copy:
-        src: files/etc/dnf/automatic.conf
-        dest: /etc/dnf/automatic.conf
-      when: ansible_os_family == 'RedHat'
-      tags: [ system ]
-    - name: RedHat - Configure security updates file permissions
-      become: true
-      file:
-        path: /etc/dnf/automatic.conf
-        mode: '0644'
-      when: ansible_os_family == 'RedHat'
-      tags: [ system ]
+      import_tasks: tasks/system/security.yml
 
     ### --- Userspace ---
     # Install dotfiles first so CI can detect drift

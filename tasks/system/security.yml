@@ -1,0 +1,13 @@
+---
+- name: RedHat - Configure security updates
+  diff: true
+  copy:
+    src: files/etc/dnf/automatic.conf
+    dest: /etc/dnf/automatic.conf
+  when: ansible_os_family == 'RedHat'
+
+- name: RedHat - Configure security updates file permissions
+  file:
+    path: /etc/dnf/automatic.conf
+    mode: '0644'
+  when: ansible_os_family == 'RedHat'
