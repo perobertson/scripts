@@ -74,7 +74,6 @@
     - redhat-rpm-config
     - samba-client
     - ShellCheck
-    - slack
     - sqlite-devel
     - tree
     - virt-what

@@ -23,9 +23,13 @@
     - flatpak-update.service
     - flatpak-update.timer
 
-- name: All - Install the spotify flatpak
+- name: All - Install flatpaks
   tags: [ user, flatpak ]
   flatpak:
-    name: com.spotify.Client
+    name: "{{ item }}"
     state: present
     method: user
+  loop:
+    - com.discordapp.Discord
+    - com.slack.Slack
+    - com.spotify.Client
