@@ -9,6 +9,13 @@
       - pkg-config
     state: present
 
+- name: Debian - Install remote packages
+  apt:
+    deb: "{{ item }}"
+    state: present
+  loop:
+    - https://github.com/wagoodman/dive/releases/download/v{{ dive_version }}/dive_{{ dive_version }}_linux_amd64.deb
+
 ### --- Distro specific ---
 
 - name: Ubuntu Packages
