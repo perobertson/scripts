@@ -36,6 +36,7 @@
     name:
       - bat
       - pulseaudio-module-bluetooth-freeworld
+      - texlive-montserrat
     state: present
   when: ansible_distribution_major_version|int >= 29
 
