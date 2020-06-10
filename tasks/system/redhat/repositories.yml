@@ -73,6 +73,7 @@
     enabled: yes
     gpgcheck: yes
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+    repo_gpgcheck: yes
 
 ### --- Distro specific ---
 
