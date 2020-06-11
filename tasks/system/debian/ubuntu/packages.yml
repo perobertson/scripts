@@ -9,6 +9,6 @@
 - name: Ubuntu >=20 - Install packages
   apt:
     pkg:
-      - python-cairo
+      - python3-cairo
     state: present
   when: ansible_distribution_major_version|int >= 20
