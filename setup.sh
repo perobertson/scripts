@@ -54,10 +54,10 @@ if [[ ! -d "$HOME/.ssh" ]]; then
 fi
 touch "$HOME/.ssh/known_hosts"
 if [[ "$(grep ^gitlab.com "$HOME/.ssh/known_hosts")" = '' ]]; then
-    ssh-keyscan 'gitlab.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
+    ssh-keyscan -v 'gitlab.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
 fi
 if [[ "$(grep ^github.com "$HOME/.ssh/known_hosts")" = '' ]]; then
-    ssh-keyscan 'github.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
+    ssh-keyscan -v 'github.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
 fi
 
 # Fetch the scripts
