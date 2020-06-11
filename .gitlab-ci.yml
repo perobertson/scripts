@@ -23,6 +23,18 @@
     - cat /etc/passwd
     - cat /etc/group
 
+.manjaro_setup:
+  before_script:
+    - whoami
+    - echo "$HOME"
+    - pwd
+    - ls -laH
+    - pacman -Sy --noconfirm sudo
+    - "echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
+    - useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
+    - cat /etc/passwd
+    - cat /etc/group
+
 .build:
   stage: build
   tags:
@@ -33,65 +45,72 @@
     - su public --command='cd "$HOME/Applications/dotfiles" && git status --short && test "$(git status --short)" = ""'
   interruptible: true
 
-lint:
-  stage: build
-  image: koalaman/shellcheck-alpine
-  tags:
-    - docker
-  script:
-    - shellcheck --external-sources setup.sh $(find . -name '*.sh' -path '**/latest/**')
+# lint:
+#   stage: build
+#   image: koalaman/shellcheck-alpine
+#   tags:
+#     - docker
+#   script:
+#     - shellcheck --external-sources setup.sh $(find . -name '*.sh' -path '**/latest/**')
 
-fedora_28:
+# fedora_28:
+#   extends:
+#     - .build
+#     - .fedora_setup
+#   image: fedora:28
+
+# fedora_29:
+#   extends:
+#     - .build
+#     - .fedora_setup
+#   image: fedora:29
+
+# fedora_30:
+#   extends:
+#     - .build
+#     - .fedora_setup
+#   image: fedora:30
+
+# fedora_31:
+#   extends:
+#     - .build
+#     - .fedora_setup
+#   image: fedora:31
+
+# fedora_32:
+#   extends:
+#     - .build
+#     - .fedora_setup
+#   image: fedora:32
+#   allow_failure: true
+
+# fedora_rawhide:
+#   extends:
+#     - .build
+#     - .fedora_setup
+#   image: fedora:rawhide
+#   allow_failure: true
+
+manjaro:
   extends:
     - .build
-    - .fedora_setup
-  image: fedora:28
-
-fedora_29:
-  extends:
-    - .build
-    - .fedora_setup
-  image: fedora:29
-
-fedora_30:
-  extends:
-    - .build
-    - .fedora_setup
-  image: fedora:30
-
-fedora_31:
-  extends:
-    - .build
-    - .fedora_setup
-  image: fedora:31
-
-fedora_32:
-  extends:
-    - .build
-    - .fedora_setup
-  image: fedora:32
+    - .manjaro_setup
+  image: manjarolinux/base:latest
   allow_failure: true
 
-fedora_rawhide:
-  extends:
-    - .build
-    - .fedora_setup
-  image: fedora:rawhide
-  allow_failure: true
+# ubuntu_18_04:
+#   # EOL: 2023-04
+#   extends:
+#     - .build
+#     - .ubuntu_setup
+#   image: ubuntu:18.04
 
-ubuntu_18_04:
-  # EOL: 2023-04
-  extends:
-    - .build
-    - .ubuntu_setup
-  image: ubuntu:18.04
-
-ubuntu_20_04:
-  # EOL: 2025-04
-  extends:
-    - .build
-    - .ubuntu_setup
-  image: ubuntu:20.04
+# ubuntu_20_04:
+#   # EOL: 2025-04
+#   extends:
+#     - .build
+#     - .ubuntu_setup
+#   image: ubuntu:20.04
 
 deploy_github:
   stage: deploy
