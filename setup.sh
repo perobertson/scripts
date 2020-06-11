@@ -35,10 +35,14 @@ mkdir -pv "$HOME/Applications" "$HOME/Downloads" "$HOME/bin" "$HOME/workspace"
 if [[ ! -x "$(command -v git)" ]]; then
     if [[ -x "$(command -v dnf)" ]]; then
         sudo dnf install -y git
-    else
+    elif [[ -x "$(command -v apt-get)" ]]; then
         sudo apt-get update
         sudo apt-get install -y apt-transport-https
         sudo apt-get install -y git
+    elif [[ -x "$(command -v pacman)" ]]; then
+        sudo pacman -Sy --noconfirm git
+    else
+        echo "WARN: could not locate git"
     fi
 fi
 
