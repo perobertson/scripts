@@ -62,15 +62,6 @@
       stderr: "{{ pip_out.stderr_lines }}"
   when: pip_out.changed
 
-- name: Debian - Install pycairo
-  tags: [ user, pip ]
-  pip:
-    extra_args: --user
-    name:
-      - pycairo
-    state: latest
-  when: ansible_os_family == 'Debian'
-
 - name: All - pip check
   tags: [ user, pip ]
   command: pip check
