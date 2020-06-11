@@ -47,6 +47,21 @@ if [[ ! -x "$(command -v git)" ]]; then
     fi
 fi
 
+# Check if ssh-keyscan needs installed
+if [[ ! -x "$(command -v ssh-keyscan)" ]]; then
+    if [[ -x "$(command -v dnf)" ]]; then
+        sudo dnf install -y openssh-clients
+    elif [[ -x "$(command -v apt-get)" ]]; then
+        sudo apt-get update
+        sudo apt-get install -y apt-transport-https
+        sudo apt-get install -y openssh-client
+    elif [[ -x "$(command -v pacman)" ]]; then
+        sudo pacman -Sy --noconfirm openssh
+    else
+        echo "WARN: could not locate ssh-keyscan"
+    fi
+fi
+
 # Setup ssh
 if [[ ! -d "$HOME/.ssh" ]]; then
     mkdir "$HOME/.ssh"
