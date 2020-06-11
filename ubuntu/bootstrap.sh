@@ -16,7 +16,3 @@ hash -r
 pip3 install --user --upgrade ansible
 # make sure all dependencies are satisfied
 pip3 check
-
-## DEBUGGING
-pip3 --version
-pip3 list
