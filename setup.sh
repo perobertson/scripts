@@ -51,6 +51,7 @@ if [[ ! -d "$HOME/.ssh" ]]; then
     mkdir "$HOME/.ssh"
     chmod 700 "$HOME/.ssh"
 fi
+touch "$HOME/.ssh/known_hosts"
 if [[ "$(grep ^gitlab.com "$HOME/.ssh/known_hosts")" = '' ]]; then
     ssh-keyscan 'gitlab.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
 fi
