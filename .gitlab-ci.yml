@@ -23,7 +23,7 @@
     - cat /etc/passwd
     - cat /etc/group
 
-.manjaro_setup:
+.archlinux_setup:
   before_script:
     - whoami
     - echo "$HOME"
@@ -52,6 +52,12 @@
 #     - docker
 #   script:
 #     - shellcheck --external-sources setup.sh $(find . -name '*.sh' -path '**/latest/**')
+
+archlinux:
+  extends:
+    - .build
+    - .archlinux_setup
+  image: archlinux/base:latest
 
 # fedora_28:
 #   extends:
@@ -94,7 +100,7 @@
 manjaro:
   extends:
     - .build
-    - .manjaro_setup
+    - .archlinux_setup
   image: manjarolinux/base:latest
 
 # ubuntu_18_04:

@@ -89,6 +89,7 @@ fi
 # Run the setup
 os="$(. /etc/os-release && echo "$ID")"
 case "${os}" in
+    arch)    . "bootstrap/arch.sh"    ;;
     fedora)  . "bootstrap/fedora.sh"  ;;
     manjaro) . "bootstrap/manjaro.sh" ;;
     ubuntu)  . "bootstrap/ubuntu.sh"  ;;
