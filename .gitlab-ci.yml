@@ -1,4 +1,38 @@
-.ubuntu_setup:
+.build:
+  interruptible: true
+  stage: build
+  tags:
+    - docker
+  script:
+    - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash'
+    - su public --command='git status --short && test "$(git status --short)" = ""'
+    - su public --command='cd "$HOME/Applications/dotfiles" && git status --short && test "$(git status --short)" = ""'
+
+.setup_archlinux:
+  before_script:
+    - whoami
+    - echo "$HOME"
+    - pwd
+    - ls -laH
+    - pacman -Sy --noconfirm sudo
+    - "echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
+    - useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
+    - cat /etc/passwd
+    - cat /etc/group
+
+.setup_fedora:
+  before_script:
+    - whoami
+    - echo "$HOME"
+    - pwd
+    - ls -laH
+    - dnf install -y sudo
+    - "echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
+    - useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
+    - cat /etc/passwd
+    - cat /etc/group
+
+.setup_ubuntu:
   before_script:
     - whoami
     - echo "$HOME"
@@ -11,111 +45,162 @@
     - cat /etc/passwd
     - cat /etc/group
 
-.fedora_setup:
-  before_script:
-    - whoami
-    - echo "$HOME"
-    - pwd
-    - ls -laH
-    - dnf install -y sudo
-    - "echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
-    - useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
-    - cat /etc/passwd
-    - cat /etc/group
+# Someday sequences will be mergable
+# https://github.com/yaml/yaml/issues/48
+.rules_archlinux:
+  rules:
+    ### All
+    - if: $CI_COMMIT_BRANCH == 'master'
+      when: always
+    - if: $CI_MERGE_REQUEST_ID
+      when: always
+    - changes:
+        - .gitlab-ci.yml
+        - "*.sh"
+        - setup.yml
+        - ansible.cfg
+        - bin/*
+        - files/**/*
+        - tasks/system/*.yml
+        - tasks/user/*.yml
+      when: always
+    ### specific
+    - changes:
+      - bootstrap/(arch|manjaro).sh
+      - tasks/system/archlinux/**/*
+      - tasks/user/archlinux/**/*
+      when: always
 
-.archlinux_setup:
-  before_script:
-    - whoami
-    - echo "$HOME"
-    - pwd
-    - ls -laH
-    - pacman -Sy --noconfirm sudo
-    - "echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
-    - useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
-    - cat /etc/passwd
-    - cat /etc/group
+.rules_debian: &rules_debian
+  rules:
+    ### All
+    - if: $CI_COMMIT_BRANCH == 'master'
+      when: always
+    - if: $CI_MERGE_REQUEST_ID
+      when: always
+    - changes:
+        - .gitlab-ci.yml
+        - "*.sh"
+        - setup.yml
+        - ansible.cfg
+        - bin/*
+        - files/**/*
+        - tasks/system/*.yml
+        - tasks/user/*.yml
+      when: always
+    ### specific
+    - changes:
+      - bootstrap/(ubuntu).sh
+      - tasks/system/debian/**/*
+      - tasks/user/debian/**/*
+      when: always
 
-.build:
+.rules_redhat: &rules_redhat
+  rules:
+    ### All
+    - if: $CI_COMMIT_BRANCH == 'master'
+      when: always
+    - if: $CI_MERGE_REQUEST_ID
+      when: always
+    - changes:
+        - .gitlab-ci.yml
+        - "*.sh"
+        - setup.yml
+        - ansible.cfg
+        - bin/*
+        - files/**/*
+        - tasks/system/*.yml
+        - tasks/user/*.yml
+      when: always
+    ### specific
+    - changes:
+      - bootstrap/(fedora).sh
+      - tasks/system/redhat/**/*
+      - tasks/user/redhat/**/*
+      when: always
+
+lint:
+  interruptible: true
   stage: build
+  image: koalaman/shellcheck-alpine
   tags:
     - docker
   script:
-    - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash'
-    - su public --command='git status --short && test "$(git status --short)" = ""'
-    - su public --command='cd "$HOME/Applications/dotfiles" && git status --short && test "$(git status --short)" = ""'
-  interruptible: true
-
-# lint:
-#   stage: build
-#   image: koalaman/shellcheck-alpine
-#   tags:
-#     - docker
-#   script:
-#     - shellcheck --external-sources setup.sh $(find . -name '*.sh' -path '**/latest/**')
+    - shellcheck --external-sources setup.sh $(find . -name '*.sh' -path '**/latest/**')
 
 archlinux:
   extends:
     - .build
-    - .archlinux_setup
+    - .setup_archlinux
+    - .rules_archlinux
   image: archlinux/base:latest
 
-# fedora_28:
-#   extends:
-#     - .build
-#     - .fedora_setup
-#   image: fedora:28
+fedora_28:
+  extends:
+    - .build
+    - .setup_fedora
+    - .rules_redhat
+  image: fedora:28
 
-# fedora_29:
-#   extends:
-#     - .build
-#     - .fedora_setup
-#   image: fedora:29
+fedora_29:
+  extends:
+    - .build
+    - .setup_fedora
+    - .rules_redhat
+  image: fedora:29
 
-# fedora_30:
-#   extends:
-#     - .build
-#     - .fedora_setup
-#   image: fedora:30
+fedora_30:
+  extends:
+    - .build
+    - .setup_fedora
+    - .rules_redhat
+  image: fedora:30
 
-# fedora_31:
-#   extends:
-#     - .build
-#     - .fedora_setup
-#   image: fedora:31
+fedora_31:
+  extends:
+    - .build
+    - .setup_fedora
+    - .rules_redhat
+  image: fedora:31
 
-# fedora_32:
-#   extends:
-#     - .build
-#     - .fedora_setup
-#   image: fedora:32
-#   allow_failure: true
+fedora_32:
+  extends:
+    - .build
+    - .setup_fedora
+    - .rules_redhat
+  image: fedora:32
+  allow_failure: true
 
-# fedora_rawhide:
-#   extends:
-#     - .build
-#     - .fedora_setup
-#   image: fedora:rawhide
-#   allow_failure: true
+fedora_rawhide:
+  extends:
+    - .build
+    - .setup_fedora
+    - .rules_redhat
+  image: fedora:rawhide
+  allow_failure: true
 
 manjaro:
   extends:
     - .build
-    - .archlinux_setup
+    - .setup_archlinux
+    - .rules_archlinux
   image: manjarolinux/base:latest
 
-# ubuntu_18_04:
-#   # EOL: 2023-04
-#   extends:
-#     - .build
-#     - .ubuntu_setup
-#   image: ubuntu:18.04
+ubuntu_18_04:
+  # EOL: 2023-04
+  extends:
+    - .build
+    - .setup_ubuntu
+    - .rules_debian
+  image: ubuntu:18.04
 
-# ubuntu_20_04:
-#   # EOL: 2025-04
-#   extends:
-#     - .build
-#     - .ubuntu_setup
-#   image: ubuntu:20.04
+ubuntu_20_04:
+  # EOL: 2025-04
+  extends:
+    - .build
+    - .setup_ubuntu
+    - .rules_debian
+  image: ubuntu:20.04
 
 deploy_github:
   stage: deploy
@@ -132,6 +217,7 @@ deploy_github:
     - git push --set-upstream github ${CI_COMMIT_REF_SLUG}
   environment:
     name: github
-  only:
-    refs:
-      - master
+  resource_group: github
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'master'
+      when: always
