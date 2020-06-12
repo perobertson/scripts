@@ -24,6 +24,9 @@
   when: ansible_os_family == 'RedHat'
 
 ### --- Family Specific Packages
+- name: Archlinux Packages
+  import_tasks: archlinux/packages.yml
+  when: ansible_os_family == 'Archlinux'
 
 - name: Debian Packages
   import_tasks: debian/packages.yml

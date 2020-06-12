@@ -1,0 +1,6 @@
+---
+  - name: Archlinux - Install packages
+    pacman:
+      name:
+        - docker
+      state: present
