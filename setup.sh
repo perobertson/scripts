@@ -89,8 +89,9 @@ fi
 # Run the setup
 os="$(. /etc/os-release && echo "$ID")"
 case "${os}" in
-    fedora) . "fedora/bootstrap.sh" ;;
-    ubuntu) . "ubuntu/bootstrap.sh" ;;
+    fedora)  . "bootstrap/fedora.sh"  ;;
+    manjaro) . "bootstrap/manjaro.sh" ;;
+    ubuntu)  . "bootstrap/ubuntu.sh"  ;;
     *)
         echo "WARN: ${os} is not supported"
         echo "Please submit an issue at https://gitlab.com/perobertson/scripts/issues"

@@ -96,7 +96,6 @@ manjaro:
     - .build
     - .manjaro_setup
   image: manjarolinux/base:latest
-  allow_failure: true
 
 # ubuntu_18_04:
 #   # EOL: 2023-04
