@@ -51,9 +51,7 @@
   rules:
     ### All
     - if: $CI_COMMIT_BRANCH == 'master'
-      when: always
     - if: $CI_MERGE_REQUEST_ID
-      when: always
     - changes:
         - .gitlab-ci.yml
         - "*.sh"
@@ -63,21 +61,17 @@
         - files/**/*
         - tasks/system/*.yml
         - tasks/user/*.yml
-      when: always
     ### specific
     - changes:
       - bootstrap/(arch|manjaro).sh
       - tasks/system/archlinux/**/*
       - tasks/user/archlinux/**/*
-      when: always
 
 .rules_debian: &rules_debian
   rules:
     ### All
     - if: $CI_COMMIT_BRANCH == 'master'
-      when: always
     - if: $CI_MERGE_REQUEST_ID
-      when: always
     - changes:
         - .gitlab-ci.yml
         - "*.sh"
@@ -87,21 +81,17 @@
         - files/**/*
         - tasks/system/*.yml
         - tasks/user/*.yml
-      when: always
     ### specific
     - changes:
       - bootstrap/(ubuntu).sh
       - tasks/system/debian/**/*
       - tasks/user/debian/**/*
-      when: always
 
 .rules_redhat: &rules_redhat
   rules:
     ### All
     - if: $CI_COMMIT_BRANCH == 'master'
-      when: always
     - if: $CI_MERGE_REQUEST_ID
-      when: always
     - changes:
         - .gitlab-ci.yml
         - "*.sh"
@@ -111,13 +101,11 @@
         - files/**/*
         - tasks/system/*.yml
         - tasks/user/*.yml
-      when: always
     ### specific
     - changes:
       - bootstrap/(fedora).sh
       - tasks/system/redhat/**/*
       - tasks/user/redhat/**/*
-      when: always
 
 lint:
   interruptible: true
@@ -220,4 +208,3 @@ deploy_github:
   resource_group: github
   rules:
     - if: $CI_COMMIT_BRANCH == 'master'
-      when: always
