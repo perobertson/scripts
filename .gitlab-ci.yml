@@ -41,18 +41,6 @@ lint:
   script:
     - shellcheck --external-sources setup.sh $(find . -name '*.sh' -path '**/latest/**')
 
-fedora_26:
-  extends:
-    - .build
-    - .fedora_setup
-  image: fedora:26
-
-fedora_27:
-  extends:
-    - .build
-    - .fedora_setup
-  image: fedora:27
-
 fedora_28:
   extends:
     - .build
