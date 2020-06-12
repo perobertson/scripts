@@ -3,6 +3,7 @@
     pacman:
       name:
         - docker
+        - flatpak
         - gcc
         - make
       state: present
