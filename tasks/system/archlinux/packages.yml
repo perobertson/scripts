@@ -3,4 +3,5 @@
     pacman:
       name:
         - docker
+        - gcc
       state: present
