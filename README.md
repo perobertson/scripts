@@ -9,13 +9,10 @@ This repo is a collection of scripts that are handy for setting up a new pc.
 Python is a main component of the tools that are installed and used.
 Because of this, the scripts are designed to work with systems that have a python3 install that is still supported.
 
-- Fedora 28 (EOL)
-- Fedora 29 (EOL)
-- Fedora 30 (EOL)
-- Fedora 31
-- Fedora 32
-- Ubuntu 18.04
-- Ubuntu 20.04
+- Archlinux
+- Fedora: 28(EOL), 29 (EOL), 30 (EOL), 31, 32
+- Manjaro
+- Ubuntu: 18.04, 20.04
 
 Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches) for `master` to see the complete list of supported operating systems.
 

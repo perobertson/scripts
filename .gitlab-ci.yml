@@ -7,6 +7,37 @@
     - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash'
     - su public --command='git status --short && test "$(git status --short)" = ""'
     - su public --command='cd "$HOME/Applications/dotfiles" && git status --short && test "$(git status --short)" = ""'
+  after_script:
+    - ansible --version
+    - bash --version
+    - code --version
+    - curl --version
+    - docker --version
+    - docker-compose --version
+    - dstat --version
+    - flameshot --version
+    - flatpak --version
+    - gcc --version
+    - git --version
+    - gitk --version
+    - gzip --version
+    - htop --version
+    - iostat --version
+    - jq --version
+    - keybase --version
+    - make --version
+    - nodejs --version
+    - npm --version
+    - pip --version
+    - python --version
+    - python3 --version
+    - seahorse --version
+    - shellcheck --version
+    - ssh --version
+    - tree --version
+    - wget --version
+    - xz --version
+    - zsh --version
 
 .setup_archlinux:
   before_script:
