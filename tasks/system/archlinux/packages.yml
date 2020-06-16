@@ -13,6 +13,7 @@
         - make
         - nodejs
         - npm
+        - shellcheck
         - tk # windowing toolkit needed for gitk
       state: present
       update_cache: yes
