@@ -10,6 +10,7 @@
         - jq
         - keybase
         - keybase-gui
+        - libnghttp2 # node dependency
         - make
         - nodejs
         - npm
