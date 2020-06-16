@@ -11,5 +11,7 @@
         - keybase
         - keybase-gui
         - make
+        - nodejs
+        - npm
         - tk # windowing toolkit needed for gitk
       state: present
