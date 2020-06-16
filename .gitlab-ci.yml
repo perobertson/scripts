@@ -82,7 +82,7 @@
     - if: $CI_MERGE_REQUEST_ID
     - changes:
         - .gitlab-ci.yml
-        - "*.sh"
+        - "**/*.sh"
         - setup.yml
         - ansible.cfg
         - bin/*
@@ -102,7 +102,7 @@
     - if: $CI_MERGE_REQUEST_ID
     - changes:
         - .gitlab-ci.yml
-        - "*.sh"
+        - "**/*.sh"
         - setup.yml
         - ansible.cfg
         - bin/*
@@ -122,7 +122,7 @@
     - if: $CI_MERGE_REQUEST_ID
     - changes:
         - .gitlab-ci.yml
-        - "*.sh"
+        - "**/*.sh"
         - setup.yml
         - ansible.cfg
         - bin/*
