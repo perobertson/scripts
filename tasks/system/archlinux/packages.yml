@@ -4,6 +4,7 @@
       name:
         - code
         - docker
+        - flameshot
         - flatpak
         - gcc
         - make
