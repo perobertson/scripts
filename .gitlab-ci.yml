@@ -22,7 +22,7 @@
     - jq --version
     - keybase --version
     - make --version
-    - nodejs --version
+    - node --version
     - npm --version
     - pip --version
     - python --version
