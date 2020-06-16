@@ -10,9 +10,10 @@
         - jq
         - keybase
         - keybase-gui
-        - libnghttp2 # node dependency
         - make
         - nodejs
         - npm
         - tk # windowing toolkit needed for gitk
       state: present
+      update_cache: yes
+      upgrade: yes

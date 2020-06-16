@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-sudo pacman -Sy --noconfirm \
+sudo pacman -Syu --noconfirm \
     ansible \
     python \
     python-pip \
