@@ -18,7 +18,6 @@
     - flatpak --version
     - gcc --version
     - git --version
-    - gitk --version
     - gzip --version
     - jq --version
     - keybase --version
@@ -35,6 +34,8 @@
     - wget --version
     - xz --version
     - zsh --version
+    # These commands do not have a version option
+    - command -v gitk
 
 .setup_archlinux:
   before_script:
