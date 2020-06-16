@@ -2,6 +2,7 @@
   - name: Archlinux - Install packages
     pacman:
       name:
+        - code
         - docker
         - flatpak
         - gcc
