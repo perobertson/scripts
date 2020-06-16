@@ -8,4 +8,5 @@
         - flatpak
         - gcc
         - make
+        - tk # windowing toolkit needed for gitk
       state: present
