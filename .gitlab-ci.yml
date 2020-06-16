@@ -27,7 +27,6 @@
     - pip --version
     - python --version
     - python3 --version
-    - seahorse --version
     - shellcheck --version
     - ssh --version
     - tree --version
