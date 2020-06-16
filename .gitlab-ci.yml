@@ -28,7 +28,7 @@
     - python --version
     - python3 --version
     - shellcheck --version
-    - ssh --version
+    - ssh -V
     - tree --version
     - wget --version
     - xz --version
