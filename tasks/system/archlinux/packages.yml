@@ -2,11 +2,14 @@
   - name: Archlinux - Install packages
     pacman:
       name:
+        - bash
         - code
+        - curl
         - docker
         - flameshot
         - flatpak
         - gcc
+        - gzip
         - jq
         - keybase
         - keybase-gui
@@ -15,5 +18,9 @@
         - npm
         - shellcheck
         - tk # windowing toolkit needed for gitk
+        - tree
+        - wget
+        - xz
+        - zsh
       state: present
       update_cache: yes
