@@ -8,6 +8,8 @@
         - flatpak
         - gcc
         - jq
+        - keybase
+        - keybase-gui
         - make
         - tk # windowing toolkit needed for gitk
       state: present
