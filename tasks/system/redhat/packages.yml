@@ -49,16 +49,16 @@
     - julia
     - keybase
     - kubectl
+    - levien-inconsolata-fonts
     - libcurl-devel
     - libffi-devel
     - libnotify
     - libtool
     - libyaml-devel
-    - levien-inconsolata-fonts
     - make
+    - mozilla-fira-fonts-common
     - mozilla-fira-mono-fonts
     - mozilla-fira-sans-fonts
-    - mozilla-fira-fonts-common
     - ncdu
     - nodejs
     - npm

@@ -35,6 +35,7 @@
   dnf:
     name:
       - bat
+      - intel-media-driver
       - pulseaudio-module-bluetooth-freeworld
       - texlive-montserrat
     state: present
