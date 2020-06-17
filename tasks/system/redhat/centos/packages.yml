@@ -1,0 +1,9 @@
+---
+- name: CentOS - Install packages
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - containerd.io
+    - docker-ce
+    - docker-ce-cli

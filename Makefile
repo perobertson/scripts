@@ -12,7 +12,7 @@ arch:
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-arch \
-		archlinux/base:latest bash
+		archlinux/base:latest bash || true
 	docker exec scripts-arch ./.gitlab/setup_archlinux.sh
 	docker exec scripts-arch ./.gitlab/build.sh
 	$(MAKE) stop-arch
@@ -20,6 +20,23 @@ arch:
 .PHONY: stop-arch
 stop-arch:
 	docker stop scripts-arch
+
+.PHONY: centos
+centos:
+	docker run \
+		-ditv $(shell pwd):/scripts \
+		-w /scripts \
+		-e ANSIBLE_FORCE_COLOR=1 \
+		--rm \
+		--name scripts-centos \
+		centos:8 bash || true
+	docker exec scripts-centos ./.gitlab/setup_fedora.sh
+	docker exec scripts-centos ./.gitlab/build.sh
+	$(MAKE) stop-centos
+
+.PHONY: stop-centos
+stop-centos:
+	docker stop scripts-centos
 
 .PHONY: fedora
 fedora:

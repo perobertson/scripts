@@ -1,0 +1,68 @@
+---
+- name: CentOS - Add Docker repository
+  tags: [ docker ]
+  yum_repository:
+    file: docker-ce
+    name: docker-ce-stable
+    description: "Docker CE Stable - $basearch"
+    # Hardcoded to 7 until they decide to support the new release
+    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/7/$basearch/stable"
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+    repo_gpgcheck: yes
+
+- name: CentOS - Add epel repository
+  yum_repository:
+    file: epel
+    name: epel
+    description: Extra Packages for Enterprise Linux $releasever - $basearch
+    # baseurl=https://download.fedoraproject.org/pub/epel/$releasever/Everything/$basearch
+    metalink: https://mirrors.fedoraproject.org/metalink?repo=epel-$releasever&arch=$basearch&infra=$infra&content=$contentdir
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-$releasever
+
+- name: CentOS - Add epel-modular repository
+  yum_repository:
+    file: epel-modular
+    name: epel-modular
+    description: Extra Packages for Enterprise Linux Modular $releasever - $basearch
+    # baseurl: https://download.fedoraproject.org/pub/epel/$releasever/Modular/$basearch
+    metalink: https://mirrors.fedoraproject.org/metalink?repo=epel-modular-$releasever&arch=$basearch&infra=$infra&content=$contentdir
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-$releasever
+
+- name: CentOS - Add rpmfusion-free-updates repository
+  yum_repository:
+    file: rpmfusion-free-updates
+    name: rpmfusion-free-updates
+    description: RPM Fusion for EL $releasever - Free - Updates
+    # baseurl: http://download1.rpmfusion.org/free/el/updates/$releasever/$basearch/
+    mirrorlist: http://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-$releasever&arch=$basearch
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-$releasever
+
+- name: CentOS - Add rpmfusion-nonfree-updates
+  yum_repository:
+    file: rpmfusion-nonfree-updates
+    name: rpmfusion-nonfree-updates
+    description: RPM Fusion for EL $releasever - Nonfree - Updates
+    # baseurl: http://download1.rpmfusion.org/nonfree/el/updates/$releasever/$basearch/
+    mirrorlist: http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-el-updates-released-$releasever&arch=$basearch
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-el-$releasever
+
+- name: CentOS - Add PowerTools repository
+  yum_repository:
+    file: CentOS-PowerTools
+    name: PowerTools
+    description: CentOS-$releasever - PowerTools
+    mirrorlist: http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=PowerTools&infra=$infra
+    # baseurl: http://mirror.centos.org/$contentdir/$releasever/PowerTools/$basearch/os/
+    gpgcheck: yes
+    enabled: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial

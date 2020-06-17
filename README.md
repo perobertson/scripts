@@ -10,6 +10,7 @@ Python is a main component of the tools that are installed and used.
 Because of this, the scripts are designed to work with systems that have a python3 install that is still supported.
 
 - Archlinux
+- CentOS: 8
 - Fedora: 28(EOL), 29 (EOL), 30 (EOL), 31, 32
 - Manjaro
 - Ubuntu: 18.04, 20.04

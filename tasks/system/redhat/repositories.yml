@@ -32,6 +32,7 @@
     gpgcheck: yes
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     repo_gpgcheck: yes
+  when: ansible_distribution != 'CentOS'
 
 - name: RedHat - Add Google Cloud SDK repository
   yum_repository:
@@ -93,6 +94,10 @@
     repo_gpgcheck: yes
 
 ### --- Distro specific ---
+
+- name: CentOS Repositories
+  import_tasks: centos/repositories.yml
+  when: ansible_distribution == 'CentOS'
 
 - name: Fedora Repositories
   import_tasks: fedora/repositories.yml
