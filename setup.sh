@@ -41,7 +41,8 @@ if [[ ! -x "$(command -v git)" ]]; then
         sudo apt-get install -y apt-transport-https
         sudo apt-get install -y git
     elif [[ -x "$(command -v pacman)" ]]; then
-        sudo pacman -Sy --noconfirm git
+        sudo pacman -Syu --noconfirm
+        sudo pacman -S --noconfirm git
     else
         echo "WARN: could not locate git"
     fi
@@ -56,7 +57,8 @@ if [[ ! -x "$(command -v ssh-keyscan)" ]]; then
         sudo apt-get install -y apt-transport-https
         sudo apt-get install -y openssh-client
     elif [[ -x "$(command -v pacman)" ]]; then
-        sudo pacman -Sy --noconfirm openssh
+        sudo pacman -Syu --noconfirm
+        sudo pacman -S --noconfirm openssh
     else
         echo "WARN: could not locate ssh-keyscan"
     fi

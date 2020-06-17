@@ -23,4 +23,3 @@
         - xz
         - zsh
       state: present
-      update_cache: yes
