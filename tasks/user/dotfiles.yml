@@ -18,7 +18,7 @@
   git:
     repo: https://gitlab.com/perobertson/dotfiles.git
     dest: ~/Applications/dotfiles
-    version: master
+    version: main
 
 - name: All - UnStash dotfile changes
   tags: [ user, dotfiles ]

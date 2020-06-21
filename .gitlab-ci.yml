@@ -79,7 +79,7 @@
 .rules_archlinux:
   rules:
     ### All
-    - if: $CI_COMMIT_BRANCH == 'master'
+    - if: $CI_COMMIT_BRANCH == 'main'
     - if: $CI_MERGE_REQUEST_ID
     - changes:
         - .gitlab-ci.yml
@@ -99,7 +99,7 @@
 .rules_debian: &rules_debian
   rules:
     ### All
-    - if: $CI_COMMIT_BRANCH == 'master'
+    - if: $CI_COMMIT_BRANCH == 'main'
     - if: $CI_MERGE_REQUEST_ID
     - changes:
         - .gitlab-ci.yml
@@ -119,7 +119,7 @@
 .rules_redhat: &rules_redhat
   rules:
     ### All
-    - if: $CI_COMMIT_BRANCH == 'master'
+    - if: $CI_COMMIT_BRANCH == 'main'
     - if: $CI_MERGE_REQUEST_ID
     - changes:
         - .gitlab-ci.yml
@@ -228,12 +228,15 @@ deploy_github:
     - echo "${GITHUB_KEY_PUB}" > ~/.ssh/id_rsa.pub
     - chmod 700 ~/.ssh/id_rsa*
     - ssh-keyscan 'github.com' >> ~/.ssh/known_hosts
-    - git remote add github -t master git@github.com:perobertson/scripts.git
+    - git remote add github -t main git@github.com:perobertson/scripts.git
     - git fetch --all --verbose
-    - git checkout -B ${CI_COMMIT_REF_SLUG}
-    - git push --set-upstream github ${CI_COMMIT_REF_SLUG}
+    - git checkout -B "${CI_COMMIT_REF_NAME}"
+    - git push --set-upstream github "${CI_COMMIT_REF_NAME}"
+  after_script:
+    - rm ~/.ssh/id_rsa
+    - rm ~/.ssh/id_rsa.pub
   environment:
     name: github
   resource_group: github
   rules:
-    - if: $CI_COMMIT_BRANCH == 'master'
+    - if: $CI_COMMIT_BRANCH == 'main'

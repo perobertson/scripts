@@ -2,7 +2,7 @@
 
 This repo is a collection of scripts that are handy for setting up a new pc.
 
-[![pipeline status](https://gitlab.com/perobertson/scripts/badges/master/pipeline.svg)](https://gitlab.com/perobertson/scripts/commits/master)
+[![pipeline status](https://gitlab.com/perobertson/scripts/badges/main/pipeline.svg)](https://gitlab.com/perobertson/scripts/commits/main)
 
 ## Supported Operating Systems
 
@@ -14,20 +14,20 @@ Because of this, the scripts are designed to work with systems that have a pytho
 - Manjaro
 - Ubuntu: 18.04, 20.04
 
-Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches) for `master` to see the complete list of supported operating systems.
+Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches) for `main` to see the complete list of supported operating systems.
 
 ## Usage
 
 To run the script, all you need to do is run this from a console on the machine that you are setting up.
 
 ```bash
-/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/master/setup.sh | time bash
+/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/main/setup.sh | time bash
 ```
 
 For the users out there who prefer `wget`
 
 ```bash
-/usr/bin/wget -qO- https://gitlab.com/perobertson/scripts/raw/master/setup.sh | time bash
+/usr/bin/wget -qO- https://gitlab.com/perobertson/scripts/raw/main/setup.sh | time bash
 ```
 
 ## Adding new OS versions
