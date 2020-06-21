@@ -1,14 +1,30 @@
 ---
+- name: Debian - Update apt cache
+  apt:
+    update_cache: yes
+
 - name: Debian - Install packages
   apt:
-    pkg:
-      - code
-      - containerd.io
-      - docker-ce-cli
-      - libcairo2-dev
-      - libglib2.0-bin # gsettings
-      - pkg-config
+    pkg: "{{ item }}"
     state: present
+  loop:
+    - code
+    - containerd.io
+    - crudini
+    - docker-ce
+    - docker-ce-cli
+    - flatpak
+    - htop
+    - libcairo2-dev
+    - libglib2.0-bin # gsettings
+    - pkg-config
+    - python3-dbus
+    - seahorse # key management
+    - sqlitebrowser
+    - sublime-merge
+    - sublime-text
+    - sysstat # iostat
+    - zsh
 
 - name: Debian - Install remote packages
   apt:

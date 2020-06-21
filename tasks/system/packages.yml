@@ -1,28 +1,4 @@
 ---
-- name: Debian - Install common packages
-  apt:
-    name: &common_packages
-      - crudini
-      - docker-ce
-      - flatpak
-      - htop
-      - python3-dbus
-      - seahorse # key management
-      - sqlitebrowser
-      - sublime-merge
-      - sublime-text
-      - sysstat # iostat
-      - zsh
-    state: present
-    update_cache: yes
-  when: ansible_os_family == 'Debian'
-
-- name: RedHat - Install common packages
-  dnf:
-    name: *common_packages
-    state: present
-  when: ansible_os_family == 'RedHat'
-
 ### --- Family Specific Packages
 - name: Archlinux Packages
   import_tasks: archlinux/packages.yml

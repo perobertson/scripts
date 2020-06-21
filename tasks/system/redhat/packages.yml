@@ -28,14 +28,15 @@
     state: present
   loop:
     - autoconf
-    - autojump-zsh
     - automake
     - bison
     - bzip2
     - bzip2-devel
+    - crudini
     - curl
     - dkms
     - dnf-automatic
+    - flatpak
     - fuse-sshfs
     - gcc
     - gcc-c++
@@ -43,22 +44,17 @@
     - gitk
     - google-cloud-sdk
     - graphviz
-    - gtk-murrine-engine
+    - htop
     - ImageMagick
     - jq
-    - julia
     - keybase
     - kubectl
-    - levien-inconsolata-fonts
     - libcurl-devel
     - libffi-devel
     - libnotify
     - libtool
     - libyaml-devel
     - make
-    - mozilla-fira-fonts-common
-    - mozilla-fira-mono-fonts
-    - mozilla-fira-sans-fonts
     - ncdu
     - nodejs
     - npm
@@ -67,14 +63,17 @@
     - patch
     - pcp-system-tools # dstat
     - perl
-    - pssh
     - pv
+    - python3-dbus
     - readline-devel
     - redhat-lsb
     - redhat-rpm-config
     - samba-client
-    - ShellCheck
+    - seahorse # key management
     - sqlite-devel
+    - sublime-merge
+    - sublime-text
+    - sysstat # iostat
     - tree
     - virt-what
     - vlc
@@ -82,6 +81,7 @@
     - xz
     - xz-devel
     - zlib-devel
+    - zsh
 
 - name: RedHat - Install remote packages
   dnf:
