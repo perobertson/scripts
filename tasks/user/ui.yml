@@ -32,3 +32,88 @@
   copy:
     src: files/home/user/.Xresources
     dest: ~/.Xresources
+
+- name: All - Set terminal settings
+  tags: [ user, ui, terminal ]
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:e7aeecbb-8907-4e08-916e-749914c7b0b7/{{ item.key }}"
+    value: "{{ item.value | string }}"
+    state: present
+  loop:
+    - key: audible-bell
+      value: "false"
+    - key: background-color
+      value: "'rgb(46,52,54)'"
+    - key: background-transparency-percent
+      value: 7
+    - key: bold-is-bright
+      value: "false"
+    - key: font
+      value: "'Fira Mono 14'"
+    - key: foreground-color
+      value: "'rgb(211,215,207)'"
+    - key: palette
+      value:
+        - 'rgb(7,54,66)'
+        - 'rgb(220,50,47)'
+        - 'rgb(133,153,0)'
+        - 'rgb(181,137,0)'
+        - 'rgb(38,139,210)'
+        - 'rgb(211,54,130)'
+        - 'rgb(42,161,152)'
+        - 'rgb(238,232,213)'
+        - 'rgb(0,43,54)'
+        - 'rgb(203,75,22)'
+        - 'rgb(88,110,117)'
+        - 'rgb(101,123,131)'
+        - 'rgb(131,148,150)'
+        - 'rgb(108,113,196)'
+        - 'rgb(147,161,161)'
+        - 'rgb(253,246,227)'
+    - key: text-blink-mode
+      value: "'always'"
+    - key: use-system-font
+      value: "true"
+    - key: use-theme-colors
+      value: "true"
+    - key: use-transparent-background
+      value: "true"
+    - key: visible-name
+      value: "'Managed by Ansible'"
+
+- name: All - Discover gnome terminal profiles
+  tags: [ user, ui, terminal ]
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/list"
+    state: read
+  register: gnome_terminal_profiles
+
+- name: All - Parse gnome terminal profiles
+  tags: [ user, ui, terminal ]
+  set_fact:
+    gnome_terminal_profiles_list: "{{ gnome_terminal_profiles.value or '[]' | replace(\"'\", '\"') | from_json }}"
+
+- name: All - Append new profile id to list
+  tags: [ user, ui, terminal ]
+  set_fact:
+    # list.append returns None which is falsey so use or to print out the updated value
+    updated_gnome_terminal_profiles_list: "{{ gnome_terminal_profiles_list.append('e7aeecbb-8907-4e08-916e-749914c7b0b7') or gnome_terminal_profiles_list | unique | sort }}"
+
+- name: All - Format gnome terminal list to dconf format
+  tags: [ user, ui, terminal ]
+  set_fact:
+    updated_gnome_terminal_profiles_str: "{{ updated_gnome_terminal_profiles_list | string | regex_replace('\"', \"'\") }}"
+
+- name: All - Add profile to terminal list
+  tags: [ user, ui, terminal ]
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/list"
+    value: "{{ updated_gnome_terminal_profiles_str | string }}"
+    state: present
+
+- name: All - Set default gnome terminal
+  tags: [ user, ui, terminal ]
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/default"
+    value: "'e7aeecbb-8907-4e08-916e-749914c7b0b7'"
+    state: present
