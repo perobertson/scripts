@@ -34,8 +34,6 @@
     - bzip2-devel
     - crudini
     - curl
-    - dbus-daemon
-    - dbus-tools
     - dconf
     - dkms
     - dnf-automatic

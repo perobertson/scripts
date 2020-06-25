@@ -52,6 +52,8 @@
   dnf:
     name:
       - bat
+      - dbus-daemon
+      - dbus-tools
       - intel-media-driver
       - pulseaudio-module-bluetooth-freeworld
       - texlive-montserrat
