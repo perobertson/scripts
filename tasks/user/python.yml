@@ -35,7 +35,7 @@
       - pexpect<5.0.0,>=4.7.0
       - poetry<2.0.0,>=1.0.5
       - pre-commit<3.0.0,>=2.4.0
-      - psutil
+      - psutil>=4.0.0
       - six
       - termcolor<2.0.0,>=1.1.0
       - tldr
