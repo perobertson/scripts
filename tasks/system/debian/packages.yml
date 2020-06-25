@@ -11,6 +11,7 @@
     - code
     - containerd.io
     - crudini
+    - dconf-cli
     - docker-ce
     - docker-ce-cli
     - flatpak
