@@ -3,6 +3,7 @@
     pacman:
       name:
         - bash
+        - bash-completion
         - code
         - curl
         - docker
