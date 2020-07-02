@@ -29,6 +29,8 @@
   loop:
     - autoconf
     - automake
+    - bash
+    - bash-completion
     - bison
     - bzip2
     - bzip2-devel

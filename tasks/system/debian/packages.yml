@@ -8,6 +8,8 @@
     pkg: "{{ item }}"
     state: present
   loop:
+    - bash
+    - bash-completion
     - code
     - containerd.io
     - crudini
