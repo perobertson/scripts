@@ -68,17 +68,3 @@
     gpgkey: "https://download.opensuse.org/repositories/hardware:/razer/Fedora_{{ ansible_distribution_major_version|int }}/repodata/repomd.xml.key"
     repo_gpgcheck: yes
   when: ansible_distribution_major_version|int >= 30
-
-# TODO: remove this once a F32 repo is available
-- name: Fedora 32 - Add Docker repository for Fedora 31
-  tags: [ docker ]
-  yum_repository:
-    file: docker-ce
-    name: docker-ce-stable
-    description: "Docker CE Stable - {{ ansible_distribution }} - 31 - $basearch"
-    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/31/$basearch/stable"
-    enabled: yes
-    gpgcheck: yes
-    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
-    repo_gpgcheck: yes
-  when: ansible_distribution_major_version|int == 32
