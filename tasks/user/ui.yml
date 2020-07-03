@@ -117,3 +117,10 @@
     key: "/org/gnome/terminal/legacy/profiles:/default"
     value: "'e7aeecbb-8907-4e08-916e-749914c7b0b7'"
     state: present
+
+- name: All - Enable cinnamon indicators
+  tags: [ user, ui, cinnamon ]
+  dconf:
+    key: /org/cinnamon/enable-indicators
+    value: 'true'
+    state: present
