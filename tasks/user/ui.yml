@@ -113,8 +113,45 @@
     state: present
 
 - name: All - Enable cinnamon indicators
-  tags: [ user, ui, cinnamon ]
+  tags: [ cinnamon ]
   dconf:
     key: /org/cinnamon/enable-indicators
     value: 'true'
     state: present
+
+- name: All - Git update cinnamon-spices-themes
+  tags: [ cinnamon ]
+  diff: false
+  git:
+    repo: https://github.com/linuxmint/cinnamon-spices-themes.git
+    dest: ~/Applications/cinnamon-spices-themes
+    depth: 1
+
+- name: All - Create ~/.themes dir
+  tags: [ cinnamon ]
+  file:
+    path: ~/.themes
+    state: directory
+
+- name: All - Link cinnamon themes
+  tags: [ cinnamon ]
+  file:
+    src: "~/Applications/cinnamon-spices-themes/{{ item }}/files/{{ item }}"
+    dest: "~/.themes/Ansible-{{ item }}"
+    state: link
+  loop:
+    - CBlack
+
+- name: All - Set cinnamon theme
+  tags: [ cinnamon ]
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop:
+    - key: /org/cinnamon/theme/name
+      value: "'Ansible-CBlack'"
+    - key: /org/cinnamon/desktop/wm/preferences/theme
+      value: "'Ansible-CBlack'"
+    - key: /org/cinnamon/desktop/interface/gtk-theme
+      value: "'Ansible-CBlack'"
