@@ -1,26 +1,27 @@
 ---
   - name: Archlinux - Install packages
     pacman:
-      name:
-        - bash
-        - bash-completion
-        - code
-        - curl
-        - docker
-        - flameshot
-        - flatpak
-        - gcc
-        - gzip
-        - jq
-        - keybase
-        - keybase-gui
-        - make
-        - nodejs
-        - npm
-        - shellcheck
-        - tk # windowing toolkit needed for gitk
-        - tree
-        - wget
-        - xz
-        - zsh
+      name: "{{ item }}"
       state: present
+    loop:
+      - bash
+      - bash-completion
+      - code
+      - curl
+      - docker
+      - flameshot
+      - flatpak
+      - gcc
+      - gzip
+      - jq
+      - keybase
+      - keybase-gui
+      - make
+      - nodejs
+      - npm
+      - shellcheck
+      - tk # windowing toolkit needed for gitk
+      - tree
+      - wget
+      - xz
+      - zsh
