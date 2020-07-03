@@ -1,6 +1,5 @@
 ---
 - name: All - pip install wheel
-  tags: [ user, pip ]
   # Install wheel first which is needed to compile other packages
   pip:
     extra_args: --user
@@ -9,7 +8,6 @@
     state: present
 
 - name: All - pip install dev tools
-  tags: [ user, pip ]
   no_log: true
   pip:
     extra_args: --user
@@ -44,19 +42,16 @@
   ignore_errors: True
 
 - name: All - pip debug install failure
-  tags: [ user, pip ]
   command: pip --version
   when: pip_out.failed
 
 - name: All - pip show install failure
-  tags: [ user, pip ]
   debug:
     msg: "{{ pip_out.msg.split('\n') }}"
   failed_when: true
   when: pip_out.failed
 
 - name: All - pip show installed
-  tags: [ user, pip ]
   debug:
     msg:
       stdout: "{{ pip_out.stdout_lines }}"
@@ -64,6 +59,5 @@
   when: pip_out.changed
 
 - name: All - pip check
-  tags: [ user, pip ]
   command: pip check
   when: pip_out.changed

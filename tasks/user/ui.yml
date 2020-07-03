@@ -1,40 +1,34 @@
 ---
 - name: All - Fetch gsettings schemas
-  tags: [ user, ui ]
   no_log: true
   command: gsettings list-schemas
   ignore_errors: yes
   register: gsettings_schemas
 
 - name: All - Show clock seconds
-  tags: [ user, ui ]
   command: gsettings set org.cinnamon.desktop.interface clock-show-seconds true
   when: "'org.cinnamon.desktop.interface' in gsettings_schemas.stdout_lines"
 
 - name: All - Set monospace font
-  tags: [ user, ui ]
   command: gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata 16'
   when: "'org.gnome.desktop.interface' in gsettings_schemas.stdout_lines"
 
 - name: All - Files date format
-  tags: [ user, ui ]
   command: gsettings set org.nemo.preferences date-format 'iso'
   when: "'org.nemo.preferences' in gsettings_schemas.stdout_lines"
 
 - name: All - Files default folder view
-  tags: [ user, ui ]
   command: gsettings set org.nemo.preferences default-folder-viewer 'list-view'
   when: "'org.nemo.preferences' in gsettings_schemas.stdout_lines"
 
 - name: All - Configure Xresources
-  tags: [ user, ui ]
   diff: true
   copy:
     src: files/home/user/.Xresources
     dest: ~/.Xresources
 
 - name: All - Set terminal settings
-  tags: [ user, ui, terminal ]
+  tags: [ terminal ]
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/:e7aeecbb-8907-4e08-916e-749914c7b0b7/{{ item.key }}"
     value: "{{ item.value | string }}"
@@ -82,37 +76,37 @@
       value: "'Managed by Ansible'"
 
 - name: All - Discover gnome terminal profiles
-  tags: [ user, ui, terminal ]
+  tags: [ terminal ]
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/list"
     state: read
   register: gnome_terminal_profiles
 
 - name: All - Parse gnome terminal profiles
-  tags: [ user, ui, terminal ]
+  tags: [ terminal ]
   set_fact:
     gnome_terminal_profiles_list: "{{ gnome_terminal_profiles.value or '[]' | replace(\"'\", '\"') | from_json }}"
 
 - name: All - Append new profile id to list
-  tags: [ user, ui, terminal ]
+  tags: [ terminal ]
   set_fact:
     # list.append returns None which is falsey so use or to print out the updated value
     updated_gnome_terminal_profiles_list: "{{ gnome_terminal_profiles_list.append('e7aeecbb-8907-4e08-916e-749914c7b0b7') or gnome_terminal_profiles_list | unique | sort }}"
 
 - name: All - Format gnome terminal list to dconf format
-  tags: [ user, ui, terminal ]
+  tags: [ terminal ]
   set_fact:
     updated_gnome_terminal_profiles_str: "{{ updated_gnome_terminal_profiles_list | string | regex_replace('\"', \"'\") }}"
 
 - name: All - Add profile to terminal list
-  tags: [ user, ui, terminal ]
+  tags: [ terminal ]
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/list"
     value: "{{ updated_gnome_terminal_profiles_str | string }}"
     state: present
 
 - name: All - Set default gnome terminal
-  tags: [ user, ui, terminal ]
+  tags: [ terminal ]
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/default"
     value: "'e7aeecbb-8907-4e08-916e-749914c7b0b7'"

@@ -1,6 +1,5 @@
 ---
 - name: All - Add the flathub flatpak repository remote to the user installation
-  tags: [ user, flatpak ]
   flatpak_remote:
     name: flathub
     state: present
@@ -8,13 +7,11 @@
     method: user
 
 - name: All - Create user systemd config directory
-  tags: [ user, flatpak ]
   file:
     path: ~/.config/systemd/user
     state: directory
 
 - name: All - Add flatpak auto updates
-  tags: [ user, flatpak ]
   diff: true
   copy:
     src: files/home/user/.config/systemd/user/{{ item }}
@@ -24,7 +21,6 @@
     - flatpak-update.timer
 
 - name: All - Install flatpaks
-  tags: [ user, flatpak ]
   flatpak:
     name: "{{ item }}"
     state: present
