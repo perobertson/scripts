@@ -1,13 +1,11 @@
 ---
 - name: All - Git update pyenv
-  tags: [ user, git ]
   diff: false
   git:
     repo: https://github.com/pyenv/pyenv.git
     dest: ~/Applications/pyenv
 
 - name: All - Git update pyenv plugins
-  tags: [ user, git ]
   diff: false
   git:
     repo: "{{ item.repo }}"
@@ -21,33 +19,28 @@
       name: pyenv-virtualenv
 
 - name: All - Git update rbenv
-  tags: [ user, git ]
   diff: false
   git:
     repo: https://github.com/rbenv/rbenv.git
     dest: ~/Applications/rbenv
 
 - name: All - Git update rbenv - ruby build
-  tags: [ user, git ]
   diff: false
   git:
     repo: https://github.com/rbenv/ruby-build.git
     dest: ~/Applications/rbenv/plugins/ruby-build
 
 - name: All - Configure rbenv
-  tags: [ user, git ]
   command:
     chdir: ~/Applications/rbenv
     cmd: src/configure
 
 - name: All - Make rbenv
-  tags: [ user, git ]
   command:
     chdir: ~/Applications/rbenv
     cmd: make -C src
 
 - name: All - Git update tfenv
-  tags: [ user, git ]
   diff: false
   git:
     repo: https://github.com/tfutils/tfenv.git

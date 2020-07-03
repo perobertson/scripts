@@ -33,8 +33,14 @@
     ### --- Userspace ---
     # Install dotfiles first so CI can detect drift
     - import_tasks: tasks/user/dotfiles.yml
+      tags: [ user, dotfiles ]
     - import_tasks: tasks/user/applications.yml
+      tags: [ user, applications ]
     - import_tasks: tasks/user/flatpaks.yml
+      tags: [ user, flatpaks ]
     - import_tasks: tasks/user/python.yml
+      tags: [ user, python ]
     - import_tasks: tasks/user/ui.yml
+      tags: [ user, ui ]
     - import_tasks: tasks/user/ides.yml
+      tags: [ user, ides ]
