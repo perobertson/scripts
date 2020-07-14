@@ -13,10 +13,12 @@
     extra_args: --user
     name:
       - ansible-lint<5.0.0,>=4.2.0
+      - autopep8>=1.5.3
       - aws-credentials
       - awscli<2.0.0,>=1.18.21
+      - black>=19.10b0
       - boto3<2.0.0,>=1.12.21
-      - diagrams
+      - diagrams>=0.16.0
       - dlint
       - flake8-annotations
       - flake8-docstrings
@@ -28,6 +30,7 @@
       - ipython<8.0.0,>=7.0.0
       - jedi
       - keyring<21.0.0,>=20.0.1
+      - mypy>=0.782
       - pdbpp
       - pep8-naming
       - pexpect<5.0.0,>=4.7.0
