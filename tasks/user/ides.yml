@@ -37,3 +37,4 @@
     - golang.go
     - ms-azuretools.vscode-docker
     - ms-python.python
+    - ms-vscode.vscode-typescript-tslint-plugin
