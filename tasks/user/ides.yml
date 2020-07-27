@@ -29,8 +29,11 @@
   when: "item not in vscode_extensions['stdout_lines'] | map('lower')"
   loop:
     - bungcip.better-toml
+    - coolbear.systemd-unit-file
+    - davidanson.vscode-markdownlint
     - eamodio.gitlens
     - editorconfig.editorconfig
     - hashicorp.terraform
+    - golang.go
     - ms-azuretools.vscode-docker
     - ms-python.python
