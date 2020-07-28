@@ -79,7 +79,6 @@
     - sysstat # iostat
     - tree
     - virt-what
-    - vlc
     - wget
     - xz
     - xz-devel
