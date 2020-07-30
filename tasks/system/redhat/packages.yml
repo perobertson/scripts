@@ -54,6 +54,7 @@
     - kubectl
     - libcurl-devel
     - libffi-devel
+    - libheif
     - libnotify
     - libtool
     - libyaml-devel
