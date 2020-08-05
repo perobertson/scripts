@@ -10,7 +10,7 @@
   when: "'org.cinnamon.desktop.interface' in gsettings_schemas.stdout_lines"
 
 - name: All - Set monospace font
-  command: gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata 16'
+  command: gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata 14'
   when: "'org.gnome.desktop.interface' in gsettings_schemas.stdout_lines"
 
 - name: All - Files date format
