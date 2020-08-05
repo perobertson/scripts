@@ -4,6 +4,7 @@
       name: "{{ item }}"
       state: present
     loop:
+      - 1password
       - bash
       - bash-completion
       - code

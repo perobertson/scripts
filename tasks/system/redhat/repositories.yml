@@ -4,6 +4,17 @@
     name:
       - dnf-plugins-core
 
+- name: RedHat - Add 1Password repository
+  yum_repository:
+    file: 1Password
+    name: 1password
+    description: "1Password for Linux"
+    baseurl: https://onepassword.s3.amazonaws.com/linux/rpm
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://onepassword.s3.amazonaws.com/linux/keys/1password.asc
+    repo_gpgcheck: yes
+
 - name: RedHat - Add Docker repository
   tags: [ docker ]
   yum_repository:

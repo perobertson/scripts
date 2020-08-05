@@ -27,6 +27,7 @@
     name: "{{ item }}"
     state: present
   loop:
+    - 1password
     - autoconf
     - automake
     - bash
