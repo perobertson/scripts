@@ -33,8 +33,9 @@
     - davidanson.vscode-markdownlint
     - eamodio.gitlens
     - editorconfig.editorconfig
-    - hashicorp.terraform
+    - gitlab.gitlab-workflow
     - golang.go
+    - hashicorp.terraform
     - ms-azuretools.vscode-docker
     - ms-python.python
     - ms-vscode.vscode-typescript-tslint-plugin
