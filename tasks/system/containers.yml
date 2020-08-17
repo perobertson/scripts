@@ -13,13 +13,22 @@
   tags: [ docker ]
   get_url:
     url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_machine }}"
-    dest: /usr/local/bin/docker-compose
+    dest: /usr/local/bin/docker-compose-{{ docker_compose_version }}
+    mode: '0755'
 
 - name: All - Enable execue for docker-compose
   tags: [ docker ]
   file:
-    path: /usr/local/bin/docker-compose
-    mode: +x
+    path: /usr/local/bin/docker-compose-{{ docker_compose_version }}
+    mode: +rx
+
+- name: All - Update link to latest docker-compose
+  tags: [ docker ]
+  file:
+    src: /usr/local/bin/docker-compose-{{ docker_compose_version }}
+    dest: /usr/local/bin/docker-compose
+    state: hard
+    force: yes
 
 - name: All - add user to docker group, use zsh
   tags: [ docker ]
