@@ -44,6 +44,7 @@
     - fuse-sshfs
     - gcc
     - gcc-c++
+    - gdouros-symbola-fonts
     - git
     - gitk
     - google-cloud-sdk

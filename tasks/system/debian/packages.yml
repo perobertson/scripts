@@ -18,6 +18,7 @@
     - docker-ce
     - docker-ce-cli
     - flatpak
+    - fonts-symbola
     - htop
     - libcairo2-dev
     - libglib2.0-bin # gsettings
