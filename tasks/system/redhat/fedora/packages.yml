@@ -63,7 +63,6 @@
 - name: Fedora >=30 - Install packages
   dnf:
     name:
-      - lazygit
       - openrazer-meta
       - polychromatic  # razer device configuration
     state: present
@@ -76,3 +75,10 @@
     groups: plugdev
     append: true
   when: ansible_distribution_major_version|int >= 30
+
+- name: Fedora >=31 - Install packages
+  dnf:
+    name:
+      - lazygit
+    state: present
+  when: ansible_distribution_major_version|int >= 31
