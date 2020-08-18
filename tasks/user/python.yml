@@ -15,9 +15,10 @@
       - ansible-lint<5.0.0,>=4.2.0
       - autopep8>=1.5.3
       - aws-credentials
-      - awscli<2.0.0,>=1.18.21
+      - awscli<2.0.0,>=1.18.121
       - black>=19.10b0
-      - boto3<2.0.0,>=1.12.21
+      - boto3<2.0.0,>=1.14.44
+      - boto3-stubs<2.0.0,>=1.14.44
       - diagrams>=0.16.0
       - dlint
       - flake8-annotations
