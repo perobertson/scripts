@@ -30,3 +30,7 @@
     - com.slack.Slack
     - com.spotify.Client
     - org.videolan.VLC
+  register: flatpak_install
+  until: flatpak_install is succeeded
+  retries: 5
+  delay: 5
