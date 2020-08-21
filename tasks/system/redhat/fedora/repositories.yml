@@ -1,10 +1,47 @@
 ---
-- name: Fedora - Add RPMFusion repository
+- name: Fedora - check if rpmfusion-free.repo file exists
+  stat:
+    path: /etc/yum.repos.d/rpmfusion-free.repo
+  register: rpmfusion_free_repo
+
+- name: Fedora - check if rpmfusion-free-updates.repo file exists
+  stat:
+    path: /etc/yum.repos.d/rpmfusion-free-updates.repo
+  register: rpmfusion_free_updates_repo
+
+- name: Fedora - Add RPMFusion-free repository
   dnf:
     name:
       - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
+    state: present
+  when: (rpmfusion_free_repo.stat.exists == False) or
+        (rpmfusion_free_updates_repo.stat.exists == False)
+  register: rpmfusion_free_install
+  until: rpmfusion_free_install is succeeded
+  retries: 5
+  delay: 5
+
+- name: Fedora - check if rpmfusion-nonfree.repo file exists
+  stat:
+    path: /etc/yum.repos.d/rpmfusion-nonfree.repo
+  register: rpmfusion_nonfree_repo
+
+- name: Fedora - check if rpmfusion-nonfree-updates.repo file exists
+  stat:
+    path: /etc/yum.repos.d/rpmfusion-nonfree-updates.repo
+  register: rpmfusion_nonfree_updates_repo
+
+- name: Fedora - Add RPMFusion-nonfree repository
+  dnf:
+    name:
       - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
     state: present
+  when: (rpmfusion_nonfree_repo.stat.exists == False) or
+        (rpmfusion_nonfree_updates_repo.stat.exists == False)
+  register: rpmfusion_nonfree_install
+  until: rpmfusion_nonfree_install is succeeded
+  retries: 5
+  delay: 5
 
 - name: Fedora <=25 - Add MySQL community repository
   dnf:
