@@ -23,6 +23,7 @@
     dest: /usr/local/bin/docker-compose
     state: hard
     force: yes
+    mode: '0755'
 
 - name: All - Enable execue for docker-compose
   tags: [ docker ]

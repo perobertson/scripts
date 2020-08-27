@@ -13,14 +13,14 @@
   dnf:
     name:
       - vim-minimal
-    state: latest
+    state: present
 
 # Install vim separately due to conflicts in upgrade / install
 - name: RedHat - Update vim
   dnf:
     name:
       - vim
-    state: latest
+    state: present
 
 - name: RedHat - Install packages
   dnf:

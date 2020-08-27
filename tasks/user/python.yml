@@ -7,7 +7,7 @@
       - wheel
     state: present
 
-- name: All - pip install dev tools
+- name: All - pip install dev tools # noqa 403
   no_log: true
   pip:
     extra_args: --user
@@ -57,13 +57,13 @@
   failed_when: true
   when: pip_out.failed
 
-- name: All - pip show installed
+- name: All - pip show installed # noqa 503
   debug:
     msg:
       stdout: "{{ pip_out.stdout_lines }}"
       stderr: "{{ pip_out.stderr_lines }}"
   when: pip_out.changed
 
-- name: All - pip check
+- name: All - pip check # noqa 503
   command: pip check
   when: pip_out.changed
