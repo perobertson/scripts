@@ -40,6 +40,7 @@
     - dconf
     - dkms
     - dnf-automatic
+    - fd-find
     - flatpak
     - fuse-sshfs
     - gcc
