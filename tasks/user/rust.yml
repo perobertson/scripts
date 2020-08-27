@@ -1,0 +1,9 @@
+---
+- name: All - download rustup.sh
+  get_url:
+    url: https://sh.rustup.rs
+    dest: ${HOME}/Applications/rustup.sh
+    mode: '0775'
+
+- name: All - Setup rust
+  command: ${HOME}/Applications/rustup.sh -y -q --no-modify-path

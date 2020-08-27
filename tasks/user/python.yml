@@ -16,7 +16,7 @@
       - autopep8>=1.5.3
       - aws-credentials
       - awscli<2.0.0,>=1.18.121
-      - black>=19.10b0
+      - black>=20.8b1
       - boto3<2.0.0,>=1.14.44
       - boto3-stubs<2.0.0,>=1.14.44
       - diagrams>=0.16.0
@@ -42,6 +42,7 @@
       - shtab
       - termcolor<2.0.0,>=1.1.0
       - tldr
+      - toml>=0.10.1
     state: latest
   register: pip_out
   ignore_errors: True
