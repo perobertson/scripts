@@ -10,6 +10,9 @@
   after_script:
     - ansible --version
     - bash --version
+    - cargo --version
+    - cargo-clippy --version
+    - cargo-fmt --version
     - code --version
     - curl --version
     - docker --version
@@ -27,6 +30,11 @@
     - pip --version
     - python --version
     - python3 --version
+    - rust-gdb --version
+    - rustc --version
+    - rustdoc --version
+    - rustfmt --version
+    - rustup --version
     - shellcheck --version
     - ssh -V
     - tree --version
