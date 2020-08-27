@@ -76,9 +76,9 @@
     append: true
   when: ansible_distribution_major_version|int >= 30
 
-- name: Fedora >=31 - Install packages
+- name: Fedora >=32 - Install packages
   dnf:
     name:
-      - lazygit
+      - gitui
     state: present
-  when: ansible_distribution_major_version|int >= 31
+  when: ansible_distribution_major_version|int >= 32

@@ -71,12 +71,6 @@
     repo_gpgcheck: yes
   when: ansible_distribution_major_version|int >= 30
 
-- name: Fedora >=31 - Add lazygit repository
-  command:
-    cmd: dnf copr enable atim/lazygit -y
-    creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:atim:lazygit.repo
-  when: ansible_distribution_major_version|int >= 31
-
 # TODO: remove this once a F32 repo is available
 - name: Fedora 32 - Add Docker repository for Fedora 31
   tags: [ docker ]
