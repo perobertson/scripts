@@ -4,6 +4,16 @@
   tags:
     - docker
   script:
+    # MRs create duplicate pipelines
+    # https://gitlab.com/gitlab-org/gitlab/-/issues/201845#note_399196241
+    - |
+      if [ -n "${GITLAB_TOKEN}" ] && [ "${CI_PIPELINE_SOURCE}" == 'push' ]; then \
+        OPENED_MR_ON_BRANCH="$(curl --header "Private-Token: $GITLAB_TOKEN" "https://$CI_SERVER_HOST/api/v4/merge_requests?project_id=$CI_PROJECT_ID&source_branch=$CI_COMMIT_BRANCH&state=opened")"; \
+        if [ "${OPENED_MR_ON_BRANCH}" != "[]" ]; then \
+          echo "There is at least one MR opened on branch $CI_COMMIT_BRANCH. Stopping the push pipeline in favor of the merge request pipeline"; \
+          exit 1; \
+        fi; \
+      fi
     - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash'
     - su public --command='git status --short && test "$(git status --short)" = ""'
     - su public --command='cd "$HOME/Applications/dotfiles" && git status --short && test "$(git status --short)" = ""'
