@@ -40,6 +40,8 @@
       tags: [ user, flatpaks ]
     - import_tasks: tasks/user/python.yml
       tags: [ user, python ]
+    - import_tasks: tasks/user/rust.yml
+      tags: [ user, rust ]
     - import_tasks: tasks/user/ui.yml
       tags: [ user, ui ]
     - import_tasks: tasks/user/ides.yml
