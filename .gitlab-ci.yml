@@ -17,10 +17,12 @@
     - curl --version
     - docker --version
     - docker-compose --version
+    - fd --version || echo 'fd unavailable'
     - flameshot --version
     - flatpak --version
     - gcc --version
     - git --version
+    - gitui || echo 'gitui unavailable'
     - gzip --version
     - jq --version
     - keybase --version
