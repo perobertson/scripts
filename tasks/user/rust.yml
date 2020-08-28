@@ -7,3 +7,8 @@
 
 - name: All - Setup rust
   command: ${HOME}/Applications/rustup.sh -y -q --no-modify-path
+
+- name: All - Install 'tools'
+  make:
+    chdir: ${HOME}/Applications/cli-tools
+    target: install

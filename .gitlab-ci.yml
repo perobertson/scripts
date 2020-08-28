@@ -18,11 +18,13 @@
     - su public --command='git status --short && test "$(git status --short)" = ""'
     - su public --command='cd "$HOME/Applications/dotfiles" && git status --short && test "$(git status --short)" = ""'
   after_script:
+    # List installed tools
+    - tools
+    # Now check the versions
     - ansible --version
     - bash --version
     - cargo --version
     - cargo-clippy --version
-    - cargo-fmt --version
     - code --version
     - curl --version
     - docker --version
