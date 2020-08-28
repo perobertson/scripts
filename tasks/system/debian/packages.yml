@@ -20,6 +20,7 @@
     - flatpak
     - fonts-symbola
     - htop
+    - jq
     - libcairo2-dev
     - libglib2.0-bin # gsettings
     - pkg-config
