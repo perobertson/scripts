@@ -17,46 +17,45 @@
     - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash'
     - su public --command='git status --short && test "$(git status --short)" = ""'
     - su public --command='cd "$HOME/Applications/dotfiles" && git status --short && test "$(git status --short)" = ""'
-    - echo "$PATH"
     # List installed tools
-    - tools
+    - bash -l -c "tools"
     # Now check the versions
-    - ansible --version
-    - bash --version
-    - cargo --version
-    - cargo-clippy --version
-    - code --version
-    - curl --version
-    - docker --version
-    - docker-compose --version
-    - fd --version || echo 'fd unavailable'
-    - flameshot --version
-    - flatpak --version
-    - gcc --version
-    - git --version
-    - gitui || echo 'gitui unavailable'
-    - gzip --version
-    - jq --version
-    - keybase --version
-    - make --version
-    - node --version
-    - npm --version
-    - pip --version
-    - python --version
-    - python3 --version
-    - rust-gdb --version
-    - rustc --version
-    - rustdoc --version
-    - rustfmt --version
-    - rustup --version
-    - shellcheck --version
-    - ssh -V
-    - tree --version
-    - wget --version
-    - xz --version
-    - zsh --version
+    - bash -l -c "ansible --version"
+    - bash -l -c "bash --version"
+    - bash -l -c "cargo --version"
+    - bash -l -c "cargo-clippy --version"
+    - bash -l -c "code --version"
+    - bash -l -c "curl --version"
+    - bash -l -c "docker --version"
+    - bash -l -c "docker-compose --version"
+    - bash -l -c "fd --version || echo 'fd unavailable'"
+    - bash -l -c "flameshot --version"
+    - bash -l -c "flatpak --version"
+    - bash -l -c "gcc --version"
+    - bash -l -c "git --version"
+    - bash -l -c "gitui || echo 'gitui unavailable'"
+    - bash -l -c "gzip --version"
+    - bash -l -c "jq --version"
+    - bash -l -c "keybase --version"
+    - bash -l -c "make --version"
+    - bash -l -c "node --version"
+    - bash -l -c "npm --version"
+    - bash -l -c "pip --version"
+    - bash -l -c "python --version"
+    - bash -l -c "python3 --version"
+    - bash -l -c "rust-gdb --version"
+    - bash -l -c "rustc --version"
+    - bash -l -c "rustdoc --version"
+    - bash -l -c "rustfmt --version"
+    - bash -l -c "rustup --version"
+    - bash -l -c "shellcheck --version"
+    - bash -l -c "ssh -V"
+    - bash -l -c "tree --version"
+    - bash -l -c "wget --version"
+    - bash -l -c "xz --version"
+    - bash -l -c "zsh --version"
     # These commands do not have a version option
-    - command -v gitk
+    - bash -l -c "command -v gitk"
 
 .setup_archlinux:
   before_script:
