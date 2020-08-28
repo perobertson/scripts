@@ -4,10 +4,6 @@ set -xueo pipefail
 # Make sure the PATH has the location of rust and python bins
 PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${HOME}/bin:$PATH"
 
-# Debug
-id
-echo "${PATH}"
-
 # List installed tools
 tools
 # Now check the versions
