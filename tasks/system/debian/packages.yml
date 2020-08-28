@@ -23,6 +23,8 @@
     - jq
     - libcairo2-dev
     - libglib2.0-bin # gsettings
+    - nodejs
+    - npm
     - pkg-config
     - python3-dbus
     - seahorse # key management
