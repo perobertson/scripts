@@ -23,6 +23,3 @@
   make:
     chdir: ${HOME}/Applications/cli-tools
     target: install
-
-- name: All - Install Alacritty terminal emulator
-  command: ${HOME}/.cargo/bin/cargo install alacritty
