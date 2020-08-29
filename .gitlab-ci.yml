@@ -18,11 +18,8 @@ variables:
           exit 1; \
         fi; \
       fi
-    - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash'
-    - su public --command='git status --short && test "$(git status --short)" = ""'
-    - su public --command='cd "$HOME/Applications/dotfiles" && git status --short && test "$(git status --short)" = ""'
-    # check installed versions of tools
-    - su public --command='$HOME/Applications/scripts/bin/versions.sh'
+    - ./.gitlab/build.sh
+    - su public --command='$HOME/Applications/scripts/.gitlab/check_versions.sh'
 
 .setup_archlinux:
   before_script:
