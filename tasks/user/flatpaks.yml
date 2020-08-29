@@ -20,6 +20,11 @@
     - flatpak-update.service
     - flatpak-update.timer
 
+- name: All - Check if dockerenv exists
+  stat:
+    path: /.dockerenv
+  register: file_dockerenv
+
 - name: All - Install flatpaks
   flatpak:
     name: "{{ item }}"
@@ -34,3 +39,4 @@
   until: flatpak_install is succeeded
   retries: 5
   delay: 5
+  when: not file_dockerenv.stat.exists
