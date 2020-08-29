@@ -30,16 +30,7 @@
 
 .setup_ubuntu:
   before_script:
-    - whoami
-    - echo "$HOME"
-    - pwd
-    - ls -laH
-    - apt-get update
-    - apt-get install -y curl sudo
-    - "echo '%sudo  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
-    - useradd --user-group --create-home --groups=sudo --shell=/bin/bash public
-    - cat /etc/passwd
-    - cat /etc/group
+    - ./.gitlab/setup_ubuntu.sh
 
 .rules_common_files: &rules_common_files
   - .gitlab-ci.yml
