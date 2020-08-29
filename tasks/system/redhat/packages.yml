@@ -45,6 +45,7 @@
     - fuse-sshfs
     - gcc
     - gcc-c++
+    - gdb
     - gdouros-symbola-fonts
     - git
     - gitk
