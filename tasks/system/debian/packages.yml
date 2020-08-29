@@ -20,6 +20,8 @@
     - flatpak
     - fonts-symbola
     - gdb
+    - git
+    - gitk
     - htop
     - jq
     - libcairo2-dev
