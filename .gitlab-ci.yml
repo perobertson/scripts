@@ -1,3 +1,7 @@
+variables:
+  # https://bixense.com/clicolors/ standard for enabling colours in CI
+  CLICOLOR: 1
+
 .build:
   interruptible: true
   stage: build
