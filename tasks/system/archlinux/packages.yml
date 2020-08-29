@@ -13,6 +13,7 @@
       - flameshot
       - flatpak
       - gcc
+      - gdb
       - gzip
       - jq
       - keybase

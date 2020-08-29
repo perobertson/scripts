@@ -17,7 +17,7 @@ shopt -s globstar
 
 # Set the path here so that any commands we install in user space will be available during setup
 # This is setup in the dotfiles, but we also need it here for setup
-PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${HOME}/bin:$PATH"
 
 # Clear any previous sudo permission
 sudo -k
@@ -29,7 +29,7 @@ if [[ $(id -u) -eq 0 ]]; then
 fi
 
 # Set up app directories
-mkdir -pv "$HOME/Applications" "$HOME/Downloads" "$HOME/bin" "$HOME/workspace"
+mkdir -pv "${HOME}/Applications" "${HOME}/Downloads" "${HOME}/bin" "${HOME}/workspace"
 
 # Check if git needs installed
 if [[ ! -x "$(command -v git)" ]]; then
@@ -64,21 +64,21 @@ if [[ ! -x "$(command -v ssh-keyscan)" ]]; then
 fi
 
 # Setup ssh
-if [[ ! -d "$HOME/.ssh" ]]; then
-    mkdir "$HOME/.ssh"
-    chmod 700 "$HOME/.ssh"
+if [[ ! -d "${HOME}/.ssh" ]]; then
+    mkdir "${HOME}/.ssh"
+    chmod 700 "${HOME}/.ssh"
 fi
 touch "$HOME/.ssh/known_hosts"
-if [[ "$(grep ^gitlab.com "$HOME/.ssh/known_hosts")" = '' ]]; then
-    ssh-keyscan -v 'gitlab.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
+if [[ "$(grep ^gitlab.com "${HOME}/.ssh/known_hosts")" = '' ]]; then
+    ssh-keyscan -v 'gitlab.com' >> "${HOME}/.ssh/known_hosts" 2>/dev/null
 fi
-if [[ "$(grep ^github.com "$HOME/.ssh/known_hosts")" = '' ]]; then
-    ssh-keyscan -v 'github.com' >> "$HOME/.ssh/known_hosts" 2>/dev/null
+if [[ "$(grep ^github.com "${HOME}/.ssh/known_hosts")" = '' ]]; then
+    ssh-keyscan -v 'github.com' >> "${HOME}/.ssh/known_hosts" 2>/dev/null
 fi
 
 # Fetch the scripts
-if [[ ! -d "$HOME/Applications/scripts" ]]; then
-    git clone https://gitlab.com/perobertson/scripts.git "$HOME/Applications/scripts"
+if [[ ! -d "${HOME}/Applications/scripts" ]]; then
+    git clone https://gitlab.com/perobertson/scripts.git "${HOME}/Applications/scripts"
     cd "$HOME/Applications/scripts"
 
     if [[ -n "${CI:-}" ]]; then

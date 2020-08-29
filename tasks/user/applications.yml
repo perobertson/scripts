@@ -45,3 +45,9 @@
   git:
     repo: https://github.com/tfutils/tfenv.git
     dest: ~/Applications/tfenv
+
+- name: All - Git update tools
+  diff: false
+  git:
+    repo: https://gitlab.com/perobertson/cli-tools.git
+    dest: ~/Applications/cli-tools

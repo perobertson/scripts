@@ -1,3 +1,7 @@
+variables:
+  # https://bixense.com/clicolors/ standard for enabling colours in CI
+  CLICOLOR: 1
+
 .build:
   interruptible: true
   stage: build
@@ -17,82 +21,20 @@
     - su public --command='/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/${CI_COMMIT_SHA}/setup.sh | bash'
     - su public --command='git status --short && test "$(git status --short)" = ""'
     - su public --command='cd "$HOME/Applications/dotfiles" && git status --short && test "$(git status --short)" = ""'
-  after_script:
-    - ansible --version
-    - bash --version
-    - cargo --version
-    - cargo-clippy --version
-    - cargo-fmt --version
-    - code --version
-    - curl --version
-    - docker --version
-    - docker-compose --version
-    - fd --version || echo 'fd unavailable'
-    - flameshot --version
-    - flatpak --version
-    - gcc --version
-    - git --version
-    - gitui || echo 'gitui unavailable'
-    - gzip --version
-    - jq --version
-    - keybase --version
-    - make --version
-    - node --version
-    - npm --version
-    - pip --version
-    - python --version
-    - python3 --version
-    - rust-gdb --version
-    - rustc --version
-    - rustdoc --version
-    - rustfmt --version
-    - rustup --version
-    - shellcheck --version
-    - ssh -V
-    - tree --version
-    - wget --version
-    - xz --version
-    - zsh --version
-    # These commands do not have a version option
-    - command -v gitk
+    # check installed versions of tools
+    - su public --command='$HOME/Applications/scripts/bin/versions.sh'
 
 .setup_archlinux:
   before_script:
-    - whoami
-    - echo "$HOME"
-    - pwd
-    - ls -laH
-    - pacman -Syu --noconfirm
-    - pacman -S --noconfirm sudo
-    - "echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
-    - useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
-    - cat /etc/passwd
-    - cat /etc/group
+    - ./.gitlab/setup_archlinux.sh
 
 .setup_fedora:
   before_script:
-    - whoami
-    - echo "$HOME"
-    - pwd
-    - ls -laH
-    - dnf install -y sudo
-    - "echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
-    - useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
-    - cat /etc/passwd
-    - cat /etc/group
+    - ./.gitlab/setup_fedora.sh
 
 .setup_ubuntu:
   before_script:
-    - whoami
-    - echo "$HOME"
-    - pwd
-    - ls -laH
-    - apt-get update
-    - apt-get install -y curl sudo
-    - "echo '%sudo  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
-    - useradd --user-group --create-home --groups=sudo --shell=/bin/bash public
-    - cat /etc/passwd
-    - cat /etc/group
+    - ./.gitlab/setup_ubuntu.sh
 
 .rules_common_files: &rules_common_files
   - .gitlab-ci.yml
