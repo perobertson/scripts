@@ -29,6 +29,7 @@
     - pkg-config
     - python3-dbus
     - seahorse # key management
+    - shellcheck
     - sqlitebrowser
     - sublime-merge
     - sublime-text
