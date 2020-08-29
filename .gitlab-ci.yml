@@ -1,6 +1,7 @@
 variables:
+  ANSIBLE_FORCE_COLOR: "1"
   # https://bixense.com/clicolors/ standard for enabling colours in CI
-  CLICOLOR: 1
+  CLICOLOR: "1"
 
 .build:
   interruptible: true
