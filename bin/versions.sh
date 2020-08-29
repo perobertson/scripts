@@ -28,7 +28,7 @@ make --version
 node --version
 npm --version
 pip --version
-python --version
+python --version || echo 'python unavailable'
 python3 --version
 rust-gdb --version
 rustc --version
