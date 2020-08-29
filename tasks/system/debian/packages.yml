@@ -19,6 +19,7 @@
     - docker-ce-cli
     - flatpak
     - fonts-symbola
+    - gdb
     - htop
     - jq
     - libcairo2-dev
