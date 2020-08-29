@@ -7,6 +7,7 @@ PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${HOME}/bin:$PATH"
 # List installed tools
 tools
 # Now check the versions
+alacritty --version
 ansible --version
 bash --version
 cargo --version
