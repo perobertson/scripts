@@ -1,12 +1,23 @@
 ---
+- name: All - Check if rustup exists
+  stat:
+    path: ${HOME}/.cargo/bin/rustup
+  register: file_rustup
+
 - name: All - download rustup.sh
   get_url:
     url: https://sh.rustup.rs
     dest: ${HOME}/Applications/rustup.sh
     mode: '0775'
+  when: not file_rustup.stat.exists
 
-- name: All - Setup rust
+- name: All - Setup rustup
   command: ${HOME}/Applications/rustup.sh -y -q --no-modify-path
+  when: not file_rustup.stat.exists
+
+- name: All - rustup update
+  command: ${HOME}/.cargo/bin/rustup update
+  when: file_rustup.stat.exists
 
 - name: All - Install 'tools'
   make:
