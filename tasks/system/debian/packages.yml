@@ -34,6 +34,7 @@
     - sublime-merge
     - sublime-text
     - sysstat # iostat
+    - tree
     - zsh
 
 - name: Debian - Install remote packages
