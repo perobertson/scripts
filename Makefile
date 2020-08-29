@@ -1,3 +1,7 @@
+.PHONY: lint
+lint:
+	ansible-lint -p setup.yml systemd.yml
+
 .PHONY: arch
 arch:
 	docker run \
@@ -14,3 +18,4 @@ arch:
 .PHONY: stop-arch
 stop-arch:
 	docker stop scripts-arch
+.DEFAULT_GOAL:=lint

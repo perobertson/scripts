@@ -4,7 +4,7 @@
     path: ~/Applications/dotfiles
   register: dotfiles
 
-- name: All - Stash dotfile changes
+- name: All - Stash dotfile changes # noqa 303
   command:
     chdir: ~/Applications/dotfiles
     cmd: git stash
@@ -16,8 +16,9 @@
     repo: https://gitlab.com/perobertson/dotfiles.git
     dest: ~/Applications/dotfiles
     version: main
+  register: git_dotfiles
 
-- name: All - UnStash dotfile changes
+- name: All - UnStash dotfile changes # noqa 303
   command:
     chdir: ~/Applications/dotfiles
     cmd: git stash pop
@@ -25,3 +26,4 @@
 
 - name: All - Install Dotfiles
   command: ~/Applications/dotfiles/install.py
+  when: git_dotfiles is changed

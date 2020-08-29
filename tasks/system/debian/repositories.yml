@@ -10,7 +10,7 @@
     filename: 1password
     state: present
 
-- name: Debian - Add VSCode signing key
+- name: Debian - Add VSCode signing key # noqa 303
   shell:
     cmd: |
       curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /tmp/packages.microsoft.gpg

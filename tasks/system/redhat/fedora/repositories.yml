@@ -14,8 +14,8 @@
     name:
       - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
     state: present
-  when: (rpmfusion_free_repo.stat.exists == False) or
-        (rpmfusion_free_updates_repo.stat.exists == False)
+  when: (not rpmfusion_free_repo.stat.exists) or
+        (not rpmfusion_free_updates_repo.stat.exists)
   register: rpmfusion_free_install
   until: rpmfusion_free_install is succeeded
   retries: 5
@@ -36,8 +36,8 @@
     name:
       - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
     state: present
-  when: (rpmfusion_nonfree_repo.stat.exists == False) or
-        (rpmfusion_nonfree_updates_repo.stat.exists == False)
+  when: (not rpmfusion_nonfree_repo.stat.exists) or
+        (not rpmfusion_nonfree_updates_repo.stat.exists)
   register: rpmfusion_nonfree_install
   until: rpmfusion_nonfree_install is succeeded
   retries: 5

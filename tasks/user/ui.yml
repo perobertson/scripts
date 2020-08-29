@@ -1,5 +1,5 @@
 ---
-- name: All - Fetch gsettings schemas
+- name: All - Fetch gsettings schemas # noqa 301
   no_log: true
   command: gsettings list-schemas
   ignore_errors: yes
@@ -26,6 +26,7 @@
   copy:
     src: files/home/user/.Xresources
     dest: ~/.Xresources
+    mode: '0664'
 
 - name: All - Set terminal settings
   tags: [ terminal ]
@@ -119,7 +120,7 @@
     value: 'true'
     state: present
 
-- name: All - Git update cinnamon-spices-themes
+- name: All - Git update cinnamon-spices-themes # noqa 401
   tags: [ cinnamon ]
   diff: false
   git:
@@ -132,6 +133,7 @@
   file:
     path: ~/.themes
     state: directory
+    mode: '0775'
 
 - name: All - Link cinnamon themes
   tags: [ cinnamon ]
