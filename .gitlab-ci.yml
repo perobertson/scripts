@@ -26,15 +26,7 @@
 
 .setup_fedora:
   before_script:
-    - whoami
-    - echo "$HOME"
-    - pwd
-    - ls -laH
-    - dnf install -y sudo
-    - "echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci"
-    - useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
-    - cat /etc/passwd
-    - cat /etc/group
+    - ./.gitlab/setup_fedora.sh
 
 .setup_ubuntu:
   before_script:
