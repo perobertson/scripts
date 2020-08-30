@@ -21,11 +21,13 @@ Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?
 
 To run the script, all you need to do is run this from a console on the machine that you are setting up.
 
+Using `curl`:
+
 ```bash
 /usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/main/setup.sh | time bash
 ```
 
-For the users out there who prefer `wget`
+Using `wget`:
 
 ```bash
 /usr/bin/wget -qO- https://gitlab.com/perobertson/scripts/raw/main/setup.sh | time bash
