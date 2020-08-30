@@ -105,6 +105,7 @@ switch_dir(){
 }
 
 bootstrap(){
+    pwd
     os="$(. /etc/os-release && echo "${ID}")"
     case "${os}" in
         arch)    source "bootstrap/arch.sh"    ;;
