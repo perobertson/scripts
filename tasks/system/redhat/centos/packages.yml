@@ -1,9 +1,9 @@
 ---
-- name: CentOS - Install packages
+# These need to be installed at the same time to avoid version conflicts
+- name: CentOS - Install docker packages # noqa 403
   dnf:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - containerd.io
-    - docker-ce
-    - docker-ce-cli
+    name:
+      - containerd.io
+      - docker-ce
+      - docker-ce-cli
+    state: latest
