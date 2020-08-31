@@ -13,8 +13,8 @@ cargo --version
 cargo-clippy --version
 code --version
 curl --version
-docker --version
-docker-compose --version
+docker --version || echo 'docker unavailable'
+docker-compose --version || echo 'docker-compose unavailable'
 fd --version || echo 'fd unavailable'
 flameshot --version
 flatpak --version

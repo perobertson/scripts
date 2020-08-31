@@ -1,9 +1,18 @@
 ---
 # These need to be installed at the same time to avoid version conflicts
-- name: CentOS - Install docker packages # noqa 403
+- name: CentOS - Install docker packages
   dnf:
     name:
       - containerd.io
       - docker-ce
       - docker-ce-cli
-    state: latest
+    state: present
+  # Docker is notoriously slow at releaseing for RHEL based distros
+  ignore_errors: True
+
+- name: CentOS - Install packages
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - code
