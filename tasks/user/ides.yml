@@ -43,3 +43,7 @@
     - ms-vscode.vscode-typescript-tslint-plugin
     - rust-lang.rust
     - timonwong.shellcheck
+  register: vscode_extension_install
+  until: vscode_extension_install is succeeded
+  retries: 5
+  delay: 5
