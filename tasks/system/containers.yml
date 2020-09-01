@@ -47,4 +47,4 @@
     append: yes
     groups: docker
   when: ansible_distribution == 'CentOS'
-  ignore_errors: "{{ uri_docker_repo is failed }}"
+  ignore_errors: "{{ uri_docker_repo_rpm is failed }}"
