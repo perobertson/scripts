@@ -21,6 +21,13 @@
     gpgkey: https://onepassword.s3.amazonaws.com/linux/keys/1password.asc
     repo_gpgcheck: yes
 
+- name: RedHat - Check for Docker support
+  tags: [ docker ]
+  uri:
+    url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version|int }}/{{ ansible_architecture }}/stable"
+  register: uri_docker_repo_rpm
+  ignore_errors: True
+
 - name: RedHat - Add Docker repository
   tags: [ docker ]
   yum_repository:
@@ -28,11 +35,10 @@
     name: docker-ce-stable
     description: "Docker CE Stable - {{ ansible_distribution }} - $releasever - $basearch"
     baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/stable"
-    enabled: yes
+    enabled: "{{ uri_docker_repo_rpm is succeeded }}"
     gpgcheck: yes
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     repo_gpgcheck: yes
-  when: ansible_distribution != 'CentOS'
 
 - name: RedHat - Add Google Cloud SDK repository
   yum_repository:

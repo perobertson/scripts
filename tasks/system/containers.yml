@@ -32,13 +32,7 @@
     dest: /usr/local/bin/docker-compose
     mode: +rx
 
-# TODO: move this
-- name: All - set default shell to zsh
-  user:
-    name: "{{ ansible_user_id }}"
-    shell: /usr/bin/zsh
-
-- name: All - add user to docker group
+- name: All - Add user to docker group
   tags: [ docker ]
   user:
     name: "{{ ansible_user_id }}"
@@ -46,7 +40,7 @@
     groups: docker
   when: ansible_distribution != 'CentOS'
 
-- name: CentOS - add user to docker group
+- name: CentOS - Add user to docker group
   tags: [ docker ]
   user:
     name: "{{ ansible_user_id }}"

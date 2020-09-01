@@ -105,7 +105,6 @@ switch_dir(){
 }
 
 bootstrap(){
-    pwd # TODO: remove this
     os="$(. /etc/os-release && echo "${ID}")"
     case "${os}" in
         arch)    source "bootstrap/arch.sh"    ;;
