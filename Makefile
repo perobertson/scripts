@@ -15,7 +15,7 @@ arch:
 		archlinux/base:latest bash || true
 	docker exec scripts-arch ./.gitlab/setup_archlinux.sh
 	docker exec scripts-arch ./.gitlab/build.sh
-	docker exec scripts-centos ./.gitlab/check_versions.sh
+	docker exec scripts-arch ./.gitlab/check_versions.sh
 	$(MAKE) stop-arch
 
 .PHONY: stop-arch
