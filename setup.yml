@@ -79,3 +79,5 @@
       tags: [ user, ui ]
     - import_tasks: tasks/user/ides.yml
       tags: [ user, ides ]
+    - import_tasks: tasks/user/bins.yml
+      tags: [ user, bins ]
