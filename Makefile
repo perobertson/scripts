@@ -29,7 +29,7 @@ fedora:
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-fedora \
-		fedora:28 bash || true
+		fedora:32 bash || true
 	docker exec scripts-fedora ./.gitlab/setup_fedora.sh
 	docker exec scripts-fedora ./.gitlab/build.sh
 	$(MAKE) stop-fedora
