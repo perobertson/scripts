@@ -25,7 +25,7 @@ stages:
         fi; \
       fi
     - ./.gitlab/build.sh
-    - su public --command='$HOME/Applications/scripts/.gitlab/check_versions.sh'
+    - su public --command="./.gitlab/check_versions.sh"
 
 .setup_archlinux:
   before_script:

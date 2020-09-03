@@ -1,3 +1,5 @@
+.DEFAULT_GOAL:=lint
+
 .PHONY: lint
 lint:
 	ansible-lint -p setup.yml systemd.yml
@@ -18,4 +20,20 @@ arch:
 .PHONY: stop-arch
 stop-arch:
 	docker stop scripts-arch
-.DEFAULT_GOAL:=lint
+
+.PHONY: fedora
+fedora:
+	docker run \
+		-ditv $(shell pwd):/scripts \
+		-w /scripts \
+		-e ANSIBLE_FORCE_COLOR=1 \
+		--rm \
+		--name scripts-fedora \
+		fedora:28 bash || true
+	docker exec scripts-fedora ./.gitlab/setup_fedora.sh
+	docker exec scripts-fedora ./.gitlab/build.sh
+	$(MAKE) stop-fedora
+
+.PHONY: stop-fedora
+stop-fedora:
+	docker stop scripts-fedora

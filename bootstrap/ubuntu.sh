@@ -10,6 +10,8 @@ sudo apt-get install -y \
 
 # use python3 as the default
 pip3 install --user --upgrade pip
+# update the packages used in the install process
+pip3 install --user --upgrade setuptools wheel
 # force the shell to forget all remembered locations
 hash -r
 # Make sure ansible is using python3
