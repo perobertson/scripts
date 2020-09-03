@@ -1,12 +1,4 @@
 ---
-- name: Fedora - Update release info and signing keys # noqa 403
-  dnf:
-    name:
-      - fedora-gpg-keys
-      - fedora-release
-      - fedora-repos
-    state: latest
-
 - name: Fedora - Import RPM-GPG-KEY-rpmfusion-free
   rpm_key:
     state: present
