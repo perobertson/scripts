@@ -144,7 +144,7 @@ bootstrap
 
 # Run the setup
 ansible-playbook -v setup.yml
-if [[ -z "${CI:-}" ]]; then
+if [[ ! -f /.dockerenv ]]; then
     # only start the services when outside of docker
     ansible-playbook -v systemd.yml
 fi
