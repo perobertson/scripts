@@ -1,0 +1,6 @@
+---
+- name: All - Link script to convert IAM credentials to SES
+  file:
+    src: "{{ playbook_dir }}/bin/aws_iam_to_ses.py"
+    dest: ${HOME}/bin/aws_iam_to_ses.py
+    state: link
