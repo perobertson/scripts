@@ -2,7 +2,7 @@
 
 .PHONY: lint
 lint:
-	ansible-lint -p setup.yml systemd.yml
+	ANSIBLE_CONFIG="./config/ansible.cfg" ansible-lint -p setup.yml systemd.yml
 
 .PHONY: arch
 arch:

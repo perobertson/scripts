@@ -143,10 +143,10 @@ switch_dir
 bootstrap
 
 # Run the setup
-ansible-playbook -v setup.yml
+ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v setup.yml
 if [[ ! -f /.dockerenv ]]; then
     # only start the services when outside of docker
-    ansible-playbook -v systemd.yml
+    ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v systemd.yml
 fi
 
 echo ''
