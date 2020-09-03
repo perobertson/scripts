@@ -96,8 +96,15 @@
     name: "{{ item }}"
     state: present
   loop:
-    - https://github.com/wagoodman/dive/releases/download/v{{ dive_version }}/dive_{{ dive_version }}_linux_amd64.rpm
     - https://zoom.us/client/latest/zoom_x86_64.rpm
+
+- name: RedHat - Install unsigned remote packages
+  dnf:
+    name: "{{ item }}"
+    state: present
+    disable_gpg_check: yes
+  loop:
+    - https://github.com/wagoodman/dive/releases/download/v{{ dive_version }}/dive_{{ dive_version }}_linux_amd64.rpm
 
 ### --- Distro specific ---
 
