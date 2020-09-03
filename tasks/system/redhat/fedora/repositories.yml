@@ -1,4 +1,10 @@
 ---
+- name: Fedora - Import Docker signing key
+  rpm_key:
+    state: present
+    key: https://download.docker.com/linux/fedora/gpg
+    fingerprint: 060A61C51B558A7F742B77AAC52FEB6B621E9F35
+
 - name: Fedora - Import RPM-GPG-KEY-rpmfusion-free
   rpm_key:
     state: present
