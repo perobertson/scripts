@@ -6,6 +6,18 @@
     dive_version: 0.9.2
     docker_compose_version: 1.26.2
     signing_keys:
+      epel: # https://getfedora.org/security/
+        "8":
+          key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8
+          fingerprint: 94E279EB8D8F25B21810ADF121EA45AB2F86D6A1
+      rpmfusion_free_el: # https://rpmfusion.org/keys
+        "8":
+          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-el-8
+          fingerprint: 837935CD19E123AA7F8A8E69979F0C69158B3811
+      rpmfusion_nonfree_el: # https://rpmfusion.org/keys
+        "8":
+          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-el-8
+          fingerprint: CF9FD59F61D6612146CDAC8E14B6792DBDDA8475
       rpmfusion_free_fedora: # https://rpmfusion.org/keys
         "28":
           key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-28

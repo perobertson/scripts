@@ -11,3 +11,10 @@
 - name: RedHat Packages
   import_tasks: redhat/packages.yml
   when: ansible_os_family == 'RedHat'
+
+### --- Settings that require packages to be installed first
+
+- name: All - Set default shell to zsh
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/zsh

@@ -10,6 +10,7 @@ Python is a main component of the tools that are installed and used.
 Because of this, the scripts are designed to work with systems that have a python3 install that is still supported.
 
 - Archlinux
+- CentOS: 8
 - Fedora: 28(EOL), 29 (EOL), 30 (EOL), 31, 32
 - Manjaro
 - Ubuntu: 18.04, 20.04
@@ -20,11 +21,13 @@ Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?
 
 To run the script, all you need to do is run this from a console on the machine that you are setting up.
 
+Using `curl`:
+
 ```bash
 /usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/main/setup.sh | time bash
 ```
 
-For the users out there who prefer `wget`
+Using `wget`:
 
 ```bash
 /usr/bin/wget -qO- https://gitlab.com/perobertson/scripts/raw/main/setup.sh | time bash

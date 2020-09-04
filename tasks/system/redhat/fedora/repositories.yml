@@ -17,22 +17,6 @@
     key: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].key }}"
     fingerprint: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].fingerprint }}"
 
-- name: Fedora - Import Zoom signing key
-  rpm_key:
-    state: present
-    key: https://zoom.us/linux/download/pubkey
-    fingerprint: 396060CADD8A75220BFCB369B903BF1861A7C71D
-
-- name: Fedora - check if rpmfusion-free.repo file exists
-  stat:
-    path: /etc/yum.repos.d/rpmfusion-free.repo
-  register: rpmfusion_free_repo
-
-- name: Fedora - check if rpmfusion-free-updates.repo file exists
-  stat:
-    path: /etc/yum.repos.d/rpmfusion-free-updates.repo
-  register: rpmfusion_free_updates_repo
-
 - name: Fedora - Add RPMFusion-free repository
   dnf:
     name:
@@ -44,16 +28,6 @@
   until: rpmfusion_free_install is succeeded
   retries: 5
   delay: 5
-
-- name: Fedora - check if rpmfusion-nonfree.repo file exists
-  stat:
-    path: /etc/yum.repos.d/rpmfusion-nonfree.repo
-  register: rpmfusion_nonfree_repo
-
-- name: Fedora - check if rpmfusion-nonfree-updates.repo file exists
-  stat:
-    path: /etc/yum.repos.d/rpmfusion-nonfree-updates.repo
-  register: rpmfusion_nonfree_updates_repo
 
 - name: Fedora - Add RPMFusion-nonfree repository
   dnf:
@@ -103,4 +77,8 @@
     name: docker-ce-stable
     description: "Docker CE Stable - {{ ansible_distribution }} - 31 - $basearch"
     baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/31/$basearch/stable"
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+    repo_gpgcheck: yes
   when: ansible_distribution_major_version|int == 32

@@ -13,10 +13,10 @@ cargo --version
 cargo-clippy --version
 code --version
 curl --version
-docker --version
-docker-compose --version
+docker --version || echo 'docker unavailable'
+docker-compose --version || echo 'docker-compose unavailable'
 fd --version || echo 'fd unavailable'
-flameshot --version
+flameshot --version || echo 'flameshot unavailable'
 flatpak --version
 gcc --version
 git --version
@@ -35,7 +35,7 @@ rustc --version
 rustdoc --version
 rustfmt --version
 rustup --version
-shellcheck --version
+shellcheck --version || echo 'command unavailable'
 ssh -V
 tree --version
 wget --version

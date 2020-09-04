@@ -32,10 +32,19 @@
     dest: /usr/local/bin/docker-compose
     mode: +rx
 
-- name: All - add user to docker group, use zsh
+- name: All - Add user to docker group
   tags: [ docker ]
   user:
     name: "{{ ansible_user_id }}"
     append: yes
     groups: docker
-    shell: /usr/bin/zsh
+  when: ansible_distribution != 'CentOS'
+
+- name: CentOS - Add user to docker group
+  tags: [ docker ]
+  user:
+    name: "{{ ansible_user_id }}"
+    append: yes
+    groups: docker
+  when: ansible_distribution == 'CentOS'
+  ignore_errors: "{{ uri_docker_repo_rpm is failed }}"

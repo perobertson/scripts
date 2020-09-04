@@ -10,6 +10,12 @@
     key: https://onepassword.s3.amazonaws.com/linux/keys/1password.asc
     fingerprint: 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
 
+- name: RedHat - Import Zoom signing key
+  rpm_key:
+    state: present
+    key: https://zoom.us/linux/download/pubkey
+    fingerprint: 396060CADD8A75220BFCB369B903BF1861A7C71D
+
 - name: RedHat - Add 1Password repository
   yum_repository:
     file: 1Password
@@ -21,6 +27,13 @@
     gpgkey: https://onepassword.s3.amazonaws.com/linux/keys/1password.asc
     repo_gpgcheck: yes
 
+- name: RedHat - Check for Docker support
+  tags: [ docker ]
+  uri:
+    url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version|int }}/{{ ansible_architecture }}/stable"
+  register: uri_docker_repo_rpm
+  ignore_errors: True
+
 - name: RedHat - Add Docker repository
   tags: [ docker ]
   yum_repository:
@@ -28,7 +41,7 @@
     name: docker-ce-stable
     description: "Docker CE Stable - {{ ansible_distribution }} - $releasever - $basearch"
     baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/stable"
-    enabled: yes
+    enabled: "{{ uri_docker_repo_rpm is succeeded }}"
     gpgcheck: yes
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     repo_gpgcheck: yes
@@ -92,7 +105,31 @@
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
     repo_gpgcheck: yes
 
+- name: RedHat - check if rpmfusion-free.repo file exists
+  stat:
+    path: /etc/yum.repos.d/rpmfusion-free.repo
+  register: rpmfusion_free_repo
+
+- name: RedHat - check if rpmfusion-free-updates.repo file exists
+  stat:
+    path: /etc/yum.repos.d/rpmfusion-free-updates.repo
+  register: rpmfusion_free_updates_repo
+
+- name: RedHat - check if rpmfusion-nonfree.repo file exists
+  stat:
+    path: /etc/yum.repos.d/rpmfusion-nonfree.repo
+  register: rpmfusion_nonfree_repo
+
+- name: RedHat - check if rpmfusion-nonfree-updates.repo file exists
+  stat:
+    path: /etc/yum.repos.d/rpmfusion-nonfree-updates.repo
+  register: rpmfusion_nonfree_updates_repo
+
 ### --- Distro specific ---
+
+- name: CentOS Repositories
+  import_tasks: centos/repositories.yml
+  when: ansible_distribution == 'CentOS'
 
 - name: Fedora Repositories
   import_tasks: fedora/repositories.yml
