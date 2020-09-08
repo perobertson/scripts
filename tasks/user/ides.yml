@@ -42,6 +42,7 @@
     - ms-python.python
     - ms-vscode.vscode-typescript-tslint-plugin
     - rust-lang.rust
+    - samuelcolvin.jinjahtml
     - timonwong.shellcheck
   register: vscode_extension_install
   until: vscode_extension_install is succeeded
