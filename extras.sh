@@ -9,6 +9,10 @@ cargo install exa
 cargo install fd-find
 cargo install git-delta
 cargo install gitui
+cargo install grex
+cargo install hyperfine
+cargo install nu
+cargo install procs
 cargo install starship
 cargo install tealdeer
 cargo install tokei
