@@ -48,3 +48,4 @@
   until: vscode_extension_install is succeeded
   retries: 5
   delay: 5
+  ignore_errors: yes # VSCode marketplace is sometimes unreachable
