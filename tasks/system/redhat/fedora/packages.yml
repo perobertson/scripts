@@ -57,9 +57,16 @@
       - dbus-daemon
       - dbus-tools
       - intel-media-driver
-      - pulseaudio-module-bluetooth-freeworld
       - texlive-montserrat
     state: present
+  when: ansible_distribution_major_version|int >= 29
+
+- name: Fedora >=29 - Install bluetooth codecs
+  dnf:
+    name:
+      - pulseaudio-module-bluetooth-freeworld
+    state: present
+    allowerasing: yes
   when: ansible_distribution_major_version|int >= 29
 
 - name: Fedora >=30 - Install packages
