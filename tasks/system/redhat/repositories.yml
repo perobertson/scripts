@@ -4,7 +4,7 @@
     name:
       - dnf-plugins-core
 
-- name: Fedora - Import 1Password signing key
+- name: RedHat - Import 1Password signing key
   rpm_key:
     state: present
     key: https://onepassword.s3.amazonaws.com/linux/keys/1password.asc
