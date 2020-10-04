@@ -10,6 +10,17 @@
     filename: 1password
     state: present
 
+- name: Debian - Add Hashicorp signing key
+  apt_key:
+    url: https://apt.releases.hashicorp.com/gpg
+    state: present
+
+- name: Debian - Add Hashicorp Repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_lsb.codename }} main"
+    filename: hashicorp
+    state: present
+
 - name: Debian - Add VSCode signing key # noqa 303
   shell:
     cmd: |
