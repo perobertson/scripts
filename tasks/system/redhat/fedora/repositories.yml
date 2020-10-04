@@ -17,6 +17,17 @@
     key: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].key }}"
     fingerprint: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].fingerprint }}"
 
+- name: Fedora - Add Hashicorp repository
+  yum_repository:
+    file: hashicorp
+    name: hashicorp
+    description: Hashicorp Stable - $basearch
+    baseurl: https://rpm.releases.hashicorp.com/fedora/$releasever/$basearch/stable
+    enabled: yes
+    gpgcheck: yes
+    repo_gpgcheck: yes
+    gpgkey: https://rpm.releases.hashicorp.com/gpg
+
 - name: Fedora - Add RPMFusion-free repository
   dnf:
     name:
