@@ -1,12 +1,12 @@
 ---
 - name: Debian - Add 1Password signing key
   apt_key:
-    url: https://onepassword.s3.amazonaws.com/linux/keys/1password.asc
+    url: https://downloads.1password.com/linux/keys/1password.asc
     state: present
 
 - name: Debian - Add 1Password Repo
   apt_repository:
-    repo: "deb [arch=amd64] https://onepassword.s3.amazonaws.com/linux/debian edge main"
+    repo: "deb [arch=amd64] https://downloads.1password.com/linux/debian edge main"
     filename: 1password
     state: present
 
