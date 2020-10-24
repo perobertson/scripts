@@ -1,18 +1,18 @@
+default:
+  interruptible: true
+
 variables:
   ANSIBLE_FORCE_COLOR: "1"
   # https://bixense.com/clicolors/ standard for enabling colours in CI
   CLICOLOR: "1"
 
-stages:
-  - lint
-  - build
-  - deploy
-
 .build:
-  interruptible: true
   stage: build
   tags:
     - docker
+  needs:
+    - lint:shellcheck
+    - lint:ansible
   script:
     # MRs create duplicate pipelines
     # https://gitlab.com/gitlab-org/gitlab/-/issues/201845#note_399196241
@@ -100,8 +100,7 @@ stages:
 lint:shellcheck:
   extends:
     - .rules_lint
-  interruptible: true
-  stage: lint
+  stage: .pre
   image: koalaman/shellcheck-alpine
   tags:
     - docker
@@ -111,8 +110,7 @@ lint:shellcheck:
 lint:ansible:
   extends:
     - .rules_lint
-  interruptible: true
-  stage: lint
+  stage: .pre
   image:
     name: cytopia/ansible-lint:latest
     entrypoint: ["/bin/sh", "-c"]
@@ -213,6 +211,7 @@ ubuntu_20_04:
 
 deploy_github:
   stage: deploy
+  interruptible: false
   script:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
