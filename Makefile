@@ -1,8 +1,16 @@
-.DEFAULT_GOAL:=lint
+.DEFAULT_GOAL:=ansible-lint
 
-.PHONY: lint
-lint:
+.PHONY: ansible-lint
+ansible-lint:
 	ANSIBLE_CONFIG="./config/ansible.cfg" ansible-lint -p setup.yml systemd.yml
+
+.PHONY: install_hooks
+install_hooks:
+	pre-commit install
+
+.PHONY: hooks
+hooks:
+	pre-commit run --all-files
 
 .PHONY: arch
 arch:
