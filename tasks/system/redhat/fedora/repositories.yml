@@ -10,12 +10,14 @@
     state: present
     key: "{{ signing_keys.rpmfusion_free_fedora[ansible_distribution_major_version].key }}"
     fingerprint: "{{ signing_keys.rpmfusion_free_fedora[ansible_distribution_major_version].fingerprint }}"
+  allow_failure: true
 
 - name: Fedora - Import RPM-GPG-KEY-rpmfusion-nonfree
   rpm_key:
     state: present
     key: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].key }}"
     fingerprint: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].fingerprint }}"
+  allow_failure: true
 
 - name: Fedora - Add Hashicorp repository
   yum_repository:
