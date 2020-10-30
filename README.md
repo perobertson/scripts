@@ -11,11 +11,14 @@ Because of this, the scripts are designed to work with systems that have a pytho
 
 - Archlinux
 - CentOS: 8
-- Fedora: 28(EOL), 29 (EOL), 30 (EOL), 31, 32
+- Fedora: 28(EOL), 29 (EOL), 30 (EOL), 31, 32, 33
 - Manjaro
 - Ubuntu: 18.04, 20.04
 
 Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches&ref=main) for `main` to see the complete list of supported operating systems.
+
+**Note:** Docker may fail to start depending on which version is installed.
+See <https://gitlab.com/perobertson/scripts/-/issues/69> for more details and how to resolve it.
 
 ## Usage
 
