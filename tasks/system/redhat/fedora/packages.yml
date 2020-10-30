@@ -69,13 +69,14 @@
     allowerasing: yes
   when: ansible_distribution_major_version|int >= 29
 
-- name: Fedora >=30 - Install packages
+- name: Fedora >=30 - Install Razer packages for device config
   dnf:
     name:
       - openrazer-meta
       - polychromatic  # razer device configuration
     state: present
   when: ansible_distribution_major_version|int >= 30
+  ignore_errors: true
 
 # This is for the razer drivers which run in userspace
 - name: Fedora >=30 - Add user to plugdev group
