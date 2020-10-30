@@ -2,6 +2,7 @@ default:
   interruptible: true
 
 variables:
+  ANSIBLE_CONFIG: "./config/ansible.cfg"
   ANSIBLE_FORCE_COLOR: "1"
   # https://bixense.com/clicolors/ standard for enabling colours in CI
   CLICOLOR: "1"
@@ -176,6 +177,13 @@ fedora_33:
     - .setup_fedora
     - .rules_redhat
   image: fedora:33
+
+fedora_34:
+  extends:
+    - .build
+    - .setup_fedora
+    - .rules_redhat
+  image: fedora:34
   allow_failure: true
 
 fedora_rawhide:

@@ -69,13 +69,14 @@
     allowerasing: yes
   when: ansible_distribution_major_version|int >= 29
 
-- name: Fedora >=30 - Install packages
+- name: Fedora >=30 - Install Razer packages for device config
   dnf:
     name:
       - openrazer-meta
       - polychromatic  # razer device configuration
     state: present
   when: ansible_distribution_major_version|int >= 30
+  ignore_errors: true
 
 # This is for the razer drivers which run in userspace
 - name: Fedora >=30 - Add user to plugdev group
@@ -84,6 +85,7 @@
     groups: plugdev
     append: true
   when: ansible_distribution_major_version|int >= 30
+  ignore_errors: true
 
 - name: Fedora >=31 - Install packages
   dnf:
@@ -95,7 +97,14 @@
 - name: Fedora >=32 - Install packages
   dnf:
     name:
-      - gitui
       - libxcrypt-compat # docker-compose needs libcrypt.so.1 provided by this package
     state: present
   when: ansible_distribution_major_version|int >= 32
+
+- name: Fedora >=32 - Install gitui
+  dnf:
+    name:
+      - gitui
+    state: present
+  when: ansible_distribution_major_version|int >= 32
+  ignore_errors: true
