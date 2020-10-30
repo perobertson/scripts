@@ -85,6 +85,7 @@
     groups: plugdev
     append: true
   when: ansible_distribution_major_version|int >= 30
+  ignore_errors: true
 
 - name: Fedora >=31 - Install packages
   dnf:
