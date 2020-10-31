@@ -46,6 +46,19 @@
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     repo_gpgcheck: yes
 
+- name: RedHat - Enable Docker Test repository for cgroupv2 support
+  tags: [ docker ]
+  yum_repository:
+    file: docker-ce
+    name: docker-ce-test
+    description: "Docker CE Test - {{ ansible_distribution }} - $releasever - $basearch"
+    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/test"
+    # TODO: set to no when Docker 20 + containerd 1.4 are into stable
+    enabled: "{{ uri_docker_repo_rpm is succeeded and ansible_distribution_major_version|int >= 32 }}"
+    gpgcheck: yes
+    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+    repo_gpgcheck: yes
+
 - name: RedHat - Add Google Cloud SDK repository
   yum_repository:
     file: google-cloud-sdk
