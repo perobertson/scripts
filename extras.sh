@@ -14,6 +14,7 @@ cargo install hyperfine
 # nu recompiles every time
 # cargo install nu
 cargo install procs
+cargo install ripgrep
 cargo install starship
 cargo install tealdeer
 cargo install tokei
