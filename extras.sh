@@ -11,7 +11,8 @@ cargo install git-delta
 cargo install gitui
 cargo install grex
 cargo install hyperfine
-cargo install nu
+# nu recompiles every time
+# cargo install nu
 cargo install procs
 cargo install starship
 cargo install tealdeer
