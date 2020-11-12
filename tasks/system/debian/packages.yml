@@ -40,6 +40,14 @@
     - wget
     - zsh
 
+- name: Debian - Best effort to install optional packages
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - exa
+  ignore_errors: true
+
 - name: Debian - Install remote packages
   apt:
     deb: "{{ item }}"

@@ -9,6 +9,7 @@
       - code
       - curl
       - docker
+      - exa
       - fd
       - flameshot
       - flatpak
