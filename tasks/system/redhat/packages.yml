@@ -90,6 +90,14 @@
     - zlib-devel
     - zsh
 
+- name: RedHat - Best effort to install optional packages
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - exa
+  ignore_errors: true
+
 - name: RedHat - Install remote packages
   dnf:
     name: "{{ item }}"
