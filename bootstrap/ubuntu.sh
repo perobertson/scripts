@@ -10,6 +10,8 @@ sudo apt-get install -y \
 
 # use python3 as the default
 pip3 install --user --upgrade pip
+# use dependency resolution
+pip3 config set global.use-feature 2020-resolver
 # update the packages used in the install process
 pip3 install --user --upgrade setuptools wheel
 # force the shell to forget all remembered locations

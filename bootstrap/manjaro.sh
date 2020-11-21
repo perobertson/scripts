@@ -6,3 +6,6 @@ sudo pacman -S --noconfirm \
     python-pip \
     python-setuptools \
     python-wheel
+
+# use dependency resolution
+pip config set global.use-feature 2020-resolver
