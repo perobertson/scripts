@@ -83,14 +83,18 @@
 # TODO: remove this when docker catches up
 # https://github.com/docker/for-linux/issues/1114
 # test is used for cgroupv2 support
-- name: Fedora33 - Add Docker Test repository for Fedora32
+# switch to stable when it has
+# - containerd 1.4
+# - docker-ce 20.10
+# - docker-ce-cli 20.10
+- name: Fedora33 - Add Docker Test repository
   tags: [ docker ]
   yum_repository:
     file: docker-ce
     name: docker-ce-test
-    description: "Docker CE Test - {{ ansible_distribution }} - 32 - $basearch"
-    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/32/$basearch/test"
-    enabled: yes
+    description: "Docker CE Test - {{ ansible_distribution }} - $releasever - $basearch"
+    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/test"
+    enabled: "{{ uri_docker_repo_rpm is succeeded }}"
     gpgcheck: yes
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     repo_gpgcheck: yes
@@ -99,12 +103,12 @@
 # TODO: remove this when docker catches up
 # https://github.com/docker/for-linux/issues/1114
 # test is used for cgroupv2 support
-- name: Fedora34 - Add Docker Test repository for Fedora32
+- name: Fedora34 - Add Docker Test repository for Fedora33
   tags: [ docker ]
   yum_repository:
     file: docker-ce
     name: docker-ce-test
-    description: "Docker CE Test - {{ ansible_distribution }} - 32 - $basearch"
+    description: "Docker CE Test - {{ ansible_distribution }} - 33 - $basearch"
     baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/32/$basearch/test"
     enabled: yes
     gpgcheck: yes
