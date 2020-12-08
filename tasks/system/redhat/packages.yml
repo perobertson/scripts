@@ -35,6 +35,7 @@
     - bison
     - bzip2
     - bzip2-devel
+    - cmake
     - crudini
     - curl
     - dconf
