@@ -2,6 +2,12 @@
 - name: All - Git update pyenv # noqa 401
   diff: false
   git:
+    repo: https://github.com/iamhsa/pkenv.git
+    dest: ~/Applications/pkenv
+
+- name: All - Git update pyenv # noqa 401
+  diff: false
+  git:
     repo: https://github.com/pyenv/pyenv.git
     dest: ~/Applications/pyenv
 
