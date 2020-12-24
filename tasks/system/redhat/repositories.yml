@@ -46,15 +46,15 @@
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     repo_gpgcheck: yes
 
-- name: RedHat - Enable Docker Test repository for cgroupv2 support
+# Useful to configure on new Fedora versions that do not have docker support yet
+- name: RedHat - Disable Docker Test repository
   tags: [ docker ]
   yum_repository:
     file: docker-ce
     name: docker-ce-test
     description: "Docker CE Test - {{ ansible_distribution }} - $releasever - $basearch"
     baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/test"
-    # TODO: set to no when Docker 20 + containerd 1.4 are into stable
-    enabled: "{{ uri_docker_repo_rpm is succeeded and ansible_distribution_major_version|int >= 32 }}"
+    enabled: no
     gpgcheck: yes
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     repo_gpgcheck: yes
