@@ -49,6 +49,16 @@
     - git
     - gitk
     - google-cloud-sdk
+    - google-noto-sans-display-fonts.noarch
+    - google-noto-sans-display-vf-fonts.noarch
+    - google-noto-sans-fonts
+    - google-noto-sans-mono-fonts
+    - google-noto-sans-mono-vf-fonts
+    - google-noto-sans-vf-fonts
+    - google-roboto-condensed-fonts
+    - google-roboto-fonts
+    - google-roboto-mono-fonts
+    - google-roboto-slab-fonts
     - graphviz
     - htop
     - ImageMagick
