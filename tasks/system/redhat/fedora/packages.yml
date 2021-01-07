@@ -56,6 +56,8 @@
       - bat
       - dbus-daemon
       - dbus-tools
+      - google-noto-sans-display-fonts
+      - google-noto-sans-mono-fonts
       - intel-media-driver
       - texlive-montserrat
     state: present
@@ -68,6 +70,15 @@
     state: present
     allowerasing: yes
   when: ansible_distribution_major_version|int >= 29
+
+- name: Fedora >=30 - Install packages
+  dnf:
+    name:
+      - google-noto-sans-display-vf-fonts
+      - google-noto-sans-mono-vf-fonts
+      - google-noto-sans-vf-fonts
+    state: present
+  when: ansible_distribution_major_version|int >= 30
 
 - name: Fedora >=30 - Install Razer packages for device config
   dnf:
@@ -91,6 +102,7 @@
   dnf:
     name:
       - git-delta
+      - google-roboto-mono-fonts
     state: present
   when: ansible_distribution_major_version|int >= 31
 
