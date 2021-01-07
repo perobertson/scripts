@@ -8,6 +8,12 @@
     - docker-ce
     - fd-find
     - gdouros-symbola-fonts
+    - google-noto-sans-display-fonts
+    - google-noto-sans-display-vf-fonts
+    - google-noto-sans-mono-fonts
+    - google-noto-sans-mono-vf-fonts
+    - google-noto-sans-vf-fonts
+    - google-roboto-mono-fonts
     - gtk-murrine-engine # gtk2 theme engine. Probably safe to remove
     - julia
     - levien-inconsolata-fonts
