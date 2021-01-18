@@ -7,6 +7,13 @@ variables:
   # https://bixense.com/clicolors/ standard for enabling colours in CI
   CLICOLOR: "1"
 
+workflow:
+  rules:
+    # Dont create a branch pipeline for new commits on a merge request
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS && $CI_PIPELINE_SOURCE == "push"
+      when: never
+    - when: always
+
 .build:
   stage: build
   tags:
@@ -15,16 +22,6 @@ variables:
     - lint:shellcheck
     - lint:ansible
   script:
-    # MRs create duplicate pipelines
-    # https://gitlab.com/gitlab-org/gitlab/-/issues/201845#note_399196241
-    - |
-      if [ -n "${GITLAB_TOKEN}" ] && [ "${CI_PIPELINE_SOURCE}" == 'push' ]; then \
-        OPENED_MR_ON_BRANCH="$(curl --header "Private-Token: $GITLAB_TOKEN" "https://$CI_SERVER_HOST/api/v4/merge_requests?project_id=$CI_PROJECT_ID&source_branch=$CI_COMMIT_BRANCH&state=opened")"; \
-        if [ "${OPENED_MR_ON_BRANCH}" != "[]" ]; then \
-          echo "There is at least one MR opened on branch $CI_COMMIT_BRANCH. Stopping the push pipeline in favor of the merge request pipeline"; \
-          exit 1; \
-        fi; \
-      fi
     - ./.gitlab/build.sh
     - su public --command="./.gitlab/check_versions.sh"
 
