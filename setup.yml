@@ -4,7 +4,7 @@
     ansible_connection: local
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
     dive_version: 0.9.2
-    docker_compose_version: 1.27.4
+    docker_compose_version: 1.28.0
     signing_keys:
       epel: # https://getfedora.org/security/
         "8":
