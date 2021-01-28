@@ -1,68 +1,17 @@
 ---
-- name: All - pip install wheel
-  # Install wheel first which is needed to compile other packages
-  pip:
-    extra_args: --user
-    name:
-      - wheel
-    state: present
+- name: All - find pyenv-default-requirements
+  find:
+    paths: "${HOME}/.config/pyenv-default-requirements/requirements.d/"
+    file_type: any
+  register: pyenv_default_requirement_files
 
-- name: All - pip install dev tools # noqa 403
-  no_log: true
+- name: All - pip install pyenv-default-requirements # noqa 403
   pip:
     extra_args: --user
-    name:
-      - ansible-lint<5.0.0,>=4.2.0
-      - autopep8>=1.5.3
-      - aws-credentials
-      - awscli<2.0.0,>=1.18.121
-      - black>=20.8b1
-      - boto3<2.0.0,>=1.14.44
-      - boto3-stubs<2.0.0,>=1.14.44
-      - diagrams>=0.16.0
-      - dlint
-      - flake8-annotations
-      - flake8-docstrings
-      - flake8-import-order
-      - flake8<4.0.0,>=3.7.9
-      - importlib-metadata<2.0.0,>=1.7.0
-      - importlib-resources<2.0.0,>=1.0.0
-      - ipdb
-      - ipython<8.0.0,>=7.0.0
-      - jedi
-      - keyring<22.0.0,>=21.2.0
-      - mypy>=0.782
-      - pdbpp
-      - pep8-naming
-      - pexpect<5.0.0,>=4.7.0
-      - poetry<2.0.0,>=1.1.0
-      - pre-commit<3.0.0,>=2.4.0
-      - psutil>=4.0.0
-      - six
-      - shtab
-      - termcolor<2.0.0,>=1.1.0
-      - tldr
-      - toml>=0.10.1
+    requirements: "{{ item.path }}"
     state: latest
+  loop: "{{ pyenv_default_requirement_files.files }}"
   register: pip_out
-  ignore_errors: True
-
-- name: All - pip debug install failure
-  command: pip --version
-  when: pip_out.failed
-
-- name: All - pip show install failure
-  debug:
-    msg: "{{ pip_out.msg.split('\n') }}"
-  failed_when: true
-  when: pip_out.failed
-
-- name: All - pip show installed # noqa 503
-  debug:
-    msg:
-      stdout: "{{ pip_out.stdout_lines }}"
-      stderr: "{{ pip_out.stderr_lines }}"
-  when: pip_out.changed
 
 - name: All - pip check # noqa 503
   command: pip check
