@@ -22,6 +22,7 @@
       - make
       - nodejs
       - npm
+      - python-psutil
       - shellcheck
       - tk # windowing toolkit needed for gitk
       - tree

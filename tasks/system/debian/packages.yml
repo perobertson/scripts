@@ -30,6 +30,7 @@
     - npm
     - pkg-config
     - python3-dbus
+    - python3-psutil
     - seahorse # key management
     - shellcheck
     - sqlitebrowser

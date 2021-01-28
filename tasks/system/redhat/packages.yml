@@ -77,6 +77,7 @@
     - pv
     - python3-dbus
     - python3-devel
+    - python3-psutil
     - readline-devel
     - redhat-lsb
     - redhat-rpm-config
