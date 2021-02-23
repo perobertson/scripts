@@ -41,6 +41,7 @@
     - dconf
     - dkms
     - dnf-automatic
+    - docker-ce
     - flatpak
     - fuse-sshfs
     - gcc
@@ -120,10 +121,6 @@
     - https://github.com/wagoodman/dive/releases/download/v{{ dive_version }}/dive_{{ dive_version }}_linux_amd64.rpm
 
 ### --- Distro specific ---
-
-- name: CentOS Packages
-  import_tasks: centos/packages.yml
-  when: ansible_distribution == 'CentOS'
 
 - name: Fedora Packages
   import_tasks: fedora/packages.yml

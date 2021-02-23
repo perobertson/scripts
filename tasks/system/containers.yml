@@ -38,7 +38,6 @@
     name: "{{ ansible_user_id }}"
     append: yes
     groups: docker
-  when: ansible_distribution != 'CentOS'
 
 - name: CentOS - Add user to docker group
   tags: [ docker ]
@@ -46,5 +45,4 @@
     name: "{{ ansible_user_id }}"
     append: yes
     groups: docker
-  when: ansible_distribution == 'CentOS'
   ignore_errors: "{{ uri_docker_repo_rpm is failed }}"

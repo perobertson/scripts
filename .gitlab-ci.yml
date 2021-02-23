@@ -122,14 +122,6 @@ archlinux:
     - .rules_archlinux
   image: archlinux/base:latest
 
-centos_8:
-  # EOL: 2029-05-31
-  extends:
-    - .build
-    - .setup_fedora
-    - .rules_redhat
-  image: centos:8
-
 fedora_28:
   # EOL: 2019-05-28
   extends:
@@ -155,6 +147,7 @@ fedora_30:
   image: fedora:30
 
 fedora_31:
+  # EOL: 2020-11-24
   extends:
     - .build
     - .setup_fedora
