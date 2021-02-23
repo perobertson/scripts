@@ -82,6 +82,7 @@
     - readline-devel
     - redhat-lsb
     - redhat-rpm-config
+    - ripgrep
     - samba-client
     - seahorse # key management
     - setools-console
