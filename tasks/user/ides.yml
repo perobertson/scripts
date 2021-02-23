@@ -21,31 +21,3 @@
     url: https://packagecontrol.io/Package%20Control.sublime-package
     dest: $HOME/.config/sublime-text-3/Installed Packages/Package Control.sublime-package
   when: not sublime_package_control.stat.exists
-
-- name: All - VSCode installed extensions # noqa 301
-  command: code --list-extensions
-  register: vscode_extensions
-
-- name: All - VSCode install extensions
-  command: code --install-extension {{ item }}
-  when: "item not in vscode_extensions['stdout_lines'] | map('lower')"
-  loop:
-    - bungcip.better-toml
-    - coolbear.systemd-unit-file
-    - davidanson.vscode-markdownlint
-    - eamodio.gitlens
-    - editorconfig.editorconfig
-    - gitlab.gitlab-workflow
-    - golang.go
-    - hashicorp.terraform
-    - ms-azuretools.vscode-docker
-    - ms-python.python
-    - ms-vscode.vscode-typescript-tslint-plugin
-    - rust-lang.rust
-    - samuelcolvin.jinjahtml
-    - timonwong.shellcheck
-  register: vscode_extension_install
-  until: vscode_extension_install is succeeded
-  retries: 5
-  delay: 5
-  ignore_errors: yes # VSCode marketplace is sometimes unreachable
