@@ -19,6 +19,7 @@
       - jq
       - keybase
       - keybase-gui
+      - lynis # Security scanning tool
       - make
       - nodejs
       - npm

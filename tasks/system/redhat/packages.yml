@@ -66,6 +66,7 @@
     - libnotify
     - libtool
     - libyaml-devel
+    - lynis # Security scanning tool
     - make
     - ncdu
     - nodejs
