@@ -16,6 +16,7 @@
       - gcc
       - gdb
       - gzip
+      - hyperfine # CLI benchmarking
       - jq
       - keybase
       - keybase-gui
