@@ -207,6 +207,16 @@ ubuntu_20_04:
     - .rules_debian
   image: ubuntu:20.04
 
+ubuntu_20_10:
+  # EOL: 2021-04
+  # replace this job with the rolling short term release
+  # https://ubuntu.com/about/release-cycle
+  extends:
+    - .build
+    - .setup_ubuntu
+    - .rules_debian
+  image: ubuntu:20.10
+
 deploy_github:
   stage: deploy
   interruptible: false
