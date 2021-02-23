@@ -5,7 +5,6 @@
     state: present
   loop:
     - autojump-zsh
-    - docker-ce
     - fd-find
     - gdouros-symbola-fonts
     - gtk-murrine-engine # gtk2 theme engine. Probably safe to remove
