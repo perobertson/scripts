@@ -26,6 +26,7 @@
     - jq
     - libcairo2-dev
     - libglib2.0-bin # gsettings
+    - lynis # Security scanning tool
     - nodejs
     - npm
     - pkg-config
