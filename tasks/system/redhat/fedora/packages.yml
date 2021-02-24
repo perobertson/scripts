@@ -57,6 +57,7 @@
       - dbus-tools
       - google-noto-sans-display-fonts
       - google-noto-sans-mono-fonts
+      - hyperfine # CLI benchmarking
       - intel-media-driver
       - texlive-montserrat
     state: present
