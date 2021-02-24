@@ -10,9 +10,9 @@ Python is a main component of the tools that are installed and used.
 Because of this, the scripts are designed to work with systems that have a python3 install that is still supported.
 
 - Archlinux
-- Fedora: 28(EOL), 29 (EOL), 30 (EOL), 31 (EOL), 32, 33
+- Fedora: 28(EOL), 29 (EOL), 30 (EOL), 31 (EOL), 32, 33, 34
 - Manjaro
-- Ubuntu: 18.04, 20.04
+- Ubuntu: 18.04(LTS), 20.04(LTS), 20.10
 
 Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches&ref=main) for `main` to see the complete list of supported operating systems.
 
