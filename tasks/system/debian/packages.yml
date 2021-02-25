@@ -46,6 +46,7 @@
     state: present
   loop:
     - exa
+    - fd-find
   ignore_errors: true
 
 - name: Debian - Install remote packages

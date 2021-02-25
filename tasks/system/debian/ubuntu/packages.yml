@@ -12,7 +12,6 @@
 - name: Ubuntu >=20 - Install packages
   apt:
     pkg:
-      - fd-find
       - python3-cairo
       - python3-launchpadlib
       - python3-testresources
