@@ -38,7 +38,7 @@ debian:
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-debian \
-		debian:9 bash || true
+		debian:10 bash || true
 	docker exec scripts-debian ./.gitlab/setup_debian.bash
 	docker exec scripts-debian ./.gitlab/build.bash
 	docker exec scripts-debian ./.gitlab/check_versions.bash

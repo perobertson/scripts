@@ -15,4 +15,5 @@
 
 - name: All - pip check # noqa 503
   command: pip check
-  when: pip_out.changed
+  # TODO: figure out how to deal with debian shipping a broken python setup
+  when: pip_out.changed and ansible_distribution != 'Debian'
