@@ -2,6 +2,7 @@
 - name: Ubuntu >=18 - Install packages
   apt:
     pkg:
+      - 1password
       - flameshot
       - libasound2
     state: present

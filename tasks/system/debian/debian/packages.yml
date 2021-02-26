@@ -1,0 +1,7 @@
+---
+- name: Debian >=10 - Install packages
+  apt:
+    pkg:
+      - 1password
+    state: present
+  when: ansible_distribution_major_version|int >= 10
