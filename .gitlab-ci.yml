@@ -95,6 +95,10 @@ workflow:
       - tasks/system/redhat/**/*
       - tasks/user/redhat/**/*
 
+.rules_eol: &rules_eol
+  rules:
+    - when: manual
+
 lint:shellcheck:
   extends:
     - .rules_lint
@@ -127,7 +131,7 @@ fedora_28:
   extends:
     - .build
     - .setup_fedora
-    - .rules_redhat
+    - .rules_eol
   image: fedora:28
 
 fedora_29:
@@ -135,7 +139,7 @@ fedora_29:
   extends:
     - .build
     - .setup_fedora
-    - .rules_redhat
+    - .rules_eol
   image: fedora:29
 
 fedora_30:
@@ -143,7 +147,7 @@ fedora_30:
   extends:
     - .build
     - .setup_fedora
-    - .rules_redhat
+    - .rules_eol
   image: fedora:30
 
 fedora_31:
@@ -151,7 +155,7 @@ fedora_31:
   extends:
     - .build
     - .setup_fedora
-    - .rules_redhat
+    - .rules_eol
   image: fedora:31
 
 fedora_32:
