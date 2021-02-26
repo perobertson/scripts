@@ -2,14 +2,16 @@
 sudo apt-get update
 
 # Make sure packages are installed over https
-sudo apt-get install apt-transport-https
+sudo apt-get install -y apt-transport-https
 
 sudo apt-get install -y \
     python3 \
     python3-pip
 
 # use python3 as the default
-pip3 install --user --upgrade 'pip>=21.0'
+pip3 install --user --upgrade 'pip>=20.0'
+# use dependency resolution
+pip3 config set global.use-feature 2020-resolver
 # update the packages used in the install process
 pip3 install --user --upgrade setuptools wheel
 # force the shell to forget all remembered locations

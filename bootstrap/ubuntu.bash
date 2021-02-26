@@ -2,7 +2,7 @@
 sudo apt-get update
 
 # Make sure packages are installed over https
-sudo apt-get install apt-transport-https
+sudo apt-get install -y apt-transport-https
 
 sudo apt-get install -y \
     python3 \
