@@ -27,7 +27,6 @@
     - libglib2.0-bin # gsettings
     - lynis # Security scanning tool
     - nodejs
-    - npm
     - pkg-config
     - python3-dbus
     - python3-psutil

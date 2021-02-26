@@ -3,5 +3,6 @@
   apt:
     pkg:
       - 1password
+      - npm
     state: present
   when: ansible_distribution_major_version|int >= 10
