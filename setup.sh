@@ -107,10 +107,11 @@ switch_dir(){
 bootstrap(){
     os="$(. /etc/os-release && echo "${ID}")"
     case "${os}" in
-        arch)    source "bootstrap/arch.sh"    ;;
-        fedora)  source "bootstrap/fedora.sh"  ;;
-        manjaro) source "bootstrap/manjaro.sh" ;;
-        ubuntu)  source "bootstrap/ubuntu.sh"  ;;
+        arch)    source "bootstrap/arch.bash"    ;;
+        debian)  source "bootstrap/debian.bash"  ;;
+        fedora)  source "bootstrap/fedora.bash"  ;;
+        manjaro) source "bootstrap/manjaro.bash" ;;
+        ubuntu)  source "bootstrap/ubuntu.bash"  ;;
         *)
             echo "WARNING: ${os} is not supported" >&2
             echo "Please submit an issue at https://gitlab.com/perobertson/scripts/issues" >&2

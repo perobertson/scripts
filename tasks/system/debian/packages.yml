@@ -8,7 +8,6 @@
     pkg: "{{ item }}"
     state: present
   loop:
-    - 1password
     - bash
     - bash-completion
     - code
@@ -28,7 +27,6 @@
     - libglib2.0-bin # gsettings
     - lynis # Security scanning tool
     - nodejs
-    - npm
     - pkg-config
     - python3-dbus
     - python3-psutil
@@ -43,8 +41,8 @@
     - zsh
 
 - name: Debian - Best effort to install optional packages
-  dnf:
-    name: "{{ item }}"
+  apt:
+    pkg: "{{ item }}"
     state: present
   loop:
     - exa
@@ -59,6 +57,10 @@
     - https://prerelease.keybase.io/keybase_amd64.deb
 
 ### --- Distro specific ---
+
+- name: Debian Packages
+  import_tasks: debian/packages.yml
+  when: ansible_distribution == 'Debian'
 
 - name: Ubuntu Packages
   import_tasks: ubuntu/packages.yml

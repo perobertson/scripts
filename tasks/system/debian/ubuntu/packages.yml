@@ -2,7 +2,9 @@
 - name: Ubuntu >=18 - Install packages
   apt:
     pkg:
+      - 1password
       - flameshot
+      - npm
       - libasound2
     state: present
   when: ansible_distribution_major_version|int >= 18
