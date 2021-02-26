@@ -132,14 +132,6 @@ archlinux:
     - .rules_archlinux
   image: archlinux/base:latest
 
-debian_9:
-  # EOL: ~2022 (LTS)
-  extends:
-    - .build
-    - .setup_debian
-    - .rules_debian
-  image: debian:9
-
 debian_10:
   # EOL: ~2022
   extends:

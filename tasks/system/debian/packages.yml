@@ -41,8 +41,8 @@
     - zsh
 
 - name: Debian - Best effort to install optional packages
-  dnf:
-    name: "{{ item }}"
+  apt:
+    pkg: "{{ item }}"
     state: present
   loop:
     - exa
