@@ -21,14 +21,32 @@ arch:
 		--rm \
 		--name scripts-arch \
 		archlinux/base:latest bash || true
-	docker exec scripts-arch ./.gitlab/setup_archlinux.sh
-	docker exec scripts-arch ./.gitlab/build.sh
-	docker exec scripts-arch ./.gitlab/check_versions.sh
+	docker exec scripts-arch ./.gitlab/setup_archlinux.bash
+	docker exec scripts-arch ./.gitlab/build.bash
+	docker exec scripts-arch ./.gitlab/check_versions.bash
 	$(MAKE) stop-arch
 
 .PHONY: stop-arch
 stop-arch:
 	docker stop scripts-arch
+
+.PHONY: debian
+debian:
+	docker run \
+		-ditv $(shell pwd):/scripts \
+		-w /scripts \
+		-e ANSIBLE_FORCE_COLOR=1 \
+		--rm \
+		--name scripts-debian \
+		debian:9 bash || true
+	docker exec scripts-debian ./.gitlab/setup_debian.bash
+	docker exec scripts-debian ./.gitlab/build.bash
+	docker exec scripts-debian ./.gitlab/check_versions.bash
+	$(MAKE) stop-debian
+
+.PHONY: stop-debian
+stop-debian:
+	docker stop scripts-debian
 
 .PHONY: fedora
 fedora:
@@ -39,8 +57,8 @@ fedora:
 		--rm \
 		--name scripts-fedora \
 		fedora:32 bash || true
-	docker exec scripts-fedora ./.gitlab/setup_fedora.sh
-	docker exec scripts-fedora ./.gitlab/build.sh
+	docker exec scripts-fedora ./.gitlab/setup_fedora.bash
+	docker exec scripts-fedora ./.gitlab/build.bash
 	$(MAKE) stop-fedora
 
 .PHONY: stop-fedora
