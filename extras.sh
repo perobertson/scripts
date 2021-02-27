@@ -12,6 +12,7 @@ cargo install grex
 cargo install hyperfine
 cargo install procs
 cargo install ripgrep
+cargo install sedo
 cargo install starship
 cargo install tealdeer
 cargo install tokei
