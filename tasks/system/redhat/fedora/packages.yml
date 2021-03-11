@@ -7,7 +7,7 @@
     - autojump-zsh
     - fd-find
     - gdouros-symbola-fonts
-    - gtk-murrine-engine # gtk2 theme engine. Probably safe to remove
+    - gtk-murrine-engine  # gtk2 theme engine. Probably safe to remove
     - julia
     - levien-inconsolata-fonts
     - mozilla-fira-fonts-common
@@ -37,7 +37,7 @@
 - name: Fedora <=27 - Install mysql-community-devel
   dnf:
     name:
-      - mysql-community-devel # from the community repository
+      - mysql-community-devel  # from the community repository
     state: present
   when: ansible_distribution_major_version|int <= 27
 
@@ -45,7 +45,7 @@
   dnf:
     name:
       - code
-      - community-mysql-devel # from fedora modular
+      - community-mysql-devel  # from fedora modular
     state: present
   when: ansible_distribution_major_version|int >= 28
 
@@ -57,7 +57,7 @@
       - dbus-tools
       - google-noto-sans-display-fonts
       - google-noto-sans-mono-fonts
-      - hyperfine # CLI benchmarking
+      - hyperfine  # CLI benchmarking
       - intel-media-driver
       - texlive-montserrat
     state: present
@@ -68,7 +68,7 @@
     name:
       - pulseaudio-module-bluetooth-freeworld
     state: present
-    allowerasing: yes
+    allowerasing: true
   when: ansible_distribution_major_version|int >= 29
 
 - name: Fedora >=30 - Install packages
@@ -103,16 +103,16 @@
     name:
       - git-delta
       - google-roboto-mono-fonts
-      - starship # CLI prompt
-      - tealdeer # tldr writen in rust
-      - ytop # CLI system monitoring
+      - starship  # CLI prompt
+      - tealdeer  # tldr writen in rust
+      - ytop  # CLI system monitoring
     state: present
   when: ansible_distribution_major_version|int >= 31
 
 - name: Fedora >=32 - Install packages
   dnf:
     name:
-      - libxcrypt-compat # docker-compose needs libcrypt.so.1 provided by this package
-      - zoxide # A faster way to navigate your filesystem
+      - libxcrypt-compat  # docker-compose needs libcrypt.so.1 provided by this package
+      - zoxide  # A faster way to navigate your filesystem
     state: present
   when: ansible_distribution_major_version|int >= 32

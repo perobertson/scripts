@@ -23,9 +23,9 @@
     name: hashicorp
     description: Hashicorp Stable - $basearch
     baseurl: https://rpm.releases.hashicorp.com/fedora/$releasever/$basearch/stable
-    enabled: yes
-    gpgcheck: yes
-    repo_gpgcheck: yes
+    enabled: true
+    gpgcheck: true
+    repo_gpgcheck: true
     gpgkey: https://rpm.releases.hashicorp.com/gpg
 
 - name: Fedora - Add RPMFusion-free repository
@@ -74,21 +74,21 @@
     name: razer
     description: Razer drivers (Fedora {{ ansible_distribution_major_version|int }})
     baseurl: "https://download.opensuse.org/repositories/hardware:/razer/Fedora_{{ ansible_distribution_major_version|int }}/"
-    enabled: yes
-    gpgcheck: yes
+    enabled: true
+    gpgcheck: true
     gpgkey: "https://download.opensuse.org/repositories/hardware:/razer/Fedora_{{ ansible_distribution_major_version|int }}/repodata/repomd.xml.key"
-    repo_gpgcheck: yes
+    repo_gpgcheck: true
   when: ansible_distribution_major_version|int >= 30
 
 - name: Fedora34+ - Add Docker Stable repository for Fedora33
-  tags: [ docker ]
+  tags: [docker]
   yum_repository:
     file: docker-ce
     name: docker-ce-stable
     description: "Docker CE Stable - {{ ansible_distribution }} - 33 - $basearch"
     baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/33/$basearch/stable"
-    enabled: yes
-    gpgcheck: yes
+    enabled: true
+    gpgcheck: true
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
-    repo_gpgcheck: yes
+    repo_gpgcheck: true
   when: ansible_distribution_major_version|int >= 34

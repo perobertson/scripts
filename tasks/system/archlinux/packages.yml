@@ -1,34 +1,34 @@
 ---
-  - name: Archlinux - Install packages
-    pacman:
-      name: "{{ item }}"
-      state: present
-    loop:
-      - bash
-      - bash-completion
-      - code
-      - curl
-      - docker
-      - exa
-      - fd
-      - flameshot
-      - flatpak
-      - gcc
-      - gdb
-      - gzip
-      - hyperfine # CLI benchmarking
-      - jq
-      - keybase
-      - keybase-gui
-      - lynis # Security scanning tool
-      - make
-      - nodejs
-      - npm
-      - python-psutil
-      - ripgrep
-      - shellcheck
-      - tk # windowing toolkit needed for gitk
-      - tree
-      - wget
-      - xz
-      - zsh
+- name: Archlinux - Install packages
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - bash
+    - bash-completion
+    - code
+    - curl
+    - docker
+    - exa
+    - fd
+    - flameshot
+    - flatpak
+    - gcc
+    - gdb
+    - gzip
+    - hyperfine  # CLI benchmarking
+    - jq
+    - keybase
+    - keybase-gui
+    - lynis  # Security scanning tool
+    - make
+    - nodejs
+    - npm
+    - python-psutil
+    - ripgrep
+    - shellcheck
+    - tk  # windowing toolkit needed for gitk
+    - tree
+    - wget
+    - xz
+    - zsh

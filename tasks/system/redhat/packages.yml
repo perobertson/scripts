@@ -66,7 +66,7 @@
     - libnotify
     - libtool
     - libyaml-devel
-    - lynis # Security scanning tool
+    - lynis  # Security scanning tool
     - make
     - ncdu
     - nodejs
@@ -74,7 +74,7 @@
     - openssl-devel
     - p7zip
     - patch
-    - pcp-system-tools # dstat
+    - pcp-system-tools  # dstat
     - perl
     - pv
     - python3-dbus
@@ -85,12 +85,12 @@
     - redhat-rpm-config
     - ripgrep
     - samba-client
-    - seahorse # key management
+    - seahorse  # key management
     - setools-console
     - sqlite-devel
     - sublime-merge
     - sublime-text
-    - sysstat # iostat
+    - sysstat  # iostat
     - tree
     - virt-what
     - wget
@@ -119,7 +119,7 @@
   dnf:
     name: "{{ item }}"
     state: present
-    disable_gpg_check: yes
+    disable_gpg_check: true
   loop:
     - https://github.com/wagoodman/dive/releases/download/v{{ dive_version }}/dive_{{ dive_version }}_linux_amd64.rpm
 

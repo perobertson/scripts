@@ -1,2 +1,6 @@
 skip_list:
-    - '204'  # Lines should be no longer than 160 chars'
+    - line-length  # Lines should be no longer than 160 chars'
+
+exclude_paths:
+  - .gitlab-ci.yml
+  - .pre-commit-config.yaml

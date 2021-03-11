@@ -1,7 +1,7 @@
 ---
 - name: Debian - Update apt cache
   apt:
-    update_cache: yes
+    update_cache: true
 
 - name: Debian - Install packages
   apt:
@@ -24,18 +24,18 @@
     - htop
     - jq
     - libcairo2-dev
-    - libglib2.0-bin # gsettings
-    - lynis # Security scanning tool
+    - libglib2.0-bin  # gsettings
+    - lynis  # Security scanning tool
     - nodejs
     - pkg-config
     - python3-dbus
     - python3-psutil
-    - seahorse # key management
+    - seahorse  # key management
     - shellcheck
     - sqlitebrowser
     - sublime-merge
     - sublime-text
-    - sysstat # iostat
+    - sysstat  # iostat
     - tree
     - wget
     - zsh

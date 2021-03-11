@@ -21,7 +21,7 @@
     filename: hashicorp
     state: present
 
-- name: Debian - Add VSCode signing key # noqa 303
+- name: Debian - Add VSCode signing key  # noqa 303
   shell:
     cmd: |
       curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /tmp/packages.microsoft.gpg
@@ -36,13 +36,13 @@
     state: present
 
 - name: Debian - Add Docker signing key
-  tags: [ docker ]
+  tags: [docker]
   apt_key:
     url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
     state: present
 
 - name: Debian - Add Docker repo
-  tags: [ docker ]
+  tags: [docker]
   apt_repository:
     repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_lsb['codename'] }} stable"
     filename: docker

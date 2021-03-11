@@ -1,8 +1,8 @@
 ---
-- name: All - Fetch gsettings schemas # noqa 301
+- name: All - Fetch gsettings schemas  # noqa 301
   no_log: true
   command: gsettings list-schemas
-  ignore_errors: yes
+  ignore_errors: true
   register: gsettings_schemas
 
 - name: All - Show clock seconds
@@ -29,7 +29,7 @@
     mode: '0664'
 
 - name: All - Set terminal settings
-  tags: [ terminal ]
+  tags: [terminal]
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/:e7aeecbb-8907-4e08-916e-749914c7b0b7/{{ item.key }}"
     value: "{{ item.value | string }}"
@@ -77,51 +77,51 @@
       value: "'Managed by Ansible'"
 
 - name: All - Discover gnome terminal profiles
-  tags: [ terminal ]
+  tags: [terminal]
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/list"
     state: read
   register: gnome_terminal_profiles
 
 - name: All - Parse gnome terminal profiles
-  tags: [ terminal ]
+  tags: [terminal]
   set_fact:
     gnome_terminal_profiles_list: "{{ gnome_terminal_profiles.value or '[]' | replace(\"'\", '\"') | from_json }}"
 
 - name: All - Append new profile id to list
-  tags: [ terminal ]
+  tags: [terminal]
   set_fact:
     # list.append returns None which is falsey so use or to print out the updated value
     updated_gnome_terminal_profiles_list: "{{ gnome_terminal_profiles_list.append('e7aeecbb-8907-4e08-916e-749914c7b0b7') or gnome_terminal_profiles_list | unique | sort }}"
 
 - name: All - Format gnome terminal list to dconf format
-  tags: [ terminal ]
+  tags: [terminal]
   set_fact:
     updated_gnome_terminal_profiles_str: "{{ updated_gnome_terminal_profiles_list | string | regex_replace('\"', \"'\") }}"
 
 - name: All - Add profile to terminal list
-  tags: [ terminal ]
+  tags: [terminal]
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/list"
     value: "{{ updated_gnome_terminal_profiles_str | string }}"
     state: present
 
 - name: All - Set default gnome terminal
-  tags: [ terminal ]
+  tags: [terminal]
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/default"
     value: "'e7aeecbb-8907-4e08-916e-749914c7b0b7'"
     state: present
 
 - name: All - Enable cinnamon indicators
-  tags: [ cinnamon ]
+  tags: [cinnamon]
   dconf:
     key: /org/cinnamon/enable-indicators
     value: 'true'
     state: present
 
-- name: All - Git update cinnamon-spices-themes # noqa 401
-  tags: [ cinnamon ]
+- name: All - Git update cinnamon-spices-themes  # noqa 401
+  tags: [cinnamon]
   diff: false
   git:
     repo: https://github.com/linuxmint/cinnamon-spices-themes.git
@@ -129,14 +129,14 @@
     depth: 1
 
 - name: All - Create ~/.themes dir
-  tags: [ cinnamon ]
+  tags: [cinnamon]
   file:
     path: ~/.themes
     state: directory
     mode: '0775'
 
 - name: All - Link cinnamon themes
-  tags: [ cinnamon ]
+  tags: [cinnamon]
   file:
     src: "~/Applications/cinnamon-spices-themes/{{ item }}/files/{{ item }}"
     dest: "~/.themes/Ansible-{{ item }}"
@@ -145,7 +145,7 @@
     - CBlack
 
 - name: All - Set cinnamon theme
-  tags: [ cinnamon ]
+  tags: [cinnamon]
   dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"

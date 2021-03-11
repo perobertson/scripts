@@ -22,42 +22,42 @@
     name: 1password
     description: "1Password for Linux"
     baseurl: https://downloads.1password.com/linux/rpm
-    enabled: yes
-    gpgcheck: yes
+    enabled: true
+    gpgcheck: true
     gpgkey: https://downloads.1password.com/linux/keys/1password.asc
-    repo_gpgcheck: yes
+    repo_gpgcheck: true
 
 - name: RedHat - Check for Docker support
-  tags: [ docker ]
+  tags: [docker]
   uri:
     url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version|int }}/{{ ansible_architecture }}/stable"
   register: uri_docker_repo_rpm
-  ignore_errors: True
+  ignore_errors: true
 
 - name: RedHat - Add Docker repository
-  tags: [ docker ]
+  tags: [docker]
   yum_repository:
     file: docker-ce
     name: docker-ce-stable
     description: "Docker CE Stable - {{ ansible_distribution }} - $releasever - $basearch"
     baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/stable"
     enabled: "{{ uri_docker_repo_rpm is succeeded }}"
-    gpgcheck: yes
+    gpgcheck: true
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
-    repo_gpgcheck: yes
+    repo_gpgcheck: true
 
 # Useful to configure on new Fedora versions that do not have docker support yet
 - name: RedHat - Disable Docker Test repository
-  tags: [ docker ]
+  tags: [docker]
   yum_repository:
     file: docker-ce
     name: docker-ce-test
     description: "Docker CE Test - {{ ansible_distribution }} - $releasever - $basearch"
     baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/test"
-    enabled: no
-    gpgcheck: yes
+    enabled: false
+    gpgcheck: true
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
-    repo_gpgcheck: yes
+    repo_gpgcheck: true
 
 - name: RedHat - Add Google Cloud SDK repository
   yum_repository:
@@ -65,9 +65,9 @@
     name: google-cloud-sdk
     description: Google Cloud SDK
     baseurl: https://packages.cloud.google.com/yum/repos/cloud-sdk-el7-x86_64
-    enabled: yes
-    gpgcheck: yes
-    repo_gpgcheck: yes
+    enabled: true
+    gpgcheck: true
+    repo_gpgcheck: true
     gpgkey:
       - https://packages.cloud.google.com/yum/doc/yum-key.gpg
       - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
@@ -78,8 +78,8 @@
     name: keybase
     description: keybase
     baseurl: http://prerelease.keybase.io/rpm/x86_64
-    enabled: yes
-    gpgcheck: yes
+    enabled: true
+    gpgcheck: true
     gpgkey: https://keybase.io/docs/server_security/code_signing_key.asc
     metadata_expire: '60'
 
@@ -89,9 +89,9 @@
     name: kubernetes
     description: Kubernetes
     baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-    enabled: yes
-    gpgcheck: yes
-    repo_gpgcheck: yes
+    enabled: true
+    gpgcheck: true
+    repo_gpgcheck: true
     gpgkey:
       - https://packages.cloud.google.com/yum/doc/yum-key.gpg
       - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
@@ -102,8 +102,8 @@
     name: sublime-text
     description: Sublime Text - x86_64 - Stable
     baseurl: https://download.sublimetext.com/rpm/stable/x86_64
-    enabled: yes
-    gpgcheck: yes
+    enabled: true
+    gpgcheck: true
     gpgkey:
       - https://download.sublimetext.com/sublimehq-rpm-pub.gpg
 
@@ -113,10 +113,10 @@
     name: code
     description: Visual Studio Code
     baseurl: https://packages.microsoft.com/yumrepos/vscode
-    enabled: yes
-    gpgcheck: yes
+    enabled: true
+    gpgcheck: true
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
-    repo_gpgcheck: yes
+    repo_gpgcheck: true
 
 - name: RedHat - check if rpmfusion-free.repo file exists
   stat:
