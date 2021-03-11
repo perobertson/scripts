@@ -5,7 +5,7 @@
     file_type: any
   register: pyenv_default_requirement_files
 
-- name: All - pip install pyenv-default-requirements # noqa 403
+- name: All - pip install pyenv-default-requirements  # noqa 403
   pip:
     extra_args: --user
     requirements: "{{ item.path }}"
@@ -13,7 +13,7 @@
   loop: "{{ pyenv_default_requirement_files.files }}"
   register: pip_out
 
-- name: All - pip check # noqa 503
+- name: All - pip check  # noqa 503
   command: pip check
   # TODO: figure out how to deal with debian shipping a broken python setup
   when: pip_out.changed and ansible_distribution != 'Debian'

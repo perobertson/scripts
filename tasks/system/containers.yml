@@ -10,14 +10,14 @@
     mode: +x
 
 - name: All - Install docker-compose {{ docker_compose_version }}
-  tags: [ docker ]
+  tags: [docker]
   get_url:
     url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_machine }}"
     dest: /usr/local/bin/docker-compose-{{ docker_compose_version }}
     mode: '0755'
 
 - name: Non-Debian - Install docker-compose completions {{ docker_compose_version }}
-  tags: [ docker ]
+  tags: [docker]
   get_url:
     url: "https://raw.githubusercontent.com/docker/compose/{{ docker_compose_version }}/contrib/completion/zsh/_docker-compose"
     dest: /usr/share/zsh/site-functions/_docker-compose
@@ -25,7 +25,7 @@
   when: ansible_os_family != 'Debian'
 
 - name: Debian - Install docker-compose completions {{ docker_compose_version }}
-  tags: [ docker ]
+  tags: [docker]
   get_url:
     url: "https://raw.githubusercontent.com/docker/compose/{{ docker_compose_version }}/contrib/completion/zsh/_docker-compose"
     dest: /usr/local/share/zsh/site-functions/_docker-compose
@@ -33,32 +33,32 @@
   when: ansible_os_family == 'Debian'
 
 - name: All - Update link to latest docker-compose
-  tags: [ docker ]
+  tags: [docker]
   file:
     src: /usr/local/bin/docker-compose-{{ docker_compose_version }}
     dest: /usr/local/bin/docker-compose
     state: hard
-    force: yes
+    force: true
     mode: '0755'
 
 - name: All - Enable execue for docker-compose
-  tags: [ docker ]
+  tags: [docker]
   file:
     src: /usr/local/bin/docker-compose-{{ docker_compose_version }}
     dest: /usr/local/bin/docker-compose
     mode: +rx
 
 - name: All - Add user to docker group
-  tags: [ docker ]
+  tags: [docker]
   user:
     name: "{{ ansible_user_id }}"
-    append: yes
+    append: true
     groups: docker
 
 - name: CentOS - Add user to docker group
-  tags: [ docker ]
+  tags: [docker]
   user:
     name: "{{ ansible_user_id }}"
-    append: yes
+    append: true
     groups: docker
   ignore_errors: "{{ uri_docker_repo_rpm is failed }}"
