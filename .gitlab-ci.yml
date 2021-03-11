@@ -120,9 +120,16 @@ lint:ansible:
     - .rules_lint
   stage: .pre
   image:
-    name: cytopia/ansible-lint:latest
-    entrypoint: ["/bin/sh", "-c"]
+    name: python:3-slim
+    entrypoint: [""]
+  tags:
+    - docker
   script:
+    - |
+      pip3 install --upgrade \
+        'ansible>=3.0.0,<4.0.0' \
+        'ansible-lint>=5.0.0,<6.0.0' \
+        'yamllint>=1.0.0<2.0.0'
     - ansible-lint -p setup.yml systemd.yml
 
 archlinux:
