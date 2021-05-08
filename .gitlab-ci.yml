@@ -137,7 +137,7 @@ archlinux:
     - .build
     - .setup_archlinux
     - .rules_archlinux
-  image: archlinux/base:latest
+  image: archlinux:latest
 
 debian_10:
   # EOL: ~2022
