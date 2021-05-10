@@ -9,3 +9,5 @@ sudo pacman -S --noconfirm \
 
 # use dependency resolution
 pip config set global.use-feature 2020-resolver
+# make sure all dependencies are satisfied
+pip check
