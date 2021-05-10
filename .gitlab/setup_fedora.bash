@@ -7,6 +7,8 @@ pwd
 ls -laH
 dnf install -y sudo
 echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci
-useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
+if ! getent group public; then
+    useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
+fi
 cat /etc/passwd
 cat /etc/group

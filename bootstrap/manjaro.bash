@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
 sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm \
-    ansible \
-    ansible-base \
     python \
     python-pip \
     python-setuptools \
     python-wheel
 
-# use dependency resolution
-pip config set global.use-feature 2020-resolver
+# use python3 as the default
+pip3 install --user --upgrade 'pip>=21.0'
+# update the packages used in the install process
+pip3 install --user --upgrade setuptools wheel
+# force the shell to forget all remembered locations
+hash -r
+# Make sure ansible is using python3
+pip3 install --user --upgrade 'ansible>=3.0.0,<4.0.0'
 # make sure all dependencies are satisfied
-pip check
+pip3 check

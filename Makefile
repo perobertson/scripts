@@ -20,7 +20,7 @@ arch:
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-arch \
-		archlinux/base:latest bash || true
+		archlinux:latest bash || true
 	docker exec scripts-arch ./.gitlab/setup_archlinux.bash
 	docker exec scripts-arch ./.gitlab/build.bash
 	docker exec scripts-arch ./.gitlab/check_versions.bash
