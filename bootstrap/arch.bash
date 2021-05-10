@@ -2,6 +2,7 @@
 sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm \
     ansible \
+    ansible-base \
     python \
     python-pip \
     python-setuptools \
