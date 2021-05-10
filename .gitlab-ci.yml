@@ -9,10 +9,10 @@ variables:
 
 workflow:
   rules:
-    # Dont create a branch pipeline for new commits on a merge request
-    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS && $CI_PIPELINE_SOURCE == "push"
-      when: never
-    - when: always
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_MERGE_REQUEST_IID
+    - if: $CI_OPEN_MERGE_REQUESTS == ''
 
 .build:
   stage: build
@@ -137,7 +137,7 @@ archlinux:
     - .build
     - .setup_archlinux
     - .rules_archlinux
-  image: archlinux/base:latest
+  image: archlinux:latest
 
 debian_10:
   # EOL: ~2022
@@ -183,7 +183,7 @@ fedora_32:
   extends:
     - .build
     - .setup_fedora
-    - .rules_redhat
+    - .rules_eol
   image: fedora:32
 
 fedora_33:
