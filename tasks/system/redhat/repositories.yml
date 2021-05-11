@@ -18,13 +18,13 @@
 
 - name: RedHat - Add 1Password repository
   yum_repository:
-    file: 1Password
+    file: 1password
     name: 1password
-    description: "1Password for Linux"
-    baseurl: https://downloads.1password.com/linux/rpm
+    description: "\"1Password Beta Channel\""
+    baseurl: https://downloads.1password.com/linux/rpm/beta/$basearch
     enabled: true
     gpgcheck: true
-    gpgkey: https://downloads.1password.com/linux/keys/1password.asc
+    gpgkey: "\"https://downloads.1password.com/linux/keys/1password.asc\""
     repo_gpgcheck: true
 
 - name: RedHat - Check for Docker support
