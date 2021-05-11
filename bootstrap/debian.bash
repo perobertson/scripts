@@ -16,6 +16,5 @@ sudo apt-get install -y \
 # Setup ansible
 "${SCRIPT_DIR}/install_ansible.bash"
 
-# TODO: figure out how to deal with the fact that debian ships with broken python
 # make sure all dependencies are satisfied
-# pip3 check
+pip3 check
