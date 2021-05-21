@@ -8,6 +8,10 @@ ansible-lint:
 install_hooks:
 	pre-commit install
 
+.PHONY: install
+install:
+	./setup.sh
+
 .PHONY: hooks
 hooks:
 	pre-commit run --all-files

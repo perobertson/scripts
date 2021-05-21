@@ -24,13 +24,13 @@ This will checkout the project to `"${HOME}/Applications/scripts"` before applyi
 Using `curl`:
 
 ```bash
-/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/main/setup.sh | time bash
+/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/main/setup.sh | bash
 ```
 
 Using `wget`:
 
 ```bash
-/usr/bin/wget -qO- https://gitlab.com/perobertson/scripts/raw/main/setup.sh | time bash
+/usr/bin/wget -qO- https://gitlab.com/perobertson/scripts/raw/main/setup.sh | bash
 ```
 
 ## Updating
