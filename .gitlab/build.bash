@@ -2,9 +2,9 @@
 set -xeuo pipefail
 
 # Location of this script
-HERE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-su public --command="${HERE}/../setup.sh"
+su public --command="${SCRIPT_DIR}/../setup.sh"
 
 git status --short && test "$(git status --short)" = ''
 

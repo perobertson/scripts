@@ -12,7 +12,9 @@ workflow:
     - if: $CI_COMMIT_TAG
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - if: $CI_MERGE_REQUEST_IID
-    - if: $CI_OPEN_MERGE_REQUESTS == ''
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: $CI_COMMIT_BRANCH
 
 .build:
   stage: build
@@ -52,6 +54,7 @@ workflow:
   - .gitlab-ci.yml
   - "**/*.bash"
   - "**/*.sh"
+  - setup.sh
   - setup.yml
   - ansible.cfg
   - bin/*
@@ -125,11 +128,12 @@ lint:ansible:
   tags:
     - docker
   script:
+    - export PATH="${HOME}/.local/bin:${PATH}"
+    - ./bootstrap/install_ansible.bash
     - |
-      pip3 install --upgrade \
-        'ansible>=3.0.0,<4.0.0' \
-        'ansible-lint>=5.0.0,<6.0.0' \
-        'yamllint>=1.0.0<2.0.0'
+      pip3 install --user --upgrade \
+        ansible-lint \
+        yamllint
     - ansible-lint -p setup.yml systemd.yml
 
 archlinux:
