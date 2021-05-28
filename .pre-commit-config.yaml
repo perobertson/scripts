@@ -1,28 +1,44 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
+---
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.3.0
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
     hooks:
-    -   id: trailing-whitespace
-    -   id: end-of-file-fixer
-    -   id: check-yaml
-    -   id: check-added-large-files
-        args: ['--maxkb=1024']
--   repo: local
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-yaml
+      - id: destroyed-symlinks
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: no-commit-to-branch
+      - id: trailing-whitespace
+  - repo: local
     hooks:
-    -   id: shellcheck
+      - id: shellcheck
         name: ShellCheck
         entry: shellcheck
         args:
-        -   --external-sources
+          - --external-sources
         language: system
         types: [shell]
-    -   id: ansible-lint
+      - id: ansible-lint
         name: Ansible Lint
         entry: make
         args:
-        -   ansible-lint
+          - ansible-lint
         language: system
         types: [yaml]
         pass_filenames: false
+      - id: yamllint
+        name: Yaml Lint
+        entry: yamllint -f parsable
+        language: system
+        types: [yaml]

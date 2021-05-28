@@ -1,3 +1,4 @@
+---
 default:
   interruptible: true
 
@@ -73,9 +74,9 @@ workflow:
     - changes: *rules_common_files
     ### specific
     - changes:
-      - bootstrap/(arch|manjaro).bash
-      - tasks/system/archlinux/**/*
-      - tasks/user/archlinux/**/*
+        - bootstrap/(arch|manjaro).bash
+        - tasks/system/archlinux/**/*
+        - tasks/user/archlinux/**/*
 
 .rules_debian: &rules_debian
   rules:
@@ -86,9 +87,9 @@ workflow:
     - changes: *rules_common_files
     ### specific
     - changes:
-      - bootstrap/(debian|ubuntu).bash
-      - tasks/system/debian/**/*
-      - tasks/user/debian/**/*
+        - bootstrap/(debian|ubuntu).bash
+        - tasks/system/debian/**/*
+        - tasks/user/debian/**/*
 
 .rules_redhat: &rules_redhat
   rules:
@@ -99,9 +100,9 @@ workflow:
     - changes: *rules_common_files
     ### specific
     - changes:
-      - bootstrap/(fedora).bash
-      - tasks/system/redhat/**/*
-      - tasks/user/redhat/**/*
+        - bootstrap/(fedora).bash
+        - tasks/system/redhat/**/*
+        - tasks/user/redhat/**/*
 
 .rules_eol: &rules_eol
   rules:
@@ -135,6 +136,8 @@ lint:ansible:
         ansible-lint \
         yamllint
     - ansible-lint -p setup.yml systemd.yml
+    # Also check all other non ansible files
+    - yamllint -f parsable .
 
 archlinux:
   extends:
