@@ -9,8 +9,8 @@ trap cleanup EXIT ERR
 
 cd /tmp
 
-/usr/bin/curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscli-exe-linux-x86_64.zip"
-/usr/bin/curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip.sig" -o "/tmp/awscli-exe-linux-x86_64.zip.sig"
+/usr/bin/curl -O "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+/usr/bin/curl -O "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip.sig"
 /usr/bin/gpg --verify /tmp/awscli-exe-linux-x86_64.zip.sig /tmp/awscli-exe-linux-x86_64.zip
 /usr/bin/unzip /tmp/awscli-exe-linux-x86_64.zip
 
