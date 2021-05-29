@@ -1,0 +1,21 @@
+---
+- name: RedHat - Configure security updates
+  diff: true
+  copy:
+    src: files/etc/dnf/automatic.conf
+    dest: /etc/dnf/automatic.conf
+    mode: '0644'
+
+- name: RedHat - Configure security updates file permissions
+  file:
+    path: /etc/dnf/automatic.conf
+    mode: '0644'
+
+- name: RedHat - Enable security updates
+  become: true
+  systemd:
+    name: dnf-automatic.timer
+    enabled: true
+    state: started
+    daemon_reload: true
+  when: not file_dockerenv.stat.exists

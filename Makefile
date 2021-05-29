@@ -1,6 +1,6 @@
 .DEFAULT_GOAL:=ansible-lint
 
-playbooks:=docker.yml gcloud.yml kubernetes.yml razer.yml setup.yml systemd.yml
+playbooks:=docker.yml gcloud.yml kubernetes.yml razer.yml setup.yml
 
 .PHONY: ansible-lint
 ansible-lint: export ANSIBLE_CONFIG="./config/ansible.cfg"

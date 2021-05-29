@@ -1,14 +1,22 @@
 ---
-- name: RedHat - Configure security updates
-  diff: true
-  copy:
-    src: files/etc/dnf/automatic.conf
-    dest: /etc/dnf/automatic.conf
-    mode: '0644'
-  when: ansible_os_family == 'RedHat'
+- name: All - Enable flatpak updates
+  systemd:
+    name: flatpak-update.timer
+    enabled: true
+    state: started
+    daemon_reload: true
+    scope: user
+  when: not file_dockerenv.stat.exists
 
-- name: RedHat - Configure security updates file permissions
-  file:
-    path: /etc/dnf/automatic.conf
-    mode: '0644'
+### --- Family Specific Setup
+- name: Archlinux Security
+  import_tasks: archlinux/security.yml
+  when: ansible_os_family == 'Archlinux'
+
+- name: Debian Security
+  import_tasks: debian/security.yml
+  when: ansible_os_family == 'Debian'
+
+- name: RedHat Security
+  import_tasks: redhat/security.yml
   when: ansible_os_family == 'RedHat'

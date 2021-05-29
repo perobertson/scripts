@@ -69,6 +69,11 @@
         msg: "{{ ansible_facts }}"
       tags: [never, debug]
 
+    - name: All - Check if dockerenv exists
+      stat:
+        path: /.dockerenv
+      register: file_dockerenv
+
     ### --- System ---
     - name: Repositories
       tags: [system, dev, repo]
