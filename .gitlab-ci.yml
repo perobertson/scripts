@@ -155,18 +155,10 @@ lint:shellcheck:
 lint:ansible:
   extends:
     - .rules_lint
-  stage: .pre
-  image:
-    name: python:3-slim
-    entrypoint: [""]
+  stage: lint
+  image: $CI_REGISTRY_IMAGE/linter:$CI_COMMIT_REF_SLUG
   script:
-    - export PATH="${HOME}/.local/bin:${PATH}"
-    - ./bootstrap/install_ansible.bash
-    - |
-      pip3 install --user --upgrade \
-        ansible-lint \
-        yamllint
-    - ansible-lint -p setup.yml systemd.yml
+    - make ansible-lint
     # Also check all other non ansible files
     - yamllint -f parsable .
 
