@@ -149,6 +149,7 @@ ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v setup.yml
 ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v docker.yml
 ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v gcloud.yml
 ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v kubernetes.yml
+ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v razer.yml
 if [[ ! -f /.dockerenv ]]; then
     # only start the services when outside of docker
     ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v systemd.yml
