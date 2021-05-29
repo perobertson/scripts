@@ -137,10 +137,10 @@ build:linter:
       JSON
     - >
       /kaniko/executor
-        --cleanup
-        --context $CI_PROJECT_DIR
-        --destination $CI_REGISTRY_IMAGE/linter:$CI_COMMIT_REF_SLUG
-        --dockerfile $CI_PROJECT_DIR/.gitlab/linter.dockerfile
+      --cleanup
+      --context $CI_PROJECT_DIR
+      --destination $CI_REGISTRY_IMAGE/linter:$CI_COMMIT_REF_SLUG
+      --dockerfile $CI_PROJECT_DIR/.gitlab/linter.dockerfile
 
 lint:shellcheck:
   extends:
