@@ -1,13 +1,4 @@
 ---
-- name: All - Enable flatpak updates
-  systemd:
-    name: flatpak-update.timer
-    enabled: true
-    state: started
-    daemon_reload: true
-    scope: user
-  when: not file_dockerenv.stat.exists
-
 ### --- Family Specific Setup
 - name: Archlinux Security
   import_tasks: archlinux/security.yml

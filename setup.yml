@@ -108,3 +108,10 @@
       tags: [user, ides]
     - import_tasks: tasks/user/bins.yml
       tags: [user, bins]
+
+  handlers:
+    - name: systemctl --user daemon-reload
+      systemd:
+        daemon_reload: true
+        scope: user
+      when: not file_dockerenv.stat.exists
