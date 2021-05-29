@@ -120,6 +120,7 @@ build:linter:
   image:
     name: gcr.io/kaniko-project/executor:v1.6.0-slim
     entrypoint: [""]
+  needs: []
   script:
     - mkdir -p /kaniko/.docker
     - |
