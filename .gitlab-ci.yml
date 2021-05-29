@@ -28,8 +28,10 @@ workflow:
 .test:
   stage: test
   needs:
-    - lint:shellcheck
-    - lint:ansible
+    - job: lint:shellcheck
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
   script:
     - ./.gitlab/build.bash
     - su public --command="./.gitlab/check_versions.bash"
@@ -157,6 +159,9 @@ lint:ansible:
     - .rules_lint
   stage: lint
   image: $CI_REGISTRY_IMAGE/linter:$CI_COMMIT_REF_SLUG
+  needs:
+    - job: build:linter
+      artifacts: false
   script:
     - make ansible-lint
     # Also check all other non ansible files
