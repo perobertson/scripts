@@ -22,7 +22,7 @@
   ansible.builtin.apt_key:
     url: https://apt.releases.hashicorp.com/gpg
     state: present
-    id: C874011F0AB405110D02105534365D9472D7468F
+    id: E8A032E094D8EB4EA189D270DA418C88A3219F7B
     keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
 
 - name: Debian - Add Hashicorp Repo
