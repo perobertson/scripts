@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  vars:
+    ansible_connection: local
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+  tasks:
+    - name: All - Check if dockerenv exists
+      stat:
+        path: /.dockerenv
+      register: file_dockerenv
+
+    - name: GCloud
+      tags: [system]
+      become: true
+      import_tasks: tasks/system/gcloud.yml

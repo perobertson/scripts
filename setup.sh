@@ -145,7 +145,10 @@ bootstrap
 
 # Run the setup
 ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v setup.yml
+# Additional playbooks that were originally part of setup
 ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v docker.yml
+ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v gcloud.yml
+ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v kubernetes.yml
 if [[ ! -f /.dockerenv ]]; then
     # only start the services when outside of docker
     ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v systemd.yml

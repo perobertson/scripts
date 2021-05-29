@@ -39,7 +39,7 @@
     append: true
     groups: docker
 
-### --- Family Specific Ssetup
+### --- Family Specific Setup
 - name: Archlinux Docker
   import_tasks: archlinux/docker.yml
   when: ansible_os_family == 'Archlinux'

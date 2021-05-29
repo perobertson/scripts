@@ -38,19 +38,6 @@
     gpgkey: https://downloads.1password.com/linux/keys/1password.asc
     repo_gpgcheck: true
 
-- name: RedHat - Add Google Cloud SDK repository
-  yum_repository:
-    file: google-cloud-sdk
-    name: google-cloud-sdk
-    description: Google Cloud SDK
-    baseurl: https://packages.cloud.google.com/yum/repos/cloud-sdk-el7-x86_64
-    enabled: true
-    gpgcheck: true
-    repo_gpgcheck: true
-    gpgkey:
-      - https://packages.cloud.google.com/yum/doc/yum-key.gpg
-      - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-
 - name: RedHat - Add Keybase repository
   yum_repository:
     file: keybase
@@ -61,19 +48,6 @@
     gpgcheck: true
     gpgkey: https://keybase.io/docs/server_security/code_signing_key.asc
     metadata_expire: '60'
-
-- name: RedHat - Add Kubernetes repository
-  yum_repository:
-    file: kubernetes
-    name: kubernetes
-    description: Kubernetes
-    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-    enabled: true
-    gpgcheck: true
-    repo_gpgcheck: true
-    gpgkey:
-      - https://packages.cloud.google.com/yum/doc/yum-key.gpg
-      - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 
 - name: RedHat - Add Sublime-Text repository
   yum_repository:
