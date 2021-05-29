@@ -13,3 +13,10 @@
     gpgkey:
       - https://packages.cloud.google.com/yum/doc/yum-key.gpg
       - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+- name: RedHat - Install kubernetes
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - kubectl

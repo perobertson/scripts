@@ -57,7 +57,6 @@
     - ImageMagick
     - jq
     - keybase
-    - kubectl
     - libcurl-devel
     - libffi-devel
     - libheif
