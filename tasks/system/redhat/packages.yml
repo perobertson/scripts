@@ -41,7 +41,6 @@
     - dconf
     - dkms
     - dnf-automatic
-    - docker-ce
     - flatpak
     - fuse-sshfs
     - gcc
@@ -114,8 +113,8 @@
     state: present
   loop:
     - https://zoom.us/client/latest/zoom_x86_64.rpm
-  retries: 3
-  delay: 3
+  retries: 5
+  delay: 5
 
 - name: RedHat - Install unsigned remote packages
   dnf:

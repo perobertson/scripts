@@ -2,7 +2,15 @@
 
 .PHONY: ansible-lint
 ansible-lint:
-	ANSIBLE_CONFIG="./config/ansible.cfg" ansible-lint -p setup.yml systemd.yml
+	ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook --syntax-check \
+		docker.yml \
+		setup.yml \
+		systemd.yml
+
+	ANSIBLE_CONFIG="./config/ansible.cfg" ansible-lint -p \
+		docker.yml \
+		setup.yml \
+		systemd.yml
 
 .PHONY: install_hooks
 install_hooks:

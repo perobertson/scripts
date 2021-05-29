@@ -28,8 +28,6 @@
 - name: Fedora >=27 - Install packages
   dnf:
     name:
-      - containerd.io
-      - docker-ce-cli
       - podman
     state: present
   when: ansible_distribution_major_version|int >= 27
@@ -112,7 +110,6 @@
 - name: Fedora >=32 - Install packages
   dnf:
     name:
-      - libxcrypt-compat  # docker-compose needs libcrypt.so.1 provided by this package
       - zoxide  # A faster way to navigate your filesystem
     state: present
   when: ansible_distribution_major_version|int >= 32

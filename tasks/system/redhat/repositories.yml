@@ -38,38 +38,6 @@
     gpgkey: https://downloads.1password.com/linux/keys/1password.asc
     repo_gpgcheck: true
 
-- name: RedHat - Check for Docker support
-  tags: [docker]
-  uri:
-    url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version|int }}/{{ ansible_architecture }}/stable"
-  register: uri_docker_repo_rpm
-  ignore_errors: true
-
-- name: RedHat - Add Docker repository
-  tags: [docker]
-  yum_repository:
-    file: docker-ce
-    name: docker-ce-stable
-    description: "Docker CE Stable - {{ ansible_distribution }} - $releasever - $basearch"
-    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/stable"
-    enabled: "{{ uri_docker_repo_rpm is succeeded }}"
-    gpgcheck: true
-    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
-    repo_gpgcheck: true
-
-# Useful to configure on new Fedora versions that do not have docker support yet
-- name: RedHat - Disable Docker Test repository
-  tags: [docker]
-  yum_repository:
-    file: docker-ce
-    name: docker-ce-test
-    description: "Docker CE Test - {{ ansible_distribution }} - $releasever - $basearch"
-    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/test"
-    enabled: false
-    gpgcheck: true
-    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
-    repo_gpgcheck: true
-
 - name: RedHat - Add Google Cloud SDK repository
   yum_repository:
     file: google-cloud-sdk

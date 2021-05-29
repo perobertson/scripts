@@ -1,0 +1,56 @@
+---
+# Docker support for new fedora releases is always behind
+- name: RedHat - Check for Docker support
+  uri:
+    url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version|int }}/{{ ansible_architecture }}/stable"
+  register: uri_docker_repo_rpm
+  ignore_errors: true
+
+- name: RedHat - Import Docker signing key
+  rpm_key:
+    state: present
+    key: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+    fingerprint: 060A61C51B558A7F742B77AAC52FEB6B621E9F35
+  retries: 5
+  delay: 5
+
+- name: RedHat - Add Docker repository
+  yum_repository:
+    file: docker-ce
+    name: docker-ce-stable
+    description: "Docker CE Stable - {{ ansible_distribution }} - $releasever - $basearch"
+    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/stable"
+    enabled: "{{ uri_docker_repo_rpm is succeeded }}"
+    gpgcheck: true
+    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+    repo_gpgcheck: true
+
+# Useful to configure on new Fedora versions that do not have docker support yet
+- name: RedHat - Disable Docker Test repository
+  yum_repository:
+    file: docker-ce
+    name: docker-ce-test
+    description: "Docker CE Test - {{ ansible_distribution }} - $releasever - $basearch"
+    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/test"
+    enabled: false
+    gpgcheck: true
+    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+    repo_gpgcheck: true
+
+- name: Fedora >=35 - Add Docker Stable repository for Fedora34
+  yum_repository:
+    file: docker-ce
+    name: docker-ce-stable
+    description: "Docker CE Stable - {{ ansible_distribution }} - 34 - $basearch"
+    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/34/$basearch/stable"
+    enabled: true
+    gpgcheck: true
+    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+    repo_gpgcheck: true
+  when: ansible_distribution_major_version|int >= 35
+
+### --- Distro specific ---
+
+- name: Fedora Docker
+  import_tasks: fedora/docker.yml
+  when: ansible_distribution == 'Fedora'

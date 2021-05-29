@@ -1,7 +1,8 @@
 ---
 default:
   interruptible: true
-
+  tags:
+    - docker
 variables:
   ANSIBLE_CONFIG: "./config/ansible.cfg"
   ANSIBLE_FORCE_COLOR: "1"
@@ -19,8 +20,6 @@ workflow:
 
 .build:
   stage: build
-  tags:
-    - docker
   needs:
     - lint:shellcheck
     - lint:ansible
@@ -114,8 +113,6 @@ lint:shellcheck:
     - .rules_lint
   stage: .pre
   image: koalaman/shellcheck-alpine
-  tags:
-    - docker
   script:
     - shellcheck --external-sources setup.sh $(find . -name '*.sh' -path '**/latest/**')
 
@@ -126,8 +123,6 @@ lint:ansible:
   image:
     name: python:3-slim
     entrypoint: [""]
-  tags:
-    - docker
   script:
     - export PATH="${HOME}/.local/bin:${PATH}"
     - ./bootstrap/install_ansible.bash
@@ -246,15 +241,15 @@ ubuntu_20_04:
     - .rules_debian
   image: ubuntu:20.04
 
-ubuntu_20_10:
-  # EOL: 2021-04
+ubuntu_21_04:
+  # EOL: 2022-01
   # replace this job with the rolling short term release
-  # https://ubuntu.com/about/release-cycle
+  # https://wiki.ubuntu.com/Releases
   extends:
     - .build
     - .setup_ubuntu
     - .rules_debian
-  image: ubuntu:20.10
+  image: ubuntu:21.04
 
 deploy_github:
   stage: deploy

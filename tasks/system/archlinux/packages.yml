@@ -8,7 +8,6 @@
     - bash-completion
     - code
     - curl
-    - docker
     - exa
     - fd
     - flameshot

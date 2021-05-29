@@ -1,0 +1,26 @@
+---
+- name: Debian - Add Docker signing key
+  tags: [docker]
+  apt_key:
+    url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+    state: present
+
+- name: Debian - Add Docker repo
+  tags: [docker]
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_lsb['codename'] }} stable"
+    filename: docker
+    state: present
+
+- name: Debian - Update apt cache
+  apt:
+    update_cache: true
+
+- name: Debian - Install docker
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  loop:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
