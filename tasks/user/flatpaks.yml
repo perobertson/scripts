@@ -18,14 +18,10 @@
     src: files/home/user/.config/systemd/user/{{ item }}
     dest: $HOME/.config/systemd/user/{{ item }}
     mode: '0644'
+  notify: systemctl --user daemon-reload
   loop:
     - flatpak-update.service
     - flatpak-update.timer
-
-- name: All - Check if dockerenv exists
-  stat:
-    path: /.dockerenv
-  register: file_dockerenv
 
 - name: All - Install flatpaks
   flatpak:
@@ -41,4 +37,13 @@
   until: flatpak_install is succeeded
   retries: 5
   delay: 5
+  when: not file_dockerenv.stat.exists
+
+- name: All - Enable flatpak updates
+  systemd:
+    name: flatpak-update.timer
+    enabled: true
+    state: started
+    daemon_reload: true
+    scope: user
   when: not file_dockerenv.stat.exists
