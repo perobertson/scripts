@@ -7,6 +7,7 @@ PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${HOME}/bin:$PATH"
 # List installed tools
 tools
 # Now check the versions
+1password --version || echo '1password unavailable'
 ansible --version
 bash --version
 cargo --version
