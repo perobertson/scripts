@@ -33,12 +33,6 @@
     dest: /usr/local/bin/docker-compose
     mode: +rx
 
-- name: All - Add user to docker group
-  user:
-    name: "{{ ansible_user_id }}"
-    append: true
-    groups: docker
-
 ### --- Family Specific Setup
 - name: Archlinux Docker
   import_tasks: archlinux/docker.yml
@@ -51,3 +45,10 @@
 - name: RedHat Docker
   import_tasks: redhat/docker.yml
   when: ansible_os_family == 'RedHat'
+
+### --- Post actions
+- name: All - Add user to docker group
+  user:
+    name: "{{ ansible_user_id }}"
+    append: true
+    groups: docker

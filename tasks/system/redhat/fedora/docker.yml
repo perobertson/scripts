@@ -8,9 +8,3 @@
     - docker-ce
     - docker-ce-cli
     - libcrypt.so.1()(64bit)  # needed by docker-compose
-
-- name: Fedora - Add user to docker group
-  user:
-    name: "{{ ansible_user_id }}"
-    append: true
-    groups: docker
