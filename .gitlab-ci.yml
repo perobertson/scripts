@@ -118,7 +118,8 @@ workflow:
 build:linter:
   stage: build
   image:
-    name: gcr.io/kaniko-project/executor:v1.6.0-slim
+    # debug image has a shell
+    name: gcr.io/kaniko-project/executor:v1.6.0-debug
     entrypoint: [""]
   needs: []
   script:
