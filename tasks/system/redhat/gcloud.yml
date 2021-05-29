@@ -13,3 +13,10 @@
     gpgkey:
       - https://packages.cloud.google.com/yum/doc/yum-key.gpg
       - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+- name: RedHat - Install gcloud
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - google-cloud-sdk
