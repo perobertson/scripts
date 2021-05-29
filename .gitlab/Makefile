@@ -1,3 +1,3 @@
 .PHONY: linter
 linter:
-	podman build -f linter.dockerfile ..
+	podman build --pull-always -f .gitlab/linter.dockerfile ..
