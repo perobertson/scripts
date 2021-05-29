@@ -3,6 +3,13 @@ default:
   interruptible: true
   tags:
     - docker
+
+stages:
+  - build
+  - lint
+  - test
+  - deploy
+
 variables:
   ANSIBLE_CONFIG: "./config/ansible.cfg"
   ANSIBLE_FORCE_COLOR: "1"
@@ -107,6 +114,31 @@ workflow:
   rules:
     - when: manual
       allow_failure: true
+
+build:linter:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.6.0-slim
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - |
+      tee /kaniko/.docker/config.json <<-JSON
+      {
+        "auths": {
+          "$CI_REGISTRY": {
+            "username":"$CI_REGISTRY_USER",
+            "password":"$CI_REGISTRY_PASSWORD"
+          }
+        }
+      }
+      JSON
+    - >
+      /kaniko/executor
+        --cleanup
+        --context $CI_PROJECT_DIR
+        --destination $CI_REGISTRY_IMAGE/linter:$CI_COMMIT_REF_SLUG
+        --dockerfile $CI_PROJECT_DIR/.gitlab/linter.dockerfile
 
 lint:shellcheck:
   extends:
