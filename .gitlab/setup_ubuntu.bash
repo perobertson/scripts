@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -xeuo pipefail
 
+apt-get update
+DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
+
 whoami
 echo "$HOME"
 pwd
