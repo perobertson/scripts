@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  vars:
+    ansible_connection: local
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+    docker_compose_version: 1.29.2
+  tasks:
+    - name: All - Check if dockerenv exists
+      stat:
+        path: /.dockerenv
+      register: file_dockerenv
+
+    - name: Docker
+      tags: [system]
+      become: true
+      import_tasks: tasks/system/docker.yml
+
+    - name: All - Enable docker
+      become: true
+      systemd:
+        name: docker.service
+        enabled: true
+        state: started
+        daemon_reload: true
+      when: not file_dockerenv.stat.exists

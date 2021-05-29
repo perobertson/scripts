@@ -1,8 +1,12 @@
 .DEFAULT_GOAL:=ansible-lint
 
+playbooks:=docker.yml gcloud.yml kubernetes.yml razer.yml setup.yml systemd.yml
+
 .PHONY: ansible-lint
+ansible-lint: export ANSIBLE_CONFIG="./config/ansible.cfg"
 ansible-lint:
-	ANSIBLE_CONFIG="./config/ansible.cfg" ansible-lint -p setup.yml systemd.yml
+	ansible-playbook --syntax-check $(playbooks)
+	ansible-lint -p $(playbooks)
 
 .PHONY: install_hooks
 install_hooks:

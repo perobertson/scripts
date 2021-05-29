@@ -1,0 +1,7 @@
+---
+- name: Archlinux - Install docker
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - docker

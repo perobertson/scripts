@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "coolbear.systemd-unit-file",
+        "davidanson.vscode-markdownlint",
+        "editorconfig.editorconfig",
+        "gitlab.gitlab-workflow",
+        "gruntfuggly.todo-tree",
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml",
+        "samuelcolvin.jinjahtml",
+        "timonwong.shellcheck",
+        "zbr.vscode-ansible"
+    ]
+}

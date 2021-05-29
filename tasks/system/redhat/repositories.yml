@@ -38,51 +38,6 @@
     gpgkey: https://downloads.1password.com/linux/keys/1password.asc
     repo_gpgcheck: true
 
-- name: RedHat - Check for Docker support
-  tags: [docker]
-  uri:
-    url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version|int }}/{{ ansible_architecture }}/stable"
-  register: uri_docker_repo_rpm
-  ignore_errors: true
-
-- name: RedHat - Add Docker repository
-  tags: [docker]
-  yum_repository:
-    file: docker-ce
-    name: docker-ce-stable
-    description: "Docker CE Stable - {{ ansible_distribution }} - $releasever - $basearch"
-    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/stable"
-    enabled: "{{ uri_docker_repo_rpm is succeeded }}"
-    gpgcheck: true
-    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
-    repo_gpgcheck: true
-
-# Useful to configure on new Fedora versions that do not have docker support yet
-- name: RedHat - Disable Docker Test repository
-  tags: [docker]
-  yum_repository:
-    file: docker-ce
-    name: docker-ce-test
-    description: "Docker CE Test - {{ ansible_distribution }} - $releasever - $basearch"
-    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/test"
-    enabled: false
-    gpgcheck: true
-    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
-    repo_gpgcheck: true
-
-- name: RedHat - Add Google Cloud SDK repository
-  yum_repository:
-    file: google-cloud-sdk
-    name: google-cloud-sdk
-    description: Google Cloud SDK
-    baseurl: https://packages.cloud.google.com/yum/repos/cloud-sdk-el7-x86_64
-    enabled: true
-    gpgcheck: true
-    repo_gpgcheck: true
-    gpgkey:
-      - https://packages.cloud.google.com/yum/doc/yum-key.gpg
-      - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-
 - name: RedHat - Add Keybase repository
   yum_repository:
     file: keybase
@@ -93,19 +48,6 @@
     gpgcheck: true
     gpgkey: https://keybase.io/docs/server_security/code_signing_key.asc
     metadata_expire: '60'
-
-- name: RedHat - Add Kubernetes repository
-  yum_repository:
-    file: kubernetes
-    name: kubernetes
-    description: Kubernetes
-    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-    enabled: true
-    gpgcheck: true
-    repo_gpgcheck: true
-    gpgkey:
-      - https://packages.cloud.google.com/yum/doc/yum-key.gpg
-      - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 
 - name: RedHat - Add Sublime-Text repository
   yum_repository:

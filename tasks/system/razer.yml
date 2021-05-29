@@ -1,0 +1,13 @@
+---
+### --- Family Specific Setup
+- name: Archlinux GCloud
+  import_tasks: archlinux/razer.yml
+  when: ansible_os_family == 'Archlinux'
+
+- name: Debian GCloud
+  import_tasks: debian/razer.yml
+  when: ansible_os_family == 'Debian'
+
+- name: RedHat GCloud
+  import_tasks: redhat/razer.yml
+  when: ansible_os_family == 'RedHat'

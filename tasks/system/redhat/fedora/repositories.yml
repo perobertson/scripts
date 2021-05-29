@@ -1,10 +1,4 @@
 ---
-- name: Fedora - Import Docker signing key
-  rpm_key:
-    state: present
-    key: https://download.docker.com/linux/fedora/gpg
-    fingerprint: 060A61C51B558A7F742B77AAC52FEB6B621E9F35
-
 - name: Fedora - Import RPM-GPG-KEY-rpmfusion-free
   rpm_key:
     state: present
@@ -16,6 +10,8 @@
     state: present
     key: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].key }}"
     fingerprint: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].fingerprint }}"
+
+# TODO import rpm key
 
 - name: Fedora - Add Hashicorp repository
   yum_repository:
@@ -67,28 +63,3 @@
   when:
     - ansible_distribution_major_version|int >= 26
     - ansible_distribution_major_version|int <= 27
-
-- name: Fedora >=30 - Add Razer repository
-  yum_repository:
-    file: razer
-    name: razer
-    description: Razer drivers (Fedora {{ ansible_distribution_major_version|int }})
-    baseurl: "https://download.opensuse.org/repositories/hardware:/razer/Fedora_{{ ansible_distribution_major_version|int }}/"
-    enabled: true
-    gpgcheck: true
-    gpgkey: "https://download.opensuse.org/repositories/hardware:/razer/Fedora_{{ ansible_distribution_major_version|int }}/repodata/repomd.xml.key"
-    repo_gpgcheck: true
-  when: ansible_distribution_major_version|int >= 30
-
-- name: Fedora >=35 - Add Docker Stable repository for Fedora34
-  tags: [docker]
-  yum_repository:
-    file: docker-ce
-    name: docker-ce-stable
-    description: "Docker CE Stable - {{ ansible_distribution }} - 34 - $basearch"
-    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/34/$basearch/stable"
-    enabled: true
-    gpgcheck: true
-    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
-    repo_gpgcheck: true
-  when: ansible_distribution_major_version|int >= 35

@@ -1,6 +1,14 @@
 ---
 default:
   interruptible: true
+  tags:
+    - docker
+
+stages:
+  - build
+  - lint
+  - test
+  - deploy
 
 variables:
   ANSIBLE_CONFIG: "./config/ansible.cfg"
@@ -17,13 +25,13 @@ workflow:
       when: never
     - if: $CI_COMMIT_BRANCH
 
-.build:
-  stage: build
-  tags:
-    - docker
+.test:
+  stage: test
   needs:
-    - lint:shellcheck
-    - lint:ansible
+    - job: lint:shellcheck
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
   script:
     - ./.gitlab/build.bash
     - su public --command="./.gitlab/check_versions.bash"
@@ -109,39 +117,59 @@ workflow:
     - when: manual
       allow_failure: true
 
+build:linter:
+  stage: build
+  image:
+    # debug image has a shell
+    name: gcr.io/kaniko-project/executor:v1.6.0-debug
+    entrypoint: [""]
+  needs: []
+  script:
+    - mkdir -p /kaniko/.docker
+    - |
+      tee /kaniko/.docker/config.json <<-JSON
+      {
+        "auths": {
+          "$CI_REGISTRY": {
+            "username":"$CI_REGISTRY_USER",
+            "password":"$CI_REGISTRY_PASSWORD"
+          }
+        }
+      }
+      JSON
+    - >
+      /kaniko/executor
+      --cleanup
+      --cache
+      --cache-repo $CI_REGISTRY_IMAGE/cache
+      --context $CI_PROJECT_DIR
+      --destination $CI_REGISTRY_IMAGE/linter:$CI_COMMIT_REF_SLUG
+      --dockerfile $CI_PROJECT_DIR/.gitlab/linter.dockerfile
+
 lint:shellcheck:
   extends:
     - .rules_lint
   stage: .pre
   image: koalaman/shellcheck-alpine
-  tags:
-    - docker
   script:
     - shellcheck --external-sources setup.sh $(find . -name '*.sh' -path '**/latest/**')
 
 lint:ansible:
   extends:
     - .rules_lint
-  stage: .pre
-  image:
-    name: python:3-slim
-    entrypoint: [""]
-  tags:
-    - docker
+  stage: lint
+  image: $CI_REGISTRY_IMAGE/linter:$CI_COMMIT_REF_SLUG
+  needs:
+    - job: build:linter
+      artifacts: false
   script:
-    - export PATH="${HOME}/.local/bin:${PATH}"
-    - ./bootstrap/install_ansible.bash
-    - |
-      pip3 install --user --upgrade \
-        ansible-lint \
-        yamllint
-    - ansible-lint -p setup.yml systemd.yml
+    - make ansible-lint
     # Also check all other non ansible files
     - yamllint -f parsable .
 
 archlinux:
   extends:
-    - .build
+    - .test
     - .setup_archlinux
     - .rules_archlinux
   image: archlinux:latest
@@ -149,7 +177,7 @@ archlinux:
 debian_10:
   # EOL: ~2022
   extends:
-    - .build
+    - .test
     - .setup_debian
     - .rules_debian
   image: debian:10
@@ -157,7 +185,7 @@ debian_10:
 fedora_28:
   # EOL: 2019-05-28
   extends:
-    - .build
+    - .test
     - .setup_fedora
     - .rules_eol
   image: fedora:28
@@ -165,7 +193,7 @@ fedora_28:
 fedora_29:
   # EOL: 2019-11-30
   extends:
-    - .build
+    - .test
     - .setup_fedora
     - .rules_eol
   image: fedora:29
@@ -173,7 +201,7 @@ fedora_29:
 fedora_30:
   # EOL: 2020-05-26
   extends:
-    - .build
+    - .test
     - .setup_fedora
     - .rules_eol
   image: fedora:30
@@ -181,35 +209,35 @@ fedora_30:
 fedora_31:
   # EOL: 2020-11-24
   extends:
-    - .build
+    - .test
     - .setup_fedora
     - .rules_eol
   image: fedora:31
 
 fedora_32:
   extends:
-    - .build
+    - .test
     - .setup_fedora
     - .rules_eol
   image: fedora:32
 
 fedora_33:
   extends:
-    - .build
+    - .test
     - .setup_fedora
     - .rules_redhat
   image: fedora:33
 
 fedora_34:
   extends:
-    - .build
+    - .test
     - .setup_fedora
     - .rules_redhat
   image: fedora:34
 
 fedora_35:
   extends:
-    - .build
+    - .test
     - .setup_fedora
     - .rules_redhat
   image: fedora:35
@@ -217,7 +245,7 @@ fedora_35:
 
 fedora_rawhide:
   extends:
-    - .build
+    - .test
     - .setup_fedora
     - .rules_redhat
   image: fedora:rawhide
@@ -225,7 +253,7 @@ fedora_rawhide:
 
 manjaro:
   extends:
-    - .build
+    - .test
     - .setup_archlinux
     - .rules_archlinux
   image: manjarolinux/base:latest
@@ -233,7 +261,7 @@ manjaro:
 ubuntu_18_04:
   # EOL: 2023-04
   extends:
-    - .build
+    - .test
     - .setup_ubuntu
     - .rules_debian
   image: ubuntu:18.04
@@ -241,20 +269,20 @@ ubuntu_18_04:
 ubuntu_20_04:
   # EOL: 2025-04
   extends:
-    - .build
+    - .test
     - .setup_ubuntu
     - .rules_debian
   image: ubuntu:20.04
 
-ubuntu_20_10:
-  # EOL: 2021-04
+ubuntu_21_04:
+  # EOL: 2022-01
   # replace this job with the rolling short term release
-  # https://ubuntu.com/about/release-cycle
+  # https://wiki.ubuntu.com/Releases
   extends:
-    - .build
+    - .test
     - .setup_ubuntu
     - .rules_debian
-  image: ubuntu:20.10
+  image: ubuntu:21.04
 
 deploy_github:
   stage: deploy

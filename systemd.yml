@@ -21,12 +21,3 @@
         state: started
         daemon_reload: true
       when: ansible_os_family == 'RedHat'
-
-    - name: RedHat - Enable docker
-      become: true
-      systemd:
-        name: docker.service
-        enabled: true
-        state: started
-        daemon_reload: true
-      when: ansible_os_family == 'RedHat'
