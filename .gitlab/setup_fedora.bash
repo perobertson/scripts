@@ -6,8 +6,8 @@ echo "$HOME"
 pwd
 ls -laH
 dnf install -y \
-    su \
-    sudo
+    sudo \
+    util-linux
 echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci
 if ! getent group public; then
     useradd --user-group --create-home --groups=wheel --shell=/bin/bash public
