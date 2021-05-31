@@ -1,9 +1,9 @@
 ---
-# TODO this is missing the fingerprint
 - name: Debian - Add Docker signing key
   ansible.builtin.apt_key:
     url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
     state: present
+    id: 060A61C51B558A7F742B77AAC52FEB6B621E9F35
     keyring: /usr/share/keyrings/docker-archive-keyring.gpg
 
 - name: Debian - Add Docker repo
