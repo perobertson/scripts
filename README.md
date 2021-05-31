@@ -10,9 +10,12 @@ Python is a main component of the tools that are installed and used.
 Because of this, the scripts are designed to work with systems that have a python3 install that is still supported.
 
 - Archlinux
-- Fedora: 28(EOL), 29 (EOL), 30 (EOL), 31 (EOL), 32, 33, 34
+- Debian: 10
+- Fedora: 28(EOL), 29 (EOL), 30 (EOL), 31 (EOL), 32(EOL), 33, 34
 - Manjaro
-- Ubuntu: 18.04(LTS), 20.04(LTS), 20.10
+- Ubuntu: 18.04(LTS), 20.04(LTS), 21.04
+
+**Note:** OSes that are EOL are not tested in CI.
 
 Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches&ref=main) for `main` to see the complete list of supported operating systems.
 
@@ -33,6 +36,20 @@ Using `wget`:
 /usr/bin/wget -qO- https://gitlab.com/perobertson/scripts/raw/main/setup.sh | bash
 ```
 
+## Installing Extras
+
+There are additional packages that can also be installed.
+This is done though supplementary playbooks, each with their own make target.
+
+- `make instal_docker`
+- `make instal_gcloud`
+- `make instal_kubernetes`
+- `make instal_razer`
+
+There are also additional rust crates that can be installed.
+
+- `make install_rust_crates`
+
 ## Updating
 
 The scripts are designed to be rerun to get the latest updates.
@@ -43,7 +60,7 @@ git pull --rebase
 ./setup.sh
 ```
 
-You can also rerun the `curl` or `wget` commands above.
+You can also rerun the `curl` or `wget` commands from above.
 
 ## Adding new OS versions
 

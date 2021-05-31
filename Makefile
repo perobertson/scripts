@@ -1,20 +1,45 @@
 .DEFAULT_GOAL:=ansible-lint
+plays:=docker gcloud kubernetes razer setup
+playbooks:=$(addsuffix .yml, $(plays))
 
-playbooks:=docker.yml gcloud.yml kubernetes.yml razer.yml setup.yml
+export ANSIBLE_CONFIG="./config/ansible.cfg"
 
 .PHONY: ansible-lint
-ansible-lint: export ANSIBLE_CONFIG="./config/ansible.cfg"
 ansible-lint:
 	ansible-playbook --syntax-check $(playbooks)
 	ansible-lint -p $(playbooks)
 
-.PHONY: install_hooks
-install_hooks:
-	pre-commit install
-
 .PHONY: install
 install:
 	./setup.sh
+
+.PHONY: install_docker
+install_docker:
+	ansible-playbook --ask-become-pass -v docker.yml
+
+.PHONY: install_gcloud
+install_gcloud:
+	ansible-playbook --ask-become-pass -v gcloud.yml
+
+.PHONY: install_kubernetes
+install_kubernetes:
+	ansible-playbook --ask-become-pass -v kubernetes.yml
+
+.PHONY: install_razer
+install_razer:
+	ansible-playbook --ask-become-pass -v razer.yml
+
+.PHONY: install_rust_crates
+install_rust_crates:
+	./extras.sh
+
+.PHONY: install_setup
+install_setup:
+	ansible-playbook --ask-become-pass -v setup.yml
+
+.PHONY: install_hooks
+install_hooks:
+	pre-commit install
 
 .PHONY: hooks
 hooks:
