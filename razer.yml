@@ -11,11 +11,11 @@
           fingerprint: E96C496E4E77C159C2FCA053062F9FD4D6D11CE4
   tasks:
     - name: All - Check if dockerenv exists
-      stat:
+      ansible.builtin.stat:
         path: /.dockerenv
       register: file_dockerenv
 
     - name: Razer
       tags: [system]
       become: true
-      import_tasks: tasks/system/razer.yml
+      ansible.builtin.import_tasks: tasks/system/razer.yml

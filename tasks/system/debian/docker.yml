@@ -13,11 +13,11 @@
     state: present
 
 - name: Debian - Update apt cache
-  apt:
+  ansible.builtin.apt:
     update_cache: true
 
 - name: Debian - Install docker
-  apt:
+  ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
   loop:

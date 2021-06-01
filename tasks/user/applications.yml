@@ -1,19 +1,19 @@
 ---
 - name: All - Git update pyenv  # noqa 401
   diff: false
-  git:
+  ansible.builtin.git:
     repo: https://github.com/iamhsa/pkenv.git
     dest: ~/Applications/pkenv
 
 - name: All - Git update pyenv  # noqa 401
   diff: false
-  git:
+  ansible.builtin.git:
     repo: https://github.com/pyenv/pyenv.git
     dest: ~/Applications/pyenv
 
 - name: All - Git update pyenv plugins  # noqa 401
   diff: false
-  git:
+  ansible.builtin.git:
     repo: "{{ item.repo }}"
     dest: "~/Applications/pyenv/plugins/{{ item.name }}"
   loop:
@@ -26,38 +26,38 @@
 
 - name: All - Git update rbenv  # noqa 401
   diff: false
-  git:
+  ansible.builtin.git:
     repo: https://github.com/rbenv/rbenv.git
     dest: ~/Applications/rbenv
   register: git_rbenv
 
 - name: All - Git update rbenv - ruby build  # noqa 401
   diff: false
-  git:
+  ansible.builtin.git:
     repo: https://github.com/rbenv/ruby-build.git
     dest: ~/Applications/rbenv/plugins/ruby-build
   register: git_ruby_build
 
 - name: All - Configure rbenv  # noqa no-handler
-  command:
+  ansible.builtin.command:
     chdir: ~/Applications/rbenv
     cmd: src/configure
   when: git_rbenv is changed or git_ruby_build is changed
 
 - name: All - Make rbenv  # noqa no-handler
-  command:
+  ansible.builtin.command:
     chdir: ~/Applications/rbenv
     cmd: make -C src
   when: git_rbenv is changed or git_ruby_build is changed
 
 - name: All - Git update tfenv  # noqa 401
   diff: false
-  git:
+  ansible.builtin.git:
     repo: https://github.com/tfutils/tfenv.git
     dest: ~/Applications/tfenv
 
 - name: All - Git update tools  # noqa 401
   diff: false
-  git:
+  ansible.builtin.git:
     repo: https://gitlab.com/perobertson/cli-tools.git
     dest: ~/Applications/cli-tools

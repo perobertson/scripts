@@ -65,12 +65,12 @@
           fingerprint: 79BDB88F9BBF73910FD4095B6A2AF96194843C65
   tasks:
     - name: debug info
-      debug:
+      ansible.builtin.debug:
         msg: "{{ ansible_facts }}"
       tags: [never, debug]
 
     - name: All - Check if dockerenv exists
-      stat:
+      ansible.builtin.stat:
         path: /.dockerenv
       register: file_dockerenv
 
@@ -78,40 +78,48 @@
     - name: Repositories
       tags: [system, dev, repo]
       become: true
-      import_tasks: tasks/system/repositories.yml
+      ansible.builtin.import_tasks: tasks/system/repositories.yml
 
     - name: Packages
       tags: [system, dev, packages]
       become: true
-      import_tasks: tasks/system/packages.yml
+      ansible.builtin.import_tasks: tasks/system/packages.yml
 
     - name: Security Settings
       tags: [system, security]
       become: true
-      import_tasks: tasks/system/security.yml
+      ansible.builtin.import_tasks: tasks/system/security.yml
 
     ### --- Userspace ---
     # Install dotfiles first so CI can detect drift
-    - import_tasks: tasks/user/dotfiles.yml
+    - name: User dotfiles
+      ansible.builtin.import_tasks: tasks/user/dotfiles.yml
       tags: [user, dotfiles]
-    - import_tasks: tasks/user/applications.yml
+    - name: User applications
+      ansible.builtin.import_tasks: tasks/user/applications.yml
       tags: [user, applications]
-    - import_tasks: tasks/user/flatpaks.yml
+    - name: User flatpaks
+      ansible.builtin.import_tasks: tasks/user/flatpaks.yml
       tags: [user, flatpaks]
-    - import_tasks: tasks/user/python.yml
+    - name: User python
+      ansible.builtin.import_tasks: tasks/user/python.yml
       tags: [user, python]
-    - import_tasks: tasks/user/rust.yml
+    - name: User rust
+      ansible.builtin.import_tasks: tasks/user/rust.yml
       tags: [user, rust]
-    - import_tasks: tasks/user/ui.yml
+    - name: User UI
+      ansible.builtin.import_tasks: tasks/user/ui.yml
       tags: [user, ui]
-    - import_tasks: tasks/user/ides.yml
+    - name: User ides
+      ansible.builtin.import_tasks: tasks/user/ides.yml
       tags: [user, ides]
-    - import_tasks: tasks/user/bins.yml
+    - name: User bins
+      ansible.builtin.import_tasks: tasks/user/bins.yml
       tags: [user, bins]
 
   handlers:
     - name: systemctl --user daemon-reload
-      systemd:
+      ansible.builtin.systemd:
         daemon_reload: true
         scope: user
       when: not file_dockerenv.stat.exists

@@ -1,19 +1,19 @@
 ---
 - name: RedHat - Configure security updates
   diff: true
-  copy:
+  ansible.builtin.copy:
     src: files/etc/dnf/automatic.conf
     dest: /etc/dnf/automatic.conf
     mode: '0644'
 
 - name: RedHat - Configure security updates file permissions
-  file:
+  ansible.builtin.file:
     path: /etc/dnf/automatic.conf
     mode: '0644'
 
 - name: RedHat - Enable security updates
   become: true
-  systemd:
+  ansible.builtin.systemd:
     name: dnf-automatic.timer
     enabled: true
     state: started

@@ -1,20 +1,20 @@
 ---
 ### --- Family Specific Packages
 - name: Archlinux Packages
-  import_tasks: archlinux/packages.yml
+  ansible.builtin.import_tasks: archlinux/packages.yml
   when: ansible_os_family == 'Archlinux'
 
 - name: Debian Packages
-  import_tasks: debian/packages.yml
+  ansible.builtin.import_tasks: debian/packages.yml
   when: ansible_os_family == 'Debian'
 
 - name: RedHat Packages
-  import_tasks: redhat/packages.yml
+  ansible.builtin.import_tasks: redhat/packages.yml
   when: ansible_os_family == 'RedHat'
 
 ### --- Settings that require packages to be installed first
 
 - name: All - Set default shell to zsh
-  user:
+  ansible.builtin.user:
     name: "{{ ansible_user_id }}"
     shell: /usr/bin/zsh

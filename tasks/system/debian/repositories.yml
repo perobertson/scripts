@@ -60,15 +60,15 @@
 ### --- Distro specific ---
 
 - name: Debian Repositories
-  import_tasks: debian/repositories.yml
+  ansible.builtin.import_tasks: debian/repositories.yml
   when: ansible_distribution == 'Debian'
 
 - name: Ubuntu Repositories
-  import_tasks: ubuntu/repositories.yml
+  ansible.builtin.import_tasks: ubuntu/repositories.yml
   when: ansible_distribution == 'Ubuntu'
 
 ### --- Post repo setup steps ---
 
 - name: Debian - Update apt cache
-  apt:
+  ansible.builtin.apt:
     update_cache: true

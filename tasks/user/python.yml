@@ -1,12 +1,12 @@
 ---
 - name: All - find pyenv-default-requirements
-  find:
+  ansible.builtin.find:
     paths: "${HOME}/.config/pyenv-default-requirements/requirements.d/"
     file_type: any
   register: pyenv_default_requirement_files
 
 - name: All - pip install pyenv-default-requirements  # noqa 403
-  pip:
+  ansible.builtin.pip:
     extra_args: --user
     requirements: "{{ item.path }}"
     state: latest
@@ -14,6 +14,6 @@
   register: pip_out
 
 - name: All - pip check  # noqa 503
-  command: pip check
+  ansible.builtin.command: pip check
   # TODO: figure out how to deal with debian shipping a broken python setup
   when: pip_out.changed and ansible_distribution != 'Debian'

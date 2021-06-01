@@ -24,7 +24,7 @@
     fingerprint: "{{ signing_keys.rpmfusion_free_fedora[ansible_distribution_major_version].fingerprint }}"
 
 - name: Fedora - Add RPMFusion-free repository
-  dnf:
+  ansible.builtin.dnf:
     name:
       - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
     state: present
@@ -42,7 +42,7 @@
     fingerprint: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].fingerprint }}"
 
 - name: Fedora - Add RPMFusion-nonfree repository
-  dnf:
+  ansible.builtin.dnf:
     name:
       - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
     state: present
@@ -54,14 +54,14 @@
   delay: 5
 
 - name: Fedora <=25 - Add MySQL community repository
-  dnf:
+  ansible.builtin.dnf:
     name:
       - "https://dev.mysql.com/get/mysql57-community-release-fc{{ ansible_distribution_major_version|int }}-10.noarch.rpm"
     state: present
   when: ansible_distribution_major_version|int <= 25
 
 - name: Fedora 26,27 - Add MySQL community repository
-  dnf:
+  ansible.builtin.dnf:
     name:
       - "https://dev.mysql.com/get/mysql80-community-release-fc{{ ansible_distribution_major_version|int }}-1.noarch.rpm"
     state: present
