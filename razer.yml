@@ -3,7 +3,12 @@
   vars:
     ansible_connection: local
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
-    docker_compose_version: 1.29.2
+    signing_keys:
+      razer_fedora:
+        "33":
+          fingerprint: E96C496E4E77C159C2FCA053062F9FD4D6D11CE4
+        "34":
+          fingerprint: E96C496E4E77C159C2FCA053062F9FD4D6D11CE4
   tasks:
     - name: All - Check if dockerenv exists
       stat:

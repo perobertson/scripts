@@ -1,8 +1,12 @@
 ---
-# TODO import rpm key
+- name: Fedora - Import Razer signing key
+  ansible.builtin.rpm_key:
+    state: present
+    key: "https://download.opensuse.org/repositories/hardware:/razer/Fedora_{{ ansible_distribution_major_version|int }}/repodata/repomd.xml.key"
+    fingerprint: "{{ signing_keys.razer_fedora[ansible_distribution_major_version].fingerprint }}"
 
-- name: Fedora >=30 - Add Razer repository
-  yum_repository:
+- name: Fedora >=32 - Add Razer repository
+  ansible.builtin.yum_repository:
     file: razer
     name: razer
     description: Razer drivers (Fedora {{ ansible_distribution_major_version|int }})
@@ -11,20 +15,20 @@
     gpgcheck: true
     gpgkey: "https://download.opensuse.org/repositories/hardware:/razer/Fedora_{{ ansible_distribution_major_version|int }}/repodata/repomd.xml.key"
     repo_gpgcheck: true
-  when: ansible_distribution_major_version|int >= 30
+  when: ansible_distribution_major_version|int >= 32
 
-- name: Fedora >=30 - Install Razer packages for device config
+- name: Fedora >=32 - Install Razer packages for device config
   dnf:
     name:
       - openrazer-meta
       - polychromatic  # razer device configuration
     state: present
-  when: ansible_distribution_major_version|int >= 30
+  when: ansible_distribution_major_version|int >= 32
 
 # This is for the razer drivers which run in userspace
-- name: Fedora >=30 - Add user to plugdev group
+- name: Fedora >=32 - Add user to plugdev group
   user:
     name: '{{ ansible_user_id }}'
     groups: plugdev
     append: true
-  when: ansible_distribution_major_version|int >= 30
+  when: ansible_distribution_major_version|int >= 32
