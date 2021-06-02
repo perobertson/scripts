@@ -1,8 +1,18 @@
 ---
-# TODO: import rpm key
+- name: RedHat - Import GCloud Yum Key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://packages.cloud.google.com/yum/doc/yum-key.gpg
+    fingerprint: 7F92E05B31093BEF5A3C2D38FEEA9169307EA071
+
+- name: RedHat - Import GCloud Package Key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+    fingerprint: 3749E1BA95A86CE054546ED2F09C394C3E1BA8D5
 
 - name: RedHat - Add Kubernetes repository
-  yum_repository:
+  ansible.builtin.yum_repository:
     file: kubernetes
     name: kubernetes
     description: Kubernetes

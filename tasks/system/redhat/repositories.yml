@@ -5,19 +5,13 @@
       - dnf-plugins-core
 
 - name: RedHat - Import 1Password signing key
-  rpm_key:
+  ansible.builtin.rpm_key:
     state: present
     key: https://downloads.1password.com/linux/keys/1password.asc
     fingerprint: 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
 
-- name: RedHat - Import Zoom signing key
-  rpm_key:
-    state: present
-    key: https://zoom.us/linux/download/pubkey
-    fingerprint: 396060CADD8A75220BFCB369B903BF1861A7C71D
-
 - name: RedHat - Add 1Password beta repository
-  yum_repository:
+  ansible.builtin.yum_repository:
     file: 1password-ansible
     name: 1password-beta
     description: 1Password - Beta
@@ -28,7 +22,7 @@
     repo_gpgcheck: true
 
 - name: RedHat - Add 1Password stable repository
-  yum_repository:
+  ansible.builtin.yum_repository:
     file: 1password-ansible
     name: 1password-stable
     description: 1Password - Stable
@@ -38,8 +32,14 @@
     gpgkey: https://downloads.1password.com/linux/keys/1password.asc
     repo_gpgcheck: true
 
+- name: RedHat - Import Keybase signing key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://keybase.io/docs/server_security/code_signing_key.asc
+    fingerprint: 222B85B0F90BE2D24CFEB93F47484E50656D16C7
+
 - name: RedHat - Add Keybase repository
-  yum_repository:
+  ansible.builtin.yum_repository:
     file: keybase
     name: keybase
     description: keybase
@@ -48,9 +48,18 @@
     gpgcheck: true
     gpgkey: https://keybase.io/docs/server_security/code_signing_key.asc
     metadata_expire: '60'
+    # This repo was previously signed with the key but they no longer sign the
+    # repo when publishing new releases. This causes a bad signature.
+    repo_gpgcheck: false
+
+- name: RedHat - Import Sublime-Text signing key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+    fingerprint: 1B64279675A4299DCFC70858CA464A9A222D23D0
 
 - name: RedHat - Add Sublime-Text repository
-  yum_repository:
+  ansible.builtin.yum_repository:
     file: sublime-text
     name: sublime-text
     description: Sublime Text - x86_64 - Stable
@@ -59,9 +68,16 @@
     gpgcheck: true
     gpgkey:
       - https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+    repo_gpgcheck: true
+
+- name: RedHat - Import VSCode signing key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://packages.microsoft.com/keys/microsoft.asc
+    fingerprint: BC528686B50D79E339D3721CEB3E94ADBE1229CF
 
 - name: RedHat - Add VSCode repository
-  yum_repository:
+  ansible.builtin.yum_repository:
     file: vscode
     name: code
     description: Visual Studio Code
@@ -70,6 +86,12 @@
     gpgcheck: true
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
     repo_gpgcheck: true
+
+- name: RedHat - Import Zoom signing key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://zoom.us/linux/download/pubkey
+    fingerprint: 396060CADD8A75220BFCB369B903BF1861A7C71D
 
 - name: RedHat - check if rpmfusion-free.repo file exists
   stat:

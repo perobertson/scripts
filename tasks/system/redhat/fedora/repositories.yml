@@ -1,20 +1,13 @@
 ---
-- name: Fedora - Import RPM-GPG-KEY-rpmfusion-free
-  rpm_key:
+# https://www.hashicorp.com/security
+- name: Fedora - Import Hashicorp signing key
+  ansible.builtin.rpm_key:
     state: present
-    key: "{{ signing_keys.rpmfusion_free_fedora[ansible_distribution_major_version].key }}"
-    fingerprint: "{{ signing_keys.rpmfusion_free_fedora[ansible_distribution_major_version].fingerprint }}"
-
-- name: Fedora - Import RPM-GPG-KEY-rpmfusion-nonfree
-  rpm_key:
-    state: present
-    key: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].key }}"
-    fingerprint: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].fingerprint }}"
-
-# TODO import rpm key
+    key: https://rpm.releases.hashicorp.com/gpg
+    fingerprint: E8A032E094D8EB4EA189D270DA418C88A3219F7B
 
 - name: Fedora - Add Hashicorp repository
-  yum_repository:
+  ansible.builtin.yum_repository:
     file: hashicorp
     name: hashicorp
     description: Hashicorp Stable - $basearch
@@ -23,6 +16,12 @@
     gpgcheck: true
     repo_gpgcheck: true
     gpgkey: https://rpm.releases.hashicorp.com/gpg
+
+- name: Fedora - Import RPM-GPG-KEY-rpmfusion-free signing key
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ signing_keys.rpmfusion_free_fedora[ansible_distribution_major_version].key }}"
+    fingerprint: "{{ signing_keys.rpmfusion_free_fedora[ansible_distribution_major_version].fingerprint }}"
 
 - name: Fedora - Add RPMFusion-free repository
   dnf:
@@ -35,6 +34,12 @@
   until: rpmfusion_free_install is succeeded
   retries: 5
   delay: 5
+
+- name: Fedora - Import RPM-GPG-KEY-rpmfusion-nonfree signing key
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].key }}"
+    fingerprint: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].fingerprint }}"
 
 - name: Fedora - Add RPMFusion-nonfree repository
   dnf:
