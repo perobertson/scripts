@@ -48,7 +48,9 @@
     gpgcheck: true
     gpgkey: https://keybase.io/docs/server_security/code_signing_key.asc
     metadata_expire: '60'
-    repo_gpgcheck: true
+    # This repo was previously signed with the key but they no longer sign the
+    # repo when publishing new releases. This causes a bad signature.
+    repo_gpgcheck: false
 
 - name: RedHat - Import Sublime-Text signing key
   ansible.builtin.rpm_key:
