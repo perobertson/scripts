@@ -1,6 +1,6 @@
 ---
 - name: RedHat - Kernel Devel
-  dnf:
+  ansible.builtin.dnf:
     # Disable updates so on fresh installs this will get the headers matching the current version
     disablerepo: updates
     name:
@@ -10,20 +10,20 @@
 
 # Need to upgrade vim-minimal first, otherwise there are conflicts
 - name: RedHat - Update vim-minimal
-  dnf:
+  ansible.builtin.dnf:
     name:
       - vim-minimal
     state: present
 
 # Install vim separately due to conflicts in upgrade / install
 - name: RedHat - Update vim
-  dnf:
+  ansible.builtin.dnf:
     name:
       - vim
     state: present
 
 - name: RedHat - Install packages
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
   loop:
@@ -98,7 +98,7 @@
     - zsh
 
 - name: RedHat - Best effort to install optional packages
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
   loop:
@@ -106,7 +106,7 @@
   ignore_errors: true
 
 - name: RedHat - Install remote packages
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
   loop:
@@ -115,7 +115,7 @@
   delay: 5
 
 - name: RedHat - Install unsigned remote packages
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
     disable_gpg_check: true
@@ -125,5 +125,5 @@
 ### --- Distro specific ---
 
 - name: Fedora Packages
-  import_tasks: fedora/packages.yml
+  ansible.builtin.import_tasks: fedora/packages.yml
   when: ansible_distribution == 'Fedora'

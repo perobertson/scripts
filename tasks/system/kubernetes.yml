@@ -1,23 +1,23 @@
 ---
 - name: All - Install minikube
-  get_url:
+  ansible.builtin.get_url:
     url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     dest: /usr/local/bin/minikube
 
 - name: All - Enable execue for minikube
-  file:
+  ansible.builtin.file:
     path: /usr/local/bin/minikube
     mode: +x
 
 ### --- Family Specific Setup
 - name: Archlinux Kubernetes
-  import_tasks: archlinux/kubernetes.yml
+  ansible.builtin.import_tasks: archlinux/kubernetes.yml
   when: ansible_os_family == 'Archlinux'
 
 - name: Debian Kubernetes
-  import_tasks: debian/kubernetes.yml
+  ansible.builtin.import_tasks: debian/kubernetes.yml
   when: ansible_os_family == 'Debian'
 
 - name: RedHat Kubernetes
-  import_tasks: redhat/kubernetes.yml
+  ansible.builtin.import_tasks: redhat/kubernetes.yml
   when: ansible_os_family == 'RedHat'

@@ -1,6 +1,6 @@
 ---
 - name: Archlinux - Install packages
-  pacman:
+  community.general.pacman:
     name: "{{ item }}"
     state: present
   loop:

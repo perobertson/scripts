@@ -1,13 +1,13 @@
 ---
 ### --- Family Specific Setup
 - name: Archlinux Security
-  import_tasks: archlinux/security.yml
+  ansible.builtin.import_tasks: archlinux/security.yml
   when: ansible_os_family == 'Archlinux'
 
 - name: Debian Security
-  import_tasks: debian/security.yml
+  ansible.builtin.import_tasks: debian/security.yml
   when: ansible_os_family == 'Debian'
 
 - name: RedHat Security
-  import_tasks: redhat/security.yml
+  ansible.builtin.import_tasks: redhat/security.yml
   when: ansible_os_family == 'RedHat'

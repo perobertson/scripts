@@ -1,6 +1,6 @@
 ---
 - name: Debian >=10 - Install packages
-  apt:
+  ansible.builtin.apt:
     pkg:
       - 1password
       - npm

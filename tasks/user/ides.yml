@@ -1,23 +1,23 @@
 ---
 - name: All - Sublime Create packages directory
-  file:
+  ansible.builtin.file:
     path: $HOME/.config/sublime-text-3/Installed Packages
     state: directory
     mode: '0700'
 
 - name: All - Sublime Create user packages directory
-  file:
+  ansible.builtin.file:
     path: $HOME/.config/sublime-text-3/Packages/User
     state: directory
     mode: '0700'
 
 - name: All - Sublime check if package control exists
-  stat:
+  ansible.builtin.stat:
     path: $HOME/.config/sublime-text-3/Installed Packages/Package Control.sublime-package
   register: sublime_package_control
 
 - name: All - Sublime download package control
-  get_url:
+  ansible.builtin.get_url:
     url: https://packagecontrol.io/Package%20Control.sublime-package
     dest: $HOME/.config/sublime-text-3/Installed Packages/Package Control.sublime-package
   when: not sublime_package_control.stat.exists

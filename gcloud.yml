@@ -5,11 +5,11 @@
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
   tasks:
     - name: All - Check if dockerenv exists
-      stat:
+      ansible.builtin.stat:
         path: /.dockerenv
       register: file_dockerenv
 
     - name: GCloud
       tags: [system]
       become: true
-      import_tasks: tasks/system/gcloud.yml
+      ansible.builtin.import_tasks: tasks/system/gcloud.yml

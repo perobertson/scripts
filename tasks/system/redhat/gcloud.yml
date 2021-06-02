@@ -25,7 +25,7 @@
       - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 
 - name: RedHat - Install gcloud
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
   loop:

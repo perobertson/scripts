@@ -1,36 +1,36 @@
 ---
 - name: All - Fetch gsettings schemas  # noqa 301
   no_log: true
-  command: gsettings list-schemas
+  ansible.builtin.command: gsettings list-schemas
   ignore_errors: true
   register: gsettings_schemas
 
 - name: All - Show clock seconds
-  command: gsettings set org.cinnamon.desktop.interface clock-show-seconds true
+  ansible.builtin.command: gsettings set org.cinnamon.desktop.interface clock-show-seconds true
   when: "'org.cinnamon.desktop.interface' in gsettings_schemas.stdout_lines"
 
 - name: All - Set monospace font
-  command: gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata 14'
+  ansible.builtin.command: gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata 14'
   when: "'org.gnome.desktop.interface' in gsettings_schemas.stdout_lines"
 
 - name: All - Files date format
-  command: gsettings set org.nemo.preferences date-format 'iso'
+  ansible.builtin.command: gsettings set org.nemo.preferences date-format 'iso'
   when: "'org.nemo.preferences' in gsettings_schemas.stdout_lines"
 
 - name: All - Files default folder view
-  command: gsettings set org.nemo.preferences default-folder-viewer 'list-view'
+  ansible.builtin.command: gsettings set org.nemo.preferences default-folder-viewer 'list-view'
   when: "'org.nemo.preferences' in gsettings_schemas.stdout_lines"
 
 - name: All - Configure Xresources
   diff: true
-  copy:
+  ansible.builtin.copy:
     src: files/home/user/.Xresources
     dest: ~/.Xresources
     mode: '0664'
 
 - name: All - Set terminal settings
   tags: [terminal]
-  dconf:
+  community.general.dconf:
     key: "/org/gnome/terminal/legacy/profiles:/:e7aeecbb-8907-4e08-916e-749914c7b0b7/{{ item.key }}"
     value: "{{ item.value | string }}"
     state: present
@@ -78,44 +78,44 @@
 
 - name: All - Discover gnome terminal profiles
   tags: [terminal]
-  dconf:
+  community.general.dconf:
     key: "/org/gnome/terminal/legacy/profiles:/list"
     state: read
   register: gnome_terminal_profiles
 
 - name: All - Parse gnome terminal profiles
   tags: [terminal]
-  set_fact:
+  ansible.builtin.set_fact:
     gnome_terminal_profiles_list: "{{ gnome_terminal_profiles.value or '[]' | replace(\"'\", '\"') | from_json }}"
 
 - name: All - Append new profile id to list
   tags: [terminal]
-  set_fact:
+  ansible.builtin.set_fact:
     # list.append returns None which is falsey so use or to print out the updated value
     updated_gnome_terminal_profiles_list: "{{ gnome_terminal_profiles_list.append('e7aeecbb-8907-4e08-916e-749914c7b0b7') or gnome_terminal_profiles_list | unique | sort }}"
 
 - name: All - Format gnome terminal list to dconf format
   tags: [terminal]
-  set_fact:
+  ansible.builtin.set_fact:
     updated_gnome_terminal_profiles_str: "{{ updated_gnome_terminal_profiles_list | string | regex_replace('\"', \"'\") }}"
 
 - name: All - Add profile to terminal list
   tags: [terminal]
-  dconf:
+  community.general.dconf:
     key: "/org/gnome/terminal/legacy/profiles:/list"
     value: "{{ updated_gnome_terminal_profiles_str | string }}"
     state: present
 
 - name: All - Set default gnome terminal
   tags: [terminal]
-  dconf:
+  community.general.dconf:
     key: "/org/gnome/terminal/legacy/profiles:/default"
     value: "'e7aeecbb-8907-4e08-916e-749914c7b0b7'"
     state: present
 
 - name: All - Enable cinnamon indicators
   tags: [cinnamon]
-  dconf:
+  community.general.dconf:
     key: /org/cinnamon/enable-indicators
     value: 'true'
     state: present
@@ -123,21 +123,21 @@
 - name: All - Git update cinnamon-spices-themes  # noqa 401
   tags: [cinnamon]
   diff: false
-  git:
+  ansible.builtin.git:
     repo: https://github.com/linuxmint/cinnamon-spices-themes.git
     dest: ~/Applications/cinnamon-spices-themes
     depth: 1
 
 - name: All - Create ~/.themes dir
   tags: [cinnamon]
-  file:
+  ansible.builtin.file:
     path: ~/.themes
     state: directory
     mode: '0775'
 
 - name: All - Link cinnamon themes
   tags: [cinnamon]
-  file:
+  ansible.builtin.file:
     src: "~/Applications/cinnamon-spices-themes/{{ item }}/files/{{ item }}"
     dest: "~/.themes/Ansible-{{ item }}"
     state: link
@@ -146,7 +146,7 @@
 
 - name: All - Set cinnamon theme
   tags: [cinnamon]
-  dconf:
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
     state: present

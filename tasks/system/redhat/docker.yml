@@ -1,7 +1,7 @@
 ---
 # Docker support for new fedora releases is always behind
 - name: RedHat - Check for Docker support
-  uri:
+  ansible.builtin.uri:
     url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version|int }}/{{ ansible_architecture }}/stable"
   register: uri_docker_repo_rpm
   ignore_errors: true
@@ -52,5 +52,5 @@
 ### --- Distro specific ---
 
 - name: Fedora Docker
-  import_tasks: fedora/docker.yml
+  ansible.builtin.import_tasks: fedora/docker.yml
   when: ansible_distribution == 'Fedora'

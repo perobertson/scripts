@@ -1,20 +1,20 @@
 ---
 - name: All - Add the flathub flatpak repository remote to the user installation
-  flatpak_remote:
+  community.general.flatpak_remote:
     name: flathub
     state: present
     flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
     method: user
 
 - name: All - Create user systemd config directory
-  file:
+  ansible.builtin.file:
     path: $HOME/.config/systemd/user
     state: directory
     mode: '0755'
 
 - name: All - Add flatpak auto updates
   diff: true
-  copy:
+  ansible.builtin.copy:
     src: files/home/user/.config/systemd/user/{{ item }}
     dest: $HOME/.config/systemd/user/{{ item }}
     mode: '0644'
@@ -24,7 +24,7 @@
     - flatpak-update.timer
 
 - name: All - Install flatpaks
-  flatpak:
+  community.general.flatpak:
     name: "{{ item }}"
     state: present
     method: user
@@ -40,7 +40,7 @@
   when: not file_dockerenv.stat.exists
 
 - name: All - Enable flatpak updates
-  systemd:
+  ansible.builtin.systemd:
     name: flatpak-update.timer
     enabled: true
     state: started

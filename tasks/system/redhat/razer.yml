@@ -2,5 +2,5 @@
 ### --- Distro specific ---
 
 - name: Fedora Razer
-  import_tasks: fedora/razer.yml
+  ansible.builtin.import_tasks: fedora/razer.yml
   when: ansible_distribution == 'Fedora'

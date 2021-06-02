@@ -1,6 +1,6 @@
 ---
 - name: Debian - Install packages
-  apt:
+  ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
   loop:
@@ -34,7 +34,7 @@
     - zsh
 
 - name: Debian - Best effort to install optional packages
-  apt:
+  ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
   loop:
@@ -43,7 +43,7 @@
   ignore_errors: true
 
 - name: Debian - Install remote packages
-  apt:
+  ansible.builtin.apt:
     deb: "{{ item }}"
     state: present
   loop:
@@ -53,9 +53,9 @@
 ### --- Distro specific ---
 
 - name: Debian Packages
-  import_tasks: debian/packages.yml
+  ansible.builtin.import_tasks: debian/packages.yml
   when: ansible_distribution == 'Debian'
 
 - name: Ubuntu Packages
-  import_tasks: ubuntu/packages.yml
+  ansible.builtin.import_tasks: ubuntu/packages.yml
   when: ansible_distribution == 'Ubuntu'

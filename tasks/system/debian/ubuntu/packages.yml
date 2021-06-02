@@ -1,6 +1,6 @@
 ---
 - name: Ubuntu >=18 - Install packages
-  apt:
+  ansible.builtin.apt:
     pkg:
       - 1password
       - flameshot
@@ -10,7 +10,7 @@
   when: ansible_distribution_major_version|int >= 18
 
 - name: Ubuntu >=20 - Install packages
-  apt:
+  ansible.builtin.apt:
     pkg:
       - python3-cairo
       - python3-launchpadlib

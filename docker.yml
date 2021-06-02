@@ -6,18 +6,18 @@
     docker_compose_version: 1.29.2
   tasks:
     - name: All - Check if dockerenv exists
-      stat:
+      ansible.builtin.stat:
         path: /.dockerenv
       register: file_dockerenv
 
     - name: Docker
       tags: [system]
       become: true
-      import_tasks: tasks/system/docker.yml
+      ansible.builtin.import_tasks: tasks/system/docker.yml
 
     - name: All - Enable docker
       become: true
-      systemd:
+      ansible.builtin.systemd:
         name: docker.service
         enabled: true
         state: started

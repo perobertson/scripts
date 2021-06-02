@@ -18,7 +18,7 @@
   when: ansible_distribution_major_version|int >= 32
 
 - name: Fedora >=32 - Install Razer packages for device config
-  dnf:
+  ansible.builtin.dnf:
     name:
       - openrazer-meta
       - polychromatic  # razer device configuration
@@ -27,7 +27,7 @@
 
 # This is for the razer drivers which run in userspace
 - name: Fedora >=32 - Add user to plugdev group
-  user:
+  ansible.builtin.user:
     name: '{{ ansible_user_id }}'
     groups: plugdev
     append: true
