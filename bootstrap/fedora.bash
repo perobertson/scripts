@@ -8,6 +8,11 @@ sudo dnf -y install \
     python3-dnf \
     python3-pip
 
+# required to install dependencies of ansible
+sudo dnf -y install \
+    gcc \
+    libffi-devel
+
 # Setup ansible
 "${SCRIPT_DIR}/install_ansible.bash"
 

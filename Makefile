@@ -85,16 +85,17 @@ stop-debian:
 
 .PHONY: test-fedora
 test-fedora:
-	docker pull fedora:34
+	docker pull fedora:35
 	docker run \
 		-ditv $(shell pwd):/scripts \
 		-w /scripts \
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-fedora \
-		fedora:34 bash || true
+		fedora:35 bash || true
 	docker exec scripts-fedora ./.gitlab/setup_fedora.bash
 	docker exec scripts-fedora ./.gitlab/build.bash
+	docker exec scripts-fedora ./.gitlab/check_versions.bash
 	$(MAKE) stop-fedora
 
 .PHONY: stop-fedora
