@@ -45,8 +45,9 @@ install_hooks:
 hooks:
 	pre-commit run --all-files
 
-.PHONY: arch
-arch:
+.PHONY: test-arch
+test-arch:
+	docker pull archlinux:latest
 	docker run \
 		-ditv $(shell pwd):/scripts \
 		-w /scripts \
@@ -63,8 +64,9 @@ arch:
 stop-arch:
 	docker stop scripts-arch
 
-.PHONY: debian
-debian:
+.PHONY: test-debian
+test-debian:
+	docker pull debian:10
 	docker run \
 		-ditv $(shell pwd):/scripts \
 		-w /scripts \
@@ -81,15 +83,16 @@ debian:
 stop-debian:
 	docker stop scripts-debian
 
-.PHONY: fedora
-fedora:
+.PHONY: test-fedora
+test-fedora:
+	docker pull fedora:34
 	docker run \
 		-ditv $(shell pwd):/scripts \
 		-w /scripts \
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-fedora \
-		fedora:32 bash || true
+		fedora:34 bash || true
 	docker exec scripts-fedora ./.gitlab/setup_fedora.bash
 	docker exec scripts-fedora ./.gitlab/build.bash
 	$(MAKE) stop-fedora
