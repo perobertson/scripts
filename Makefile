@@ -101,3 +101,22 @@ test-fedora:
 .PHONY: stop-fedora
 stop-fedora:
 	docker stop scripts-fedora
+
+.PHONY: test-manjaro
+test-manjaro:
+	docker pull manjarolinux/base:latest
+	docker run \
+		-ditv $(shell pwd):/scripts \
+		-w /scripts \
+		-e ANSIBLE_FORCE_COLOR=1 \
+		--rm \
+		--name scripts-manjaro \
+		manjarolinux/base:latest bash || true
+	docker exec scripts-manjaro ./.gitlab/setup_archlinux.bash
+	docker exec scripts-manjaro ./.gitlab/build.bash
+	docker exec scripts-manjaro ./.gitlab/check_versions.bash
+	$(MAKE) stop-manjaro
+
+.PHONY: stop-manjaro
+stop-manjaro:
+	docker stop scripts-manjaro
