@@ -11,11 +11,16 @@ Because of this, the scripts are designed to work with systems that have a pytho
 
 - Archlinux
 - Debian: 10
-- Fedora: 28(EOL), 29 (EOL), 30 (EOL), 31 (EOL), 32(EOL), 33, 34
+- Fedora: 33, 34
 - Manjaro
-- Ubuntu: 18.04(LTS), 20.04(LTS), 21.04
+- Ubuntu: 20.04(LTS), 21.04
 
 **Note:** OSes that are EOL are not tested in CI.
+
+These systems may still work, but they are either EOL or use EOL packages:
+
+- Fedora: 28-32
+- Ubuntu: 18.04(LTS, python 3.6 EOL)
 
 Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches&ref=main) for `main` to see the complete list of supported operating systems.
 

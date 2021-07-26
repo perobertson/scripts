@@ -215,6 +215,7 @@ fedora_31:
   image: fedora:31
 
 fedora_32:
+  # EOL: 2021-05-25
   extends:
     - .test
     - .setup_fedora
@@ -260,10 +261,11 @@ manjaro:
 
 ubuntu_18_04:
   # EOL: 2023-04
+  # Python 3.6 EOL: 2021-12-23
   extends:
     - .test
     - .setup_ubuntu
-    - .rules_debian
+    - .rules_eol
   image: ubuntu:18.04
 
 ubuntu_20_04:
