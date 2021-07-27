@@ -10,7 +10,7 @@ sudo pacman -S --noconfirm \
     python-setuptools \
     python-wheel
 
-if pip3 check; then
+if [[ -n ${CI:-} ]] && pip3 check; then
     # The error was:
     # tomli 1.0.4 requires flit-core, which is not installed
     echo 'No longer need to manually install flit-core'
