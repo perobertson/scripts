@@ -16,6 +16,13 @@ sudo apt-get install -y \
 # Setup ansible
 "${SCRIPT_DIR}/install_ansible.bash"
 
-# TODO: figure out how to deal with the fact that debian ships with broken python
+if [[ -n ${CI:-} ]] && pip3 check; then
+    # one of ansibles dependencies requires pycairo to be installed
+    echo 'No longer need to manually install python3-cairo'
+    exit 1
+fi
+
+sudo apt-get install -y python3-cairo
+
 # make sure all dependencies are satisfied
-# pip3 check
+pip3 check
