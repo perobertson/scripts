@@ -10,15 +10,6 @@ sudo pacman -S --noconfirm \
     python-setuptools \
     python-wheel
 
-if pip3 check; then
-    # The error was:
-    # tomli 1.0.4 requires flit-core, which is not installed
-    echo 'No longer need to manually install flit-core'
-    exit 1
-fi
-sudo pacman -S --noconfirm \
-    python-flit-core
-
 # Setup ansible
 "${SCRIPT_DIR}/install_ansible.bash"
 
