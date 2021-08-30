@@ -95,7 +95,6 @@
     - xz-devel
     - yubikey-manager
     - zlib-devel
-    - zoom
     - zsh
 
 - name: RedHat - Best effort to install optional packages
@@ -104,6 +103,7 @@
     state: present
   loop:
     - exa
+    - zoom
   ignore_errors: true
 
 - name: RedHat - Install unsigned remote packages

@@ -124,7 +124,9 @@
   ansible.builtin.command:
     chdir: /opt/zoom-yum-repo
     cmd: make install-service start-service
-  when: git_zoom_yum_repo is changed
+  when:
+    - not file_dockerenv.stat.exists
+    - git_zoom_yum_repo is changed
 
 ### --- Distro specific ---
 
