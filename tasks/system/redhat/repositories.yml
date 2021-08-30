@@ -113,6 +113,19 @@
     path: /etc/yum.repos.d/rpmfusion-nonfree-updates.repo
   register: rpmfusion_nonfree_updates_repo
 
+- name: RedHat - update zoom-yum-repo  # noqa git-latest
+  diff: false
+  ansible.builtin.git:
+    repo: https://gitlab.com/perobertson/zoom-yum-repo.git
+    dest: /opt/zoom-yum-repo
+  register: git_zoom_yum_repo
+
+- name: RedHat - install zoom updater service  # noqa no-handler
+  ansible.builtin.command:
+    chdir: /opt/zoom-yum-repo
+    cmd: make install-service start-service
+  when: git_zoom_yum_repo is changed
+
 ### --- Distro specific ---
 
 - name: Fedora Repositories

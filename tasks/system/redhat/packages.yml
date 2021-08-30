@@ -95,6 +95,7 @@
     - xz-devel
     - yubikey-manager
     - zlib-devel
+    - zoom
     - zsh
 
 - name: RedHat - Best effort to install optional packages
@@ -104,15 +105,6 @@
   loop:
     - exa
   ignore_errors: true
-
-- name: RedHat - Install remote packages
-  ansible.builtin.dnf:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - https://zoom.us/client/latest/zoom_x86_64.rpm
-  retries: 5
-  delay: 5
 
 - name: RedHat - Install unsigned remote packages
   ansible.builtin.dnf:
