@@ -40,7 +40,7 @@
   loop:
     - exa
     - fd-find
-  ignore_errors: true
+  failed_when: false
 
 - name: Debian - Install remote packages
   ansible.builtin.apt:

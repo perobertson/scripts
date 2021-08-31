@@ -1,9 +1,10 @@
 ---
-- name: All - Fetch gsettings schemas  # noqa 301
+- name: All - Fetch gsettings schemas
   no_log: true
   ansible.builtin.command: gsettings list-schemas
   ignore_errors: true
   register: gsettings_schemas
+  changed_when: false
 
 - name: All - Show clock seconds
   ansible.builtin.command: gsettings set org.cinnamon.desktop.interface clock-show-seconds true
@@ -120,7 +121,7 @@
     value: 'true'
     state: present
 
-- name: All - Git update cinnamon-spices-themes  # noqa 401
+- name: All - Git update cinnamon-spices-themes  # noqa git-latest
   tags: [cinnamon]
   diff: false
   ansible.builtin.git:

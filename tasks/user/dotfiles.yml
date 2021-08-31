@@ -4,7 +4,8 @@
     path: ~/Applications/dotfiles
   register: dotfiles
 
-- name: All - Stash dotfile changes  # noqa 303
+# use command to stash changes. Module does not support this
+- name: All - Stash dotfile changes  # noqa command-instead-of-module
   ansible.builtin.command:
     chdir: ~/Applications/dotfiles
     cmd: git stash
@@ -18,7 +19,8 @@
     version: main
   register: git_dotfiles
 
-- name: All - UnStash dotfile changes  # noqa 303
+# use command to stash changes. Module does not support this
+- name: All - UnStash dotfile changes  # noqa command-instead-of-module
   ansible.builtin.command:
     chdir: ~/Applications/dotfiles
     cmd: git stash pop
