@@ -104,7 +104,7 @@
   loop:
     - exa
     - zoom
-  ignore_errors: true
+  failed_when: false
 
 - name: RedHat - Install unsigned remote packages
   ansible.builtin.dnf:

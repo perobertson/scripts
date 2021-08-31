@@ -7,7 +7,7 @@ export ANSIBLE_CONFIG="./config/ansible.cfg"
 .PHONY: ansible-lint
 ansible-lint:
 	ansible-playbook --syntax-check $(playbooks)
-	ansible-lint -p $(playbooks)
+	ansible-lint -p .
 
 .PHONY: install
 install:
@@ -57,7 +57,7 @@ test-arch:
 		archlinux:latest bash || true
 	docker exec scripts-arch ./.gitlab/setup_archlinux.bash
 	docker exec scripts-arch ./.gitlab/build.bash
-	docker exec scripts-arch ./.gitlab/check_versions.bash
+	docker exec scripts-arch su public --command="./.gitlab/check_versions.bash"
 	$(MAKE) stop-arch
 
 .PHONY: stop-arch
@@ -76,7 +76,7 @@ test-debian:
 		debian:10 bash || true
 	docker exec scripts-debian ./.gitlab/setup_debian.bash
 	docker exec scripts-debian ./.gitlab/build.bash
-	docker exec scripts-debian ./.gitlab/check_versions.bash
+	docker exec scripts-debian su public --command="./.gitlab/check_versions.bash"
 	$(MAKE) stop-debian
 
 .PHONY: stop-debian
@@ -95,7 +95,7 @@ test-fedora:
 		fedora:35 bash || true
 	docker exec scripts-fedora ./.gitlab/setup_fedora.bash
 	docker exec scripts-fedora ./.gitlab/build.bash
-	docker exec scripts-fedora ./.gitlab/check_versions.bash
+	docker exec scripts-fedora su public --command="./.gitlab/check_versions.bash"
 	$(MAKE) stop-fedora
 
 .PHONY: stop-fedora
@@ -114,7 +114,7 @@ test-manjaro:
 		manjarolinux/base:latest bash || true
 	docker exec scripts-manjaro ./.gitlab/setup_archlinux.bash
 	docker exec scripts-manjaro ./.gitlab/build.bash
-	docker exec scripts-manjaro ./.gitlab/check_versions.bash
+	docker exec scripts-manjaro su public --command="./.gitlab/check_versions.bash"
 	$(MAKE) stop-manjaro
 
 .PHONY: stop-manjaro
@@ -133,7 +133,7 @@ test-ubuntu-18:
 		ubuntu:18.04 bash || true
 	docker exec scripts-ubuntu-18 ./.gitlab/setup_ubuntu.bash
 	docker exec scripts-ubuntu-18 ./.gitlab/build.bash
-	docker exec scripts-ubuntu-18 ./.gitlab/check_versions.bash
+	docker exec scripts-ubuntu-18 su public --command="./.gitlab/check_versions.bash"
 	$(MAKE) stop-ubuntu-18
 
 .PHONY: stop-ubuntu-18
