@@ -12,3 +12,9 @@
     - name: Flatpaks
       tags: [user]
       ansible.builtin.import_tasks: tasks/user/flatpaks.yml
+  handlers:
+    - name: systemctl --user daemon-reload
+      ansible.builtin.systemd:
+        daemon_reload: true
+        scope: user
+      when: not file_dockerenv.stat.exists
