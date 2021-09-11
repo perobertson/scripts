@@ -40,6 +40,7 @@ rustup --version
 shellcheck --version || echo 'command unavailable'
 ssh -V
 tree --version
+virt-what --version
 wget --version
 xz --version
 zsh --version

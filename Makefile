@@ -17,6 +17,10 @@ install:
 install_docker:
 	ansible-playbook --ask-become-pass -v docker.yml
 
+.PHONY: install_flatpaks
+install_flatpaks:
+	ansible-playbook -v flatpaks.yml
+
 .PHONY: install_gcloud
 install_gcloud:
 	ansible-playbook --ask-become-pass -v gcloud.yml
