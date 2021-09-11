@@ -98,9 +98,6 @@
     - name: User applications
       ansible.builtin.import_tasks: tasks/user/applications.yml
       tags: [user, applications]
-    - name: User flatpaks
-      ansible.builtin.import_tasks: tasks/user/flatpaks.yml
-      tags: [user, flatpaks]
     - name: User python
       ansible.builtin.import_tasks: tasks/user/python.yml
       tags: [user, python]
@@ -116,10 +113,3 @@
     - name: User bins
       ansible.builtin.import_tasks: tasks/user/bins.yml
       tags: [user, bins]
-
-  handlers:
-    - name: systemctl --user daemon-reload
-      ansible.builtin.systemd:
-        daemon_reload: true
-        scope: user
-      when: not file_dockerenv.stat.exists

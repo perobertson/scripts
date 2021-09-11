@@ -30,6 +30,7 @@
     - sublime-text
     - sysstat  # iostat
     - tree
+    - virt-what
     - wget
     - zsh
 
