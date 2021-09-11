@@ -37,10 +37,10 @@ rustc --version
 rustdoc --version
 rustfmt --version
 rustup --version
-shellcheck --version || echo 'command unavailable'
+shellcheck --version || echo 'shellcheck unavailable'
 ssh -V
 tree --version
-virt-what --version
+virt-what --version || echo 'virt-what unavailable'
 wget --version
 xz --version
 zsh --version
