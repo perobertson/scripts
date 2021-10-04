@@ -25,7 +25,7 @@ git --version
 gitui --version || echo 'gitui unavailable'
 gzip --version
 jq --version
-keybase --version
+keybase --version || echo 'keybase unavailable'
 make --version
 node --version
 npm --version
