@@ -1,3 +1,6 @@
+# Debian EOL dates https://wiki.debian.org/DebianReleases
+# Fedora EOL dates https://fedorapeople.org/groups/schedule/
+# Ubuntu EOL dates https://wiki.ubuntu.com/Releases
 ---
 default:
   interruptible: true
@@ -182,6 +185,13 @@ debian_10:
     - .rules_debian
   image: debian:10
 
+debian_11:
+  extends:
+    - .test
+    - .setup_debian
+    - .rules_debian
+  image: debian:11
+
 fedora_28:
   # EOL: 2019-05-28
   extends:
@@ -223,6 +233,7 @@ fedora_32:
   image: fedora:32
 
 fedora_33:
+  # EOL: 2021-12-01
   extends:
     - .test
     - .setup_fedora
@@ -242,6 +253,14 @@ fedora_35:
     - .setup_fedora
     - .rules_redhat
   image: fedora:35
+  allow_failure: true
+
+fedora_36:
+  extends:
+    - .test
+    - .setup_fedora
+    - .rules_redhat
+  image: fedora:36
   allow_failure: true
 
 fedora_rawhide:
