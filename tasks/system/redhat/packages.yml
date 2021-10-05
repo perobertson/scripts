@@ -93,7 +93,6 @@
     - wget
     - xz
     - xz-devel
-    - yubikey-manager
     - zlib-devel
     - zsh
 
@@ -103,6 +102,7 @@
     state: present
   loop:
     - exa
+    - yubikey-manager
     - zoom
   failed_when: false
 
