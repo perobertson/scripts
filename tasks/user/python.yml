@@ -13,7 +13,7 @@
   loop: "{{ pyenv_default_requirement_files.files }}"
   register: pip_out
 
-- name: All - pip check
+# TODO: move this to a handler
+- name: All - pip check  # noqa no-handler
   ansible.builtin.command: pip check
-  # TODO: figure out how to deal with debian shipping a broken python setup
-  when: pip_out.changed and ansible_distribution != 'Debian'
+  when: pip_out.changed

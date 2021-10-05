@@ -102,7 +102,8 @@
     state: present
   loop:
     - exa
-    - yubikey-manager
+    # TODO: enable this again when yubikey-manager fixes the constraints around cryptography
+    # - yubikey-manager
     - zoom
   failed_when: false
 
