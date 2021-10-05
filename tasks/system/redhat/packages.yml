@@ -93,7 +93,6 @@
     - wget
     - xz
     - xz-devel
-    - yubikey-manager
     - zlib-devel
     - zsh
 
@@ -103,6 +102,8 @@
     state: present
   loop:
     - exa
+    # TODO: enable this again when yubikey-manager fixes the constraints around cryptography
+    # - yubikey-manager
     - zoom
   failed_when: false
 
