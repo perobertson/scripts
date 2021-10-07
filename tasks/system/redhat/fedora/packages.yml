@@ -8,12 +8,10 @@
     - fd-find
     - gdouros-symbola-fonts
     - gtk-murrine-engine  # gtk2 theme engine. Probably safe to remove
-    - julia
     - levien-inconsolata-fonts
     - mozilla-fira-fonts-common
     - mozilla-fira-mono-fonts
     - mozilla-fira-sans-fonts
-    - pssh
     - ShellCheck
     - sqlitebrowser
 
