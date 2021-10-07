@@ -14,8 +14,8 @@ cargo --version
 cargo-clippy --version
 code --version
 curl --version
-docker --version || echo 'docker unavailable'
-docker-compose --version || echo 'docker-compose unavailable'
+docker --version
+docker compose --version
 exa --version || echo 'exa unavailable'
 fd --version || echo 'fd unavailable'
 flameshot --version || echo 'flameshot unavailable'
