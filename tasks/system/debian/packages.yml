@@ -43,13 +43,14 @@
     - fd-find
   failed_when: false
 
-- name: Debian - Install remote packages
+- name: Debian - Best effort to install remote packages
   ansible.builtin.apt:
     deb: "{{ item }}"
     state: present
   loop:
     - https://github.com/wagoodman/dive/releases/download/v{{ dive_version }}/dive_{{ dive_version }}_linux_amd64.deb
     - https://prerelease.keybase.io/keybase_amd64.deb
+  failed_when: false
 
 ### --- Distro specific ---
 

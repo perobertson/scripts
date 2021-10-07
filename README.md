@@ -10,7 +10,7 @@ Python is a main component of the tools that are installed and used.
 Because of this, the scripts are designed to work with systems that have a python3 install that is still supported.
 
 - Archlinux
-- Debian: 10
+- Debian: 10, 11
 - Fedora: 33, 34
 - Manjaro
 - Ubuntu: 20.04(LTS), 21.04

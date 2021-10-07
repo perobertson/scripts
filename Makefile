@@ -70,14 +70,14 @@ stop-arch:
 
 .PHONY: test-debian
 test-debian:
-	docker pull debian:10
+	docker pull debian:11
 	docker run \
 		-ditv $(shell pwd):/scripts \
 		-w /scripts \
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-debian \
-		debian:10 bash || true
+		debian:11 bash || true
 	docker exec scripts-debian ./.gitlab/setup_debian.bash
 	docker exec scripts-debian ./.gitlab/build.bash
 	docker exec scripts-debian su public --command="./.gitlab/check_versions.bash"
