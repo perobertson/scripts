@@ -31,3 +31,11 @@
     - wget
     - xz
     - zsh
+
+- name: Archlinux - Best effort to install optional packages
+  ansible.builtin.apt:
+    pkg: "{{ item }}"
+    state: present
+  loop:
+    - dconf-editor
+  failed_when: false
