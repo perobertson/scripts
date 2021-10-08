@@ -17,7 +17,6 @@
     - htop
     - jq
     - libcairo2-dev
-    - libglib2.0-bin  # gsettings
     - lynis  # Security scanning tool
     - nodejs
     - pkg-config
@@ -39,6 +38,7 @@
     pkg: "{{ item }}"
     state: present
   loop:
+    - dconf-editor
     - exa
     - fd-find
   failed_when: false

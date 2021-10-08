@@ -101,6 +101,7 @@
     name: "{{ item }}"
     state: present
   loop:
+    - dconf-editor
     - exa
     # TODO: enable this again when yubikey-manager fixes the constraints around cryptography
     # - yubikey-manager

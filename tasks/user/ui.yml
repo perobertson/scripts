@@ -1,26 +1,21 @@
 ---
-- name: All - Fetch gsettings schemas
-  no_log: true
-  ansible.builtin.command: gsettings list-schemas
-  ignore_errors: true
-  register: gsettings_schemas
-  changed_when: false
-
-- name: All - Show clock seconds
-  ansible.builtin.command: gsettings set org.cinnamon.desktop.interface clock-show-seconds true
-  when: "'org.cinnamon.desktop.interface' in gsettings_schemas.stdout_lines"
-
-- name: All - Set monospace font
-  ansible.builtin.command: gsettings set org.gnome.desktop.interface monospace-font-name 'Inconsolata 14'
-  when: "'org.gnome.desktop.interface' in gsettings_schemas.stdout_lines"
-
-- name: All - Files date format
-  ansible.builtin.command: gsettings set org.nemo.preferences date-format 'iso'
-  when: "'org.nemo.preferences' in gsettings_schemas.stdout_lines"
-
-- name: All - Files default folder view
-  ansible.builtin.command: gsettings set org.nemo.preferences default-folder-viewer 'list-view'
-  when: "'org.nemo.preferences' in gsettings_schemas.stdout_lines"
+- name: All - Set UI settings
+  tags: [cinnamon, gnome, files]
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop:
+    - key: /org/cinnamon/desktop/interface/clock-show-seconds
+      value: 'true'
+    - key: /org/cinnamon/enable-indicators
+      value: 'true'
+    - key: /org/gnome/desktop/interface/monospace-font-name
+      value: "'Inconsolata 14'"
+    - key: /org/nemo/preferences/date-format
+      value: "'iso'"
+    - key: /org/nemo/preferences/default-folder-viewer
+      value: "'list-view'"
 
 - name: All - Configure Xresources
   diff: true
@@ -112,13 +107,6 @@
   community.general.dconf:
     key: "/org/gnome/terminal/legacy/profiles:/default"
     value: "'e7aeecbb-8907-4e08-916e-749914c7b0b7'"
-    state: present
-
-- name: All - Enable cinnamon indicators
-  tags: [cinnamon]
-  community.general.dconf:
-    key: /org/cinnamon/enable-indicators
-    value: 'true'
     state: present
 
 ### Cursor
