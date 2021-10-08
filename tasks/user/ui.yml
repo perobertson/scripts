@@ -121,29 +121,70 @@
     value: 'true'
     state: present
 
-- name: All - Git update cinnamon-spices-themes  # noqa git-latest
-  tags: [cinnamon]
-  diff: false
-  ansible.builtin.git:
-    repo: https://github.com/linuxmint/cinnamon-spices-themes.git
-    dest: ~/Applications/cinnamon-spices-themes
-    depth: 1
+### Cursor
 
-- name: All - Create ~/.themes dir
+- name: All - Check if /usr/share/icons/volantes_cursors/index.theme exists
   tags: [cinnamon]
-  ansible.builtin.file:
-    path: ~/.themes
-    state: directory
-    mode: '0775'
+  ansible.builtin.stat:
+    path: /usr/share/icons/volantes_cursors/index.theme
+  register: stat_sys_volantes_cursors
 
-- name: All - Link cinnamon themes
+- name: All - Check if ~/.local/share/icons/volantes_cursors/index.theme exists
   tags: [cinnamon]
-  ansible.builtin.file:
-    src: "~/Applications/cinnamon-spices-themes/{{ item }}/files/{{ item }}"
-    dest: "~/.themes/Ansible-{{ item }}"
-    state: link
+  ansible.builtin.stat:
+    path: ~/.local/share/icons/volantes_cursors/index.theme
+  register: stat_usr_volantes_cursors
+
+- name: All - Set cinnamon cursor theme
+  tags: [cinnamon]
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
   loop:
-    - CBlack
+    - key: /org/cinnamon/desktop/interface/cursor-theme
+      value: "'volantes_cursors'"
+  when: stat_sys_volantes_cursors.stat.exists or stat_usr_volantes_cursors.stat.exists
+
+### Icons
+
+- name: All - Check if /usr/share/icons/Mint-Y-Dark-Teal/index.theme exists
+  tags: [cinnamon]
+  ansible.builtin.stat:
+    path: /usr/share/icons/Mint-Y-Dark-Teal/index.theme
+  register: stat_sys_mint_y_icons
+
+- name: All - Check if ~/.local/share/icons/Mint-Y-Dark-Teal/index.theme exists
+  tags: [cinnamon]
+  ansible.builtin.stat:
+    path: ~/.local/share/icons/Mint-Y-Dark-Teal/index.theme
+  register: stat_usr_mint_y_icons
+
+- name: All - Set cinnamon icon theme
+  tags: [cinnamon]
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop:
+    # Icons
+    - key: /org/cinnamon/desktop/interface/icon-theme
+      value: "'Mint-Y-Dark-Teal'"
+  when: stat_sys_mint_y_icons.stat.exists or stat_usr_mint_y_icons.stat.exists
+
+### Remaining UI themes
+
+- name: All - Check if /usr/share/themes/Mint-Y-Dark-Teal/index.theme exists
+  tags: [cinnamon]
+  ansible.builtin.stat:
+    path: /usr/share/themes/Mint-Y-Dark-Teal/index.theme
+  register: stat_sys_mint_y_theme
+
+- name: All - Check if ~/.local/share/themes/Mint-Y-Dark-Teal/index.theme exists
+  tags: [cinnamon]
+  ansible.builtin.stat:
+    path: ~/.local/share/themes/Mint-Y-Dark-Teal/index.theme
+  register: stat_usr_mint_y_theme
 
 - name: All - Set cinnamon theme
   tags: [cinnamon]
@@ -152,9 +193,13 @@
     value: "{{ item.value }}"
     state: present
   loop:
-    - key: /org/cinnamon/theme/name
-      value: "'Ansible-CBlack'"
-    - key: /org/cinnamon/desktop/wm/preferences/theme
-      value: "'Ansible-CBlack'"
+    # Controls
     - key: /org/cinnamon/desktop/interface/gtk-theme
-      value: "'Ansible-CBlack'"
+      value: "'Mint-Y-Dark-Teal'"
+    # Desktop
+    - key: /org/cinnamon/theme/name
+      value: "'Mint-Y-Dark-Teal'"
+    # Window Borders
+    - key: /org/cinnamon/desktop/wm/preferences/theme
+      value: "'Mint-Y-Dark'"
+  when: stat_sys_mint_y_theme.stat.exists or stat_usr_mint_y_theme.stat.exists
