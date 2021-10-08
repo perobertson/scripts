@@ -104,6 +104,8 @@
     - exa
     # TODO: enable this again when yubikey-manager fixes the constraints around cryptography
     # - yubikey-manager
+    - mint-y-icons
+    - mint-y-theme
     - zoom
   failed_when: false
 
