@@ -98,6 +98,9 @@
     - name: User applications
       ansible.builtin.import_tasks: tasks/user/applications.yml
       tags: [user, applications]
+    - name: User autostart
+      ansible.builtin.import_tasks: tasks/user/autostart.yml
+      tags: [user, autostart]
     - name: User python
       ansible.builtin.import_tasks: tasks/user/python.yml
       tags: [user, python]

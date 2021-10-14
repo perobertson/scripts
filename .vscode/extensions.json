@@ -6,6 +6,7 @@
         "gitlab.gitlab-workflow",
         "gruntfuggly.todo-tree",
         "ms-azuretools.vscode-docker",
+        "nico-castell.linux-desktop-file",
         "redhat.vscode-yaml",
         "samuelcolvin.jinjahtml",
         "timonwong.shellcheck",
