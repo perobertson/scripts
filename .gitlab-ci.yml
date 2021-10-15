@@ -305,6 +305,16 @@ ubuntu_21_04:
     - .rules_debian
   image: ubuntu:21.04
 
+ubuntu_21_10:
+  # EOL: 2022-07
+  # replace this job with the rolling short term release
+  # https://wiki.ubuntu.com/Releases
+  extends:
+    - .test
+    - .setup_ubuntu
+    - .rules_debian
+  image: ubuntu:21.10
+
 deploy_github:
   stage: deploy
   interruptible: false
