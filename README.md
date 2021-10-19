@@ -11,7 +11,7 @@ Because of this, the scripts are designed to work with systems that have a pytho
 
 - Archlinux
 - Debian: 10, 11
-- Fedora: 33, 34
+- Fedora: 34, 35
 - Manjaro
 - Ubuntu: 20.04(LTS), 21.04
 

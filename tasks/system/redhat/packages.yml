@@ -56,7 +56,6 @@
     - htop
     - ImageMagick
     - jq
-    - keybase
     - libcurl-devel
     - libffi-devel
     - libheif
@@ -96,6 +95,13 @@
     - zlib-devel
     - zsh
 
+- name: RedHat - Best effort to install keybase
+  ansible.builtin.dnf:
+    name:
+      - keybase
+    state: present
+  when: rpm_key_keybase is succeeded
+
 - name: RedHat - Best effort to install optional packages
   ansible.builtin.dnf:
     name: "{{ item }}"
@@ -107,6 +113,7 @@
     # - yubikey-manager
     - mint-y-icons
     - mint-y-theme
+    - ytop  # CLI system monitoring
     - zoom
   failed_when: false
 

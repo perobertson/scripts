@@ -40,6 +40,9 @@
         "34":
           key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
           fingerprint: E9A491A3DE247814E7E067EAE06F8ECDD651FF2E
+        "35":
+          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
+          fingerprint: E9A491A3DE247814E7E067EAE06F8ECDD651FF2E
       rpmfusion_nonfree_fedora:  # https://rpmfusion.org/keys
         "28":
           key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-28
@@ -61,6 +64,9 @@
           key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
           fingerprint: 79BDB88F9BBF73910FD4095B6A2AF96194843C65
         "34":
+          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
+          fingerprint: 79BDB88F9BBF73910FD4095B6A2AF96194843C65
+        "35":
           key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
           fingerprint: 79BDB88F9BBF73910FD4095B6A2AF96194843C65
   tasks:

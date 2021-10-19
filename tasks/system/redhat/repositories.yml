@@ -37,6 +37,8 @@
     state: present
     key: https://keybase.io/docs/server_security/code_signing_key.asc
     fingerprint: 222B85B0F90BE2D24CFEB93F47484E50656D16C7
+  register: rpm_key_keybase
+  ignore_errors: true
 
 - name: RedHat - Add Keybase repository
   ansible.builtin.yum_repository:
@@ -51,6 +53,7 @@
     # This repo was previously signed with the key but they no longer sign the
     # repo when publishing new releases. This causes a bad signature.
     repo_gpgcheck: false
+  when: rpm_key_keybase is succeeded
 
 - name: RedHat - Import Sublime-Text signing key
   ansible.builtin.rpm_key:
