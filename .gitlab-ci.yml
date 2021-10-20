@@ -237,7 +237,7 @@ fedora_33:
   extends:
     - .test
     - .setup_fedora
-    - .rules_redhat
+    - .rules_eol
   image: fedora:33
 
 fedora_34:
@@ -253,7 +253,6 @@ fedora_35:
     - .setup_fedora
     - .rules_redhat
   image: fedora:35
-  allow_failure: true
 
 fedora_36:
   extends:
