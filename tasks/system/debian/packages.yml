@@ -41,6 +41,7 @@
     - dconf-editor
     - exa
     - fd-find
+    - neofetch
   failed_when: false
 
 - name: Debian - Best effort to install remote packages
