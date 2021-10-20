@@ -37,4 +37,6 @@
     name: '{{ ansible_user_id }}'
     groups: plugdev
     append: true
-  when: ansible_distribution_major_version|int >= 32
+  when:
+    - ansible_distribution_major_version|int >= 32
+    - rpm_key_razer is succeeded
