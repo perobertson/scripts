@@ -38,4 +38,5 @@
     state: present
   loop:
     - dconf-editor
+    - neofetch
   failed_when: false

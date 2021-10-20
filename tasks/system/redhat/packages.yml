@@ -113,6 +113,7 @@
     # - yubikey-manager
     - mint-y-icons
     - mint-y-theme
+    - neofetch
     - ytop  # CLI system monitoring
     - zoom
   failed_when: false
