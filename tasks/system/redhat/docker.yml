@@ -37,7 +37,7 @@
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     repo_gpgcheck: true
 
-- name: Fedora >=35 - Add Docker Stable repository for Fedora34
+- name: Fedora >=36 - Add Docker Stable repository for Fedora35
   ansible.builtin.yum_repository:
     file: docker-ce
     name: docker-ce-stable
@@ -47,7 +47,7 @@
     gpgcheck: true
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     repo_gpgcheck: true
-  when: ansible_distribution_major_version|int >= 35
+  when: ansible_distribution_major_version|int >= 36
 
 ### --- Distro specific ---
 
