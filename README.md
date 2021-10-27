@@ -13,7 +13,7 @@ Because of this, the scripts are designed to work with systems that have a pytho
 - Debian: 10, 11
 - Fedora: 34, 35
 - Manjaro
-- Ubuntu: 20.04(LTS), 21.04
+- Ubuntu: 20.04(LTS), 21.04, 21.10
 
 **Note:** OSes that are EOL are not tested in CI.
 
