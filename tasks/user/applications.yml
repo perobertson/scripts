@@ -61,3 +61,50 @@
   ansible.builtin.git:
     repo: https://gitlab.com/perobertson/cli-tools.git
     dest: ~/Applications/cli-tools
+
+# Needed for user systemd scripts
+- name: All - Create user ~/bin
+  ansible.builtin.file:
+    path: $HOME/bin
+    state: directory
+    mode: '0700'
+
+- name: All - Create user scripts
+  diff: true
+  ansible.builtin.copy:
+    src: "files/home/user/bin/{{ item.name }}"
+    dest: "$HOME/bin/{{ item.name }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - name: README.md
+      mode: '0600'
+
+- name: All - Create user ~/.config/systemd/user
+  ansible.builtin.file:
+    path: "$HOME/{{ item }}"
+    state: directory
+    mode: '0700'
+  loop:
+    - .config/systemd
+    - .config/systemd/user
+
+- name: All - Create user services
+  diff: true
+  ansible.builtin.copy:
+    src: "files/home/user/.config/systemd/user/{{ item.name }}"
+    dest: "$HOME/.config/systemd/user/{{ item.name }}"
+    mode: "{{ item.mode }}"
+  notify: systemctl --user daemon-reload
+  loop:
+    - name: logout-podman-stop.service
+      mode: '0700'
+
+- name: All - Enable user services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+    daemon_reload: true
+    scope: user
+  when: not file_dockerenv.stat.exists
+  loop:
+    - logout-podman-stop.service

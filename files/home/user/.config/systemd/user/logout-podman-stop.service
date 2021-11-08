@@ -1,0 +1,11 @@
+[Unit]
+Description=Stop podman containers on logout
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/bin/true
+ExecStop=podman stop --all
+
+[Install]
+WantedBy=multi-user.target
