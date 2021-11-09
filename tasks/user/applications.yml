@@ -97,7 +97,7 @@
   notify: systemctl --user daemon-reload
   loop:
     - name: logout-podman-stop.service
-      mode: '0700'
+      mode: '0600'
 
 - name: All - Enable user services
   ansible.builtin.systemd:
