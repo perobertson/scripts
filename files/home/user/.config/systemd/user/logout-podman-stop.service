@@ -1,5 +1,6 @@
 [Unit]
 Description=Stop podman containers on logout
+After=default.target
 
 [Service]
 Type=oneshot
@@ -8,4 +9,6 @@ ExecStart=/bin/true
 ExecStop=podman stop --all
 
 [Install]
-WantedBy=multi-user.target
+# https://www.freedesktop.org/software/systemd/man/systemd.special.html#default.target1
+# The main target for user sessions
+WantedBy=default.target
