@@ -11,6 +11,7 @@
     cmd: git stash
   when: dotfiles.stat.isdir is defined and dotfiles.stat.isdir
   register: stashed_changes
+  changed_when: "'No local changes to save' not in stashed_changes.stdout"
 
 - name: All - Git update dotfiles
   ansible.builtin.git:

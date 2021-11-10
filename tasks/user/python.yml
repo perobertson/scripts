@@ -17,3 +17,4 @@
 - name: All - pip check  # noqa no-handler
   ansible.builtin.command: pip check
   when: pip_out.changed
+  changed_when: false
