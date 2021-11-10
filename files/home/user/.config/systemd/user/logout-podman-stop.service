@@ -1,12 +1,13 @@
 [Unit]
 Description=Stop podman containers on logout
+ConditionFileIsExecutable=/usr/bin/podman
 After=default.target
 
 [Service]
 Type=oneshot
 RemainAfterExit=true
 ExecStart=/bin/true
-ExecStop=podman stop --all
+ExecStop=/usr/bin/podman stop --all
 
 [Install]
 # https://www.freedesktop.org/software/systemd/man/systemd.special.html#default.target1
