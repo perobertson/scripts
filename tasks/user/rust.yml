@@ -18,6 +18,8 @@
 - name: All - rustup update
   ansible.builtin.command: ${HOME}/.cargo/bin/rustup update
   when: file_rustup.stat.exists
+  register: rustup_result
+  changed_when: "'linux-gnu unchanged - rustc' not in rustup_result.stdout"
 
 - name: All - Install 'tools'
   community.general.make:
