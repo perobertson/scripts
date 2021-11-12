@@ -43,6 +43,10 @@ workflow:
   before_script:
     - ./.gitlab/setup_archlinux.bash
 
+.setup_centos:
+  before_script:
+    - ./.gitlab/setup_centos.bash
+
 .setup_debian:
   before_script:
     - ./.gitlab/setup_debian.bash
@@ -111,7 +115,7 @@ workflow:
     - changes: *rules_common_files
     ### specific
     - changes:
-        - bootstrap/(fedora).bash
+        - bootstrap/(centos|fedora).bash
         - tasks/system/redhat/**/*
         - tasks/user/redhat/**/*
 
@@ -176,6 +180,21 @@ archlinux:
     - .setup_archlinux
     - .rules_archlinux
   image: archlinux:latest
+
+centos_stream8:
+  # EOL: 2024-05-31
+  extends:
+    - .test
+    - .setup_centos
+    - .rules_redhat
+  image: quay.io/centos/centos:stream8
+
+centos_stream9:
+  extends:
+    - .test
+    - .setup_centos
+    - .rules_redhat
+  image: quay.io/centos/centos:stream9
 
 debian_10:
   # EOL: ~2022
