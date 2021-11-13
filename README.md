@@ -10,6 +10,7 @@ Python is a main component of the tools that are installed and used.
 Because of this, the scripts are designed to work with systems that have a python3 install that is still supported.
 
 - Archlinux
+- Centos: stream8, stream9
 - Debian: 10, 11
 - Fedora: 34, 35
 - Manjaro

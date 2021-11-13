@@ -51,6 +51,10 @@
 
 ### --- Distro specific ---
 
+- name: Centos Docker
+  ansible.builtin.import_tasks: centos/docker.yml
+  when: ansible_distribution == 'Centos'
+
 - name: Fedora Docker
   ansible.builtin.import_tasks: fedora/docker.yml
   when: ansible_distribution == 'Fedora'
