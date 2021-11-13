@@ -75,6 +75,16 @@
         msg: "{{ ansible_facts }}"
       tags: [never, debug]
 
+    - name: debug info - ansible_architecture
+      ansible.builtin.debug:
+        var: ansible_architecture
+    - name: debug info - ansible_distribution
+      ansible.builtin.debug:
+        var: ansible_distribution
+    - name: debug info - ansible_distribution_major_version
+      ansible.builtin.debug:
+        var: ansible_distribution_major_version
+
     - name: All - Check if dockerenv exists
       ansible.builtin.stat:
         path: /.dockerenv
