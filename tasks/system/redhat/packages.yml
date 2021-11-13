@@ -36,50 +36,34 @@
     - bzip2
     - bzip2-devel
     - cmake
-    - crudini
     - curl
     - dconf
-    - dkms
     - dnf-automatic
     - flatpak
-    - fuse-sshfs
     - gcc
     - gcc-c++
     - gdb
     - git
     - gitk
-    - google-noto-sans-fonts
-    - google-roboto-condensed-fonts
-    - google-roboto-fonts
-    - google-roboto-slab-fonts
     - graphviz
-    - htop
-    - ImageMagick
     - jq
     - libcurl-devel
     - libffi-devel
-    - libheif
     - libnotify
     - libtool
-    - libyaml-devel
-    - lynis  # Security scanning tool
     - make
-    - ncdu
     - nodejs
     - npm
     - openssl-devel
-    - p7zip
     - patch
     - pcp-system-tools  # dstat
     - perl
-    - pv
     - python3-dbus
     - python3-devel
     - python3-psutil
     - readline-devel
     - redhat-lsb
     - redhat-rpm-config
-    - ripgrep
     - samba-client
     - seahorse  # key management
     - setools-console
@@ -107,14 +91,30 @@
     name: "{{ item }}"
     state: present
   loop:
+    - crudini
     - dconf-editor
+    - dkms
     - exa
-    # TODO: enable this again when yubikey-manager fixes the constraints around cryptography
-    # - yubikey-manager
+    - fuse-sshfs
+    - google-noto-sans-fonts
+    - google-roboto-condensed-fonts
+    - google-roboto-fonts
+    - google-roboto-slab-fonts
+    - htop
+    - ImageMagick
+    - libheif
+    - libyaml-devel
+    - lynis  # Security scanning tool
     - mint-y-icons
     - mint-y-theme
+    - ncdu
     - neofetch
+    - p7zip
+    - pv
+    - ripgrep
     - ytop  # CLI system monitoring
+    # TODO: enable this again when yubikey-manager fixes the constraints around cryptography
+    # - yubikey-manager
     - zoom
   failed_when: false
 
