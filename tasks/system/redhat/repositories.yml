@@ -133,6 +133,10 @@
 
 ### --- Distro specific ---
 
+- name: Centos Repositories
+  ansible.builtin.import_tasks: centos/repositories.yml
+  when: ansible_distribution == 'Centos'
+
 - name: Fedora Repositories
   ansible.builtin.import_tasks: fedora/repositories.yml
   when: ansible_distribution == 'Fedora'
