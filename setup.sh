@@ -108,6 +108,7 @@ bootstrap(){
     os="$(. /etc/os-release && echo "${ID}")"
     case "${os}" in
         arch)    source "bootstrap/arch.bash"    ;;
+        centos)  source "bootstrap/centos.bash"  ;;
         debian)  source "bootstrap/debian.bash"  ;;
         fedora)  source "bootstrap/fedora.bash"  ;;
         manjaro) source "bootstrap/manjaro.bash" ;;
