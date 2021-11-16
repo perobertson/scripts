@@ -133,7 +133,7 @@
 
 ### --- Distro specific ---
 
-- name: Centos Repositories
+- name: CentOS Repositories
   ansible.builtin.import_tasks: centos/repositories.yml
   when: ansible_distribution == 'CentOS'
 

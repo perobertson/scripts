@@ -1,5 +1,5 @@
 ---
-- name: Centos - Install docker
+- name: CentOS - Install docker
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: present

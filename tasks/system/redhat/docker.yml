@@ -51,7 +51,7 @@
 
 ### --- Distro specific ---
 
-- name: Centos Docker
+- name: CentOS Docker
   ansible.builtin.import_tasks: centos/docker.yml
   when: ansible_distribution == 'CentOS'
 
