@@ -53,7 +53,7 @@
 
 - name: Centos Docker
   ansible.builtin.import_tasks: centos/docker.yml
-  when: ansible_distribution == 'Centos'
+  when: ansible_distribution == 'CentOS'
 
 - name: Fedora Docker
   ansible.builtin.import_tasks: fedora/docker.yml
