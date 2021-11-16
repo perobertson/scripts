@@ -20,8 +20,8 @@
 - name: Centos - Import RPM-GPG-KEY-rpmfusion-free signing key
   ansible.builtin.rpm_key:
     state: present
-    key: "{{ signing_keys.rpmfusion_free_centos[ansible_distribution_major_version].key }}"
-    fingerprint: "{{ signing_keys.rpmfusion_free_centos[ansible_distribution_major_version].fingerprint }}"
+    key: "{{ signing_keys.rpmfusion_free_el[ansible_distribution_major_version].key }}"
+    fingerprint: "{{ signing_keys.rpmfusion_free_el[ansible_distribution_major_version].fingerprint }}"
 
 - name: Centos - Add RPMFusion-free repository
   ansible.builtin.dnf:
@@ -38,8 +38,8 @@
 - name: Centos - Import RPM-GPG-KEY-rpmfusion-nonfree signing key
   ansible.builtin.rpm_key:
     state: present
-    key: "{{ signing_keys.rpmfusion_nonfree_centos[ansible_distribution_major_version].key }}"
-    fingerprint: "{{ signing_keys.rpmfusion_nonfree_centos[ansible_distribution_major_version].fingerprint }}"
+    key: "{{ signing_keys.rpmfusion_nonfree_el[ansible_distribution_major_version].key }}"
+    fingerprint: "{{ signing_keys.rpmfusion_nonfree_el[ansible_distribution_major_version].fingerprint }}"
 
 - name: Centos - Add RPMFusion-nonfree repository
   ansible.builtin.dnf:
