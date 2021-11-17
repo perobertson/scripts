@@ -4,10 +4,16 @@ playbooks:=$(addsuffix .yml, $(plays))
 
 export ANSIBLE_CONFIG="./config/ansible.cfg"
 
+.git/hooks/pre-commit: .pre-commit-config.yaml
+	pre-commit install
+
 .PHONY: ansible-lint
 ansible-lint:
 	ansible-playbook --syntax-check $(playbooks)
 	ansible-lint -p .
+
+.PHONY: git_hooks
+git_hooks: .git/hooks/pre-commit
 
 .PHONY: install
 install:
@@ -40,14 +46,6 @@ install_rust_crates:
 .PHONY: install_setup
 install_setup:
 	ansible-playbook --ask-become-pass -v setup.yml
-
-.PHONY: install_hooks
-install_hooks:
-	pre-commit install
-
-.PHONY: hooks
-hooks:
-	pre-commit run --all-files
 
 .PHONY: test-arch
 test-arch:
