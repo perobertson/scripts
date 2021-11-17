@@ -64,7 +64,7 @@ test-arch:
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-arch \
-		archlinux:latest bash || true
+		archlinux:latest /sbin/init || true
 	$(CONTAINER) exec scripts-arch ./.gitlab/setup_archlinux.bash
 	$(CONTAINER) exec scripts-arch ./.gitlab/build.bash
 	$(CONTAINER) exec scripts-arch su public --command="./.gitlab/check_versions.bash"
@@ -83,7 +83,7 @@ test-centos-8:
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-centos-8 \
-		quay.io/centos/centos:stream8 bash || true
+		quay.io/centos/centos:stream8 /sbin/init || true
 	$(CONTAINER) exec scripts-centos-8 ./.gitlab/setup_centos.bash
 	$(CONTAINER) exec scripts-centos-8 ./.gitlab/build.bash
 	$(CONTAINER) exec scripts-centos-8 su public --command="./.gitlab/check_versions.bash"
@@ -102,7 +102,7 @@ test-debian:
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-debian-11 \
-		debian:11 bash || true
+		debian:11 /sbin/init || true
 	$(CONTAINER) exec scripts-debian-11 ./.gitlab/setup_debian.bash
 	$(CONTAINER) exec scripts-debian-11 ./.gitlab/build.bash
 	$(CONTAINER) exec scripts-debian-11 su public --command="./.gitlab/check_versions.bash"
@@ -121,7 +121,7 @@ test-fedora-35:
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-fedora-35 \
-		fedora:35 bash || true
+		fedora:35 /sbin/init || true
 	$(CONTAINER) exec scripts-fedora-35 ./.gitlab/setup_fedora.bash
 	$(CONTAINER) exec scripts-fedora-35 ./.gitlab/build.bash
 	$(CONTAINER) exec scripts-fedora-35 su public --command="./.gitlab/check_versions.bash"
@@ -140,7 +140,7 @@ test-manjaro:
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-manjaro \
-		manjarolinux/base:latest bash || true
+		manjarolinux/base:latest /sbin/init || true
 	$(CONTAINER) exec scripts-manjaro ./.gitlab/setup_archlinux.bash
 	$(CONTAINER) exec scripts-manjaro ./.gitlab/build.bash
 	$(CONTAINER) exec scripts-manjaro su public --command="./.gitlab/check_versions.bash"
@@ -159,7 +159,7 @@ test-ubuntu-18:
 		-e ANSIBLE_FORCE_COLOR=1 \
 		--rm \
 		--name scripts-ubuntu-18 \
-		ubuntu:18.04 bash || true
+		ubuntu:18.04 /sbin/init || true
 	$(CONTAINER) exec scripts-ubuntu-18 ./.gitlab/setup_ubuntu.bash
 	$(CONTAINER) exec scripts-ubuntu-18 ./.gitlab/build.bash
 	$(CONTAINER) exec scripts-ubuntu-18 su public --command="./.gitlab/check_versions.bash"
