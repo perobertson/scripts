@@ -1,6 +1,6 @@
 ---
 - name: CentOS - Install packages
-  community.general.pacman:
+  ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
   loop:
