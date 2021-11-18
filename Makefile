@@ -2,6 +2,8 @@
 plays:=docker gcloud kubernetes razer setup
 playbooks:=$(addsuffix .yml, $(plays))
 
+kaniko_img:=gcr.io/kaniko-project/executor:v1.6.0-debug
+
 export ANSIBLE_CONFIG="./config/ansible.cfg"
 
 ifneq ($(shell command -v podman), '')
@@ -19,6 +21,18 @@ endif
 ansible-lint:
 	ansible-playbook --syntax-check $(playbooks)
 	ansible-lint -p .
+
+dockerfiles/dist/centos/centos-stream8.tar: ./.gitlab/build_container.sh
+dockerfiles/dist/centos/centos-stream8.tar: dockerfiles/centos.dockerfile
+	$(CONTAINER) run \
+		--entrypoint='' \
+		--name="scripts-build-centos-stream8" \
+		--rm \
+		-v "$(shell pwd):/worksapce" \
+		-w /worksapce \
+		$(kaniko_img) \
+		./.gitlab/build_container.sh centos stream8
+	$(CONTAINER) load -i dockerfiles/dist/centos/centos-stream8.tar
 
 .PHONY: git_hooks
 git_hooks: .git/hooks/pre-commit
