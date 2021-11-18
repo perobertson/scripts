@@ -34,6 +34,9 @@ workflow:
     # debug image has a shell
     name: gcr.io/kaniko-project/executor:v1.6.0-debug
     entrypoint: [""]
+  needs:
+    - job: lint:shellcheck
+      artifacts: false
 
 .test:
   stage: test
@@ -66,7 +69,7 @@ workflow:
   before_script:
     - ./.gitlab/setup_ubuntu.bash
 
-.rules_lint: &rules_lint
+.rules_lint:
   rules:
     ### Always
     - if: $CI_COMMIT_TAG
@@ -100,7 +103,7 @@ workflow:
         - tasks/system/archlinux/**/*
         - tasks/user/archlinux/**/*
 
-.rules_debian: &rules_debian
+.rules_debian:
   rules:
     - if: $CI_COMMIT_TAG
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -113,7 +116,7 @@ workflow:
         - tasks/system/debian/**/*
         - tasks/user/debian/**/*
 
-.rules_redhat: &rules_redhat
+.rules_redhat:
   rules:
     - if: $CI_COMMIT_TAG
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -126,7 +129,7 @@ workflow:
         - tasks/system/redhat/**/*
         - tasks/user/redhat/**/*
 
-.rules_eol: &rules_eol
+.rules_eol:
   rules:
     - when: manual
       allow_failure: true
@@ -187,29 +190,33 @@ lint:ansible:
     # Also check all other non ansible files
     - yamllint -f parsable .
 
-archlinux:
+test:archlinux:
   extends:
     - .test
     - .setup_archlinux
     - .rules_archlinux
   image: archlinux:latest
 
-centos_stream8:
+test:centos_stream8:
   # EOL: 2024-05-31
   extends:
     - .test
-    - .setup_centos
     - .rules_redhat
-  image: quay.io/centos/centos:stream8
+  image: ${CI_REGISTRY}/perobertson/scripts/centos:stream8-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:centos:stream8
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
-centos_stream9:
+test:centos_stream9:
   extends:
     - .test
     - .setup_centos
     - .rules_redhat
   image: quay.io/centos/centos:stream9
 
-debian_10:
+test:debian_10:
   # EOL: ~2022
   extends:
     - .test
@@ -217,14 +224,14 @@ debian_10:
     - .rules_debian
   image: debian:10
 
-debian_11:
+test:debian_11:
   extends:
     - .test
     - .setup_debian
     - .rules_debian
   image: debian:11
 
-fedora_28:
+test:fedora_28:
   # EOL: 2019-05-28
   extends:
     - .test
@@ -232,7 +239,7 @@ fedora_28:
     - .rules_eol
   image: fedora:28
 
-fedora_29:
+test:fedora_29:
   # EOL: 2019-11-30
   extends:
     - .test
@@ -240,7 +247,7 @@ fedora_29:
     - .rules_eol
   image: fedora:29
 
-fedora_30:
+test:fedora_30:
   # EOL: 2020-05-26
   extends:
     - .test
@@ -248,7 +255,7 @@ fedora_30:
     - .rules_eol
   image: fedora:30
 
-fedora_31:
+test:fedora_31:
   # EOL: 2020-11-24
   extends:
     - .test
@@ -256,7 +263,7 @@ fedora_31:
     - .rules_eol
   image: fedora:31
 
-fedora_32:
+test:fedora_32:
   # EOL: 2021-05-25
   extends:
     - .test
@@ -264,7 +271,7 @@ fedora_32:
     - .rules_eol
   image: fedora:32
 
-fedora_33:
+test:fedora_33:
   # EOL: 2021-12-01
   extends:
     - .test
@@ -272,21 +279,21 @@ fedora_33:
     - .rules_eol
   image: fedora:33
 
-fedora_34:
+test:fedora_34:
   extends:
     - .test
     - .setup_fedora
     - .rules_redhat
   image: fedora:34
 
-fedora_35:
+test:fedora_35:
   extends:
     - .test
     - .setup_fedora
     - .rules_redhat
   image: fedora:35
 
-fedora_36:
+test:fedora_36:
   extends:
     - .test
     - .setup_fedora
@@ -294,7 +301,7 @@ fedora_36:
   image: fedora:36
   allow_failure: true
 
-fedora_rawhide:
+test:fedora_rawhide:
   extends:
     - .test
     - .setup_fedora
@@ -302,14 +309,14 @@ fedora_rawhide:
   image: fedora:rawhide
   allow_failure: true
 
-manjaro:
+test:manjaro:
   extends:
     - .test
     - .setup_archlinux
     - .rules_archlinux
   image: manjarolinux/base:latest
 
-ubuntu_18_04:
+test:ubuntu_18_04:
   # EOL: 2023-04
   # Python 3.6 EOL: 2021-12-23
   extends:
@@ -318,7 +325,7 @@ ubuntu_18_04:
     - .rules_eol
   image: ubuntu:18.04
 
-ubuntu_20_04:
+test:ubuntu_20_04:
   # EOL: 2025-04
   extends:
     - .test
@@ -326,7 +333,7 @@ ubuntu_20_04:
     - .rules_debian
   image: ubuntu:20.04
 
-ubuntu_21_04:
+test:ubuntu_21_04:
   # EOL: 2022-01
   # replace this job with the rolling short term release
   # https://wiki.ubuntu.com/Releases
@@ -336,7 +343,7 @@ ubuntu_21_04:
     - .rules_debian
   image: ubuntu:21.04
 
-ubuntu_21_10:
+test:ubuntu_21_10:
   # EOL: 2022-07
   # replace this job with the rolling short term release
   # https://wiki.ubuntu.com/Releases
@@ -346,7 +353,7 @@ ubuntu_21_10:
     - .rules_debian
   image: ubuntu:21.10
 
-deploy_github:
+deploy:github:
   stage: deploy
   interruptible: false
   script:
