@@ -18,11 +18,11 @@ if [ -n "${CI:-}" ]; then
 JSON
     /kaniko/executor \
         --cache \
-        --cache-repo "${CI_REGISTRY_IMAGE}/cache" \
+        --cache-repo="${CI_REGISTRY_IMAGE}/cache" \
         --cleanup \
-        --context "${CI_PROJECT_DIR}/dockerfiles" \
-        --destination "${CI_REGISTRY_IMAGE}/${OS}:${CI_COMMIT_REF_SLUG}" \
-        --dockerfile "${CI_PROJECT_DIR}/dockerfiles/${OS}.dockerfile" \
+        --context="${CI_PROJECT_DIR}/dockerfiles" \
+        --destination="${CI_REGISTRY_IMAGE}/${OS}:${OS_VERSION}-${CI_COMMIT_REF_SLUG}" \
+        --dockerfile="${CI_PROJECT_DIR}/dockerfiles/${OS}.dockerfile" \
         --reproducible
 else
     mkdir -p "dockerfiles/dist/${OS}"

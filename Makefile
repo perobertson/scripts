@@ -31,7 +31,7 @@ dockerfiles/dist/centos/centos-stream8.tar: dockerfiles/centos.dockerfile
 		-v "$(shell pwd):/worksapce" \
 		-w /worksapce \
 		$(kaniko_img) \
-		./.gitlab/build_container.sh centos stream8
+		./.gitlab/build_image.sh centos stream8
 	$(CONTAINER) load -i dockerfiles/dist/centos/centos-stream8.tar
 
 .PHONY: git_hooks

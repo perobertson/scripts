@@ -28,6 +28,13 @@ workflow:
       when: never
     - if: $CI_COMMIT_BRANCH
 
+.build_img:
+  stage: build
+  image:
+    # debug image has a shell
+    name: gcr.io/kaniko-project/executor:v1.6.0-debug
+    entrypoint: [""]
+
 .test:
   stage: test
   needs:
@@ -152,6 +159,12 @@ build:linter:
       --context $CI_PROJECT_DIR
       --destination $CI_REGISTRY_IMAGE/linter:$CI_COMMIT_REF_SLUG
       --dockerfile $CI_PROJECT_DIR/.gitlab/linter.dockerfile
+
+build:centos:stream8:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh centos stream8
 
 lint:shellcheck:
   extends:
