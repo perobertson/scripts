@@ -49,6 +49,13 @@ workflow:
     - ./.gitlab/build.bash
     - su public --command="./.gitlab/check_versions.bash"
 
+.test_new:
+  stage: test
+  script:
+    - ./setup.sh
+    - ./.gitlab/verify_no_changes.sh
+    - ./.gitlab/check_versions.bash
+
 .setup_archlinux:
   before_script:
     - ./.gitlab/setup_archlinux.bash
@@ -197,10 +204,10 @@ test:archlinux:
     - .rules_archlinux
   image: archlinux:latest
 
-test:centos_stream8:
+test:centos:stream8:
   # EOL: 2024-05-31
   extends:
-    - .test
+    - .test_new
     - .rules_redhat
   image: ${CI_REGISTRY}/perobertson/scripts/centos:stream8-${CI_COMMIT_REF_SLUG}
   needs:
