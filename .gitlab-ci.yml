@@ -49,6 +49,7 @@ workflow:
     - ./.gitlab/build.bash
     - su public --command="./.gitlab/check_versions.bash"
 
+# TODO: replace .test with this
 .test_new:
   stage: test
   script:
@@ -59,10 +60,6 @@ workflow:
 .setup_archlinux:
   before_script:
     - ./.gitlab/setup_archlinux.bash
-
-.setup_centos:
-  before_script:
-    - ./.gitlab/setup_centos.bash
 
 .setup_debian:
   before_script:
@@ -176,6 +173,12 @@ build:centos:stream8:
   script:
     - ./.gitlab/build_image.sh centos stream8
 
+build:centos:stream9:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh centos stream9
+
 lint:shellcheck:
   extends:
     - .rules_lint
@@ -216,12 +219,16 @@ test:centos:stream8:
     - job: lint:ansible
       artifacts: false
 
-test:centos_stream9:
+test:centos:stream9:
   extends:
-    - .test
-    - .setup_centos
+    - .test_new
     - .rules_redhat
-  image: quay.io/centos/centos:stream9
+  image: ${CI_REGISTRY}/perobertson/scripts/centos:stream9-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:centos:stream9
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
 test:debian_10:
   # EOL: ~2022
