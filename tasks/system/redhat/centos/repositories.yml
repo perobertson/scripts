@@ -1,4 +1,10 @@
 ---
+- name: CentOS - Check for Hashicorp support
+  ansible.builtin.uri:
+    url: "https://rpm.releases.hashicorp.com/RHEL/{{ ansible_distribution_major_version|int }}/{{ ansible_architecture }}/stable/repodata/repomd.xml"
+  register: uri_hashicorp_repo_metadata
+  ignore_errors: true
+
 # https://www.hashicorp.com/security
 - name: CentOS - Import Hashicorp signing key
   ansible.builtin.rpm_key:
@@ -12,7 +18,7 @@
     name: hashicorp
     description: Hashicorp Stable - $basearch
     baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
-    enabled: true
+    enabled: "{{ uri_hashicorp_repo_metadata is succeeded }}"
     gpgcheck: true
     repo_gpgcheck: true
     gpgkey: https://rpm.releases.hashicorp.com/gpg
