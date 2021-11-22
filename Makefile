@@ -22,7 +22,7 @@ ansible-lint:
 	ansible-playbook --syntax-check $(playbooks)
 	ansible-lint -p .
 
-dockerfiles/dist/centos/centos-stream8.tar: ./.gitlab/build_container.sh
+dockerfiles/dist/centos/centos-stream8.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/centos/centos-stream8.tar: dockerfiles/centos.dockerfile
 	$(CONTAINER) run \
 		--entrypoint='' \
@@ -87,6 +87,33 @@ test-arch:
 .PHONY: stop-arch
 stop-arch:
 	$(CONTAINER) stop scripts-arch
+
+define test_os
+	$(CONTAINER) create \
+		--env ANSIBLE_FORCE_COLOR=1 \
+		--interactive \
+		--name="scripts-$(1)-$(2)" \
+		--rm \
+		--tmpfs="/run:rw,noexec,nosuid,nodev" \
+		--tmpfs="/tmp:rw,noexec,nosuid,nodev" \
+		--tty \
+		--volume="/sys/fs/cgroup:/sys/fs/cgroup:ro" \
+		--volume="$(shell pwd):/scripts" \
+		--workdir /scripts \
+		"localhost/scripts-$(1):$(2)" || true
+	$(CONTAINER) start "scripts-$(1)-$(2)" || true
+	@# The container must run as root for systemd
+	@# This means we need to explicitly start a different session for the user
+	@# FIXME: this is failing because systemd is not running for the user session as well
+	$(CONTAINER) exec "scripts-$(1)-$(2)" su public -c './setup.sh'
+	$(CONTAINER) exec "scripts-$(1)-$(2)" su public -c './check_versions.bash'
+	$(CONTAINER) exec "scripts-$(1)-$(2)" su public -c './.gitlab/verify_no_changes.sh'
+	$(CONTAINER) stop "scripts-$(1)-$(2)"
+endef
+
+.PHONY: test-centos-stream8
+test-centos-stream8: dockerfiles/dist/centos/centos-stream8.tar
+	$(call test_os,centos,stream8)
 
 .PHONY: test-centos-8
 test-centos-8:
