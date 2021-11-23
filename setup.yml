@@ -132,10 +132,3 @@
     - name: User bins
       ansible.builtin.import_tasks: tasks/user/bins.yml
       tags: [user, bins]
-
-  handlers:
-    - name: systemctl --user daemon-reload
-      ansible.builtin.systemd:
-        daemon_reload: true
-        scope: user
-      when: not file_dockerenv.stat.exists
