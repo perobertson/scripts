@@ -14,4 +14,3 @@ RUN dnf install -y \
 
 # Systemd must run as root when the system boots
 # This means USER cannot be set
-ENTRYPOINT [ "/sbin/init" ]

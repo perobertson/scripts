@@ -53,6 +53,34 @@
   retries: 5
   delay: 5
 
+- name: Fedora - Install zoom updater dependencies
+  ansible.builtin.dnf:
+    name:
+      - make
+      - coreutils  # provides basename
+      - createrepo_c
+      - curl
+      - rpm
+    state: present
+
+- name: Fedora - install zoom updater service
+  community.general.make:
+    chdir: /opt/zoom-yum-repo
+    target: install-service
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir
+
+- name: Fedora - start zoom updater service
+  community.general.make:
+    chdir: /opt/zoom-yum-repo
+    target: start-service
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir
+
+### Version specific repositories
+
 - name: Fedora <=25 - Add MySQL community repository
   ansible.builtin.dnf:
     name:

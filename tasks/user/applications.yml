@@ -104,9 +104,11 @@
     enabled: true
     daemon_reload: true
     scope: user
-  when: not file_dockerenv.stat.exists
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir
   loop:
     - logout-podman-stop.service
   # TODO: figure out how to get `systemd --user` running
   # Failed to connect to bus: No such file or directory
-  ignore_errors: true
+  failed_when: false
