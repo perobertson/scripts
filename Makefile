@@ -1,14 +1,15 @@
 .DEFAULT_GOAL:=ansible-lint
+MAKEFLAGS=--warn-undefined-variables
+
 plays:=docker gcloud kubernetes razer setup
 playbooks:=$(addsuffix .yml, $(plays))
-
 kaniko_img:=gcr.io/kaniko-project/executor:v1.6.0-debug
 
 export ANSIBLE_CONFIG="./config/ansible.cfg"
 
-ifneq ($(shell command -v podman), '')
+ifneq ("$(shell command -v podman)", "")
 CONTAINER?=podman
-else ifneq ($(shell command -v docker), '')
+else ifneq ("$(shell command -v docker)", "")
 CONTAINER?=docker
 else
 $(warning no container platform found. Cannot run test targets.)
