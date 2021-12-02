@@ -53,9 +53,11 @@ workflow:
 .test_new:
   stage: test
   script:
-    - ./setup.sh
-    - ./.gitlab/verify_no_changes.sh
-    - ./.gitlab/check_versions.bash
+    # Container runs as root to support systemd as the init system
+    # switch to the test user 'public' to run the scripts like a user would
+    - su public --command="./setup.sh"
+    - su public --command="./.gitlab/check_versions.bash"
+    - su public --command="./.gitlab/verify_no_changes.sh"
 
 .setup_archlinux:
   before_script:
