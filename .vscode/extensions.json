@@ -7,9 +7,9 @@
         "gruntfuggly.todo-tree",
         "ms-azuretools.vscode-docker",
         "nico-castell.linux-desktop-file",
+        "redhat.ansible",
         "redhat.vscode-yaml",
         "samuelcolvin.jinjahtml",
-        "timonwong.shellcheck",
-        "zbr.vscode-ansible"
+        "timonwong.shellcheck"
     ]
 }

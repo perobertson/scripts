@@ -39,6 +39,7 @@ rustfmt --version
 rustup --version
 shellcheck --version || echo 'shellcheck unavailable'
 ssh -V
+tar --version
 tree --version
 virt-what --version || echo 'virt-what unavailable'
 wget --version

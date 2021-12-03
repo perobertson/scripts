@@ -2,8 +2,8 @@
 # Docker support for new fedora releases is always behind
 - name: RedHat - Check for Docker support
   ansible.builtin.uri:
-    url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version|int }}/{{ ansible_architecture }}/stable"
-  register: uri_docker_repo_rpm
+    url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version|int }}/{{ ansible_architecture }}/stable/repodata/repomd.xml"
+  register: uri_docker_repo_metadata
   ignore_errors: true
 
 - name: RedHat - Import Docker signing key
@@ -20,7 +20,7 @@
     name: docker-ce-stable
     description: "Docker CE Stable - {{ ansible_distribution }} - $releasever - $basearch"
     baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/stable"
-    enabled: "{{ uri_docker_repo_rpm is succeeded }}"
+    enabled: "{{ uri_docker_repo_metadata is succeeded }}"
     gpgcheck: true
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     repo_gpgcheck: true
@@ -50,6 +50,10 @@
   when: ansible_distribution_major_version|int >= 36
 
 ### --- Distro specific ---
+
+- name: CentOS Docker
+  ansible.builtin.import_tasks: centos/docker.yml
+  when: ansible_distribution == 'CentOS'
 
 - name: Fedora Docker
   ansible.builtin.import_tasks: fedora/docker.yml

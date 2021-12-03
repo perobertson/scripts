@@ -94,7 +94,6 @@
     src: "files/home/user/.config/systemd/user/{{ item.name }}"
     dest: "$HOME/.config/systemd/user/{{ item.name }}"
     mode: "{{ item.mode }}"
-  notify: systemctl --user daemon-reload
   loop:
     - name: logout-podman-stop.service
       mode: '0600'
@@ -105,6 +104,11 @@
     enabled: true
     daemon_reload: true
     scope: user
-  when: not file_dockerenv.stat.exists
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir
   loop:
     - logout-podman-stop.service
+  # TODO: figure out how to get `systemd --user` running
+  # Failed to connect to bus: No such file or directory
+  failed_when: false

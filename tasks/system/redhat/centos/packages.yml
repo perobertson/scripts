@@ -1,0 +1,7 @@
+---
+- name: CentOS - Install packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - code

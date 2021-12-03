@@ -1,0 +1,92 @@
+---
+- name: CentOS - Check for Hashicorp support
+  ansible.builtin.uri:
+    url: "https://rpm.releases.hashicorp.com/RHEL/{{ ansible_distribution_major_version|int }}/{{ ansible_architecture }}/stable/repodata/repomd.xml"
+  register: uri_hashicorp_repo_metadata
+  ignore_errors: true
+
+# https://www.hashicorp.com/security
+- name: CentOS - Import Hashicorp signing key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://rpm.releases.hashicorp.com/gpg
+    fingerprint: E8A032E094D8EB4EA189D270DA418C88A3219F7B
+
+- name: CentOS - Add Hashicorp repository
+  ansible.builtin.yum_repository:
+    file: hashicorp
+    name: hashicorp
+    description: Hashicorp Stable - $basearch
+    baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
+    enabled: "{{ uri_hashicorp_repo_metadata is succeeded }}"
+    gpgcheck: true
+    repo_gpgcheck: true
+    gpgkey: https://rpm.releases.hashicorp.com/gpg
+
+- name: CentOS - Import RPM-GPG-KEY-rpmfusion-free signing key
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ signing_keys.rpmfusion_free_el[ansible_distribution_major_version].key }}"
+    fingerprint: "{{ signing_keys.rpmfusion_free_el[ansible_distribution_major_version].fingerprint }}"
+  when: ansible_distribution_major_version in signing_keys.rpmfusion_free_el
+
+- name: CentOS - Add RPMFusion-free repository
+  ansible.builtin.dnf:
+    name:
+      - https://download1.rpmfusion.org/free/el/rpmfusion-free-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
+    state: present
+  when:
+    - ansible_distribution_major_version in signing_keys.rpmfusion_free_el
+    - (not rpmfusion_free_repo.stat.exists) or (not rpmfusion_free_updates_repo.stat.exists)
+  register: rpmfusion_free_install
+  until: rpmfusion_free_install is succeeded
+  retries: 5
+  delay: 5
+
+- name: CentOS - Import RPM-GPG-KEY-rpmfusion-nonfree signing key
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ signing_keys.rpmfusion_nonfree_el[ansible_distribution_major_version].key }}"
+    fingerprint: "{{ signing_keys.rpmfusion_nonfree_el[ansible_distribution_major_version].fingerprint }}"
+  when: ansible_distribution_major_version in signing_keys.rpmfusion_nonfree_el
+
+- name: CentOS - Add RPMFusion-nonfree repository
+  ansible.builtin.dnf:
+    name:
+      - https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
+    state: present
+  when:
+    - ansible_distribution_major_version in signing_keys.rpmfusion_nonfree_el
+    - (not rpmfusion_nonfree_repo.stat.exists) or (not rpmfusion_nonfree_updates_repo.stat.exists)
+  register: rpmfusion_nonfree_install
+  until: rpmfusion_nonfree_install is succeeded
+  retries: 5
+  delay: 5
+
+- name: CentOS - Install zoom updater dependencies
+  ansible.builtin.dnf:
+    name:
+      - make
+      - coreutils-single  # provides basename
+      - createrepo_c
+      - curl
+      - rpm
+    state: present
+
+- name: CentOS - install zoom updater service
+  community.general.make:
+    chdir: /opt/zoom-yum-repo
+    target: install-service
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir
+
+- name: CentOS - start zoom updater service
+  community.general.make:
+    chdir: /opt/zoom-yum-repo
+    target: start-service
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir
+
+### Version specific repositories

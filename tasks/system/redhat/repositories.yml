@@ -116,6 +116,7 @@
     path: /etc/yum.repos.d/rpmfusion-nonfree-updates.repo
   register: rpmfusion_nonfree_updates_repo
 
+# Install of dependencies is specific to the os family
 - name: RedHat - update zoom-yum-repo  # noqa git-latest
   diff: false
   ansible.builtin.git:
@@ -123,15 +124,11 @@
     dest: /opt/zoom-yum-repo
   register: git_zoom_yum_repo
 
-- name: RedHat - install zoom updater service  # noqa no-handler
-  ansible.builtin.command:
-    chdir: /opt/zoom-yum-repo
-    cmd: make install-service start-service
-  when:
-    - not file_dockerenv.stat.exists
-    - git_zoom_yum_repo is changed
-
 ### --- Distro specific ---
+
+- name: CentOS Repositories
+  ansible.builtin.import_tasks: centos/repositories.yml
+  when: ansible_distribution == 'CentOS'
 
 - name: Fedora Repositories
   ansible.builtin.import_tasks: fedora/repositories.yml
