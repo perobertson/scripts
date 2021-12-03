@@ -18,4 +18,6 @@
     enabled: true
     state: started
     daemon_reload: true
-  when: not file_dockerenv.stat.exists
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir

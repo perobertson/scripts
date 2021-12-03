@@ -5,10 +5,11 @@
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
     docker_compose_version: 1.29.2
   tasks:
-    - name: All - Check if dockerenv exists
+    # https://www.freedesktop.org/software/systemd/man/sd_booted.html
+    - name: All - Check if systemd is running
       ansible.builtin.stat:
-        path: /.dockerenv
-      register: file_dockerenv
+        path: /run/systemd/system/
+      register: stat_run_systemd
 
     - name: Docker
       tags: [system]
@@ -22,4 +23,6 @@
         enabled: true
         state: started
         daemon_reload: true
-      when: not file_dockerenv.stat.exists
+      when:
+        - stat_run_systemd.stat.exists
+        - stat_run_systemd.stat.isdir

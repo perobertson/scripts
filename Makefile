@@ -35,6 +35,18 @@ dockerfiles/dist/centos/centos-stream8.tar: dockerfiles/centos.dockerfile
 		./.gitlab/build_image.sh centos stream8
 	$(CONTAINER) load -i dockerfiles/dist/centos/centos-stream8.tar
 
+dockerfiles/dist/centos/centos-stream9.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/centos/centos-stream9.tar: dockerfiles/centos.dockerfile
+	$(CONTAINER) run \
+		--entrypoint='' \
+		--name="scripts-build-centos-stream9" \
+		--rm \
+		-v "$(shell pwd):/worksapce" \
+		-w /worksapce \
+		$(kaniko_img) \
+		./.gitlab/build_image.sh centos stream9
+	$(CONTAINER) load -i dockerfiles/dist/centos/centos-stream9.tar
+
 .PHONY: git_hooks
 git_hooks: .git/hooks/pre-commit
 
@@ -116,24 +128,9 @@ endef
 test-centos-stream8: dockerfiles/dist/centos/centos-stream8.tar
 	$(call test_os,centos,stream8)
 
-.PHONY: test-centos-8
-test-centos-8:
-	$(CONTAINER) pull quay.io/centos/centos:stream8
-	$(CONTAINER) run \
-		-ditv "$(shell pwd):/scripts" \
-		-w /scripts \
-		-e ANSIBLE_FORCE_COLOR=1 \
-		--rm \
-		--name scripts-centos-8 \
-		quay.io/centos/centos:stream8 /sbin/init || true
-	$(CONTAINER) exec scripts-centos-8 ./.gitlab/setup_centos.bash
-	$(CONTAINER) exec scripts-centos-8 ./.gitlab/build.bash
-	$(CONTAINER) exec scripts-centos-8 su public --command="./.gitlab/check_versions.bash"
-	$(MAKE) stop-centos-8
-
-.PHONY: stop-centos-8
-stop-centos-8:
-	$(CONTAINER) stop scripts-centos-8
+.PHONY: test-centos-stream9
+test-centos-stream9: dockerfiles/dist/centos/centos-stream9.tar
+	$(call test_os,centos,stream9)
 
 .PHONY: test-debian-11
 test-debian:
