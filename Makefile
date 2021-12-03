@@ -35,6 +35,18 @@ dockerfiles/dist/centos/centos-stream8.tar: dockerfiles/centos.dockerfile
 		./.gitlab/build_image.sh centos stream8
 	$(CONTAINER) load -i dockerfiles/dist/centos/centos-stream8.tar
 
+dockerfiles/dist/centos/centos-stream9.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/centos/centos-stream9.tar: dockerfiles/centos.dockerfile
+	$(CONTAINER) run \
+		--entrypoint='' \
+		--name="scripts-build-centos-stream9" \
+		--rm \
+		-v "$(shell pwd):/worksapce" \
+		-w /worksapce \
+		$(kaniko_img) \
+		./.gitlab/build_image.sh centos stream9
+	$(CONTAINER) load -i dockerfiles/dist/centos/centos-stream9.tar
+
 .PHONY: git_hooks
 git_hooks: .git/hooks/pre-commit
 
