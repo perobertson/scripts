@@ -23,29 +23,27 @@ ansible-lint:
 	ansible-playbook --syntax-check $(playbooks)
 	ansible-lint -p .
 
-dockerfiles/dist/centos/centos-stream8.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/centos/centos-stream8.tar: dockerfiles/centos.dockerfile
+define build_image
+	@# $1 is the OS
+	@# $2 is the OS_VERSION
 	$(CONTAINER) run \
 		--entrypoint='' \
-		--name="scripts-build-centos-stream8" \
+		--name="scripts-build-$(1)-$(2)" \
 		--rm \
 		-v "$(shell pwd):/worksapce" \
 		-w /worksapce \
 		$(kaniko_img) \
-		./.gitlab/build_image.sh centos stream8
-	$(CONTAINER) load -i dockerfiles/dist/centos/centos-stream8.tar
+		./.gitlab/build_image.sh $(1) $(2)
+	$(CONTAINER) load -i dockerfiles/dist/$(1)/$(1)-$(2).tar
+endef
+
+dockerfiles/dist/centos/centos-stream8.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/centos/centos-stream8.tar: dockerfiles/centos.dockerfile
+	$(call build_image,centos,stream8)
 
 dockerfiles/dist/centos/centos-stream9.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/centos/centos-stream9.tar: dockerfiles/centos.dockerfile
-	$(CONTAINER) run \
-		--entrypoint='' \
-		--name="scripts-build-centos-stream9" \
-		--rm \
-		-v "$(shell pwd):/worksapce" \
-		-w /worksapce \
-		$(kaniko_img) \
-		./.gitlab/build_image.sh centos stream9
-	$(CONTAINER) load -i dockerfiles/dist/centos/centos-stream9.tar
+	$(call build_image,centos,stream9)
 
 .PHONY: git_hooks
 git_hooks: .git/hooks/pre-commit
@@ -102,6 +100,8 @@ stop-arch:
 	$(CONTAINER) stop scripts-arch
 
 define test_os
+	@# $1 is the OS
+	@# $2 is the OS_VERSION
 	@# TODO: rustup executes files in /tmp. Needed to drop noexec
 	$(CONTAINER) create \
 		--env ANSIBLE_FORCE_COLOR=1 \
