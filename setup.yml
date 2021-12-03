@@ -87,11 +87,6 @@
         var: ansible_distribution_major_version
       tags: [never, debug]
 
-    - name: All - Check if dockerenv exists
-      ansible.builtin.stat:
-        path: /.dockerenv
-      register: file_dockerenv
-
     # https://www.freedesktop.org/software/systemd/man/sd_booted.html
     - name: All - Check if systemd is running
       ansible.builtin.stat:

@@ -37,7 +37,9 @@
   until: flatpak_install is succeeded
   retries: 5
   delay: 5
-  when: not file_dockerenv.stat.exists
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir
 
 - name: All - Enable flatpak updates
   ansible.builtin.systemd:
@@ -46,4 +48,6 @@
     state: started
     daemon_reload: true
     scope: user
-  when: not file_dockerenv.stat.exists
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir

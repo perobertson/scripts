@@ -14,11 +14,6 @@
         "35":
           fingerprint: E96C496E4E77C159C2FCA053062F9FD4D6D11CE4
   tasks:
-    - name: All - Check if dockerenv exists
-      ansible.builtin.stat:
-        path: /.dockerenv
-      register: file_dockerenv
-
     - name: Razer
       tags: [system]
       become: true
