@@ -32,7 +32,7 @@ workflow:
   stage: build
   image:
     # debug image has a shell
-    name: gcr.io/kaniko-project/executor:v1.6.0-debug
+    name: gcr.io/kaniko-project/executor:v1.7.0-debug
     entrypoint: [""]
   needs:
     - job: lint:shellcheck
@@ -58,10 +58,6 @@ workflow:
     - su public --command="./setup.sh"
     - su public --command="./.gitlab/check_versions.bash"
     - su public --command="./.gitlab/verify_no_changes.sh"
-
-.setup_archlinux:
-  before_script:
-    - ./.gitlab/setup_archlinux.bash
 
 .setup_debian:
   before_script:
@@ -144,7 +140,7 @@ build:linter:
   stage: build
   image:
     # debug image has a shell
-    name: gcr.io/kaniko-project/executor:v1.6.0-debug
+    name: gcr.io/kaniko-project/executor:v1.7.0-debug
     entrypoint: [""]
   needs: []
   script:
@@ -169,6 +165,12 @@ build:linter:
       --destination $CI_REGISTRY_IMAGE/linter:$CI_COMMIT_REF_SLUG
       --dockerfile $CI_PROJECT_DIR/.gitlab/linter.dockerfile
 
+build:archlinux:latest:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh archlinux latest
+
 build:centos:stream8:
   extends:
     - .build_img
@@ -180,6 +182,12 @@ build:centos:stream9:
     - .build_img
   script:
     - ./.gitlab/build_image.sh centos stream9
+
+build:manjarolinux:latest:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh manjarolinux latest
 
 lint:shellcheck:
   extends:
@@ -204,10 +212,14 @@ lint:ansible:
 
 test:archlinux:
   extends:
-    - .test
-    - .setup_archlinux
+    - .test_new
     - .rules_archlinux
-  image: archlinux:latest
+  image: ${CI_REGISTRY}/perobertson/scripts/archlinux:latest-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:archlinux:latest
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
 test:centos:stream8:
   # EOL: 2024-05-31
@@ -325,12 +337,16 @@ test:fedora_rawhide:
   image: fedora:rawhide
   allow_failure: true
 
-test:manjaro:
+test:manjarolinux:
   extends:
-    - .test
-    - .setup_archlinux
+    - .test_new
     - .rules_archlinux
-  image: manjarolinux/base:latest
+  image: ${CI_REGISTRY}/perobertson/scripts/manjarolinux:latest-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:manjarolinux:latest
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
 test:ubuntu_18_04:
   # EOL: 2023-04

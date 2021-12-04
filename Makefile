@@ -3,7 +3,7 @@ MAKEFLAGS=--warn-undefined-variables
 
 plays:=docker gcloud kubernetes razer setup
 playbooks:=$(addsuffix .yml, $(plays))
-kaniko_img:=gcr.io/kaniko-project/executor:v1.6.0-debug
+kaniko_img:=gcr.io/kaniko-project/executor:v1.7.0-debug
 
 export ANSIBLE_CONFIG="./config/ansible.cfg"
 
@@ -17,11 +17,6 @@ endif
 
 .git/hooks/pre-commit: .pre-commit-config.yaml
 	pre-commit install
-
-.PHONY: ansible-lint
-ansible-lint:
-	ansible-playbook --syntax-check $(playbooks)
-	ansible-lint -p .
 
 define build_image
 	@# $1 is the OS
@@ -37,6 +32,10 @@ define build_image
 	$(CONTAINER) load -i dockerfiles/dist/$(1)/$(1)-$(2).tar
 endef
 
+dockerfiles/dist/archlinux/archlinux-latest.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/archlinux/archlinux-latest.tar: dockerfiles/archlinux.dockerfile
+	$(call build_image,archlinux,latest)
+
 dockerfiles/dist/centos/centos-stream8.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/centos/centos-stream8.tar: dockerfiles/centos.dockerfile
 	$(call build_image,centos,stream8)
@@ -44,6 +43,15 @@ dockerfiles/dist/centos/centos-stream8.tar: dockerfiles/centos.dockerfile
 dockerfiles/dist/centos/centos-stream9.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/centos/centos-stream9.tar: dockerfiles/centos.dockerfile
 	$(call build_image,centos,stream9)
+
+dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: dockerfiles/manjarolinux.dockerfile
+	$(call build_image,manjarolinux,latest)
+
+.PHONY: ansible-lint
+ansible-lint:
+	ansible-playbook --syntax-check $(playbooks)
+	ansible-lint -p .
 
 .PHONY: git_hooks
 git_hooks: .git/hooks/pre-commit
@@ -80,25 +88,6 @@ install_rust_crates:
 install_setup:
 	ansible-playbook --ask-become-pass -v setup.yml
 
-.PHONY: test-arch
-test-arch:
-	$(CONTAINER) pull archlinux:latest
-	$(CONTAINER) run \
-		-ditv "$(shell pwd):/scripts" \
-		-w /scripts \
-		-e ANSIBLE_FORCE_COLOR=1 \
-		--rm \
-		--name scripts-arch \
-		archlinux:latest /sbin/init || true
-	$(CONTAINER) exec scripts-arch ./.gitlab/setup_archlinux.bash
-	$(CONTAINER) exec scripts-arch ./.gitlab/build.bash
-	$(CONTAINER) exec scripts-arch su public --command="./.gitlab/check_versions.bash"
-	$(MAKE) stop-arch
-
-.PHONY: stop-arch
-stop-arch:
-	$(CONTAINER) stop scripts-arch
-
 define test_os
 	@# $1 is the OS
 	@# $2 is the OS_VERSION
@@ -123,6 +112,10 @@ define test_os
 	$(CONTAINER) exec "scripts-$(1)-$(2)" su public --command="./.gitlab/verify_no_changes.sh"
 	$(CONTAINER) stop "scripts-$(1)-$(2)"
 endef
+
+.PHONY: test-archlinux-latest
+test-archlinux-latest: dockerfiles/dist/archlinux/archlinux-latest.tar
+	$(call test_os,archlinux,latest)
 
 .PHONY: test-centos-stream8
 test-centos-stream8: dockerfiles/dist/centos/centos-stream8.tar
@@ -170,24 +163,9 @@ test-fedora-35:
 stop-fedora-35:
 	$(CONTAINER) stop scripts-fedora-35
 
-.PHONY: test-manjaro
-test-manjaro:
-	$(CONTAINER) pull manjarolinux/base:latest
-	$(CONTAINER) run \
-		-ditv "$(shell pwd):/scripts" \
-		-w /scripts \
-		-e ANSIBLE_FORCE_COLOR=1 \
-		--rm \
-		--name scripts-manjaro \
-		manjarolinux/base:latest /sbin/init || true
-	$(CONTAINER) exec scripts-manjaro ./.gitlab/setup_archlinux.bash
-	$(CONTAINER) exec scripts-manjaro ./.gitlab/build.bash
-	$(CONTAINER) exec scripts-manjaro su public --command="./.gitlab/check_versions.bash"
-	$(MAKE) stop-manjaro
-
-.PHONY: stop-manjaro
-stop-manjaro:
-	$(CONTAINER) stop scripts-manjaro
+.PHONY: test-manjarolinux-latest
+test-manjarolinux-latest: dockerfiles/dist/manjarolinux/manjarolinux-latest.tar
+	$(call test_os,manjarolinux,latest)
 
 .PHONY: test-ubuntu-18
 test-ubuntu-18:
