@@ -3,7 +3,7 @@ MAKEFLAGS=--warn-undefined-variables
 
 plays:=docker gcloud kubernetes razer setup
 playbooks:=$(addsuffix .yml, $(plays))
-kaniko_img:=gcr.io/kaniko-project/executor:v1.6.0-debug
+kaniko_img:=gcr.io/kaniko-project/executor:v1.7.0-debug
 
 export ANSIBLE_CONFIG="./config/ansible.cfg"
 
