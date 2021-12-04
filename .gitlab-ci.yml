@@ -59,6 +59,7 @@ workflow:
     - su public --command="./.gitlab/check_versions.bash"
     - su public --command="./.gitlab/verify_no_changes.sh"
 
+# TODO: remove this when changing manjaro
 .setup_archlinux:
   before_script:
     - ./.gitlab/setup_archlinux.bash
@@ -169,6 +170,12 @@ build:linter:
       --destination $CI_REGISTRY_IMAGE/linter:$CI_COMMIT_REF_SLUG
       --dockerfile $CI_PROJECT_DIR/.gitlab/linter.dockerfile
 
+build:archlinux:latest:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh archlinux latest
+
 build:centos:stream8:
   extends:
     - .build_img
@@ -204,10 +211,14 @@ lint:ansible:
 
 test:archlinux:
   extends:
-    - .test
-    - .setup_archlinux
+    - .test_new
     - .rules_archlinux
-  image: archlinux:latest
+  image: ${CI_REGISTRY}/perobertson/scripts/archlinux:latest-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:archlinux:latest
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
 test:centos:stream8:
   # EOL: 2024-05-31
