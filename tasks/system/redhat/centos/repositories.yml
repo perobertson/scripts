@@ -63,13 +63,19 @@
   retries: 5
   delay: 5
 
+- name: CentOS - Install zoom updater dependencies - curl
+  ansible.builtin.dnf:
+    name:
+      - curl
+    state: present
+    allowerasing: true  # curl-minimal may already be installed
+
 - name: CentOS - Install zoom updater dependencies
   ansible.builtin.dnf:
     name:
       - make
       - coreutils-single  # provides basename
       - createrepo_c
-      - curl
       - rpm
     state: present
 
