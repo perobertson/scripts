@@ -218,7 +218,7 @@ lint:ansible:
     # Also check all other non ansible files
     - yamllint -f parsable .
 
-test:archlinux:
+test:archlinux:latest:
   extends:
     - .test_new
     - .rules_archlinux
@@ -251,6 +251,8 @@ test:centos:stream9:
       artifacts: false
     - job: lint:ansible
       artifacts: false
+  # unreleased
+  allow_failure: true
 
 test:debian:10:
   # EOL: ~2022
@@ -343,6 +345,7 @@ test:fedora_36:
     - .setup_fedora
     - .rules_redhat
   image: fedora:36
+  # unreleased
   allow_failure: true
 
 test:fedora_rawhide:
@@ -351,9 +354,10 @@ test:fedora_rawhide:
     - .setup_fedora
     - .rules_redhat
   image: fedora:rawhide
+  # unreleased
   allow_failure: true
 
-test:manjarolinux:
+test:manjarolinux:latest:
   extends:
     - .test_new
     - .rules_archlinux
