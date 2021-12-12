@@ -111,7 +111,7 @@ define test_os
 		--volume="/sys/fs/cgroup:/sys/fs/cgroup:ro" \
 		--volume="$(shell pwd):/scripts" \
 		--workdir /scripts \
-		"localhost/scripts-$(1):$(2)" /sbin/init || true
+		"localhost/scripts-$(1):$(2)" /lib/systemd/systemd || true
 	$(CONTAINER) start "scripts-$(1)-$(2)" || true
 	@# The container must run as root for systemd
 	@# This means we need to explicitly start a different session for the user
