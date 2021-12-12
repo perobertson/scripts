@@ -20,10 +20,27 @@
     name: docker-ce-stable
     description: "Docker CE Stable - {{ ansible_distribution }} - $releasever - $basearch"
     baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/$releasever/$basearch/stable"
-    enabled: "{{ uri_docker_repo_metadata is succeeded }}"
+    enabled: true
     gpgcheck: true
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     repo_gpgcheck: true
+  when:
+    - uri_docker_repo_metadata is succeeded
+
+# Docker often lags behind in supporting new releases
+# Use the repository for the previous release until the new one is ready
+- name: RedHat - Add Docker Stable repository for previous release
+  ansible.builtin.yum_repository:
+    file: docker-ce
+    name: docker-ce-stable
+    description: "Docker CE Stable - {{ ansible_distribution }} - {{ ansible_distribution_major_version|int - 1 }} - $basearch"
+    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version|int - 1 }}/$basearch/stable"
+    enabled: true
+    gpgcheck: true
+    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+    repo_gpgcheck: true
+  when:
+    - uri_docker_repo_metadata is not succeeded
 
 # Useful to configure on new Fedora versions that do not have docker support yet
 - name: RedHat - Disable Docker Test repository
@@ -36,18 +53,6 @@
     gpgcheck: true
     gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
     repo_gpgcheck: true
-
-- name: Fedora >=36 - Add Docker Stable repository for Fedora35
-  ansible.builtin.yum_repository:
-    file: docker-ce
-    name: docker-ce-stable
-    description: "Docker CE Stable - {{ ansible_distribution }} - 34 - $basearch"
-    baseurl: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/34/$basearch/stable"
-    enabled: true
-    gpgcheck: true
-    gpgkey: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
-    repo_gpgcheck: true
-  when: ansible_distribution_major_version|int >= 36
 
 ### --- Distro specific ---
 
