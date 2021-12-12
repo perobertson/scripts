@@ -5,3 +5,4 @@
     state: present
   loop:
     - code
+    - dbus-daemon

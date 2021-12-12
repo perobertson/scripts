@@ -59,10 +59,6 @@ workflow:
     - su public --command="./.gitlab/check_versions.bash"
     - su public --command="./.gitlab/verify_no_changes.sh"
 
-.setup_debian:
-  before_script:
-    - ./.gitlab/setup_debian.bash
-
 .setup_fedora:
   before_script:
     - ./.gitlab/setup_fedora.bash
@@ -183,6 +179,18 @@ build:centos:stream9:
   script:
     - ./.gitlab/build_image.sh centos stream9
 
+build:debian:10:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh debian 10
+
+build:debian:11:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh debian 11
+
 build:manjarolinux:latest:
   extends:
     - .build_img
@@ -210,7 +218,7 @@ lint:ansible:
     # Also check all other non ansible files
     - yamllint -f parsable .
 
-test:archlinux:
+test:archlinux:latest:
   extends:
     - .test_new
     - .rules_archlinux
@@ -243,21 +251,31 @@ test:centos:stream9:
       artifacts: false
     - job: lint:ansible
       artifacts: false
+  # unreleased
+  allow_failure: true
 
-test:debian_10:
+test:debian:10:
   # EOL: ~2022
   extends:
-    - .test
-    - .setup_debian
+    - .test_new
     - .rules_debian
-  image: debian:10
+  image: ${CI_REGISTRY}/perobertson/scripts/debian:10-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:debian:10
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
-test:debian_11:
+test:debian:11:
   extends:
-    - .test
-    - .setup_debian
+    - .test_new
     - .rules_debian
-  image: debian:11
+  image: ${CI_REGISTRY}/perobertson/scripts/debian:11-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:debian:11
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
 test:fedora_28:
   # EOL: 2019-05-28
@@ -327,6 +345,7 @@ test:fedora_36:
     - .setup_fedora
     - .rules_redhat
   image: fedora:36
+  # unreleased
   allow_failure: true
 
 test:fedora_rawhide:
@@ -335,9 +354,10 @@ test:fedora_rawhide:
     - .setup_fedora
     - .rules_redhat
   image: fedora:rawhide
+  # unreleased
   allow_failure: true
 
-test:manjarolinux:
+test:manjarolinux:latest:
   extends:
     - .test_new
     - .rules_archlinux

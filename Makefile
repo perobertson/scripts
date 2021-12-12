@@ -44,6 +44,14 @@ dockerfiles/dist/centos/centos-stream9.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/centos/centos-stream9.tar: dockerfiles/centos.dockerfile
 	$(call build_image,centos,stream9)
 
+dockerfiles/dist/debian/debian-10.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/debian/debian-10.tar: dockerfiles/debian.dockerfile
+	$(call build_image,debian,10)
+
+dockerfiles/dist/debian/debian-11.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/debian/debian-11.tar: dockerfiles/debian.dockerfile
+	$(call build_image,debian,11)
+
 dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: dockerfiles/manjarolinux.dockerfile
 	$(call build_image,manjarolinux,latest)
@@ -103,7 +111,7 @@ define test_os
 		--volume="/sys/fs/cgroup:/sys/fs/cgroup:ro" \
 		--volume="$(shell pwd):/scripts" \
 		--workdir /scripts \
-		"localhost/scripts-$(1):$(2)" /sbin/init || true
+		"localhost/scripts-$(1):$(2)" /lib/systemd/systemd || true
 	$(CONTAINER) start "scripts-$(1)-$(2)" || true
 	@# The container must run as root for systemd
 	@# This means we need to explicitly start a different session for the user
@@ -125,24 +133,13 @@ test-centos-stream8: dockerfiles/dist/centos/centos-stream8.tar
 test-centos-stream9: dockerfiles/dist/centos/centos-stream9.tar
 	$(call test_os,centos,stream9)
 
-.PHONY: test-debian-11
-test-debian:
-	$(CONTAINER) pull debian:11
-	$(CONTAINER) run \
-		-ditv "$(shell pwd):/scripts" \
-		-w /scripts \
-		-e ANSIBLE_FORCE_COLOR=1 \
-		--rm \
-		--name scripts-debian-11 \
-		debian:11 /sbin/init || true
-	$(CONTAINER) exec scripts-debian-11 ./.gitlab/setup_debian.bash
-	$(CONTAINER) exec scripts-debian-11 ./.gitlab/build.bash
-	$(CONTAINER) exec scripts-debian-11 su public --command="./.gitlab/check_versions.bash"
-	$(MAKE) stop-debian
+.PHONY: test-debian-10
+test-debian-10: dockerfiles/dist/debian/debian-10.tar
+	$(call test_os,debian,10)
 
-.PHONY: stop-debian-11
-stop-debian-11:
-	$(CONTAINER) stop scripts-debian-11
+.PHONY: test-debian-11
+test-debian-11: dockerfiles/dist/debian/debian-11.tar
+	$(call test_os,debian,11)
 
 .PHONY: test-fedora-35
 test-fedora-35:

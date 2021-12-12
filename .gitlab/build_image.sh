@@ -17,6 +17,7 @@ if [ -n "${CI:-}" ]; then
 }
 JSON
     /kaniko/executor \
+        --build-arg="OS_VERSION=${OS_VERSION}" \
         --cache \
         --cache-repo="${CI_REGISTRY_IMAGE}/cache" \
         --cleanup \
