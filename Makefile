@@ -52,6 +52,14 @@ dockerfiles/dist/debian/debian-11.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/debian/debian-11.tar: dockerfiles/debian.dockerfile
 	$(call build_image,debian,11)
 
+dockerfiles/dist/fedora/fedora-34.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/fedora/fedora-34.tar: dockerfiles/fedora.dockerfile
+	$(call build_image,fedora,34)
+
+dockerfiles/dist/fedora/fedora-35.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/fedora/fedora-35.tar: dockerfiles/fedora.dockerfile
+	$(call build_image,fedora,35)
+
 dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: dockerfiles/manjarolinux.dockerfile
 	$(call build_image,manjarolinux,latest)
@@ -141,24 +149,13 @@ test-debian-10: dockerfiles/dist/debian/debian-10.tar
 test-debian-11: dockerfiles/dist/debian/debian-11.tar
 	$(call test_os,debian,11)
 
-.PHONY: test-fedora-35
-test-fedora-35:
-	$(CONTAINER) pull fedora:35
-	$(CONTAINER) run \
-		-ditv "$(shell pwd):/scripts" \
-		-w /scripts \
-		-e ANSIBLE_FORCE_COLOR=1 \
-		--rm \
-		--name scripts-fedora-35 \
-		fedora:35 /sbin/init || true
-	$(CONTAINER) exec scripts-fedora-35 ./.gitlab/setup_fedora.bash
-	$(CONTAINER) exec scripts-fedora-35 ./.gitlab/build.bash
-	$(CONTAINER) exec scripts-fedora-35 su public --command="./.gitlab/check_versions.bash"
-	$(MAKE) stop-fedora
+.PHONY: test-fedora-34
+test-fedora-34: dockerfiles/dist/fedora/fedora-34.tar
+	$(call test_os,fedora,34)
 
-.PHONY: stop-fedora-35
-stop-fedora-35:
-	$(CONTAINER) stop scripts-fedora-35
+.PHONY: test-fedora-35
+test-fedora-35: dockerfiles/dist/fedora/fedora-35.tar
+	$(call test_os,fedora,35)
 
 .PHONY: test-manjarolinux-latest
 test-manjarolinux-latest: dockerfiles/dist/manjarolinux/manjarolinux-latest.tar

@@ -59,10 +59,6 @@ workflow:
     - su public --command="./.gitlab/check_versions.bash"
     - su public --command="./.gitlab/verify_no_changes.sh"
 
-.setup_fedora:
-  before_script:
-    - ./.gitlab/setup_fedora.bash
-
 .setup_ubuntu:
   before_script:
     - ./.gitlab/setup_ubuntu.bash
@@ -191,6 +187,72 @@ build:debian:11:
   script:
     - ./.gitlab/build_image.sh debian 11
 
+build:fedora:28:
+  extends:
+    - .build_img
+    - .rules_eol
+  script:
+    - ./.gitlab/build_image.sh fedora 28
+
+build:fedora:29:
+  extends:
+    - .build_img
+    - .rules_eol
+  script:
+    - ./.gitlab/build_image.sh fedora 29
+
+build:fedora:30:
+  extends:
+    - .build_img
+    - .rules_eol
+  script:
+    - ./.gitlab/build_image.sh fedora 30
+
+build:fedora:31:
+  extends:
+    - .build_img
+    - .rules_eol
+  script:
+    - ./.gitlab/build_image.sh fedora 31
+
+build:fedora:32:
+  extends:
+    - .build_img
+    - .rules_eol
+  script:
+    - ./.gitlab/build_image.sh fedora 32
+
+build:fedora:33:
+  extends:
+    - .build_img
+    - .rules_eol
+  script:
+    - ./.gitlab/build_image.sh fedora 33
+
+build:fedora:34:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh fedora 34
+
+build:fedora:35:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh fedora 35
+
+build:fedora:36:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh fedora 36
+
+build:fedora:rawhide:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh fedora rawhide
+
 build:manjarolinux:latest:
   extends:
     - .build_img
@@ -277,83 +339,126 @@ test:debian:11:
     - job: lint:ansible
       artifacts: false
 
-test:fedora_28:
+test:fedora:28:
   # EOL: 2019-05-28
   extends:
     - .test
-    - .setup_fedora
     - .rules_eol
-  image: fedora:28
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:28-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:fedora:28
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
-test:fedora_29:
+test:fedora:29:
   # EOL: 2019-11-30
   extends:
     - .test
-    - .setup_fedora
     - .rules_eol
-  image: fedora:29
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:29-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:fedora:29
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
-test:fedora_30:
+test:fedora:30:
   # EOL: 2020-05-26
   extends:
     - .test
-    - .setup_fedora
     - .rules_eol
-  image: fedora:30
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:30-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:fedora:30
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
-test:fedora_31:
+test:fedora:31:
   # EOL: 2020-11-24
   extends:
     - .test
-    - .setup_fedora
     - .rules_eol
-  image: fedora:31
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:31-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:fedora:31
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
-test:fedora_32:
+test:fedora:32:
   # EOL: 2021-05-25
   extends:
     - .test
-    - .setup_fedora
     - .rules_eol
-  image: fedora:32
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:32-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:fedora:32
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
-test:fedora_33:
+test:fedora:33:
   # EOL: 2021-12-01
   extends:
     - .test
-    - .setup_fedora
     - .rules_eol
-  image: fedora:33
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:33-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:fedora:33
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
-test:fedora_34:
+test:fedora:34:
+  # EOL: 2022-05-17
   extends:
     - .test
-    - .setup_fedora
     - .rules_redhat
-  image: fedora:34
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:34-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:fedora:34
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
-test:fedora_35:
+test:fedora:35:
+  # EOL: 2022-11-15
   extends:
     - .test
-    - .setup_fedora
     - .rules_redhat
-  image: fedora:35
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:35-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:fedora:35
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
-test:fedora_36:
+test:fedora:36:
+  # EOL: 2022-05-16
   extends:
     - .test
-    - .setup_fedora
     - .rules_redhat
-  image: fedora:36
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:36-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:fedora:36
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
   # unreleased
   allow_failure: true
 
-test:fedora_rawhide:
+test:fedora:rawhide:
   extends:
-    - .test
-    - .setup_fedora
+    - .test_new
     - .rules_redhat
-  image: fedora:rawhide
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:rawhide-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:fedora:rawhide
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
   # unreleased
   allow_failure: true
 
