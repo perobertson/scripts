@@ -40,28 +40,12 @@ workflow:
 
 .test:
   stage: test
-  needs:
-    - job: lint:shellcheck
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
-  script:
-    - ./.gitlab/build.bash
-    - su public --command="./.gitlab/check_versions.bash"
-
-# TODO: replace .test with this
-.test_new:
-  stage: test
   script:
     # Container runs as root to support systemd as the init system
     # switch to the test user 'public' to run the scripts like a user would
     - su public --command="./setup.sh"
     - su public --command="./.gitlab/check_versions.bash"
     - su public --command="./.gitlab/verify_no_changes.sh"
-
-.setup_ubuntu:
-  before_script:
-    - ./.gitlab/setup_ubuntu.bash
 
 .rules_lint:
   rules:
@@ -224,6 +208,30 @@ build:manjarolinux:latest:
   script:
     - ./.gitlab/build_image.sh manjarolinux latest
 
+build:ubuntu:18.04:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh ubuntu 18.04
+
+build:ubuntu:20.04:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh ubuntu 20.04
+
+build:ubuntu:21.04:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh ubuntu 21.04
+
+build:ubuntu:21.10:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh ubuntu 21.10
+
 lint:shellcheck:
   extends:
     - .rules_lint
@@ -247,7 +255,7 @@ lint:ansible:
 
 test:archlinux:latest:
   extends:
-    - .test_new
+    - .test
     - .rules_archlinux
   image: ${CI_REGISTRY}/perobertson/scripts/archlinux:latest-${CI_COMMIT_REF_SLUG}
   needs:
@@ -259,7 +267,7 @@ test:archlinux:latest:
 test:centos:stream8:
   # EOL: 2024-05-31
   extends:
-    - .test_new
+    - .test
     - .rules_redhat
   image: ${CI_REGISTRY}/perobertson/scripts/centos:stream8-${CI_COMMIT_REF_SLUG}
   needs:
@@ -270,7 +278,7 @@ test:centos:stream8:
 
 test:centos:stream9:
   extends:
-    - .test_new
+    - .test
     - .rules_redhat
   image: ${CI_REGISTRY}/perobertson/scripts/centos:stream9-${CI_COMMIT_REF_SLUG}
   needs:
@@ -284,7 +292,7 @@ test:centos:stream9:
 test:debian:10:
   # EOL: ~2022
   extends:
-    - .test_new
+    - .test
     - .rules_debian
   image: ${CI_REGISTRY}/perobertson/scripts/debian:10-${CI_COMMIT_REF_SLUG}
   needs:
@@ -295,7 +303,7 @@ test:debian:10:
 
 test:debian:11:
   extends:
-    - .test_new
+    - .test
     - .rules_debian
   image: ${CI_REGISTRY}/perobertson/scripts/debian:11-${CI_COMMIT_REF_SLUG}
   needs:
@@ -356,7 +364,7 @@ test:fedora:36:
 
 test:fedora:rawhide:
   extends:
-    - .test_new
+    - .test
     - .rules_redhat
   image: ${CI_REGISTRY}/perobertson/scripts/fedora:rawhide-${CI_COMMIT_REF_SLUG}
   needs:
@@ -369,7 +377,7 @@ test:fedora:rawhide:
 
 test:manjarolinux:latest:
   extends:
-    - .test_new
+    - .test
     - .rules_archlinux
   image: ${CI_REGISTRY}/perobertson/scripts/manjarolinux:latest-${CI_COMMIT_REF_SLUG}
   needs:
@@ -378,42 +386,38 @@ test:manjarolinux:latest:
     - job: lint:ansible
       artifacts: false
 
-test:ubuntu_18_04:
+test:ubuntu:18.04:
   # EOL: 2023-04
   # Python 3.6 EOL: 2021-12-23
   extends:
     - .test
-    - .setup_ubuntu
     - .rules_eol
-  image: ubuntu:18.04
+  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:18.04-${CI_COMMIT_REF_SLUG}
 
-test:ubuntu_20_04:
+test:ubuntu:20.04:
   # EOL: 2025-04
   extends:
     - .test
-    - .setup_ubuntu
     - .rules_debian
-  image: ubuntu:20.04
+  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:20.04-${CI_COMMIT_REF_SLUG}
 
-test:ubuntu_21_04:
+test:ubuntu:21.04:
   # EOL: 2022-01
   # replace this job with the rolling short term release
   # https://wiki.ubuntu.com/Releases
   extends:
     - .test
-    - .setup_ubuntu
     - .rules_debian
-  image: ubuntu:21.04
+  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:20.04-${CI_COMMIT_REF_SLUG}
 
-test:ubuntu_21_10:
+test:ubuntu:21.10:
   # EOL: 2022-07
   # replace this job with the rolling short term release
   # https://wiki.ubuntu.com/Releases
   extends:
     - .test
-    - .setup_ubuntu
     - .rules_debian
-  image: ubuntu:21.10
+  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:21.10-${CI_COMMIT_REF_SLUG}
 
 deploy:github:
   stage: deploy
