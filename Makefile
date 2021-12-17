@@ -64,6 +64,22 @@ dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: dockerfiles/manjarolinux.dockerfile
 	$(call build_image,manjarolinux,latest)
 
+dockerfiles/dist/ubuntu/ubuntu-18.04.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/ubuntu/ubuntu-18.04.tar: dockerfiles/ubuntu.dockerfile
+	$(call build_image,ubuntu,18.04)
+
+dockerfiles/dist/ubuntu/ubuntu-20.04.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/ubuntu/ubuntu-20.04.tar: dockerfiles/ubuntu.dockerfile
+	$(call build_image,ubuntu,20.04)
+
+dockerfiles/dist/ubuntu/ubuntu-21.04.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/ubuntu/ubuntu-21.04.tar: dockerfiles/ubuntu.dockerfile
+	$(call build_image,ubuntu,21.04)
+
+dockerfiles/dist/ubuntu/ubuntu-21.10.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/ubuntu/ubuntu-21.10.tar: dockerfiles/ubuntu.dockerfile
+	$(call build_image,ubuntu,21.10)
+
 .PHONY: ansible-lint
 ansible-lint:
 	ansible-playbook --syntax-check $(playbooks)
@@ -161,21 +177,18 @@ test-fedora-35: dockerfiles/dist/fedora/fedora-35.tar
 test-manjarolinux-latest: dockerfiles/dist/manjarolinux/manjarolinux-latest.tar
 	$(call test_os,manjarolinux,latest)
 
-.PHONY: test-ubuntu-18
-test-ubuntu-18:
-	$(CONTAINER) pull ubuntu:18.04
-	$(CONTAINER) run \
-		-ditv "$(shell pwd):/scripts" \
-		-w /scripts \
-		-e ANSIBLE_FORCE_COLOR=1 \
-		--rm \
-		--name scripts-ubuntu-18 \
-		ubuntu:18.04 /sbin/init || true
-	$(CONTAINER) exec scripts-ubuntu-18 ./.gitlab/setup_ubuntu.bash
-	$(CONTAINER) exec scripts-ubuntu-18 ./.gitlab/build.bash
-	$(CONTAINER) exec scripts-ubuntu-18 su public --command="./.gitlab/check_versions.bash"
-	$(MAKE) stop-ubuntu-18
+.PHONY: test-ubuntu-18.04
+test-ubuntu-18.04: dockerfiles/dist/ubuntu/ubuntu-18.04.tar
+	$(call test_os,ubuntu,18.04)
 
-.PHONY: stop-ubuntu-18
-stop-ubuntu-18:
-	$(CONTAINER) stop scripts-ubuntu-18
+.PHONY: test-ubuntu-20.04
+test-ubuntu-20.04: dockerfiles/dist/ubuntu/ubuntu-20.04.tar
+	$(call test_os,ubuntu,20.04)
+
+.PHONY: test-ubuntu-21.04
+test-ubuntu-21.04: dockerfiles/dist/ubuntu/ubuntu-21.04.tar
+	$(call test_os,ubuntu,21.04)
+
+.PHONY: test-ubuntu-21.10
+test-ubuntu-21.10: dockerfiles/dist/ubuntu/ubuntu-21.10.tar
+	$(call test_os,ubuntu,21.10)
