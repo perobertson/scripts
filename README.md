@@ -18,11 +18,6 @@ Because of this, the scripts are designed to work with systems that have a pytho
 
 **Note:** OSes that are EOL are not tested in CI.
 
-These systems may still work, but they are either EOL or use EOL packages:
-
-- Fedora: 28-32
-- Ubuntu: 18.04(LTS, python 3.6 EOL)
-
 Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches&ref=main) for `main` to see the complete list of supported operating systems.
 
 ## Usage

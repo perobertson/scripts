@@ -5,59 +5,36 @@
     state: present
   loop:
     - autojump-zsh
+    - bat  # rust version of cat
+    - code  # VSCode
+    - community-mysql-devel  # from fedora modular
+    - dbus-daemon
+    - dbus-tools
     - fd-find
+    - flameshot
+    - fzf
     - gdouros-symbola-fonts
+    - git-delta
+    - google-noto-sans-display-fonts
+    - google-noto-sans-display-vf-fonts
+    - google-noto-sans-mono-fonts
+    - google-noto-sans-mono-vf-fonts
+    - google-noto-sans-vf-fonts
+    - google-roboto-mono-fonts
     - gtk-murrine-engine  # gtk2 theme engine. Probably safe to remove
+    - hyperfine  # CLI benchmarking
+    - intel-media-driver
     - levien-inconsolata-fonts
     - mozilla-fira-fonts-common
     - mozilla-fira-mono-fonts
     - mozilla-fira-sans-fonts
+    - podman
     - ShellCheck
     - sqlitebrowser
-
-- name: Fedora >=26 - Install packages
-  ansible.builtin.dnf:
-    name:
-      - flameshot
-      - fzf
-    state: present
-  when: ansible_distribution_major_version|int >= 26
-
-- name: Fedora >=27 - Install packages
-  ansible.builtin.dnf:
-    name:
-      - podman
-    state: present
-  when: ansible_distribution_major_version|int >= 27
-
-- name: Fedora <=27 - Install mysql-community-devel
-  ansible.builtin.dnf:
-    name:
-      - mysql-community-devel  # from the community repository
-    state: present
-  when: ansible_distribution_major_version|int <= 27
-
-- name: Fedora >=28 - Install packages
-  ansible.builtin.dnf:
-    name:
-      - code
-      - community-mysql-devel  # from fedora modular
-    state: present
-  when: ansible_distribution_major_version|int >= 28
-
-- name: Fedora >=29 - Install packages
-  ansible.builtin.dnf:
-    name:
-      - bat
-      - dbus-daemon
-      - dbus-tools
-      - google-noto-sans-display-fonts
-      - google-noto-sans-mono-fonts
-      - hyperfine  # CLI benchmarking
-      - intel-media-driver
-      - texlive-montserrat
-    state: present
-  when: ansible_distribution_major_version|int >= 29
+    - starship  # CLI prompt
+    - tealdeer  # tldr writen in rust
+    - texlive-montserrat
+    - zoxide  # A faster way to navigate your filesystem
 
 - name: Fedora >=29 - Install bluetooth codecs
   ansible.builtin.dnf:
@@ -66,29 +43,3 @@
     state: present
     allowerasing: true
   when: ansible_distribution_major_version|int >= 29
-
-- name: Fedora >=30 - Install packages
-  ansible.builtin.dnf:
-    name:
-      - google-noto-sans-display-vf-fonts
-      - google-noto-sans-mono-vf-fonts
-      - google-noto-sans-vf-fonts
-    state: present
-  when: ansible_distribution_major_version|int >= 30
-
-- name: Fedora >=31 - Install packages
-  ansible.builtin.dnf:
-    name:
-      - git-delta
-      - google-roboto-mono-fonts
-      - starship  # CLI prompt
-      - tealdeer  # tldr writen in rust
-    state: present
-  when: ansible_distribution_major_version|int >= 31
-
-- name: Fedora >=32 - Install packages
-  ansible.builtin.dnf:
-    name:
-      - zoxide  # A faster way to navigate your filesystem
-    state: present
-  when: ansible_distribution_major_version|int >= 32
