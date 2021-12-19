@@ -393,6 +393,11 @@ test:ubuntu:18.04:
     - .test
     - .rules_eol
   image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:18.04-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:ubuntu:18.04
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
 test:ubuntu:20.04:
   # EOL: 2025-04
@@ -400,6 +405,11 @@ test:ubuntu:20.04:
     - .test
     - .rules_debian
   image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:20.04-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:ubuntu:20.04
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
 test:ubuntu:21.04:
   # EOL: 2022-01
@@ -408,7 +418,12 @@ test:ubuntu:21.04:
   extends:
     - .test
     - .rules_debian
-  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:20.04-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:21.04-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:ubuntu:21.04
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
 test:ubuntu:21.10:
   # EOL: 2022-07
@@ -418,6 +433,11 @@ test:ubuntu:21.10:
     - .test
     - .rules_debian
   image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:21.10-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:ubuntu:21.10
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
 
 deploy:github:
   stage: deploy
