@@ -3,7 +3,7 @@
   vars:
     ansible_connection: local
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
-    docker_compose_version: 2.0.1
+    docker_compose_version: 2.2.2
   tasks:
     # https://www.freedesktop.org/software/systemd/man/sd_booted.html
     - name: All - Check if systemd is running

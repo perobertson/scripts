@@ -7,4 +7,3 @@
     - containerd.io
     - docker-ce
     - docker-ce-cli
-    - libcrypt.so.1()(64bit)  # needed by docker-compose

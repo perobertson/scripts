@@ -1,37 +1,25 @@
 ---
+- name: All - Create docker cli plugins dir
+  ansible.builtin.file:
+    path: "/usr/local/lib/{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  loop:
+    - docker
+    - docker/cli-plugins
+
 - name: All - Install docker compose {{ docker_compose_version }}
   ansible.builtin.get_url:
     url: "https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-{{ ansible_system | lower }}-{{ ansible_machine }}"
-    dest: /usr/local/lib/docker/cli-plugins/docker-compose-{{ ansible_system | lower }}-{{ ansible_machine }}
+    dest: /usr/local/lib/docker/cli-plugins/docker-compose
     checksum: "sha256:https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-{{ ansible_system | lower }}-{{ ansible_machine }}.sha256"
     mode: '0755'
 
-# TODO: add completions for docker compose
-# - name: Non-Debian - Install docker-compose completions {{ docker_compose_version }}
-#   ansible.builtin.get_url:
-#     url: "https://raw.githubusercontent.com/docker/compose/{{ docker_compose_version }}/contrib/completion/zsh/_docker-compose"
-#     dest: /usr/share/zsh/site-functions/_docker-compose
-#     mode: '0644'
-#   when: ansible_os_family != 'Debian'
-
-# - name: Debian - Install docker-compose completions {{ docker_compose_version }}
-#   ansible.builtin.get_url:
-#     url: "https://raw.githubusercontent.com/docker/compose/{{ docker_compose_version }}/contrib/completion/zsh/_docker-compose"
-#     dest: /usr/local/share/zsh/site-functions/_docker-compose
-#     mode: '0644'
-#   when: ansible_os_family == 'Debian'
-
-# - name: All - Update link to latest docker-compose
-#   ansible.builtin.file:
-#     src: /usr/local/bin/docker-compose-{{ docker_compose_version }}
-#     dest: /usr/local/bin/docker-compose
-#     state: hard
-#     force: true
-#     mode: '0755'
-
 - name: All - Enable execue for docker compose
   ansible.builtin.file:
-    path: /usr/local/lib/docker/cli-plugins/docker-compose-{{ ansible_system | lower }}-{{ ansible_machine }}
+    path: /usr/local/lib/docker/cli-plugins/docker-compose
     mode: +rx
 
 ### --- Family Specific Setup
