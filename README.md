@@ -16,7 +16,7 @@ Because of this, the scripts are designed to work with systems that have a pytho
 - Manjaro
 - Ubuntu: 20.04(LTS), 21.04, 21.10
 
-**Note:** OSes that are EOL are not tested in CI.
+**Note:** OSes that are EOL, or are based on languages that are EOL are not tested in CI.
 
 Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches&ref=main) for `main` to see the complete list of supported operating systems.
 

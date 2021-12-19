@@ -211,6 +211,7 @@ build:manjarolinux:latest:
 build:ubuntu:18.04:
   extends:
     - .build_img
+    - .rules_eol
   script:
     - ./.gitlab/build_image.sh ubuntu 18.04
 
