@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PKENV_ROOT="${HOME}/.local/lib/pkenv"
+
+if [[ ! -d "${PKENV_ROOT}" ]]; then
+    git clone \
+        --single-branch \
+        https://github.com/iamhsa/pkenv.git \
+        "${PKENV_ROOT}"
+    cd "${PKENV_ROOT}"
+else
+    cd "${PKENV_ROOT}"
+    git pull --rebase --stat
+fi
+
+# link the bins to the PATH
+for bin in "${PKENV_ROOT}/bin/"*; do
+    bin=$(basename "${bin}")
+    if [[ ! -x "${HOME}/.local/bin/${bin}" ]]; then
+        ln -s "${PKENV_ROOT}/bin/${bin}" "${HOME}/.local/bin/${bin}"
+    fi
+done

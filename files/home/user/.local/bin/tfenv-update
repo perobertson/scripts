@@ -8,6 +8,7 @@ if [[ ! -d "${TFENV_ROOT}" ]]; then
         --single-branch \
         https://github.com/tfutils/tfenv.git \
         "${TFENV_ROOT}"
+    cd "${TFENV_ROOT}"
 else
     cd "${TFENV_ROOT}"
     git pull --rebase --stat

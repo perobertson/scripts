@@ -1,0 +1,12 @@
+[Unit]
+Description=Updates pkenv
+After=default.target
+
+[Service]
+Type=simple
+ExecStart={{ lookup('env', 'HOME') }}/.local/bin/pkenv-update
+
+[Install]
+# https://www.freedesktop.org/software/systemd/man/systemd.special.html#default.target1
+# The main target for user sessions
+WantedBy=default.target
