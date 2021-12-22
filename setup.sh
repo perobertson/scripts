@@ -135,7 +135,6 @@ fi
 mkdir -pv \
     "${HOME}/Applications" \
     "${HOME}/Downloads" \
-    "${HOME}/bin" \
     "${HOME}/workspace"
 
 install_git

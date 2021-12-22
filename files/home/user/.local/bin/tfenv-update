@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TFENV_ROOT="${HOME}/.local/lib/tfenv"
+
+if [[ ! -d "${TFENV_ROOT}" ]]; then
+    git clone \
+        --single-branch \
+        https://github.com/tfutils/tfenv.git \
+        "${TFENV_ROOT}"
+else
+    cd "${TFENV_ROOT}"
+    git pull --rebase --stat
+fi
+
+# link the bins to the PATH
+for bin in "${TFENV_ROOT}/bin/"*; do
+    bin=$(basename "${bin}")
+    if [[ ! -x "${HOME}/.local/bin/${bin}" ]]; then
+        ln -s "${TFENV_ROOT}/bin/${bin}" "${HOME}/.local/bin/${bin}"
+    fi
+done
