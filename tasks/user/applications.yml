@@ -50,12 +50,6 @@
     cmd: make -C src
   when: git_rbenv is changed or git_ruby_build is changed
 
-- name: All - Git update tfenv  # noqa git-latest
-  diff: false
-  ansible.builtin.git:
-    repo: https://github.com/tfutils/tfenv.git
-    dest: ~/Applications/tfenv
-
 - name: All - Git update tools  # noqa git-latest
   diff: false
   ansible.builtin.git:
@@ -63,13 +57,15 @@
     dest: ~/Applications/cli-tools
 
 # Needed for user systemd scripts
-- name: All - Create user ~/bin
+- name: All - Create ~/bin
+  tags: [systemd]
   ansible.builtin.file:
     path: $HOME/bin
     state: directory
     mode: '0700'
 
-- name: All - Create user scripts
+- name: All - Populate ~/bin
+  tags: [systemd]
   diff: true
   ansible.builtin.copy:
     src: "files/home/user/bin/{{ item.name }}"
@@ -79,36 +75,31 @@
     - name: README.md
       mode: '0600'
 
-- name: All - Create user ~/.config/systemd/user
+# For user systemd
+# https://www.freedesktop.org/software/systemd/man/file-hierarchy.html#Home%20Directory
+- name: All - Create ~/.local/bin
+  tags: [systemd]
   ansible.builtin.file:
     path: "$HOME/{{ item }}"
     state: directory
     mode: '0700'
   loop:
-    - .config/systemd
-    - .config/systemd/user
+    - .local/bin
+    - .local/lib
 
-- name: All - Create user services
+- name: All - Populate user systemd scripts
+  tags: [systemd]
   diff: true
   ansible.builtin.copy:
-    src: "files/home/user/.config/systemd/user/{{ item.name }}"
-    dest: "$HOME/.config/systemd/user/{{ item.name }}"
+    src: "files/home/user/.local/bin/{{ item.name }}"
+    dest: "$HOME/.local/bin/{{ item.name }}"
     mode: "{{ item.mode }}"
   loop:
-    - name: logout-podman-stop.service
-      mode: '0600'
+    - name: tfenv-update
+      mode: '0700'
 
-- name: All - Enable user services
-  ansible.builtin.systemd:
-    name: "{{ item }}"
-    enabled: true
-    daemon_reload: true
-    scope: user
-  when:
-    - stat_run_systemd.stat.exists
-    - stat_run_systemd.stat.isdir
-  loop:
-    - logout-podman-stop.service
-  # TODO: figure out how to get `systemd --user` running
-  # Failed to connect to bus: No such file or directory
-  failed_when: false
+- name: All - tfenv-update
+  ansible.builtin.command:
+    cmd: "$HOME/.local/bin/tfenv-update"
+  register: tfenv_update_result
+  changed_when: tfenv_update_result.stdout != 'Already up to date.'

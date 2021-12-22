@@ -1,0 +1,45 @@
+---
+- name: All - Create user systemd directories
+  ansible.builtin.file:
+    path: "$HOME/{{ item }}"
+    state: directory
+    mode: '0700'
+  loop:
+    - .config/systemd
+    - .config/systemd/user
+
+- name: All - Create user services
+  diff: true
+  ansible.builtin.copy:
+    src: "files/home/user/.config/systemd/user/{{ item.name }}"
+    dest: "$HOME/.config/systemd/user/{{ item.name }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - name: logout-podman-stop.service
+      mode: '0600'
+
+- name: All - Create user templated services
+  diff: true
+  ansible.builtin.template:
+    src: "files/home/user/.config/systemd/user/{{ item.name }}.j2"
+    dest: "$HOME/.config/systemd/user/{{ item.name }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - name: tfenv-update.service
+      mode: '0600'
+
+- name: All - Enable user services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+    daemon_reload: true
+    scope: user
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir
+  loop:
+    - logout-podman-stop.service
+    - tfenv-update.service
+  # TODO: figure out how to get `systemd --user` running
+  # Failed to connect to bus: No such file or directory
+  failed_when: false

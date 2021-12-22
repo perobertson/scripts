@@ -89,6 +89,7 @@
 
     # https://www.freedesktop.org/software/systemd/man/sd_booted.html
     - name: All - Check if systemd is running
+      tags: [systemd]
       ansible.builtin.stat:
         path: /run/systemd/system/
       register: stat_run_systemd
@@ -135,3 +136,9 @@
     - name: User bins
       ansible.builtin.import_tasks: tasks/user/bins.yml
       tags: [user, bins]
+    - name: User systemd
+      ansible.builtin.import_tasks: tasks/user/systemd.yml
+      tags: [user, systemd]
+      when:
+        - stat_run_systemd.stat.exists
+        - stat_run_systemd.stat.isdir
