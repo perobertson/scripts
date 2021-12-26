@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SOURCE=https://github.com/tfutils/tfenv.git
 TFENV_ROOT="${HOME}/.local/lib/tfenv"
 
 if [[ ! -d "${TFENV_ROOT}" ]]; then
     git clone \
         --single-branch \
-        https://github.com/tfutils/tfenv.git \
+        "${SOURCE}" \
         "${TFENV_ROOT}"
     cd "${TFENV_ROOT}"
 else

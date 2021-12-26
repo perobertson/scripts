@@ -1,23 +1,4 @@
 ---
-- name: All - Git update pyenv  # noqa git-latest
-  diff: false
-  ansible.builtin.git:
-    repo: https://github.com/pyenv/pyenv.git
-    dest: ~/Applications/pyenv
-
-- name: All - Git update pyenv plugins  # noqa git-latest
-  diff: false
-  ansible.builtin.git:
-    repo: "{{ item.repo }}"
-    dest: "~/Applications/pyenv/plugins/{{ item.name }}"
-  loop:
-    - repo: https://gitlab.com/perobertson/pyenv-default-requirements.git
-      name: pyenv-default-requirements
-    - repo: https://github.com/pyenv/pyenv-doctor.git
-      name: pyenv-doctor
-    - repo: https://github.com/pyenv/pyenv-virtualenv.git
-      name: pyenv-virtualenv
-
 - name: All - Git update rbenv  # noqa git-latest
   diff: false
   ansible.builtin.git:
@@ -91,6 +72,8 @@
   loop:
     - name: pkenv-update
       mode: '0700'
+    - name: pyenv-update
+      mode: '0700'
     - name: tfenv-update
       mode: '0700'
 
@@ -99,6 +82,12 @@
     cmd: "$HOME/.local/bin/pkenv-update"
   register: pkenv_update_result
   changed_when: pkenv_update_result.stdout != 'Already up to date.'
+
+- name: All - pyenv-update
+  ansible.builtin.command:
+    cmd: "$HOME/.local/bin/pyenv-update"
+  register: pyenv_update_result
+  changed_when: pyenv_update_result.stdout != 'Already up to date.'
 
 - name: All - tfenv-update
   ansible.builtin.command:
