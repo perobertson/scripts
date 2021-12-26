@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SOURCE=https://github.com/rbenv/rbenv.git
+RBENV_ROOT="${HOME}/.local/lib/rbenv"
+
+update_clone(){
+    if [[ ! -d "${1}" ]]; then
+        git clone \
+            --single-branch \
+            "${2}" \
+            "${1}"
+        cd "${1}"
+    else
+        cd "${1}"
+        git pull --rebase --stat
+    fi
+}
+
+update_clone "${RBENV_ROOT}" "${SOURCE}"
+update_clone "${RBENV_ROOT}/plugins/ruby-build" \
+    https://github.com/rbenv/ruby-build.git
+
+# link the bins to the PATH
+for bin in "${RBENV_ROOT}/bin/"*; do
+    bin=$(basename "${bin}")
+    if [[ ! -x "${HOME}/.local/bin/${bin}" ]]; then
+        ln -s "${RBENV_ROOT}/bin/${bin}" "${HOME}/.local/bin/${bin}"
+    fi
+done
+
+# Configure rbenv
+cd "${RBENV_ROOT}"
+./src/configure
+
+# Make rbenv
+make -C src

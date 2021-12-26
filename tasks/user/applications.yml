@@ -1,30 +1,4 @@
 ---
-- name: All - Git update rbenv  # noqa git-latest
-  diff: false
-  ansible.builtin.git:
-    repo: https://github.com/rbenv/rbenv.git
-    dest: ~/Applications/rbenv
-  register: git_rbenv
-
-- name: All - Git update rbenv - ruby build  # noqa git-latest
-  diff: false
-  ansible.builtin.git:
-    repo: https://github.com/rbenv/ruby-build.git
-    dest: ~/Applications/rbenv/plugins/ruby-build
-  register: git_ruby_build
-
-- name: All - Configure rbenv  # noqa no-handler
-  ansible.builtin.command:
-    chdir: ~/Applications/rbenv
-    cmd: src/configure
-  when: git_rbenv is changed or git_ruby_build is changed
-
-- name: All - Make rbenv  # noqa no-handler
-  ansible.builtin.command:
-    chdir: ~/Applications/rbenv
-    cmd: make -C src
-  when: git_rbenv is changed or git_ruby_build is changed
-
 - name: All - Git update tools  # noqa git-latest
   diff: false
   ansible.builtin.git:
@@ -74,6 +48,8 @@
       mode: '0700'
     - name: pyenv-update
       mode: '0700'
+    - name: rbenv-update
+      mode: '0700'
     - name: tfenv-update
       mode: '0700'
 
@@ -88,6 +64,12 @@
     cmd: "$HOME/.local/bin/pyenv-update"
   register: pyenv_update_result
   changed_when: pyenv_update_result.stdout != 'Already up to date.'
+
+- name: All - rbenv-update
+  ansible.builtin.command:
+    cmd: "$HOME/.local/bin/rbenv-update"
+  register: rbenv_update_result
+  changed_when: rbenv_update_result.stdout != 'Already up to date.'
 
 - name: All - tfenv-update
   ansible.builtin.command:
