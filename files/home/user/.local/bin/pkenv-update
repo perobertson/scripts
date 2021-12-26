@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SOURCE=https://github.com/iamhsa/pkenv.git
 PKENV_ROOT="${HOME}/.local/lib/pkenv"
 
 if [[ ! -d "${PKENV_ROOT}" ]]; then
     git clone \
         --single-branch \
-        https://github.com/iamhsa/pkenv.git \
+        "${SOURCE}" \
         "${PKENV_ROOT}"
     cd "${PKENV_ROOT}"
 else
