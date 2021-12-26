@@ -4,16 +4,26 @@ set -euo pipefail
 SOURCE=https://github.com/pyenv/pyenv.git
 PYENV_ROOT="${HOME}/.local/lib/pyenv"
 
-if [[ ! -d "${PYENV_ROOT}" ]]; then
-    git clone \
-        --single-branch \
-        "${SOURCE}" \
-        "${PYENV_ROOT}"
-    cd "${PYENV_ROOT}"
-else
-    cd "${PYENV_ROOT}"
-    git pull --rebase --stat
-fi
+update_clone(){
+    if [[ ! -d "${1}" ]]; then
+        git clone \
+            --single-branch \
+            "${2}" \
+            "${1}"
+        cd "${1}"
+    else
+        cd "${1}"
+        git pull --rebase --stat
+    fi
+}
+
+update_clone "${PYENV_ROOT}" "${SOURCE}"
+update_clone "${PYENV_ROOT}/plugins/pyenv-default-requirements" \
+    https://gitlab.com/perobertson/pyenv-default-requirements.git
+update_clone "${PYENV_ROOT}/plugins/pyenv-doctor" \
+    https://github.com/pyenv/pyenv-doctor.git
+update_clone "${PYENV_ROOT}/plugins/pyenv-virtualenv" \
+    https://github.com/pyenv/pyenv-virtualenv.git
 
 # link the bins to the PATH
 for bin in "${PYENV_ROOT}/bin/"*; do

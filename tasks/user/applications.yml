@@ -1,17 +1,4 @@
 ---
-- name: All - Git update pyenv plugins  # noqa git-latest
-  diff: false
-  ansible.builtin.git:
-    repo: "{{ item.repo }}"
-    dest: "~/Applications/pyenv/plugins/{{ item.name }}"
-  loop:
-    - repo: https://gitlab.com/perobertson/pyenv-default-requirements.git
-      name: pyenv-default-requirements
-    - repo: https://github.com/pyenv/pyenv-doctor.git
-      name: pyenv-doctor
-    - repo: https://github.com/pyenv/pyenv-virtualenv.git
-      name: pyenv-virtualenv
-
 - name: All - Git update rbenv  # noqa git-latest
   diff: false
   ansible.builtin.git:
