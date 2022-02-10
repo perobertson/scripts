@@ -57,22 +57,22 @@
   ansible.builtin.command:
     cmd: "$HOME/.local/bin/pkenv-update"
   register: pkenv_update_result
-  changed_when: pkenv_update_result.stdout != 'Already up to date.'
+  changed_when: pkenv_update_result.stdout_lines | unique != ['Already up to date.']
 
 - name: All - pyenv-update
   ansible.builtin.command:
     cmd: "$HOME/.local/bin/pyenv-update"
   register: pyenv_update_result
-  changed_when: pyenv_update_result.stdout != 'Already up to date.'
+  changed_when: pyenv_update_result.stdout_lines | unique != ['Already up to date.']
 
 - name: All - rbenv-update
   ansible.builtin.command:
     cmd: "$HOME/.local/bin/rbenv-update"
   register: rbenv_update_result
-  changed_when: rbenv_update_result.stdout != 'Already up to date.'
+  changed_when: rbenv_update_result.stdout_lines | unique != ['Already up to date.']
 
 - name: All - tfenv-update
   ansible.builtin.command:
     cmd: "$HOME/.local/bin/tfenv-update"
   register: tfenv_update_result
-  changed_when: tfenv_update_result.stdout != 'Already up to date.'
+  changed_when: tfenv_update_result.stdout_lines | unique != ['Already up to date.']
