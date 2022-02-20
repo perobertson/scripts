@@ -66,7 +66,7 @@ disable_nouveau(){
 
 install_nvidia(){
     installer=$(find /opt/nvidia -name 'NVIDIA-*.run' | sort | tail -n 1)
-    "./${installer}" \
+    sudo "${installer}" \
         --module-signing-secret-key=/opt/driver_signing/driver-signing.key \
         --module-signing-public-key=/opt/driver_signing/driver-signing.der
 }
