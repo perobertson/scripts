@@ -64,26 +64,31 @@ disable_nouveau(){
     sudo dracut "/boot/initramfs-$(uname -r).img" "$(uname -r)"
 }
 
-# ./NVIDIA... \
-#     --module-signing-secret-key=MODULE-SIGNING-SECRET-KEY
-#     --module-signing-public-key=MODULE-SIGNING-PUBLIC-KEY
+install_nvidia(){
+    installer=$(find /opt/nvidia -name 'NVIDIA-*.run' | sort | tail -n 1)
+    "./${installer}" \
+        --module-signing-secret-key=/opt/driver_signing/driver-signing.key \
+        --module-signing-public-key=/opt/driver_signing/driver-signing.der
+}
+
 
 
 help(){
    # Display Help
    echo "Add description of the script functions here."
    echo
-   echo "Syntax: $0 [-d|g|h]"
+   echo "Syntax: $0 [-d|e|g|h|i|n]"
    echo "options:"
    echo "d     Install NVIDIA dependencies."
    echo "e     Enroll driver signing key."
    echo "g     Generate driver signing key for secure boot."
    echo "h     Print this help."
+   echo "i     Install NVIDIA driver."
    echo "n     Disable nouveau driver."
    echo
 }
 
-while getopts ":deghn" option; do
+while getopts ":deghin" option; do
    case $option in
         d)
             install_nvidia_dependencies
@@ -97,6 +102,9 @@ while getopts ":deghn" option; do
         h) # display Help
             help
             exit
+        ;;
+        i)
+            install_nvidia
         ;;
         n)
             disable_nouveau
