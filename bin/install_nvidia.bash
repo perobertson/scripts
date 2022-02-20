@@ -17,9 +17,9 @@ generate_signing_key(){
         -nodes \
         -days 36500 \
         -subj "/CN=Private Driver Signing"
-
+}
+enroll_signing_key(){
     sudo mokutil --import /opt/driver_signing/driver-signing.der
-
     echo "Key is enrolled, be sure to reboot before proceeding."
 }
 
@@ -75,15 +75,19 @@ help(){
    echo "Syntax: $0 [-d|g|h]"
    echo "options:"
    echo "d     Install NVIDIA dependencies."
+   echo "e     Enroll driver signing key."
    echo "g     Generate driver signing key for secure boot."
    echo "h     Print this help."
    echo
 }
 
-while getopts ":dgh" option; do
+while getopts ":degh" option; do
    case $option in
         d)
             install_nvidia_dependencies
+        ;;
+        e)
+            enroll_signing_key
         ;;
         g)
             generate_signing_key
