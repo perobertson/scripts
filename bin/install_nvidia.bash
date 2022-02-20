@@ -71,14 +71,20 @@ install_nvidia(){
         --module-signing-public-key=/opt/driver_signing/driver-signing.der
 }
 
-
+install_video_acceleration(){
+    sudo dnf install \
+        libva-utils \
+        libva-vdpau-driver \
+        vdpauinfo
+}
 
 help(){
    # Display Help
    echo "Add description of the script functions here."
    echo
-   echo "Syntax: $0 [-d|e|g|h|i|n]"
+   echo "Syntax: $0 [-a|d|e|g|h|i|n]"
    echo "options:"
+   echo "a     Install video acceleration support."
    echo "d     Install NVIDIA dependencies."
    echo "e     Enroll driver signing key."
    echo "g     Generate driver signing key for secure boot."
@@ -88,8 +94,11 @@ help(){
    echo
 }
 
-while getopts ":deghin" option; do
+while getopts ":adeghin" option; do
    case $option in
+        a)
+            install_video_acceleration
+        ;;
         d)
             install_nvidia_dependencies
         ;;
