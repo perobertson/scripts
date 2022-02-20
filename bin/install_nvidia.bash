@@ -35,6 +35,8 @@ install_nvidia_dependencies(){
         libglvnd-opengl \
         make \
         pkgconfig
+    sudo dnf update
+    echo "dependencies installed be sure to reboot"
 }
 
 disable_nouveau(){
@@ -66,25 +68,29 @@ disable_nouveau(){
 #     --module-signing-public-key=MODULE-SIGNING-PUBLIC-KEY
 
 
-help()
-{
+help(){
    # Display Help
    echo "Add description of the script functions here."
    echo
-   echo "Syntax: $0 [-h]"
+   echo "Syntax: $0 [-d|g|h]"
    echo "options:"
+   echo "d     Install NVIDIA dependencies."
+   echo "g     Generate driver signing key for secure boot."
    echo "h     Print this help."
    echo
 }
 
-while getopts ":hg" option; do
+while getopts ":dgh" option; do
    case $option in
-        h) # display Help
-            help
-            exit
+        d)
+            install_nvidia_dependencies
         ;;
         g)
             generate_signing_key
+        ;;
+        h) # display Help
+            help
+            exit
         ;;
         *)
             echo failed
