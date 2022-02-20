@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # See https://www.if-not-true-then-false.com/2015/fedora-nvidia-guide/
+# See https://blog.monosoul.dev/2021/12/29/automatically-sign-nvidia-kernel-module-in-fedora/
 
 generate_signing_key(){
     sudo dnf install \
