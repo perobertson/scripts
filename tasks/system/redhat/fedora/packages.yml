@@ -21,7 +21,6 @@
     - google-noto-sans-mono-vf-fonts
     - google-noto-sans-vf-fonts
     - google-roboto-mono-fonts
-    - gtk-murrine-engine  # gtk2 theme engine. Probably safe to remove
     - hyperfine  # CLI benchmarking
     - intel-media-driver
     - levien-inconsolata-fonts
