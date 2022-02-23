@@ -73,13 +73,28 @@ disable_nouveau(){
 
     ## Create new initramfs image ##
     sudo dracut "/boot/initramfs-$(uname -r).img" "$(uname -r)"
+
+    echo "Nouveau has been disabled."
+    echo "Changing runlevel to multi-user"
+    sudo systemctl set-default multi-user.target
+    echo "Runlevel changed. Time to reboot and install the NVIDIA driver."
 }
 
 install_nvidia(){
     installer=$(find /opt/nvidia -name 'NVIDIA-*.run' | sort | tail -n 1)
+    if [[ ! -x "${installer}" ]]; then
+        echo "No installer found in /opt/nvidia"
+        echo "See: https://www.nvidia.com/en-us/drivers/unix/"
+        exit 3
+    fi
     sudo "${installer}" \
         --module-signing-secret-key=/opt/driver_signing/driver-signing.key \
         --module-signing-public-key=/opt/driver_signing/driver-signing.der
+
+    echo "NVIDIA has been installed"
+    echo "Changing runlevel back to graphical"
+    sudo systemctl set-default graphical.target
+    echo "Runlevel changed. Time to reboot and install the video acceleration."
 }
 
 install_video_acceleration(){
@@ -102,7 +117,7 @@ help(){
    echo "-d     Step3: Install NVIDIA dependencies."
    echo "-n     Step4: Disable nouveau driver."
    echo "-i     Step5: Install NVIDIA driver."
-   echo "-a     Step6 Install video acceleration support."
+   echo "-a     Step6: Install video acceleration support."
 }
 
 while getopts ":adeghin" option; do
