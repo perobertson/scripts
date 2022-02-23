@@ -3,6 +3,13 @@
 # See https://blog.monosoul.dev/2021/12/29/automatically-sign-nvidia-kernel-module-in-fedora/
 
 generate_signing_key(){
+    if sudo bash -c '[[ -f /opt/driver_signing/driver-signing.key ]]'; then
+        echo "Driver signing key already exists"
+        return 1
+    elif sudo bash -c '[[ -f /opt/driver_signing/driver-signing.der ]]'; then
+        echo "Driver signing key already exists"
+        return 2
+    fi
     sudo dnf install \
         mokutil \
         openssl
@@ -21,6 +28,9 @@ generate_signing_key(){
 }
 
 enroll_signing_key(){
+    if [[ ! -f /opt/driver_signing/driver-signing.der ]]; then
+        generate_signing_key
+    fi
     sudo mokutil --import /opt/driver_signing/driver-signing.der
     echo "Key is enrolled, be sure to reboot before proceeding."
 }
@@ -81,33 +91,37 @@ install_video_acceleration(){
 
 help(){
    # Display Help
-   echo "Add description of the script functions here."
+   echo "Multi step script to installing the NVIDA drivers."
    echo
    echo "Syntax: $0 [-a|d|e|g|h|i|n]"
-   echo "options:"
-   echo "a     Install video acceleration support."
-   echo "d     Install NVIDIA dependencies."
-   echo "e     Enroll driver signing key."
-   echo "g     Generate driver signing key for secure boot."
-   echo "h     Print this help."
-   echo "i     Install NVIDIA driver."
-   echo "n     Disable nouveau driver."
    echo
+   echo "options:"
+   echo "-h     Print this help."
+   echo "-g     Step1: Generate driver signing key for secure boot."
+   echo "-e     Step2: Enroll driver signing key."
+   echo "-d     Step3: Install NVIDIA dependencies."
+   echo "-n     Step4: Disable nouveau driver."
+   echo "-i     Step5: Install NVIDIA driver."
+   echo "-a     Step6 Install video acceleration support."
 }
 
 while getopts ":adeghin" option; do
    case $option in
         a)
             install_video_acceleration
+            exit
         ;;
         d)
             install_nvidia_dependencies
+            exit
         ;;
         e)
             enroll_signing_key
+            exit
         ;;
         g)
             generate_signing_key
+            exit
         ;;
         h) # display Help
             help
@@ -115,12 +129,16 @@ while getopts ":adeghin" option; do
         ;;
         i)
             install_nvidia
+            exit
         ;;
         n)
             disable_nouveau
+            exit
         ;;
         *)
             echo failed
             exit 1
    esac
 done
+
+help
