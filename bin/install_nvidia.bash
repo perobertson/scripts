@@ -2,6 +2,8 @@
 # See https://www.if-not-true-then-false.com/2015/fedora-nvidia-guide/
 # See https://blog.monosoul.dev/2021/12/29/automatically-sign-nvidia-kernel-module-in-fedora/
 
+set -euo pipefail
+
 generate_signing_key(){
     if sudo bash -c '[[ -f /opt/driver_signing/driver-signing.key ]]'; then
         echo "Driver signing key already exists"
