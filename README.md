@@ -14,7 +14,7 @@ Because of this, the scripts are designed to work with systems that have a pytho
 - Debian: 10, 11
 - Fedora: 34, 35
 - Manjaro
-- Ubuntu: 20.04(LTS), 21.10
+- Ubuntu: 20.04(LTS), 21.10, 22.04(LTS)
 
 **Note:** OSes that are EOL, or are based on languages that are EOL are not tested in CI.
 

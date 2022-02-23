@@ -80,6 +80,10 @@ dockerfiles/dist/ubuntu/ubuntu-21.10.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/ubuntu/ubuntu-21.10.tar: dockerfiles/ubuntu.dockerfile
 	$(call build_image,ubuntu,21.10)
 
+dockerfiles/dist/ubuntu/ubuntu-22.04.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/ubuntu/ubuntu-22.04.tar: dockerfiles/ubuntu.dockerfile
+	$(call build_image,ubuntu,22.04)
+
 .PHONY: ansible-lint
 ansible-lint:
 	ansible-playbook --syntax-check $(playbooks)
@@ -192,3 +196,7 @@ test-ubuntu-20.04: dockerfiles/dist/ubuntu/ubuntu-20.04.tar
 .PHONY: test-ubuntu-21.10
 test-ubuntu-21.10: dockerfiles/dist/ubuntu/ubuntu-21.10.tar
 	$(call test_os,ubuntu,21.10)
+
+.PHONY: test-ubuntu-22.04
+test-ubuntu-22.04: dockerfiles/dist/ubuntu/ubuntu-22.04.tar
+	$(call test_os,ubuntu,22.04)

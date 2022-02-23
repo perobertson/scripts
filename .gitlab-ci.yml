@@ -227,6 +227,12 @@ build:ubuntu:21.10:
   script:
     - ./.gitlab/build_image.sh ubuntu 21.10
 
+build:ubuntu:22.04:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh ubuntu 22.04
+
 lint:shellcheck:
   extends:
     - .rules_lint
@@ -416,6 +422,20 @@ test:ubuntu:21.10:
   image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:21.10-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:ubuntu:21.10
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
+
+test:ubuntu:22.04:
+  # EOL: 2022-07
+  # replace this job with the rolling short term release
+  # https://wiki.ubuntu.com/Releases
+  extends:
+    - .test
+    - .rules_debian
+  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:22.04-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:ubuntu:22.04
       artifacts: false
     - job: lint:ansible
       artifacts: false
