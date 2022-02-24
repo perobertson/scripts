@@ -221,12 +221,6 @@ build:ubuntu:20.04:
   script:
     - ./.gitlab/build_image.sh ubuntu 20.04
 
-build:ubuntu:21.04:
-  extends:
-    - .build_img
-  script:
-    - ./.gitlab/build_image.sh ubuntu 21.04
-
 build:ubuntu:21.10:
   extends:
     - .build_img
@@ -408,20 +402,6 @@ test:ubuntu:20.04:
   image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:20.04-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:ubuntu:20.04
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
-
-test:ubuntu:21.04:
-  # EOL: 2022-01
-  # replace this job with the rolling short term release
-  # https://wiki.ubuntu.com/Releases
-  extends:
-    - .test
-    - .rules_debian
-  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:21.04-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:ubuntu:21.04
       artifacts: false
     - job: lint:ansible
       artifacts: false
