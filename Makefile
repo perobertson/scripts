@@ -72,10 +72,6 @@ dockerfiles/dist/ubuntu/ubuntu-20.04.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/ubuntu/ubuntu-20.04.tar: dockerfiles/ubuntu.dockerfile
 	$(call build_image,ubuntu,20.04)
 
-dockerfiles/dist/ubuntu/ubuntu-21.04.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/ubuntu/ubuntu-21.04.tar: dockerfiles/ubuntu.dockerfile
-	$(call build_image,ubuntu,21.04)
-
 dockerfiles/dist/ubuntu/ubuntu-21.10.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/ubuntu/ubuntu-21.10.tar: dockerfiles/ubuntu.dockerfile
 	$(call build_image,ubuntu,21.10)
@@ -184,10 +180,6 @@ test-ubuntu-18.04: dockerfiles/dist/ubuntu/ubuntu-18.04.tar
 .PHONY: test-ubuntu-20.04
 test-ubuntu-20.04: dockerfiles/dist/ubuntu/ubuntu-20.04.tar
 	$(call test_os,ubuntu,20.04)
-
-.PHONY: test-ubuntu-21.04
-test-ubuntu-21.04: dockerfiles/dist/ubuntu/ubuntu-21.04.tar
-	$(call test_os,ubuntu,21.04)
 
 .PHONY: test-ubuntu-21.10
 test-ubuntu-21.10: dockerfiles/dist/ubuntu/ubuntu-21.10.tar
