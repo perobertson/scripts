@@ -60,6 +60,10 @@ dockerfiles/dist/fedora/fedora-35.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/fedora/fedora-35.tar: dockerfiles/fedora.dockerfile
 	$(call build_image,fedora,35)
 
+dockerfiles/dist/fedora/fedora-36.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/fedora/fedora-36.tar: dockerfiles/fedora.dockerfile
+	$(call build_image,fedora,36)
+
 dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: dockerfiles/manjarolinux.dockerfile
 	$(call build_image,manjarolinux,latest)
@@ -168,6 +172,10 @@ test-fedora-34: dockerfiles/dist/fedora/fedora-34.tar
 .PHONY: test-fedora-35
 test-fedora-35: dockerfiles/dist/fedora/fedora-35.tar
 	$(call test_os,fedora,35)
+
+.PHONY: test-fedora-36
+test-fedora-36: dockerfiles/dist/fedora/fedora-36.tar
+	$(call test_os,fedora,36)
 
 .PHONY: test-manjarolinux-latest
 test-manjarolinux-latest: dockerfiles/dist/manjarolinux/manjarolinux-latest.tar
