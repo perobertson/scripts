@@ -7,13 +7,13 @@
     file: kubernetes
     name: kubernetes
     description: Kubernetes
-    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el9-x86_64
     enabled: true
     gpgcheck: true
     repo_gpgcheck: true
     gpgkey:
       # Repository metadata keys
-      - https://packages.cloud.google.com/yum/repos/cloud-sdk-el7-x86_64/repodata/repomd.xml.key
+      - https://packages.cloud.google.com/yum/repos/cloud-sdk-el9-x86_64/repodata/repomd.xml.key
       # Old repository metadata key
       # - https://packages.cloud.google.com/yum/doc/yum-key.gpg
       # Package key
