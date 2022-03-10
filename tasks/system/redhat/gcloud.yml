@@ -2,6 +2,20 @@
 - name: RedHat - rpm keys for Google
   ansible.builtin.import_tasks: rpm_keys_google.yml
 
+- name: RedHat - Import google-cloud-sdk repository key - 1
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://packages.cloud.google.com/yum/repos/cloud-sdk-el9-x86_64/repodata/repomd.xml.key
+    fingerprint: 7F92E05B31093BEF5A3C2D38FEEA9169307EA071
+  register: import_glcoud_repository_key1
+
+- name: RedHat - Import google-cloud-sdk repository key - 2
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://packages.cloud.google.com/yum/repos/cloud-sdk-el9-x86_64/repodata/repomd.xml.key
+    fingerprint: 59FE0256827269DC81578F928B57C5C2836F4BEB
+  register: import_glcoud_repository_key2
+
 - name: RedHat - Add Google Cloud SDK repository
   ansible.builtin.yum_repository:
     file: google-cloud-sdk
