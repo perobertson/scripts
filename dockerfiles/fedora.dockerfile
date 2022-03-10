@@ -5,6 +5,7 @@ RUN dnf install -y \
         shadow-utils \
         sudo \
         systemd \
+        util-linux \
     && echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci \
     && /usr/sbin/useradd \
         --user-group \
