@@ -1,15 +1,6 @@
 ---
-- name: RedHat - Import GCloud Yum Key
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://packages.cloud.google.com/yum/doc/yum-key.gpg
-    fingerprint: 7F92E05B31093BEF5A3C2D38FEEA9169307EA071
-
-- name: RedHat - Import GCloud Package Key
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-    fingerprint: 3749E1BA95A86CE054546ED2F09C394C3E1BA8D5
+- name: RedHat - rpm keys for Google
+  ansible.builtin.import_tasks: rpm_keys_google.yml
 
 - name: RedHat - Add Kubernetes repository
   ansible.builtin.yum_repository:
@@ -21,8 +12,17 @@
     gpgcheck: true
     repo_gpgcheck: true
     gpgkey:
-      - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+      # Repository metadata keys
+      - https://packages.cloud.google.com/yum/repos/cloud-sdk-el7-x86_64/repodata/repomd.xml.key
+      # Old repository metadata key
+      # - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+      # Package key
       - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+# TODO: remove this workaround when dnf uses the rpm key database
+- name: RedHat - refresh dnf keys for Google  # noqa no-handler
+  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='kubernetes'"
+  when: import_glcoud_repository_key1.changed or import_glcoud_repository_key2.changed or import_glcoud_package_key.changed
 
 - name: RedHat - Install kubernetes
   ansible.builtin.dnf:
