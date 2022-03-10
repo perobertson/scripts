@@ -5,6 +5,7 @@
     state: present
     key: https://rpm.releases.hashicorp.com/gpg
     fingerprint: E8A032E094D8EB4EA189D270DA418C88A3219F7B
+  register: rpm_key_hashicorp
 
 - name: Fedora - Add Hashicorp repository
   ansible.builtin.yum_repository:
@@ -16,6 +17,11 @@
     gpgcheck: true
     repo_gpgcheck: true
     gpgkey: https://rpm.releases.hashicorp.com/gpg
+
+# TODO: remove this workaround when dnf uses the rpm key database
+- name: RedHat - refresh dnf keys for Hashicorp  # noqa no-handler
+  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='hashicorp'"
+  when: rpm_key_hasicorp.changed
 
 - name: Fedora - Import RPM-GPG-KEY-rpmfusion-free signing key
   ansible.builtin.rpm_key:
