@@ -18,6 +18,14 @@
     filename: 1password
     state: present
 
+- name: Debian - Check for Hashicorp support
+  uri:
+    url: https://apt.releases.hashicorp.com/dists/{{ ansible_distribution_release }}/Release
+    method: HEAD
+  register: uri_apt_hashicorp
+  # fail with error if status is unexpected
+  failed_when: uri_apt_hashicorp.status is undefined or uri_apt_hashicorp.status <= 0
+
 - name: Debian - Add Hashicorp signing key
   ansible.builtin.apt_key:
     url: https://apt.releases.hashicorp.com/gpg
@@ -30,6 +38,7 @@
     repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
     filename: hashicorp
     state: present
+  when: uri_apt_hashicorp is succeeded
 
 - name: Debian - Add VSCode signing key
   ansible.builtin.apt_key:
