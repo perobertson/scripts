@@ -113,7 +113,7 @@
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: RedHat - refresh dnf keys for VSCode  # noqa no-handler
   command: "dnf -q makecache -y --disablerepo='*' --enablerepo='code'"
-  when: rpm_key_code.changed
+  when: rpm_key_microsoft.changed
 
 - name: RedHat - Import Zoom signing key
   ansible.builtin.rpm_key:
