@@ -9,6 +9,7 @@
     state: present
     key: https://downloads.1password.com/linux/keys/1password.asc
     fingerprint: 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
+  register: rpm_key_1password
 
 - name: RedHat - Add 1Password beta repository
   ansible.builtin.yum_repository:
@@ -31,6 +32,11 @@
     gpgcheck: true
     gpgkey: https://downloads.1password.com/linux/keys/1password.asc
     repo_gpgcheck: true
+
+# TODO: remove this workaround when dnf uses the rpm key database
+- name: RedHat - refresh dnf keys for 1Password  # noqa no-handler
+  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='1password-beta' --enablerepo='1password-stable'"
+  when: rpm_key_1password.changed
 
 - name: RedHat - Import Keybase signing key
   ansible.builtin.rpm_key:
@@ -55,11 +61,19 @@
     repo_gpgcheck: false
   when: rpm_key_keybase is succeeded
 
+# TODO: remove this workaround when dnf uses the rpm key database
+- name: RedHat - refresh dnf keys for Keybase  # noqa no-handler
+  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='keybase'"
+  when:
+    - rpm_key_keybase is succeeded
+    - rpm_key_keybase.changed
+
 - name: RedHat - Import Sublime-Text signing key
   ansible.builtin.rpm_key:
     state: present
     key: https://download.sublimetext.com/sublimehq-rpm-pub.gpg
     fingerprint: 1B64279675A4299DCFC70858CA464A9A222D23D0
+  register: rpm_key_sublimetext
 
 - name: RedHat - Add Sublime-Text repository
   ansible.builtin.yum_repository:
@@ -73,11 +87,17 @@
       - https://download.sublimetext.com/sublimehq-rpm-pub.gpg
     repo_gpgcheck: true
 
+# TODO: remove this workaround when dnf uses the rpm key database
+- name: RedHat - refresh dnf keys for SublimeText  # noqa no-handler
+  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='sublime-text'"
+  when: rpm_key_sublimetext.changed
+
 - name: RedHat - Import VSCode signing key
   ansible.builtin.rpm_key:
     state: present
     key: https://packages.microsoft.com/keys/microsoft.asc
     fingerprint: BC528686B50D79E339D3721CEB3E94ADBE1229CF
+  register: rpm_key_microsoft
 
 - name: RedHat - Add VSCode repository
   ansible.builtin.yum_repository:
@@ -90,11 +110,17 @@
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
     repo_gpgcheck: true
 
+# TODO: remove this workaround when dnf uses the rpm key database
+- name: RedHat - refresh dnf keys for VSCode  # noqa no-handler
+  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='code'"
+  when: rpm_key_microsoft.changed
+
 - name: RedHat - Import Zoom signing key
   ansible.builtin.rpm_key:
     state: present
     key: https://zoom.us/linux/download/pubkey
     fingerprint: 396060CADD8A75220BFCB369B903BF1861A7C71D
+  register: rpm_key_zoom
 
 - name: RedHat - check if rpmfusion-free.repo file exists
   ansible.builtin.stat:
