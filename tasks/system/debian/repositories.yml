@@ -38,7 +38,7 @@
     repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
     filename: hashicorp
     state: present
-  when: uri_apt_hashicorp is succeeded
+  when: uri_apt_hashicorp.status == 200
 
 - name: Debian - Add VSCode signing key
   ansible.builtin.apt_key:
