@@ -19,7 +19,7 @@
     state: present
 
 - name: Debian - Check for Hashicorp support
-  uri:
+  ansible.builtin.uri:
     url: https://apt.releases.hashicorp.com/dists/{{ ansible_distribution_release }}/Release
     method: HEAD
   register: uri_apt_hashicorp

@@ -35,7 +35,7 @@
 
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: RedHat - refresh dnf keys for 1Password  # noqa no-handler
-  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='1password-beta' --enablerepo='1password-stable'"
+  ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='1password-beta' --enablerepo='1password-stable'"
   when: rpm_key_1password.changed
 
 - name: RedHat - Import Keybase signing key
@@ -63,7 +63,7 @@
 
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: RedHat - refresh dnf keys for Keybase  # noqa no-handler
-  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='keybase'"
+  ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='keybase'"
   when:
     - rpm_key_keybase is succeeded
     - rpm_key_keybase.changed
@@ -89,7 +89,7 @@
 
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: RedHat - refresh dnf keys for SublimeText  # noqa no-handler
-  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='sublime-text'"
+  ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='sublime-text'"
   when: rpm_key_sublimetext.changed
 
 - name: RedHat - Import VSCode signing key
@@ -112,7 +112,7 @@
 
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: RedHat - refresh dnf keys for VSCode  # noqa no-handler
-  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='code'"
+  ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='code'"
   when: rpm_key_microsoft.changed
 
 - name: RedHat - Import Zoom signing key

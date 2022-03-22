@@ -20,7 +20,7 @@
 
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: RedHat - refresh dnf keys for Hashicorp  # noqa no-handler
-  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='hashicorp'"
+  ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='hashicorp'"
   when: rpm_key_hashicorp.changed
 
 - name: Fedora - Import RPM-GPG-KEY-rpmfusion-free signing key

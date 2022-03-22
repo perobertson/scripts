@@ -35,7 +35,7 @@
 
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: RedHat - refresh dnf keys for Google  # noqa no-handler
-  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='google-cloud-sdk'"
+  ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='google-cloud-sdk'"
   when: import_glcoud_repository_key1.changed or import_glcoud_repository_key2.changed or import_glcoud_package_key.changed
 
 - name: RedHat - Install gcloud

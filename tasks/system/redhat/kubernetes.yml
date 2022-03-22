@@ -35,7 +35,7 @@
 
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: RedHat - refresh dnf keys for Google  # noqa no-handler
-  command: "dnf -q makecache -y --disablerepo='*' --enablerepo='kubernetes'"
+  ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='kubernetes'"
   when: import_kubernetes_repository_key1.changed or import_kubernetes_repository_key2.changed or import_glcoud_package_key.changed
 
 - name: RedHat - Install kubernetes
