@@ -11,7 +11,7 @@ Because of this, the scripts are designed to work with systems that have a pytho
 
 - Archlinux
 - CentOS: stream8, stream9
-- Debian: 10, 11
+- Debian: 11
 - Fedora: 34, 35
 - Manjaro
 - Ubuntu: 20.04(LTS), 21.10, 22.04(LTS)

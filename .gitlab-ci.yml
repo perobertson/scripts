@@ -162,6 +162,7 @@ build:centos:stream9:
 build:debian:10:
   extends:
     - .build_img
+    - .rules_eol
   script:
     - ./.gitlab/build_image.sh debian 10
 
@@ -291,10 +292,10 @@ test:centos:stream9:
   allow_failure: true
 
 test:debian:10:
-  # EOL: ~2022
+  # EOL: ~2022-08
   extends:
     - .test
-    - .rules_debian
+    - .rules_eol
   image: ${CI_REGISTRY}/perobertson/scripts/debian:10-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:debian:10
