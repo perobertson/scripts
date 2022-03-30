@@ -1,6 +1,7 @@
-# Debian EOL dates https://wiki.debian.org/DebianReleases
+# CentOS EOL dates https://www.centos.org/centos-stream/
+# Debian EOL dates https://wiki.debian.org/DebianReleases/
 # Fedora EOL dates https://fedorapeople.org/groups/schedule/
-# Ubuntu EOL dates https://wiki.ubuntu.com/Releases
+# Ubuntu EOL dates https://wiki.ubuntu.com/Releases/
 ---
 default:
   interruptible: true
