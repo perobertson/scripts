@@ -10,4 +10,8 @@ pip3 install --user --upgrade setuptools wheel
 # Remove old ansible base package if it is installed
 pip3 uninstall -y ansible-base
 # Make sure ansible is using python3
-pip3 install --user --upgrade 'ansible~=4.0' 'ansible-core'
+pip3 install --user --upgrade 'ansible~=4.0'
+
+if [[ -n "$CI" ]]; then
+    pip3 list
+fi
