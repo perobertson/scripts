@@ -1,4 +1,6 @@
-FROM docker.io/python:3.9-slim
+# use the version of python that matches the oldest supported OS
+# this will make sure that the correct ansible and lint version are installed
+FROM docker.io/python:3.7-slim
 
 RUN apt-get update && apt-get install -y \
         bash \
