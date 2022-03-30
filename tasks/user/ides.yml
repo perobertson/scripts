@@ -20,4 +20,5 @@
   ansible.builtin.get_url:
     url: https://packagecontrol.io/Package%20Control.sublime-package
     dest: $HOME/.config/sublime-text-3/Installed Packages/Package Control.sublime-package
+    mode: '0600'
   when: not sublime_package_control.stat.exists
