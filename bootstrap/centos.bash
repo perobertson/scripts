@@ -4,9 +4,9 @@ set -euo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 sudo dnf -y install \
-    python3-devel \
     python3-dnf \
-    python3-pip
+    python39-devel \
+    python39-pip
 
 # required to install dependencies of ansible
 sudo dnf -y install \

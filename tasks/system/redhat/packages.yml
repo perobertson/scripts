@@ -59,8 +59,6 @@
     - pcp-system-tools  # dstat
     - perl
     - python3-dbus
-    - python3-devel
-    - python3-psutil
     - readline-devel
     - redhat-rpm-config
     - samba-client
