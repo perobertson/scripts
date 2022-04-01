@@ -28,6 +28,7 @@
     - mozilla-fira-mono-fonts
     - mozilla-fira-sans-fonts
     - podman
+    - python3-psutil
     - ShellCheck
     - sqlitebrowser
     - starship  # CLI prompt

@@ -6,3 +6,4 @@
   loop:
     - code
     - dbus-daemon
+    - python39-psutil
