@@ -29,6 +29,7 @@ keybase --version || echo 'keybase unavailable'
 make --version
 node --version
 npm --version
+op --version || echo 'op unavailable'
 pip --version
 python --version || echo 'python unavailable'
 python3 --version

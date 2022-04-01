@@ -3,6 +3,7 @@
   ansible.builtin.apt:
     pkg:
       - 1password
+      - 1password-cli
       - npm
     state: present
   when: ansible_distribution_major_version|int >= 10
