@@ -1,18 +1,38 @@
 ---
+- name: RedHat - install script for checking metered connections
+  tags: [systemd]
+  ansible.builtin.copy:
+    src: files/usr/local/bin/non_metered_connection.bash
+    dest: /usr/local/bin/non_metered_connection.bash
+    mode: '0755'
+
+- name: RedHat - create dnf-automatic drop in directories
+  tags: [systemd]
+  ansible.builtin.file:
+    path: /etc/systemd/system/dnf-automatic.service.d
+    state: directory
+    mode: '0755'
+
 - name: RedHat - Configure security updates
   diff: true
+  tags: [systemd]
   ansible.builtin.copy:
-    src: files/etc/dnf/automatic.conf
-    dest: /etc/dnf/automatic.conf
+    src: "files{{ item }}"
+    dest: "{{ item }}"
     mode: '0644'
+  loop:
+    - /etc/dnf/automatic.conf
+    - /etc/systemd/system/dnf-automatic.service.d/non-metered.conf
 
 - name: RedHat - Configure security updates file permissions
+  tags: [systemd]
   ansible.builtin.file:
     path: /etc/dnf/automatic.conf
     mode: '0644'
 
 - name: RedHat - Enable security updates
   become: true
+  tags: [systemd]
   ansible.builtin.systemd:
     name: dnf-automatic.timer
     enabled: true
