@@ -189,5 +189,5 @@
       value: "'Mint-Y-Dark-Teal'"
     # Window Borders
     - key: /org/cinnamon/desktop/wm/preferences/theme
-      value: "'Mint-Y-Dark'"
+      value: "'Mint-Y'"
   when: stat_sys_mint_y_theme.stat.exists or stat_usr_mint_y_theme.stat.exists
