@@ -124,6 +124,14 @@ install_rust_crates:
 install_setup:
 	ansible-playbook --ask-become-pass -v setup.yml
 
+.PHONY: install_setup_system
+install_setup_system:
+	ansible-playbook --ask-become-pass -v setup.yml --tags=system
+
+.PHONY: install_setup_user
+install_setup_user:
+	ansible-playbook -v setup.yml --tags=user
+
 define test_os
 	@# $1 is the OS
 	@# $2 is the OS_VERSION
