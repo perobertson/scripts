@@ -101,7 +101,7 @@
 
     # https://www.freedesktop.org/software/systemd/man/sd_booted.html
     - name: All - Check if systemd is running
-      tags: [systemd]
+      tags: [system, user, systemd]
       ansible.builtin.stat:
         path: /run/systemd/system/
       register: stat_run_systemd
