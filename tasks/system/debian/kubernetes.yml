@@ -1,1 +1,10 @@
 ---
+### --- Distro specific ---
+
+- name: Debian Packages
+  ansible.builtin.import_tasks: debian/packages.yml
+  when: ansible_distribution == 'Debian'
+
+- name: Ubuntu Packages
+  ansible.builtin.import_tasks: ubuntu/packages.yml
+  when: ansible_distribution == 'Ubuntu'

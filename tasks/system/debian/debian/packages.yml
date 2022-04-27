@@ -11,6 +11,7 @@
 - name: Debian >=11 - Install packages
   ansible.builtin.apt:
     pkg:
+      - kubernetes-client  # kubectl
       - python3-cairo  # required to fix default python
     state: present
   when: ansible_distribution_major_version|int >= 11

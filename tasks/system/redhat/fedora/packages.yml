@@ -23,6 +23,7 @@
     - google-roboto-mono-fonts
     - hyperfine  # CLI benchmarking
     - intel-media-driver
+    - kubernetes-client  # kubectl
     - levien-inconsolata-fonts
     - mozilla-fira-fonts-common
     - mozilla-fira-mono-fonts
