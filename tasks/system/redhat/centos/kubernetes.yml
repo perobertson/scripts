@@ -1,6 +1,6 @@
 ---
 - name: CentOS - rpm keys for Google
-  ansible.builtin.import_tasks: rpm_keys_google.yml
+  ansible.builtin.import_tasks: ../rpm_keys_google.yml
 
 - name: CentOS - Import kubernetes repository key - 1
   ansible.builtin.rpm_key:
