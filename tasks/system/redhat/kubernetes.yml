@@ -1,9 +1,0 @@
----
-### --- Distro specific ---
-- name: CentOS Kubernetes
-  ansible.builtin.import_tasks: centos/kubernetes.yml
-  when: ansible_distribution == 'CentOS'
-
-- name: Fedora Kubernetes
-  ansible.builtin.import_tasks: fedora/kubernetes.yml
-  when: ansible_distribution == 'Fedora'
