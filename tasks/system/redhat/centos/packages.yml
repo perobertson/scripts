@@ -6,4 +6,5 @@
   loop:
     - code
     - dbus-daemon
+    - kubectl
     - python39-psutil

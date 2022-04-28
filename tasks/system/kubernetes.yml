@@ -9,16 +9,3 @@
   ansible.builtin.file:
     path: /usr/local/bin/minikube
     mode: +x
-
-### --- Family Specific Setup
-- name: Archlinux Kubernetes
-  ansible.builtin.import_tasks: archlinux/kubernetes.yml
-  when: ansible_os_family == 'Archlinux'
-
-- name: Debian Kubernetes
-  ansible.builtin.import_tasks: debian/kubernetes.yml
-  when: ansible_os_family == 'Debian'
-
-- name: RedHat Kubernetes
-  ansible.builtin.import_tasks: redhat/kubernetes.yml
-  when: ansible_os_family == 'RedHat'
