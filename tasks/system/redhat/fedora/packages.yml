@@ -4,7 +4,6 @@
     name: "{{ item }}"
     state: present
   loop:
-    - autojump-zsh
     - bat  # rust version of cat
     - code  # VSCode
     - community-mysql-devel  # from fedora modular
@@ -14,7 +13,7 @@
     - flameshot
     - fzf
     - gdouros-symbola-fonts
-    - git-delta
+    - git-delta  # Syntax-highlighting pager for git
     - google-noto-sans-display-fonts
     - google-noto-sans-display-vf-fonts
     - google-noto-sans-mono-fonts

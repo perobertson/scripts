@@ -6,6 +6,7 @@
   loop:
     - bash
     - bash-completion
+    - bat  # rust version of cat
     - code
     - curl
     - exa
@@ -14,6 +15,7 @@
     - flatpak
     - gcc
     - gdb
+    - git-delta  # Syntax-highlighting pager for git
     - gzip
     - hyperfine  # CLI benchmarking
     - jq

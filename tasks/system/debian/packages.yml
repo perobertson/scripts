@@ -6,6 +6,7 @@
   loop:
     - bash
     - bash-completion
+    - bat  # rust version of cat
     - code
     - crudini
     - dconf-cli

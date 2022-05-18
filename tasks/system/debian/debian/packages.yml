@@ -13,5 +13,6 @@
     pkg:
       - kubernetes-client  # kubectl
       - python3-cairo  # required to fix default python
+      - zoxide  # A faster way to navigate your filesystem
     state: present
   when: ansible_distribution_major_version|int >= 11
