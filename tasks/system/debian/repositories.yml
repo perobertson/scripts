@@ -8,17 +8,15 @@
 
 - name: Debian - Add 1Password Beta Repo
   ansible.builtin.apt_repository:
-    repo: >
-      deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg]
-      https://downloads.1password.com/linux/debian/amd64 beta main
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg]
+      https://downloads.1password.com/linux/debian/amd64 beta main"
     filename: 1password
     state: present
 
 - name: Debian - Add 1Password Stable Repo
   ansible.builtin.apt_repository:
-    repo: >
-      deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg]
-      https://downloads.1password.com/linux/debian/amd64 stable main
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg]
+      https://downloads.1password.com/linux/debian/amd64 stable main"
     filename: 1password
     state: present
 
@@ -39,9 +37,8 @@
 
 - name: Debian - Add Hashicorp Repo
   ansible.builtin.apt_repository:
-    repo: >
-      deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg]
-      https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg]
+      https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
     filename: hashicorp
     state: present
   when: uri_apt_hashicorp.status == 200
@@ -55,9 +52,8 @@
 
 - name: Debian - Add VSCode Repo
   ansible.builtin.apt_repository:
-    repo: >
-      deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg]
-      https://packages.microsoft.com/repos/vscode stable main
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg]
+      https://packages.microsoft.com/repos/vscode stable main"
     filename: vscode
     state: present
 
@@ -70,9 +66,8 @@
 
 - name: Debian - Add Sublime Text Repo
   ansible.builtin.apt_repository:
-    repo: >
-      deb [signed-by=/usr/share/keyrings/sublime-archive-keyring.gpg]
-      https://download.sublimetext.com/ apt/stable/
+    repo: "deb [signed-by=/usr/share/keyrings/sublime-archive-keyring.gpg]
+      https://download.sublimetext.com/ apt/stable/"
     filename: sublime-text
     state: present
 
