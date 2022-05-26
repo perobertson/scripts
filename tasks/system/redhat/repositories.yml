@@ -35,7 +35,9 @@
 
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: RedHat - refresh dnf keys for 1Password  # noqa no-handler
-  ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='1password-beta' --enablerepo='1password-stable'"
+  ansible.builtin.command: >
+    dnf -q makecache -y --disablerepo='*'
+    --enablerepo='1password-beta' --enablerepo='1password-stable'
   when: rpm_key_1password.changed
 
 - name: RedHat - Import Keybase signing key

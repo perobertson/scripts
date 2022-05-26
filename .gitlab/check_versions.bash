@@ -10,6 +10,7 @@ tools
 1password --version || echo '1password unavailable'
 ansible --version
 bash --version
+bat --version || echo 'bat unavailable'
 cargo --version
 cargo-clippy --version
 code --version
@@ -45,6 +46,7 @@ tree --version
 virt-what --version || echo 'virt-what unavailable'
 wget --version
 xz --version
+zoxide --version || echo 'zoxide unavailable'
 zsh --version
 # These commands do not have a version option
 command -v gitk

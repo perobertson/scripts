@@ -1,7 +1,9 @@
 ---
 - name: CentOS - Check for Hashicorp support
   ansible.builtin.uri:
-    url: "https://rpm.releases.hashicorp.com/RHEL/{{ ansible_distribution_major_version|int }}/{{ ansible_architecture }}/stable/repodata/repomd.xml"
+    url: "https://rpm.releases.hashicorp.com/RHEL/\
+          {{ ansible_distribution_major_version|int }}/\
+          {{ ansible_architecture }}/stable/repodata/repomd.xml"
   register: uri_hashicorp_repo_metadata
   ignore_errors: true
 
@@ -66,7 +68,10 @@
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: CentOS - refresh dnf keys for Google  # noqa no-handler
   ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='kubernetes'"
-  when: import_kubernetes_repository_key1.changed or import_kubernetes_repository_key2.changed or import_glcoud_package_key.changed
+  when: >
+    import_kubernetes_repository_key1.changed
+    or import_kubernetes_repository_key2.changed
+    or import_glcoud_package_key.changed
 
 - name: CentOS - Import RPM-GPG-KEY-rpmfusion-free signing key
   ansible.builtin.rpm_key:
@@ -78,7 +83,8 @@
 - name: CentOS - Add RPMFusion-free repository
   ansible.builtin.dnf:
     name:
-      - https://download1.rpmfusion.org/free/el/rpmfusion-free-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
+      - "https://download1.rpmfusion.org/free/el/rpmfusion-free-release-\
+        {{ ansible_distribution_major_version|int }}.noarch.rpm"
     state: present
   when:
     - ansible_distribution_major_version in signing_keys.rpmfusion_free_el
@@ -98,7 +104,8 @@
 - name: CentOS - Add RPMFusion-nonfree repository
   ansible.builtin.dnf:
     name:
-      - https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-{{ ansible_distribution_major_version|int }}.noarch.rpm
+      - "https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-\
+        {{ ansible_distribution_major_version|int }}.noarch.rpm"
     state: present
   when:
     - ansible_distribution_major_version in signing_keys.rpmfusion_nonfree_el

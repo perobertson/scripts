@@ -88,12 +88,19 @@
   tags: [terminal]
   ansible.builtin.set_fact:
     # list.append returns None which is falsey so use or to print out the updated value
-    updated_gnome_terminal_profiles_list: "{{ gnome_terminal_profiles_list.append('e7aeecbb-8907-4e08-916e-749914c7b0b7') or gnome_terminal_profiles_list | unique | sort }}"
+    updated_gnome_terminal_profiles_list: "{{
+      gnome_terminal_profiles_list.append('e7aeecbb-8907-4e08-916e-749914c7b0b7')
+      or gnome_terminal_profiles_list
+      | unique | sort
+      }}"
 
 - name: All - Format gnome terminal list to dconf format
   tags: [terminal]
   ansible.builtin.set_fact:
-    updated_gnome_terminal_profiles_str: "{{ updated_gnome_terminal_profiles_list | string | regex_replace('\"', \"'\") }}"
+    updated_gnome_terminal_profiles_str: "{{
+      updated_gnome_terminal_profiles_list
+      | string | regex_replace('\"', \"'\")
+      }}"
 
 - name: All - Add profile to terminal list
   tags: [terminal]
