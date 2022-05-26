@@ -43,6 +43,7 @@
     - exa
     - fd-find
     - neofetch
+    - ripgrep
   failed_when: false
 
 - name: Debian - Best effort to install remote packages
