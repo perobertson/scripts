@@ -35,7 +35,7 @@
   ansible.builtin.yum_repository:
     file: docker-ce
     name: docker-ce-stable
-    description: >
+    description: >-
       Docker CE Stable
       - {{ ansible_distribution }}
       - {{ ansible_distribution_major_version|int - 1 }}
