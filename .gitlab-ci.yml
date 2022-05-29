@@ -30,7 +30,7 @@ workflow:
   stage: build
   image:
     # debug image has a shell
-    name: gcr.io/kaniko-project/executor:v1.7.0-debug
+    name: gcr.io/kaniko-project/executor:v1.8.1-debug
     entrypoint: [""]
   needs:
     - job: lint:shellcheck
@@ -114,7 +114,7 @@ build:linter:
   stage: build
   image:
     # debug image has a shell
-    name: gcr.io/kaniko-project/executor:v1.7.0-debug
+    name: gcr.io/kaniko-project/executor:v1.8.1-debug
     entrypoint: [""]
   needs: []
   script:

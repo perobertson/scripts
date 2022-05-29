@@ -3,7 +3,7 @@ MAKEFLAGS=--warn-undefined-variables
 
 plays:=docker gcloud kubernetes razer setup
 playbooks:=$(addsuffix .yml, $(plays))
-kaniko_img:=gcr.io/kaniko-project/executor:v1.7.0-debug
+kaniko_img:=gcr.io/kaniko-project/executor:v1.8.1-debug
 
 export ANSIBLE_CONFIG="./config/ansible.cfg"
 
@@ -25,7 +25,7 @@ define build_image
 		--entrypoint='' \
 		--name="scripts-build-$(1)-$(2)" \
 		--rm \
-		-v "$(shell pwd):/worksapce" \
+		-v "$(shell pwd):/worksapce:z" \
 		-w /worksapce \
 		$(kaniko_img) \
 		./.gitlab/build_image.sh $(1) $(2)
