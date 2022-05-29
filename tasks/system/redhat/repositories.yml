@@ -123,6 +123,8 @@
     key: https://zoom.us/linux/download/pubkey
     fingerprint: 396060CADD8A75220BFCB369B903BF1861A7C71D
   register: rpm_key_zoom
+  # Zoom is an optional package and CentOS:stream9 does not like this key
+  failed_when: false
 
 - name: RedHat - check if rpmfusion-free.repo file exists
   ansible.builtin.stat:
