@@ -3,6 +3,7 @@ FROM quay.io/centos/centos:${OS_VERSION}
 
 RUN dnf install -y \
         sudo \
+        systemd \
         util-linux \
     && echo '%wheel  ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci \
     && useradd \
