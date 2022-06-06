@@ -32,12 +32,14 @@
       # - https://packages.cloud.google.com/yum/doc/yum-key.gpg
       # Package key
       - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+  register: gcloud_repository
 
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: RedHat - refresh dnf keys for google-cloud-sdk  # noqa no-handler
   ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='google-cloud-sdk'"
   when: >
-    import_glcoud_repository_key1.changed
+    gcloud_repository.changed
+    or import_glcoud_repository_key1.changed
     or import_glcoud_repository_key2.changed
     or import_glcoud_package_key.changed
 

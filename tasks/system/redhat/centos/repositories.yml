@@ -64,12 +64,14 @@
       # - https://packages.cloud.google.com/yum/doc/yum-key.gpg
       # Package key
       - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+  register: kubernetes_repository
 
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: CentOS - refresh dnf keys for kubernetes  # noqa no-handler
   ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='kubernetes'"
   when: >
-    import_kubernetes_repository_key1.changed
+    kubernetes_repository.changed
+    or import_kubernetes_repository_key1.changed
     or import_kubernetes_repository_key2.changed
     or import_glcoud_package_key.changed
 
