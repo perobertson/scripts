@@ -66,7 +66,7 @@
       - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 
 # TODO: remove this workaround when dnf uses the rpm key database
-- name: CentOS - refresh dnf keys for Google  # noqa no-handler
+- name: CentOS - refresh dnf keys for kubernetes  # noqa no-handler
   ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='kubernetes'"
   when: >
     import_kubernetes_repository_key1.changed
