@@ -76,6 +76,8 @@
     - xz-devel
     - zlib-devel
     - zsh
+  retries: 5
+  delay: 5
 
 - name: RedHat - Best effort to install keybase
   ansible.builtin.dnf:
