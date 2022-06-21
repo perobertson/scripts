@@ -94,6 +94,7 @@
     - dkms
     - exa
     - fuse-sshfs
+    - go-task  # CLI tool for taskfiles
     - google-noto-sans-fonts
     - google-roboto-condensed-fonts
     - google-roboto-fonts
