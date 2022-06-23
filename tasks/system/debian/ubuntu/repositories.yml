@@ -2,4 +2,4 @@
 - name: Ubuntu <18 - Add flatpak apt repository
   ansible.builtin.apt_repository:
     repo: ppa:alexlarsson/flatpak
-  when: ansible_distribution_major_version|int < 18
+  when: ansible_distribution_major_version | int < 18

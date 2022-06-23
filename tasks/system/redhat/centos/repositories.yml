@@ -2,7 +2,7 @@
 - name: CentOS - Check for Hashicorp support
   ansible.builtin.uri:
     url: "https://rpm.releases.hashicorp.com/RHEL/\
-          {{ ansible_distribution_major_version|int }}/\
+          {{ ansible_distribution_major_version | int }}/\
           {{ ansible_architecture }}/stable/repodata/repomd.xml"
   register: uri_hashicorp_repo_metadata
   ignore_errors: true
@@ -84,7 +84,7 @@
   ansible.builtin.dnf:
     name:
       - "https://download1.rpmfusion.org/free/el/rpmfusion-free-release-\
-        {{ ansible_distribution_major_version|int }}.noarch.rpm"
+        {{ ansible_distribution_major_version | int }}.noarch.rpm"
     state: present
   when:
     - ansible_distribution_major_version in signing_keys.rpmfusion_free_el
@@ -105,7 +105,7 @@
   ansible.builtin.dnf:
     name:
       - "https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-\
-        {{ ansible_distribution_major_version|int }}.noarch.rpm"
+        {{ ansible_distribution_major_version | int }}.noarch.rpm"
     state: present
   when:
     - ansible_distribution_major_version in signing_keys.rpmfusion_nonfree_el

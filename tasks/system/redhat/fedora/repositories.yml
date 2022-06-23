@@ -33,7 +33,7 @@
   ansible.builtin.dnf:
     name:
       - "https://download1.rpmfusion.org/free/fedora/\
-        rpmfusion-free-release-{{ ansible_distribution_major_version|int }}.noarch.rpm"
+        rpmfusion-free-release-{{ ansible_distribution_major_version | int }}.noarch.rpm"
     state: present
   when: (not rpmfusion_free_repo.stat.exists) or
         (not rpmfusion_free_updates_repo.stat.exists)
@@ -52,7 +52,7 @@
   ansible.builtin.dnf:
     name:
       - "https://download1.rpmfusion.org/nonfree/fedora/\
-        rpmfusion-nonfree-release-{{ ansible_distribution_major_version|int }}.noarch.rpm"
+        rpmfusion-nonfree-release-{{ ansible_distribution_major_version | int }}.noarch.rpm"
     state: present
   when: (not rpmfusion_nonfree_repo.stat.exists) or
         (not rpmfusion_nonfree_updates_repo.stat.exists)
@@ -93,16 +93,16 @@
   ansible.builtin.dnf:
     name:
       - "https://dev.mysql.com/get/mysql57-community-release\
-        -fc{{ ansible_distribution_major_version|int }}-10.noarch.rpm"
+        -fc{{ ansible_distribution_major_version | int }}-10.noarch.rpm"
     state: present
-  when: ansible_distribution_major_version|int <= 25
+  when: ansible_distribution_major_version | int <= 25
 
 - name: Fedora 26,27 - Add MySQL community repository
   ansible.builtin.dnf:
     name:
       - "https://dev.mysql.com/get/mysql80-community-release\
-        -fc{{ ansible_distribution_major_version|int }}-1.noarch.rpm"
+        -fc{{ ansible_distribution_major_version | int }}-1.noarch.rpm"
     state: present
   when:
-    - ansible_distribution_major_version|int >= 26
-    - ansible_distribution_major_version|int <= 27
+    - ansible_distribution_major_version | int >= 26
+    - ansible_distribution_major_version | int <= 27

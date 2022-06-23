@@ -3,7 +3,7 @@
   ansible.builtin.rpm_key:
     state: present
     key: "https://download.opensuse.org/repositories/hardware:/razer/\
-          Fedora_{{ ansible_distribution_major_version|int }}/repodata/repomd.xml.key"
+          Fedora_{{ ansible_distribution_major_version | int }}/repodata/repomd.xml.key"
     fingerprint: "{{ signing_keys.razer_fedora[ansible_distribution_major_version].fingerprint }}"
   register: rpm_key_razer
   ignore_errors: true
@@ -12,16 +12,16 @@
   ansible.builtin.yum_repository:
     file: razer
     name: razer
-    description: Razer drivers (Fedora {{ ansible_distribution_major_version|int }})
+    description: Razer drivers (Fedora {{ ansible_distribution_major_version | int }})
     baseurl: "https://download.opensuse.org/repositories/hardware:/razer/\
-              Fedora_{{ ansible_distribution_major_version|int }}/"
+              Fedora_{{ ansible_distribution_major_version | int }}/"
     enabled: true
     gpgcheck: true
     gpgkey: "https://download.opensuse.org/repositories/hardware:/razer/\
-            Fedora_{{ ansible_distribution_major_version|int }}/repodata/repomd.xml.key"
+            Fedora_{{ ansible_distribution_major_version | int }}/repodata/repomd.xml.key"
     repo_gpgcheck: true
   when:
-    - ansible_distribution_major_version|int >= 32
+    - ansible_distribution_major_version | int >= 32
     - rpm_key_razer is succeeded
 
 - name: Fedora >=32 - Install Razer packages for device config
@@ -31,7 +31,7 @@
       - polychromatic  # razer device configuration
     state: present
   when:
-    - ansible_distribution_major_version|int >= 32
+    - ansible_distribution_major_version | int >= 32
     - rpm_key_razer is succeeded
 
 # This is for the razer drivers which run in userspace
@@ -41,5 +41,5 @@
     groups: plugdev
     append: true
   when:
-    - ansible_distribution_major_version|int >= 32
+    - ansible_distribution_major_version | int >= 32
     - rpm_key_razer is succeeded
