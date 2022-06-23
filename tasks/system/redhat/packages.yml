@@ -76,6 +76,8 @@
     - xz-devel
     - zlib-devel
     - zsh
+  retries: 5
+  delay: 5
 
 - name: RedHat - Best effort to install keybase
   ansible.builtin.dnf:
@@ -94,6 +96,7 @@
     - dkms
     - exa
     - fuse-sshfs
+    - go-task  # CLI tool for taskfiles
     - google-noto-sans-fonts
     - google-roboto-condensed-fonts
     - google-roboto-fonts
