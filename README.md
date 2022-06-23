@@ -6,19 +6,22 @@ This repo is a collection of scripts that are handy for setting up a new pc.
 
 ## Supported Operating Systems
 
-Python is a main component of the tools that are installed and used.
-Because of this, the scripts are designed to work with systems that have a python3 install that is still supported.
+Python3 is a main component of the tools that are installed and used. This
+limits which OS versions that are supported since Python2 is EOL. In general,
+this list will be the latest LTS release, and one fast release for the
+distribution. OSes that become EOL or use EOL languages can still be run as
+manual jobs in the CI pipeline and will be cleaned up after a period of time.
 
 - Archlinux
 - CentOS: stream8, stream9
 - Debian: 11
 - Fedora: 35, 36
 - Manjaro
-- Ubuntu: 20.04(LTS), 21.10, 22.04(LTS)
+- Ubuntu: 22.04(LTS), 22.10
 
-**Note:** OSes that are EOL, or are based on languages that are EOL are not tested in CI.
+Please see the [latest pipeline] for `main` for the complete list.
 
-Checkout the [latest pipeline](https://gitlab.com/perobertson/scripts/pipelines?scope=branches&ref=main) for `main` to see the complete list of supported operating systems.
+[latest pipeline]: https://gitlab.com/perobertson/scripts/pipelines?scope=branches&ref=main
 
 ## Usage
 
