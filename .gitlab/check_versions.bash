@@ -32,6 +32,7 @@ node --version
 npm --version
 op --version || echo 'op unavailable'
 pip --version
+podman --version
 python --version || echo 'python unavailable'
 python3 --version
 rust-gdb --version
