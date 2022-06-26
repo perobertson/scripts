@@ -29,6 +29,7 @@
     - python-psutil
     - ripgrep
     - shellcheck
+    - starship  # CLI prompt
     - tk  # windowing toolkit needed for gitk
     - tree
     - wget
