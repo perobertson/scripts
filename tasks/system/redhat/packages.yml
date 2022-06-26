@@ -26,6 +26,8 @@
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
+  retries: 5
+  delay: 5
   loop:
     - 1password
     - 1password-cli
@@ -76,8 +78,6 @@
     - xz-devel
     - zlib-devel
     - zsh
-  retries: 5
-  delay: 5
 
 - name: RedHat - Best effort to install keybase
   ansible.builtin.dnf:
