@@ -7,7 +7,6 @@
     - bash
     - bash-completion
     - bat  # rust version of cat
-    - code
     - curl
     - exa
     - fd
@@ -37,8 +36,16 @@
     - xz
     - zsh
 
+- name: Archlinux - Install non WSL packages
+  ansible.builtin.pacman:
+    pkg: "{{ item }}"
+    state: present
+  loop:
+    - code  # VSCode
+  when: not running_in_wsl
+
 - name: Archlinux - Best effort to install optional packages
-  ansible.builtin.apt:
+  ansible.builtin.pacman:
     pkg: "{{ item }}"
     state: present
   loop:

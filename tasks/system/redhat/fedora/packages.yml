@@ -5,7 +5,6 @@
     state: present
   loop:
     - bat  # rust version of cat
-    - code  # VSCode
     - community-mysql-devel  # from fedora modular
     - dbus-daemon
     - dbus-tools

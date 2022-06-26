@@ -79,6 +79,14 @@
     - zlib-devel
     - zsh
 
+- name: RedHat - Install non WSL packages
+  ansible.builtin.dnf:
+    pkg: "{{ item }}"
+    state: present
+  loop:
+    - code  # VSCode
+  when: not running_in_wsl
+
 - name: RedHat - Best effort to install keybase
   ansible.builtin.dnf:
     name:
