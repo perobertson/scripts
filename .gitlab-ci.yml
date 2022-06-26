@@ -403,7 +403,7 @@ test:ubuntu:20.04:
   # EOL: 2025-04
   extends:
     - .test
-    - .rules_debian
+    - .rules_eol  # non current TLS release
   image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:20.04-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:ubuntu:20.04
