@@ -7,4 +7,5 @@
     - code
     - dbus-daemon
     - kubectl
+    - podman
     - python39-psutil
