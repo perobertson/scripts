@@ -287,8 +287,6 @@ test:centos:stream9:
       artifacts: false
     - job: lint:ansible
       artifacts: false
-  # unreleased
-  allow_failure: true
 
 test:debian:10:
   # EOL: ~2022-08

@@ -136,18 +136,30 @@ define test_os
 	@# $1 is the OS
 	@# $2 is the OS_VERSION
 	@# TODO: rustup executes files in /tmp. Needed to drop noexec
-	$(CONTAINER) create \
-		--env ANSIBLE_FORCE_COLOR=1 \
-		--interactive \
-		--name="scripts-$(1)-$(2)" \
-		--rm \
-		--tmpfs="/run:rw,noexec,nosuid,nodev" \
-		--tmpfs="/tmp:rw,nosuid,nodev" \
-		--tty \
-		--volume="/sys/fs/cgroup:/sys/fs/cgroup:ro" \
-		--volume="$(shell pwd):/scripts" \
-		--workdir /scripts \
-		"localhost/scripts-$(1):$(2)" /lib/systemd/systemd || true
+	if uname -a | grep '\-WSL'; then \
+		$(CONTAINER) create \
+			--env ANSIBLE_FORCE_COLOR=1 \
+			--interactive \
+			--name="scripts-$(1)-$(2)" \
+			--rm \
+			--tty \
+			--volume="$(shell pwd):/scripts" \
+			--workdir /scripts \
+			"localhost/scripts-$(1):$(2)" || true; \
+	else \
+		$(CONTAINER) create \
+			--env ANSIBLE_FORCE_COLOR=1 \
+			--interactive \
+			--name="scripts-$(1)-$(2)" \
+			--rm \
+			--tmpfs="/run:rw,noexec,nosuid,nodev" \
+			--tmpfs="/tmp:rw,nosuid,nodev" \
+			--tty \
+			--volume="/sys/fs/cgroup:/sys/fs/cgroup:ro" \
+			--volume="$(shell pwd):/scripts" \
+			--workdir /scripts \
+			"localhost/scripts-$(1):$(2)" /lib/systemd/systemd || true; \
+	fi
 	$(CONTAINER) start "scripts-$(1)-$(2)" || true
 	@# The container must run as root for systemd
 	@# This means we need to explicitly start a different session for the user

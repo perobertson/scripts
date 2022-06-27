@@ -9,4 +9,21 @@
     - dbus-daemon
     - kubectl
     - podman
+
+- name: CentOS - Install stream8 packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
     - python39-psutil
+  when:
+    - ansible_distribution_major_version|int <= 8
+
+- name: CentOS - Install stream9 packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - python3-psutil
+  when:
+    - ansible_distribution_major_version|int >= 9
