@@ -3,6 +3,8 @@
   community.general.pacman:
     name: "{{ item }}"
     state: present
+  retries: 5
+  delay: 5
   loop:
     - bash
     - bash-completion

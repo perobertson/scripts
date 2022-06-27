@@ -3,6 +3,8 @@
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
+  retries: 5
+  delay: 5
   loop:
     - dbus-daemon
     - kubectl

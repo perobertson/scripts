@@ -3,7 +3,11 @@
   ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
+  retries: 5
+  delay: 5
   loop:
+    - 1password
+    - 1password-cli
     - bash
     - bash-completion
     - bat  # rust version of cat
