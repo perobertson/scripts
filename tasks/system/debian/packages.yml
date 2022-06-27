@@ -7,7 +7,6 @@
     - bash
     - bash-completion
     - bat  # rust version of cat
-    - code
     - crudini
     - dconf-cli
     - flatpak
@@ -33,6 +32,14 @@
     - virt-what
     - wget
     - zsh
+
+- name: Debian - Install non WSL packages
+  ansible.builtin.apt:
+    pkg: "{{ item }}"
+    state: present
+  loop:
+    - code  # VSCode
+  when: not running_in_wsl
 
 - name: Debian - Best effort to install optional packages
   ansible.builtin.apt:
