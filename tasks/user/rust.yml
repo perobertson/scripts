@@ -10,6 +10,8 @@
     dest: ${HOME}/Applications/rustup.sh
     mode: '0775'
   when: not file_rustup.stat.exists
+  retries: 5
+  delay: 5
 
 - name: All - Setup rustup
   ansible.builtin.command: ${HOME}/Applications/rustup.sh -y -q --no-modify-path
