@@ -1,19 +1,23 @@
 ---
 - name: Debian >=10 - Install packages
   ansible.builtin.apt:
-    pkg:
-      - 1password
-      - 1password-cli
-      - npm
+    pkg: "{{ item }}"
     state: present
+  retries: 5
+  delay: 5
   when: ansible_distribution_major_version | int >= 10
+  loop:
+    - npm
 
 - name: Debian >=11 - Install packages
   ansible.builtin.apt:
-    pkg:
-      - kubernetes-client  # kubectl
-      - podman
-      - python3-cairo  # required to fix default python
-      - zoxide  # A faster way to navigate your filesystem
+    pkg: "{{ item }}"
     state: present
+  retries: 5
+  delay: 5
   when: ansible_distribution_major_version | int >= 11
+  loop:
+    - kubernetes-client  # kubectl
+    - podman
+    - python3-cairo  # required to fix default python
+    - zoxide  # A faster way to navigate your filesystem
