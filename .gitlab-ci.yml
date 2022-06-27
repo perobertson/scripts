@@ -220,17 +220,17 @@ build:ubuntu:20.04:
   script:
     - ./.gitlab/build_image.sh ubuntu 20.04
 
-build:ubuntu:21.10:
-  extends:
-    - .build_img
-  script:
-    - ./.gitlab/build_image.sh ubuntu 21.10
-
 build:ubuntu:22.04:
   extends:
     - .build_img
   script:
     - ./.gitlab/build_image.sh ubuntu 22.04
+
+build:ubuntu:22.10:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh ubuntu 22.10
 
 lint:shellcheck:
   extends:
@@ -403,7 +403,7 @@ test:ubuntu:20.04:
   # EOL: 2025-04
   extends:
     - .test
-    - .rules_debian
+    - .rules_eol  # non current TLS release
   image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:20.04-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:ubuntu:20.04
@@ -411,23 +411,8 @@ test:ubuntu:20.04:
     - job: lint:ansible
       artifacts: false
 
-test:ubuntu:21.10:
-  # EOL: 2022-07
-  # replace this job with the rolling short term release
-  # https://wiki.ubuntu.com/Releases
-  extends:
-    - .test
-    - .rules_debian
-  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:21.10-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:ubuntu:21.10
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
-
 test:ubuntu:22.04:
-  # EOL: 2022-07
-  # replace this job with the rolling short term release
+  # EOL: 2027-04
   # https://wiki.ubuntu.com/Releases
   extends:
     - .test
@@ -435,6 +420,20 @@ test:ubuntu:22.04:
   image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:22.04-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:ubuntu:22.04
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
+
+test:ubuntu:22.10:
+  # EOL: 2022-07
+  # replace this job with the rolling short term release
+  # https://wiki.ubuntu.com/Releases
+  extends:
+    - .test
+    - .rules_debian
+  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:22.10-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:ubuntu:22.10
       artifacts: false
     - job: lint:ansible
       artifacts: false

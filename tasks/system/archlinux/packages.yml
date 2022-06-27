@@ -26,6 +26,7 @@
     - make
     - nodejs
     - npm
+    - podman
     - python-psutil
     - ripgrep
     - shellcheck

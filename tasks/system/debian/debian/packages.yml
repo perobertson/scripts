@@ -12,6 +12,7 @@
   ansible.builtin.apt:
     pkg:
       - kubernetes-client  # kubectl
+      - podman
       - python3-cairo  # required to fix default python
       - zoxide  # A faster way to navigate your filesystem
     state: present
