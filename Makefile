@@ -76,13 +76,13 @@ dockerfiles/dist/ubuntu/ubuntu-20.04.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/ubuntu/ubuntu-20.04.tar: dockerfiles/ubuntu.dockerfile
 	$(call build_image,ubuntu,20.04)
 
-dockerfiles/dist/ubuntu/ubuntu-21.10.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/ubuntu/ubuntu-21.10.tar: dockerfiles/ubuntu.dockerfile
-	$(call build_image,ubuntu,21.10)
-
 dockerfiles/dist/ubuntu/ubuntu-22.04.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/ubuntu/ubuntu-22.04.tar: dockerfiles/ubuntu.dockerfile
 	$(call build_image,ubuntu,22.04)
+
+dockerfiles/dist/ubuntu/ubuntu-22.10.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/ubuntu/ubuntu-22.10.tar: dockerfiles/ubuntu.dockerfile
+	$(call build_image,ubuntu,22.10)
 
 .PHONY: ansible-lint
 ansible-lint:
@@ -201,10 +201,10 @@ test-ubuntu-18.04: dockerfiles/dist/ubuntu/ubuntu-18.04.tar
 test-ubuntu-20.04: dockerfiles/dist/ubuntu/ubuntu-20.04.tar
 	$(call test_os,ubuntu,20.04)
 
-.PHONY: test-ubuntu-21.10
-test-ubuntu-21.10: dockerfiles/dist/ubuntu/ubuntu-21.10.tar
-	$(call test_os,ubuntu,21.10)
-
 .PHONY: test-ubuntu-22.04
 test-ubuntu-22.04: dockerfiles/dist/ubuntu/ubuntu-22.04.tar
 	$(call test_os,ubuntu,22.04)
+
+.PHONY: test-ubuntu-22.10
+test-ubuntu-22.10: dockerfiles/dist/ubuntu/ubuntu-22.10.tar
+	$(call test_os,ubuntu,22.10)

@@ -217,6 +217,7 @@ build:ubuntu:18.04:
 build:ubuntu:20.04:
   extends:
     - .build_img
+    - .rules_eol
   script:
     - ./.gitlab/build_image.sh ubuntu 20.04
 
@@ -413,7 +414,6 @@ test:ubuntu:20.04:
 
 test:ubuntu:22.04:
   # EOL: 2027-04
-  # https://wiki.ubuntu.com/Releases
   extends:
     - .test
     - .rules_debian
@@ -427,7 +427,6 @@ test:ubuntu:22.04:
 test:ubuntu:22.10:
   # EOL: 2022-07
   # replace this job with the rolling short term release
-  # https://wiki.ubuntu.com/Releases
   extends:
     - .test
     - .rules_debian
