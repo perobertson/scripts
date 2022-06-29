@@ -34,6 +34,7 @@
     - starship  # CLI prompt
     - tk  # windowing toolkit needed for gitk
     - tree
+    - unzip
     - wget
     - xz
     - zsh
