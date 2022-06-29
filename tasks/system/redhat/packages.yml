@@ -72,6 +72,7 @@
     - sublime-text
     - sysstat  # iostat
     - tree
+    - unzip
     - virt-what
     - wget
     - xz

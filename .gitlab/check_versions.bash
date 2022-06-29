@@ -44,6 +44,7 @@ shellcheck --version || echo 'shellcheck unavailable'
 ssh -V
 tar --version
 tree --version
+unzip --version
 virt-what --version || echo 'virt-what unavailable'
 wget --version
 xz --version
