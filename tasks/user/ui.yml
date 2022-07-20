@@ -198,3 +198,63 @@
     - key: /org/cinnamon/desktop/wm/preferences/theme
       value: "'Mint-Y'"
   when: stat_sys_mint_y_theme.stat.exists or stat_usr_mint_y_theme.stat.exists
+
+### Keybindings
+
+- name: All - Discover cinnamon keybindings list
+  tags: [cinnamon]
+  community.general.dconf:
+    key: "/org/cinnamon/desktop/keybindings/custom-list"
+    state: read
+  register: dconf_cinnamon_keybindings_list
+
+- name: All - Parse cinnamon keybindings list
+  tags: [cinnamon]
+  ansible.builtin.set_fact:
+    cinnamon_keybindings_list: "{{ dconf_cinnamon_keybindings_list.value or '[]' | replace(\"'\", '\"') | from_json }}"
+
+- name: All - Append 1password to the keybinding list
+  tags: [cinnamon]
+  ansible.builtin.set_fact:
+    # list.append returns None which is falsey so use or to print out the updated value
+    updated_cinnamon_keybindings_list: "{{
+      cinnamon_keybindings_list.append('1password')
+      or cinnamon_keybindings_list
+      | unique | sort
+      }}"
+
+- name: All - Format cinnamon keybindings list to dconf format
+  tags: [cinnamon]
+  ansible.builtin.set_fact:
+    updated_cinnamon_keybindings_list_str: "{{
+      updated_cinnamon_keybindings_list
+      | string | regex_replace('\"', \"'\")
+      }}"
+
+- name: All - cinnamon keybinding 1password - binding
+  tags: [cinnamon]
+  community.general.dconf:
+    key: "/org/cinnamon/desktop/keybindings/custom-keybindings/1password/binding"
+    value: "['<Shift><Super>exclam']"
+    state: present
+
+- name: All - cinnamon keybinding 1password - command
+  tags: [cinnamon]
+  community.general.dconf:
+    key: "/org/cinnamon/desktop/keybindings/custom-keybindings/1password/command"
+    value: "'1password --toggle'"
+    state: present
+
+- name: All - cinnamon keybinding 1password - name
+  tags: [cinnamon]
+  community.general.dconf:
+    key: "/org/cinnamon/desktop/keybindings/custom-keybindings/1password/name"
+    value: "'1password'"
+    state: present
+
+- name: All - Update cinnamon keybindings list
+  tags: [cinnamon]
+  community.general.dconf:
+    key: "/org/cinnamon/desktop/keybindings/custom-list"
+    value: "{{ updated_cinnamon_keybindings_list_str | string }}"
+    state: present
