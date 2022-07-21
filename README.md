@@ -72,3 +72,15 @@ To add a new OS version you need to add a build definition in `.gitlab-ci.yml`.
 If this version requires specific install steps, you need to add a directory under the OS type and a `bootstrap.sh` file.
 The `bootstrap.sh` script should only install `ansible`.
 The rest of the setup script should be done as ansible tasks so that all systems benefit.
+
+## Keybindings
+
+This is a non exhaustive list of the keybindings that have been configured.
+
+### Desktop environments
+
+**Cinnamon:**
+
+- `<Shift><Super>exclam` will toggle 1Password
+- `<Primary><Shift>space` will toggle 1Password quick access
+    - primary is ctrl

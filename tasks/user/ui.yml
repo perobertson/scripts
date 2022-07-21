@@ -201,6 +201,27 @@
 
 ### Keybindings
 
+- name: All - cinnamon keybindings
+  tags: [cinnamon]
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop:
+    - key: "/org/cinnamon/desktop/keybindings/custom-keybindings/custom1000/binding"
+      value: "['<Shift><Super>exclam']"
+    - key: "/org/cinnamon/desktop/keybindings/custom-keybindings/custom1000/command"
+      value: "'1password --toggle'"
+    - key: "/org/cinnamon/desktop/keybindings/custom-keybindings/custom1000/name"
+      value: "'1Password'"
+
+    - key: "/org/cinnamon/desktop/keybindings/custom-keybindings/custom1001/binding"
+      value: "['<Primary><Shift>space']"
+    - key: "/org/cinnamon/desktop/keybindings/custom-keybindings/custom1001/command"
+      value: "'1password --quick-access'"
+    - key: "/org/cinnamon/desktop/keybindings/custom-keybindings/custom1001/name"
+      value: "'1Password - quick access'"
+
 - name: All - Discover cinnamon keybindings list
   tags: [cinnamon]
   community.general.dconf:
@@ -217,8 +238,10 @@
   tags: [cinnamon]
   ansible.builtin.set_fact:
     # list.append returns None which is falsey so use or to print out the updated value
+    # the directory names must be in the format custom## so that the UI still works
     updated_cinnamon_keybindings_list: "{{
-      cinnamon_keybindings_list.append('1password')
+      cinnamon_keybindings_list.append('custom1000')
+      or cinnamon_keybindings_list.append('custom1001')
       or cinnamon_keybindings_list
       | unique | sort
       }}"
@@ -230,27 +253,6 @@
       updated_cinnamon_keybindings_list
       | string | regex_replace('\"', \"'\")
       }}"
-
-- name: All - cinnamon keybinding 1password - binding
-  tags: [cinnamon]
-  community.general.dconf:
-    key: "/org/cinnamon/desktop/keybindings/custom-keybindings/1password/binding"
-    value: "['<Shift><Super>exclam']"
-    state: present
-
-- name: All - cinnamon keybinding 1password - command
-  tags: [cinnamon]
-  community.general.dconf:
-    key: "/org/cinnamon/desktop/keybindings/custom-keybindings/1password/command"
-    value: "'1password --toggle'"
-    state: present
-
-- name: All - cinnamon keybinding 1password - name
-  tags: [cinnamon]
-  community.general.dconf:
-    key: "/org/cinnamon/desktop/keybindings/custom-keybindings/1password/name"
-    value: "'1password'"
-    state: present
 
 - name: All - Update cinnamon keybindings list
   tags: [cinnamon]
