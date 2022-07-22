@@ -1,4 +1,17 @@
 ---
+- name: CentOS - Import RPM-GPG-KEY-EPEL
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ signing_keys.epel[ansible_distribution_major_version].key }}"
+    fingerprint: "{{ signing_keys.epel[ansible_distribution_major_version].fingerprint }}"
+  register: rpm_key_epel
+
+- name: CentOS - Install EPEL repository
+  dnf:
+    name:
+      - https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version|int }}.noarch.rpm
+    state: present
+
 - name: CentOS - rpm keys for Google
   ansible.builtin.import_tasks: ../rpm_keys_google.yml
 
@@ -48,7 +61,6 @@
     state: present
     key: "{{ signing_keys.rpmfusion_free_el[ansible_distribution_major_version].key }}"
     fingerprint: "{{ signing_keys.rpmfusion_free_el[ansible_distribution_major_version].fingerprint }}"
-  when: ansible_distribution_major_version in signing_keys.rpmfusion_free_el
 
 - name: CentOS - Add RPMFusion-free repository
   ansible.builtin.dnf:
@@ -57,7 +69,6 @@
         {{ ansible_distribution_major_version | int }}.noarch.rpm"
     state: present
   when:
-    - ansible_distribution_major_version in signing_keys.rpmfusion_free_el
     - (not rpmfusion_free_repo.stat.exists) or (not rpmfusion_free_updates_repo.stat.exists)
   register: rpmfusion_free_install
   until: rpmfusion_free_install is succeeded
@@ -69,7 +80,6 @@
     state: present
     key: "{{ signing_keys.rpmfusion_nonfree_el[ansible_distribution_major_version].key }}"
     fingerprint: "{{ signing_keys.rpmfusion_nonfree_el[ansible_distribution_major_version].fingerprint }}"
-  when: ansible_distribution_major_version in signing_keys.rpmfusion_nonfree_el
 
 - name: CentOS - Add RPMFusion-nonfree repository
   ansible.builtin.dnf:
@@ -78,7 +88,6 @@
         {{ ansible_distribution_major_version | int }}.noarch.rpm"
     state: present
   when:
-    - ansible_distribution_major_version in signing_keys.rpmfusion_nonfree_el
     - (not rpmfusion_nonfree_repo.stat.exists) or (not rpmfusion_nonfree_updates_repo.stat.exists)
   register: rpmfusion_nonfree_install
   until: rpmfusion_nonfree_install is succeeded
