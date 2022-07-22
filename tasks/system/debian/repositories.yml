@@ -20,29 +20,6 @@
     filename: 1password
     state: present
 
-- name: Debian - Check for Hashicorp support
-  ansible.builtin.uri:
-    url: https://apt.releases.hashicorp.com/dists/{{ ansible_distribution_release }}/Release
-    method: HEAD
-  register: uri_apt_hashicorp
-  # fail with error if status is unexpected
-  failed_when: uri_apt_hashicorp.status is undefined or uri_apt_hashicorp.status <= 0
-
-- name: Debian - Add Hashicorp signing key
-  ansible.builtin.apt_key:
-    url: https://apt.releases.hashicorp.com/gpg
-    state: present
-    id: E8A032E094D8EB4EA189D270DA418C88A3219F7B
-    keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
-
-- name: Debian - Add Hashicorp Repo
-  ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg]
-      https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
-    filename: hashicorp
-    state: present
-  when: uri_apt_hashicorp.status == 200
-
 - name: Debian - Add VSCode signing key
   ansible.builtin.apt_key:
     url: https://packages.microsoft.com/keys/microsoft.asc
