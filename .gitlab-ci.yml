@@ -148,6 +148,7 @@ build:archlinux:latest:
 build:centos:stream8:
   extends:
     - .build_img
+    - .rules_eol
   script:
     - ./.gitlab/build_image.sh centos stream8
 
@@ -269,7 +270,7 @@ test:centos:stream8:
   # EOL: 2024-05-31
   extends:
     - .test
-    - .rules_redhat
+    - .rules_eol
   image: ${CI_REGISTRY}/perobertson/scripts/centos:stream8-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:centos:stream8

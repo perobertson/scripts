@@ -13,6 +13,7 @@
     - bat  # rust version of cat
     - crudini
     - dconf-cli
+    - ffmpeg  # Improves video playback
     - flatpak
     - fonts-symbola
     - gdb

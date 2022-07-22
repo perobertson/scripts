@@ -12,6 +12,7 @@
     - curl
     - exa
     - fd
+    - ffmpeg  # Improves video playback
     - flameshot
     - flatpak
     - gcc

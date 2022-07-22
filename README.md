@@ -13,7 +13,7 @@ distribution. OSes that become EOL or use EOL languages can still be run as
 manual jobs in the CI pipeline and will be cleaned up after a period of time.
 
 - Archlinux
-- CentOS: stream8, stream9
+- CentOS: stream9
 - Debian: 11
 - Fedora: 35, 36
 - Manjaro
