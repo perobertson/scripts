@@ -16,20 +16,12 @@
 - name: All - Populate ~/bin
   tags: [systemd]
   diff: true
-  ansible.builtin.copy:
-    src: "files/home/user/bin/{{ item.name }}"
-    dest: "$HOME/bin/{{ item.name }}"
-    mode: "{{ item.mode }}"
-  loop:
-    - name: README.md
-      mode: '0600'
-
-- name: All - Link user scripts
   ansible.builtin.file:
-    src: "files/home/user/bin/{{ item }}"
+    src: "{{ playbook_dir }}/files/home/user/bin/{{ item }}"
     dest: "$HOME/bin/{{ item }}"
     state: link
   loop:
+    - README.md
     - aws_iam_to_ses.py
     - create-bootable-usb.bash
     - install-aws.bash
