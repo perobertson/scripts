@@ -1,11 +1,10 @@
 .DEFAULT_GOAL:=ansible-lint
 MAKEFLAGS=--warn-undefined-variables
 
-plays:=docker gcloud kubernetes razer setup
-playbooks:=$(addsuffix .yml, $(plays))
+playbooks:=$(wildcard playbooks/*.yml)
 kaniko_img:=gcr.io/kaniko-project/executor:v1.8.1-debug
 
-export ANSIBLE_CONFIG="./config/ansible.cfg"
+export ANSIBLE_CONFIG="./playbooks/config/ansible.cfg"
 
 ifneq ("$(shell command -v podman)", "")
 CONTAINER?=podman
@@ -87,7 +86,7 @@ dockerfiles/dist/ubuntu/ubuntu-22.10.tar: dockerfiles/ubuntu.dockerfile
 .PHONY: ansible-lint
 ansible-lint:
 	ansible-playbook --syntax-check $(playbooks)
-	ansible-lint -p .
+	ansible-lint -p $(playbooks)
 
 .PHONY: git_hooks
 git_hooks: .git/hooks/pre-commit
@@ -98,7 +97,7 @@ install:
 
 .PHONY: install_docker
 install_docker:
-	ansible-playbook --ask-become-pass -v docker.yml
+	ansible-playbook --ask-become-pass -v playbooks/docker.yml
 
 .PHONY: install_flatpaks
 install_flatpaks:
@@ -106,15 +105,15 @@ install_flatpaks:
 
 .PHONY: install_gcloud
 install_gcloud:
-	ansible-playbook --ask-become-pass -v gcloud.yml
+	ansible-playbook --ask-become-pass -v playbooks/gcloud.yml
 
 .PHONY: install_kubernetes
 install_kubernetes:
-	ansible-playbook --ask-become-pass -v kubernetes.yml
+	ansible-playbook --ask-become-pass -v playbooks/kubernetes.yml
 
 .PHONY: install_razer
 install_razer:
-	ansible-playbook --ask-become-pass -v razer.yml
+	ansible-playbook --ask-become-pass -v playbooks/razer.yml
 
 .PHONY: install_rust_crates
 install_rust_crates:
@@ -122,15 +121,15 @@ install_rust_crates:
 
 .PHONY: install_setup
 install_setup:
-	ansible-playbook --ask-become-pass -v setup.yml
+	ansible-playbook --ask-become-pass -v playbooks/setup.yml
 
 .PHONY: install_setup_system
 install_setup_system:
-	ansible-playbook --ask-become-pass -v setup.yml --tags=system
+	ansible-playbook --ask-become-pass -v playbooks/setup.yml --tags=system
 
 .PHONY: install_setup_user
 install_setup_user:
-	ansible-playbook -v setup.yml --tags=user
+	ansible-playbook -v playbooks/setup.yml --tags=user
 
 define test_os
 	@# $1 is the OS

@@ -1,9 +1,3 @@
 ---
 skip_list:
   - line-length  # Lines should be no longer than 160 chars'
-
-exclude_paths:
-  - .ansible-lint
-  - .gitlab-ci.yml
-  - .pre-commit-config.yaml
-  - .yamllint

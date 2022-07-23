@@ -144,17 +144,17 @@ switch_dir
 bootstrap
 
 # Run the setup
-ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v setup.yml
+ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/setup.yml
 
 if [[ -n "${CI:-}" ]]; then
     # Additional playbooks that were originally part of setup
     # Docker has been replaced by podman
     # Management of docker setup will be removed sometime in the future
-    # ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v docker.yml
-    ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v flatpaks.yml
-    ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v gcloud.yml
-    ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v kubernetes.yml
-    ANSIBLE_CONFIG="./config/ansible.cfg" ansible-playbook -v razer.yml
+    # ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/docker.yml
+    ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/flatpaks.yml
+    ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/gcloud.yml
+    ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/kubernetes.yml
+    ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/razer.yml
 fi
 
 echo ''

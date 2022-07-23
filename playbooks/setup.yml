@@ -159,9 +159,6 @@
     - name: User ides
       ansible.builtin.import_tasks: tasks/user/ides.yml
       tags: [user, ides]
-    - name: User bins
-      ansible.builtin.import_tasks: tasks/user/bins.yml
-      tags: [user, bins]
     - name: User systemd
       ansible.builtin.import_tasks: tasks/user/systemd.yml
       tags: [user, systemd]
