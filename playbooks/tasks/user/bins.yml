@@ -1,6 +1,10 @@
 ---
-- name: All - Link script to convert IAM credentials to SES
+- name: All - Link user scripts
   ansible.builtin.file:
-    src: "{{ playbook_dir }}/bin/aws_iam_to_ses.py"
-    dest: ${HOME}/bin/aws_iam_to_ses.py
+    src: "../{{ playbook_dir }}/bin/{{ item }}"
+    dest: "${HOME}/bin/{{ item }}"
     state: link
+  loop:
+    - aws_iam_to_ses.py
+    - create-bootable-usb.bash
+    - install-aws.bash
