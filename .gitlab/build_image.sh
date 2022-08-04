@@ -16,6 +16,8 @@ if [ -n "${CI:-}" ]; then
     }
 }
 JSON
+    # Cannot use --reproducable in CI because there is a usage quota.
+    # When enabled the registry does not get cleaned up.
     /kaniko/executor \
         --build-arg="OS_VERSION=${OS_VERSION}" \
         --cache \
@@ -23,8 +25,7 @@ JSON
         --cleanup \
         --context="${CI_PROJECT_DIR}/dockerfiles" \
         --destination="${CI_REGISTRY_IMAGE}/${OS}:${OS_VERSION}-${CI_COMMIT_REF_SLUG}" \
-        --dockerfile="${CI_PROJECT_DIR}/dockerfiles/${OS}.dockerfile" \
-        --reproducible
+        --dockerfile="${CI_PROJECT_DIR}/dockerfiles/${OS}.dockerfile"
 else
     mkdir -p "dockerfiles/dist/${OS}"
     mkdir -p /var/cache/kaniko
