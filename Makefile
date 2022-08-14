@@ -101,7 +101,7 @@ install_docker:
 
 .PHONY: install_flatpaks
 install_flatpaks:
-	ansible-playbook -v flatpaks.yml
+	ansible-playbook -v playbooks/flatpaks.yml
 
 .PHONY: install_gcloud
 install_gcloud:
