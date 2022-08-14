@@ -25,6 +25,10 @@
     dest: "$HOME/.config/systemd/user/{{ item.name }}"
     mode: "{{ item.mode }}"
   loop:
+    - name: pkenv-update.service
+      mode: '0600'
+    - name: pyenv-update.service
+      mode: '0600'
     - name: tfenv-update.service
       mode: '0600'
 
@@ -39,6 +43,8 @@
     - stat_run_systemd.stat.isdir
   loop:
     - logout-podman-stop.service
+    - pkenv-update.service
+    - pyenv-update.service
     - tfenv-update.service
   # TODO: figure out how to get `systemd --user` running
   # Failed to connect to bus: No such file or directory
