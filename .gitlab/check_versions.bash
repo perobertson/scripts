@@ -26,6 +26,7 @@ flatpak --version
 gcc --version
 git --version
 gitui --version || echo 'gitui unavailable'
+go-task --version || echo 'go-task unavailable'
 gzip --version
 jq --version
 keybase --version || echo 'keybase unavailable'
