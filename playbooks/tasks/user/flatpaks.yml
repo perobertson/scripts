@@ -21,7 +21,7 @@
     src: files/home/user/.config/systemd/user/{{ item }}
     dest: $HOME/.config/systemd/user/{{ item }}
     mode: '0600'
-  notify: systemctl --user daemon-reload
+  notify: Reload systemd --user
   loop:
     - flatpak-update.service
     - flatpak-update.timer
