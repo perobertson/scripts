@@ -75,6 +75,7 @@
     - tree
     - unzip
     - virt-what
+    - webp-pixbuf-loader  # Allows for viewing of webp images
     - wget
     - xz
     - xz-devel
