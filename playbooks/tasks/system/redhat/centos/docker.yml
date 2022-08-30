@@ -1,9 +1,0 @@
----
-- name: CentOS - Install docker
-  ansible.builtin.dnf:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - containerd.io
-    - docker-ce
-    - docker-ce-cli

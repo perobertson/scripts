@@ -1,7 +1,0 @@
----
-- name: Archlinux - Install docker
-  community.general.pacman:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - docker
