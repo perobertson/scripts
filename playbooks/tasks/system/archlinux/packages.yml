@@ -29,6 +29,8 @@
     - nodejs
     - npm
     - podman
+    - podman-compose  # emulate docker-compose
+    - podman-docker  # emulate docker
     - python-psutil
     - ripgrep
     - shellcheck

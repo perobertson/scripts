@@ -8,7 +8,6 @@
   loop:
     - dbus-daemon
     - kubectl
-    - podman
 
 - name: CentOS - Install stream8 packages
   ansible.builtin.dnf:
