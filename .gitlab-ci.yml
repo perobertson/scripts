@@ -21,7 +21,7 @@ variables:
   CLICOLOR: "1"
 
 workflow:
-  rules:
+  rules: &rules_default
     - if: $CI_COMMIT_TAG
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - if: $CI_MERGE_REQUEST_IID
@@ -45,70 +45,27 @@ workflow:
     - su public --command="./.gitlab/check_versions.bash"
     - su public --command="./.gitlab/verify_no_changes.sh"
 
-.rules_lint:
-  rules:
-    ### Always
-    - if: $CI_COMMIT_TAG
-    - if: $CI_COMMIT_BRANCH
-    - if: $CI_MERGE_REQUEST_IID
-
-.rules_common_files: &rules_common_files
-  - .gitlab-ci.yml
-  - "**/*.bash"
-  - "**/*.sh"
-  - setup.sh
-  - setup.yml
-  - ansible.cfg
-  - bin/*
-  - files/**/*
-  - tasks/system/*.yml
-  - tasks/user/*.yml
-
-# Someday sequences will be mergable
-# https://github.com/yaml/yaml/issues/48
 .rules_archlinux:
-  rules:
-    - if: $CI_COMMIT_TAG
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-    - if: $CI_MERGE_REQUEST_IID
-    ### All
-    - changes: *rules_common_files
-    ### specific
-    - changes:
-        - bootstrap/(arch|manjaro).bash
-        - tasks/system/archlinux/**/*
-        - tasks/user/archlinux/**/*
+  rules: *rules_default
 
 .rules_debian:
-  rules:
-    - if: $CI_COMMIT_TAG
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-    - if: $CI_MERGE_REQUEST_IID
-    ### All
-    - changes: *rules_common_files
-    ### specific
-    - changes:
-        - bootstrap/(debian|ubuntu).bash
-        - tasks/system/debian/**/*
-        - tasks/user/debian/**/*
-
-.rules_redhat:
-  rules:
-    - if: $CI_COMMIT_TAG
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-    - if: $CI_MERGE_REQUEST_IID
-    ### All
-    - changes: *rules_common_files
-    ### specific
-    - changes:
-        - bootstrap/(centos|fedora).bash
-        - tasks/system/redhat/**/*
-        - tasks/user/redhat/**/*
+  rules: *rules_default
 
 .rules_eol:
   rules:
     - when: manual
       allow_failure: true
+
+.rules_lint:
+  rules: *rules_default
+
+.rules_redhat:
+  rules: *rules_default
+
+# This is used for distributions which are used as flags for upcoming errors
+.rules_only_warn:
+  rules:
+    - allow_failure: true
 
 build:linter:
   stage: build
@@ -428,11 +385,11 @@ test:ubuntu:22.04:
       artifacts: false
 
 test:ubuntu:22.10:
-  # EOL: 2022-07
+  # EOL: 2023-07
   # replace this job with the rolling short term release
   extends:
     - .test
-    - .rules_debian
+    - .rules_only_warn
   image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:22.10-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:ubuntu:22.10
