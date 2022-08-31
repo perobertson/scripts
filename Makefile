@@ -2,7 +2,7 @@
 MAKEFLAGS=--warn-undefined-variables
 
 playbooks:=$(wildcard playbooks/*.yml)
-kaniko_img:=gcr.io/kaniko-project/executor:v1.8.1-debug
+kaniko_img:=gcr.io/kaniko-project/executor:v1.9.0-debug
 
 export ANSIBLE_CONFIG="./playbooks/config/ansible.cfg"
 
