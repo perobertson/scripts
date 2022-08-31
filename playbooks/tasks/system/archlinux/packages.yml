@@ -36,6 +36,7 @@
     - tk  # windowing toolkit needed for gitk
     - tree
     - unzip
+    - webp-pixbuf-loader  # Allows for viewing of webp images
     - wget
     - xz
     - zsh
