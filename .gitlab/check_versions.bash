@@ -17,6 +17,7 @@ code --version
 curl --version
 docker --version || echo 'docker unavailable'
 docker compose version || echo 'docker compose unavailable'
+docker-compose version || echo 'docker-compose unavailable'
 exa --version || echo 'exa unavailable'
 fd --version || echo 'fd unavailable'
 flameshot --version || echo 'flameshot unavailable'
@@ -33,6 +34,7 @@ npm --version
 op --version || echo 'op unavailable'
 pip --version
 podman --version
+podman-compose --version || echo 'podman-compose unavailable'
 python --version || echo 'python unavailable'
 python3 --version
 rust-gdb --version

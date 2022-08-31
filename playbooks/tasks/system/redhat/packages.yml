@@ -62,6 +62,8 @@
     - patch
     - pcp-system-tools  # dstat
     - perl
+    - podman
+    - podman-docker  # emulate docker
     - python3-dbus
     - readline-devel
     - redhat-rpm-config

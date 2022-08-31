@@ -1,4 +1,13 @@
 ---
+- name: Ubuntu - Install packages
+  ansible.builtin.apt:
+    pkg: "{{ item }}"
+    state: present
+  retries: 5
+  delay: 5
+  loop:
+    - podman-docker  # emulate docker
+
 - name: Ubuntu >=18 - Install packages
   ansible.builtin.apt:
     pkg: "{{ item }}"
