@@ -9,6 +9,7 @@ tools
 # Now check the versions
 1password --version || echo '1password unavailable'
 ansible --version
+aws-vault --version
 bash --version
 bat --version || echo 'bat unavailable'
 cargo --version
