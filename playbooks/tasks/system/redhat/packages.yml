@@ -80,7 +80,6 @@
     - wget
     - xz
     - xz-devel
-    - yubikey-manager
     - zlib-devel
     - zsh
 
