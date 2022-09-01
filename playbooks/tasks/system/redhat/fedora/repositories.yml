@@ -2,8 +2,8 @@
 - name: Fedora - Import RPM-GPG-KEY-rpmfusion-free signing key
   ansible.builtin.rpm_key:
     state: present
-    key: "{{ signing_keys.rpmfusion_free_fedora[ansible_distribution_major_version].key }}"
-    fingerprint: "{{ signing_keys.rpmfusion_free_fedora[ansible_distribution_major_version].fingerprint }}"
+    key: "{{ signing_keys.rpmfusion_free_fedora.key }}"
+    fingerprint: "{{ signing_keys.rpmfusion_free_fedora.fingerprint }}"
 
 - name: Fedora - Add RPMFusion-free repository
   ansible.builtin.dnf:
@@ -21,8 +21,8 @@
 - name: Fedora - Import RPM-GPG-KEY-rpmfusion-nonfree signing key
   ansible.builtin.rpm_key:
     state: present
-    key: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].key }}"
-    fingerprint: "{{ signing_keys.rpmfusion_nonfree_fedora[ansible_distribution_major_version].fingerprint }}"
+    key: "{{ signing_keys.rpmfusion_nonfree_fedora.key }}"
+    fingerprint: "{{ signing_keys.rpmfusion_nonfree_fedora.fingerprint }}"
 
 - name: Fedora - Add RPMFusion-nonfree repository
   ansible.builtin.dnf:
@@ -64,21 +64,3 @@
     - stat_run_systemd.stat.isdir
 
 ### Version specific repositories
-
-- name: Fedora <=25 - Add MySQL community repository
-  ansible.builtin.dnf:
-    name:
-      - "https://dev.mysql.com/get/mysql57-community-release\
-        -fc{{ ansible_distribution_major_version | int }}-10.noarch.rpm"
-    state: present
-  when: ansible_distribution_major_version | int <= 25
-
-- name: Fedora 26,27 - Add MySQL community repository
-  ansible.builtin.dnf:
-    name:
-      - "https://dev.mysql.com/get/mysql80-community-release\
-        -fc{{ ansible_distribution_major_version | int }}-1.noarch.rpm"
-    state: present
-  when:
-    - ansible_distribution_major_version | int >= 26
-    - ansible_distribution_major_version | int <= 27
