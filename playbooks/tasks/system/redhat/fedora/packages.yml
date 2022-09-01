@@ -37,4 +37,5 @@
     - starship  # CLI prompt
     - tealdeer  # tldr writen in rust
     - texlive-montserrat
+    - yubikey-manager
     - zoxide  # A faster way to navigate your filesystem

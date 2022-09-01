@@ -42,6 +42,7 @@
     - webp-pixbuf-loader  # Allows for viewing of webp images
     - wget
     - xz
+    - yubikey-manager
     - zsh
 
 - name: Archlinux - Install non WSL packages
