@@ -37,6 +37,7 @@
     - tree
     - unzip
     - wget
+    - yubikey-manager
     - zsh
 
 - name: Debian - Install non WSL packages

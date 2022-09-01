@@ -80,6 +80,7 @@
     - wget
     - xz
     - xz-devel
+    - yubikey-manager
     - zlib-devel
     - zsh
 
@@ -127,8 +128,6 @@
     - ripgrep
     - sd  # like sed but with python regex
     - ytop  # CLI system monitoring
-    # TODO: enable this again when yubikey-manager fixes the constraints around cryptography
-    # - yubikey-manager
     - zoom
   failed_when: false
 
