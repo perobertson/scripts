@@ -47,7 +47,6 @@ ssh -V
 tar --version
 tree --version
 unzip -v
-virt-what --version || echo 'virt-what unavailable'
 wget --version
 xz --version
 zoxide --version || echo 'zoxide unavailable'

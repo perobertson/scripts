@@ -36,7 +36,6 @@
     - sysstat  # iostat
     - tree
     - unzip
-    - virt-what
     - wget
     - zsh
 
