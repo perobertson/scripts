@@ -51,7 +51,7 @@ tree --version
 unzip -v
 wget --version
 xz --version
-ykman --version
+ykman --version || echo 'ykman unavailable'
 zoxide --version || echo 'zoxide unavailable'
 zsh --version
 # These commands do not have a version option
