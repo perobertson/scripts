@@ -25,6 +25,7 @@
     - lynis  # Security scanning tool
     - nodejs
     - pkg-config
+    - podman
     - python3-dbus
     - python3-psutil
     - seahorse  # key management

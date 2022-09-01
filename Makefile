@@ -95,10 +95,6 @@ git_hooks: .git/hooks/pre-commit
 install:
 	./setup.sh
 
-.PHONY: install_docker
-install_docker:
-	ansible-playbook --ask-become-pass -v playbooks/docker.yml
-
 .PHONY: install_flatpaks
 install_flatpaks:
 	ansible-playbook -v playbooks/flatpaks.yml

@@ -45,7 +45,6 @@ Using `wget`:
 There are additional packages that can also be installed.
 This is done though supplementary playbooks, each with their own make target.
 
-- `make instal_docker`
 - `make instal_gcloud`
 - `make instal_kubernetes`
 - `make instal_razer`
