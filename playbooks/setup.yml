@@ -27,69 +27,11 @@
           key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-el-9
           fingerprint: BB24128A4BB3C3352C0B75A2E4174E6BAAB212EA
       rpmfusion_free_fedora:  # https://rpmfusion.org/keys
-        "28":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-28
-          fingerprint: 34249D2CB3758B5548E2874FC08D326909EAB3F2
-        "29":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-29
-          fingerprint: BD127385C312090FF2F35FA11191A7C442F19ED0
-        "30":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-30
-          fingerprint: 80C3B2C6E727F3E092B473E03DF2CE43C0AEDA6E
-        "31":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-31
-          fingerprint: 59A7FE07F664C1B27687C5D26DEEF051C481937A
-        "32":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-32
-          fingerprint: 7BDA98EF593050A34B1697ABA0EE9D83100BCD92
-        # Starting with 33 they keys are symlinked to a yearly signing key
-        "33":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
-          fingerprint: E9A491A3DE247814E7E067EAE06F8ECDD651FF2E
-        "34":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
-          fingerprint: E9A491A3DE247814E7E067EAE06F8ECDD651FF2E
-        "35":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
-          fingerprint: E9A491A3DE247814E7E067EAE06F8ECDD651FF2E
-        "36":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
-          fingerprint: E9A491A3DE247814E7E067EAE06F8ECDD651FF2E
-        "37":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
-          fingerprint: E9A491A3DE247814E7E067EAE06F8ECDD651FF2E
+        key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
+        fingerprint: E9A491A3DE247814E7E067EAE06F8ECDD651FF2E
       rpmfusion_nonfree_fedora:  # https://rpmfusion.org/keys
-        "28":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-28
-          fingerprint: 3DE8C682E38EE9BC0FDFEA47FCAE2EA87F858107
-        "29":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-29
-          fingerprint: 18A50439A072A393E47178D49C009EABD6841AF8
-        "30":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-30
-          fingerprint: 80171C8D2CC8AAB84C8448E9BDD6ECC41D14A795
-        "31":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-31
-          fingerprint: 4CAB951A7493D92CADEC04219CE63A0354A86092
-        "32":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-32
-          fingerprint: FE5A9393CB6E271B5A90CC1B0D9A76996DC1BE18
-        # Starting with 33 they keys are symlinked to a yearly signing key
-        "33":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
-          fingerprint: 79BDB88F9BBF73910FD4095B6A2AF96194843C65
-        "34":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
-          fingerprint: 79BDB88F9BBF73910FD4095B6A2AF96194843C65
-        "35":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
-          fingerprint: 79BDB88F9BBF73910FD4095B6A2AF96194843C65
-        "36":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
-          fingerprint: 79BDB88F9BBF73910FD4095B6A2AF96194843C65
-        "37":
-          key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
-          fingerprint: 79BDB88F9BBF73910FD4095B6A2AF96194843C65
+        key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
+        fingerprint: 79BDB88F9BBF73910FD4095B6A2AF96194843C65
   tasks:
     - name: debug info
       ansible.builtin.debug:
