@@ -3,6 +3,7 @@
   vars:
     ansible_connection: local
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
+    aws_vault_version: 6.6.0
     dive_version: 0.10.0
     signing_keys:
       epel:  # https://getfedora.org/security/

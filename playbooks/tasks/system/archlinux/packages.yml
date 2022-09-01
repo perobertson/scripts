@@ -6,6 +6,7 @@
   retries: 5
   delay: 5
   loop:
+    - aws-vault
     - bash
     - bash-completion
     - bat  # rust version of cat
