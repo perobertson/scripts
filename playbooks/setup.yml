@@ -34,32 +34,33 @@
         key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
         fingerprint: 79BDB88F9BBF73910FD4095B6A2AF96194843C65
   tasks:
-    - name: debug info
+    - name: Debug info
       ansible.builtin.debug:
         msg: "{{ ansible_facts }}"
       tags: [never, debug]
-    - name: debug info - ansible_architecture
+    - name: Debug info - ansible_architecture
       ansible.builtin.debug:
         var: ansible_architecture
       tags: [never, debug]
-    - name: debug info - ansible_distribution
+    - name: Debug info - ansible_distribution
       ansible.builtin.debug:
         var: ansible_distribution
       tags: [never, debug]
-    - name: debug info - ansible_distribution_major_version
+    - name: Debug info - ansible_distribution_major_version
       ansible.builtin.debug:
         var: ansible_distribution_major_version
       tags: [never, debug]
 
     # https://www.freedesktop.org/software/systemd/man/sd_booted.html
     - name: All - Check if systemd is running
-      tags: [system, user, systemd]
+      tags: [always]
       ansible.builtin.stat:
         path: /run/systemd/system/
       register: stat_run_systemd
 
     # Not all packages can be installed in WSL
     - name: All - Check if running in WSL
+      tags: [always]
       ansible.builtin.set_fact:
         running_in_wsl: "{{ ansible_kernel.endswith('-WSL') or ansible_kernel.endswith('-WSL2') }}"
 
