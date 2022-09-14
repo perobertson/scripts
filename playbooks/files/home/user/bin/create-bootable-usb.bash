@@ -24,17 +24,14 @@ if basename "${ISO}" | grep --ignore-case '^win.*\.iso$' >/dev/null; then
     exit 1
 fi
 
-ISO_SIZE="$(/usr/bin/du -b "${ISO}" | cut -f1)"
-
-available=$(lsblk -o NAME,TYPE --noheadings -l | grep '[[:space:]]disk' | cut -f1 -d' ')
-
-for drive in ${available[*]}; do
+for drive in $(lsblk -o NAME,TYPE --noheadings -l | grep '[[:space:]]disk' | cut -f1 -d' ')
+do
     if [[ "/dev/$drive" == "${DISK}" ]]; then
         if [[ $(id -u) -ne 0 ]]; then
             echo "re-run as root to run this command:"
-            echo "dd if=\"${ISO}\" | pv -s \"${ISO_SIZE}\" | dd iflag=fullblock oflag=direct of=\"${DISK}\" bs=4M"
+            echo "pv \"${ISO}\" | dd iflag=fullblock oflag=direct of=\"${DISK}\" bs=512b"
         else
-            dd if="${ISO}" | pv -s "${ISO_SIZE}" | dd iflag=fullblock oflag=direct of="${DISK}" bs=4M
+            pv "${ISO}" | dd iflag=fullblock oflag=direct of="${DISK}" bs=512b
         fi
         exit 0
     fi
