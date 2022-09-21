@@ -15,7 +15,7 @@ manual jobs in the CI pipeline and will be cleaned up after a period of time.
 - Archlinux
 - CentOS: stream9
 - Debian: 11
-- Fedora: 35, 36
+- Fedora: 36
 - Manjaro
 - Ubuntu: 22.04(LTS), 22.10
 

@@ -13,10 +13,10 @@
     state: present
   when: (not rpmfusion_free_repo.stat.exists) or
         (not rpmfusion_free_updates_repo.stat.exists)
+  retries: 3
+  delay: 5
   register: rpmfusion_free_install
   until: rpmfusion_free_install is succeeded
-  retries: 5
-  delay: 5
 
 - name: Fedora - Import RPM-GPG-KEY-rpmfusion-nonfree signing key
   ansible.builtin.rpm_key:
@@ -32,10 +32,10 @@
     state: present
   when: (not rpmfusion_nonfree_repo.stat.exists) or
         (not rpmfusion_nonfree_updates_repo.stat.exists)
+  retries: 3
+  delay: 5
   register: rpmfusion_nonfree_install
   until: rpmfusion_nonfree_install is succeeded
-  retries: 5
-  delay: 5
 
 - name: Fedora - Install zoom updater dependencies
   ansible.builtin.dnf:

@@ -3,8 +3,10 @@
   ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
-  retries: 5
+  retries: 3
   delay: 5
+  register: debian_install_packages
+  until: debian_install_packages is succeeded
   loop:
     - 1password
     - 1password-cli
