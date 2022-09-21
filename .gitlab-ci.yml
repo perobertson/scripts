@@ -321,6 +321,8 @@ test:fedora:37:
       artifacts: false
     - job: lint:ansible
       artifacts: false
+  # unreleased
+  allow_failure: true
 
 test:fedora:38:
   # EOL: TBD
