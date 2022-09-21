@@ -70,6 +70,7 @@
     - python3-dbus
     - readline-devel
     - redhat-rpm-config
+    - rls  # Rust Language Server for IDE integration
     - rust
     - rust-gdb  # GDB pretty printers for Rust
     - rust-lldb  # LLDB pretty printers for Rust

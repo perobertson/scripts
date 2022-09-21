@@ -97,8 +97,6 @@
     - name: User rust
       ansible.builtin.import_tasks: tasks/user/rust.yml
       tags: [user, rust]
-      when:
-        - ansible_os_family != 'RedHat'  # RedHat keeps rust updated
     - name: User UI
       ansible.builtin.import_tasks: tasks/user/ui.yml
       tags: [user, ui]
