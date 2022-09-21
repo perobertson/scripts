@@ -5,14 +5,7 @@
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
     signing_keys:
       razer_fedora:
-        "32":
-          fingerprint: E96C496E4E77C159C2FCA053062F9FD4D6D11CE4
-        "33":
-          fingerprint: E96C496E4E77C159C2FCA053062F9FD4D6D11CE4
-        "34":
-          fingerprint: E96C496E4E77C159C2FCA053062F9FD4D6D11CE4
-        "35":
-          fingerprint: E96C496E4E77C159C2FCA053062F9FD4D6D11CE4
+        fingerprint: E96C496E4E77C159C2FCA053062F9FD4D6D11CE4
   tasks:
     - name: Razer
       tags: [system]
