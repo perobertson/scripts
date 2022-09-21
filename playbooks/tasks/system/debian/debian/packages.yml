@@ -3,8 +3,10 @@
   ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
-  retries: 5
+  retries: 3
   delay: 5
+  register: debian10_install_packages
+  until: debian10_install_packages is succeeded
   when: ansible_distribution_major_version | int >= 10
   loop:
     - npm
@@ -13,8 +15,10 @@
   ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
-  retries: 5
+  retries: 3
   delay: 5
+  register: debian11_install_packages
+  until: debian11_install_packages is succeeded
   when: ansible_distribution_major_version | int >= 11
   loop:
     - kubernetes-client  # kubectl

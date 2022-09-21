@@ -3,8 +3,10 @@
   community.general.pacman:
     name: "{{ item }}"
     state: present
-  retries: 5
+  retries: 3
   delay: 5
+  register: archlinux_install_packages
+  until: archlinux_install_packages is succeeded
   loop:
     - aws-vault
     - bash

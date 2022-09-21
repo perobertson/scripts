@@ -3,8 +3,10 @@
   ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
-  retries: 5
+  retries: 3
   delay: 5
+  register: ubuntu_install_packages
+  until: ubuntu_install_packages is succeeded
   loop:
     - podman-docker  # emulate docker
     - yubikey-manager
@@ -13,8 +15,10 @@
   ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
-  retries: 5
+  retries: 3
   delay: 5
+  register: ubuntu18_install_packages
+  until: ubuntu18_install_packages is succeeded
   when: ansible_distribution_major_version | int >= 18
   loop:
     - flameshot
@@ -25,8 +29,10 @@
   ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
-  retries: 5
+  retries: 3
   delay: 5
+  register: ubuntu20_install_packages
+  until: ubuntu20_install_packages is succeeded
   when: ansible_distribution_major_version | int >= 20
   loop:
     - python3-cairo
@@ -37,8 +43,10 @@
   ansible.builtin.apt:
     pkg: "{{ item }}"
     state: present
-  retries: 5
+  retries: 3
   delay: 5
+  register: ubuntu22_install_packages
+  until: ubuntu22_install_packages is succeeded
   when: ansible_distribution_major_version | int >= 22
   loop:
     - podman

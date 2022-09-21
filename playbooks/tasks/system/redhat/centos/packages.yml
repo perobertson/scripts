@@ -3,8 +3,10 @@
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
-  retries: 5
+  retries: 3
   delay: 5
+  register: centos_install_packages
+  until: centos_install_packages is succeeded
   loop:
     - dbus-daemon
     - kubectl
@@ -15,6 +17,10 @@
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
+  retries: 3
+  delay: 5
+  register: centos8_install_packages
+  until: centos8_install_packages is succeeded
   loop:
     - python39-psutil
   when:
@@ -24,6 +30,10 @@
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
+  retries: 3
+  delay: 5
+  register: centos9_install_packages
+  until: centos9_install_packages is succeeded
   loop:
     - python3-psutil
   when:

@@ -36,10 +36,10 @@
     - com.slack.Slack
     - com.spotify.Client
     - org.videolan.VLC
+  retries: 3
+  delay: 5
   register: flatpak_install
   until: flatpak_install is succeeded
-  retries: 5
-  delay: 5
   when:
     - stat_run_systemd.stat.exists
     - stat_run_systemd.stat.isdir
