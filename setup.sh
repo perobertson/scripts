@@ -45,7 +45,7 @@ install_git(){
     # Check if git needs installed
     if [[ ! -x "$(command -v git)" ]]; then
         if [[ -x "$(command -v dnf)" ]]; then
-            sudo dnf install -y git
+            sudo dnf install -y git-core
         elif [[ -x "$(command -v apt-get)" ]]; then
             sudo apt-get update
             # There was a bug in apt that allowed insecure transport
