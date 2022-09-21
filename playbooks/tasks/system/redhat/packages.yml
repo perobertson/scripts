@@ -42,7 +42,6 @@
     - curl
     - dconf
     - dnf-automatic
-    - ffmpeg  # Improves video playback
     - flatpak
     - gcc
     - gcc-c++
@@ -106,7 +105,8 @@
     - crudini
     - dconf-editor
     - dkms
-    - exa
+    - exa  # like ls but more functionality
+    - ffmpeg  # Improves video playback
     - fuse-sshfs
     - go-task  # CLI tool for taskfiles
     - google-noto-sans-fonts
