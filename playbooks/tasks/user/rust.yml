@@ -1,26 +1,36 @@
 ---
+- name: All - Check if rustc is installed on the system
+  ansible.builtin.stat:
+    path: /usr/bin/rustc
+  register: file_rustc
+
 - name: All - Check if rustup exists
   ansible.builtin.stat:
     path: ${HOME}/.cargo/bin/rustup
   register: file_rustup
 
+# This is a shell script which is used for bootstrapping
+# Future updates use the binary
 - name: All - download rustup.sh
   ansible.builtin.get_url:
     url: https://sh.rustup.rs
-    dest: ${HOME}/Applications/rustup.sh
+    dest: ${HOME}/.local/bin/rustup.sh
     mode: '0775'
-  when: not file_rustup.stat.exists
   retries: 3
   delay: 5
-  register: download_rustup
-  until: download_rustup is succeeded
+  register: download_rustup_sh
+  until: download_rustup_sh is succeeded
 
 - name: All - Setup rustup
-  ansible.builtin.command: ${HOME}/Applications/rustup.sh -y -q --no-modify-path
-  when: not file_rustup.stat.exists
+  ansible.builtin.command: rustup.sh -y -q --no-modify-path
+  when:
+    # prefer the system compiler so all packages match
+    - not file_rustc.stat.exists
+    # If the binary exists, use that instead
+    - not file_rustup.stat.exists
 
 - name: All - rustup update
-  ansible.builtin.command: ${HOME}/.cargo/bin/rustup update
+  ansible.builtin.command: rustup update
   when: file_rustup.stat.exists
   register: rustup_result
   changed_when: "'linux-gnu unchanged - rustc' not in rustup_result.stdout"

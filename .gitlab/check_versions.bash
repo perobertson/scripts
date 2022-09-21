@@ -43,7 +43,6 @@ rust-gdb --version
 rustc --version
 rustdoc --version
 rustfmt --version
-rustup --version
 shellcheck --version || echo 'shellcheck unavailable'
 ssh -V
 tar --version
@@ -54,5 +53,6 @@ xz --version
 ykman --version || echo 'ykman unavailable'
 zoxide --version || echo 'zoxide unavailable'
 zsh --version
-# These commands do not have a version option
+# These commands do not have a version option or cause side effects
 command -v gitk
+command -v rustup.sh

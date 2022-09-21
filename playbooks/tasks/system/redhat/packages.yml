@@ -40,6 +40,8 @@
     - bison
     - bzip2
     - bzip2-devel
+    - cargo  # Rust's package manager and build tool
+    - clippy  # Lints to catch common mistakes and improve your Rust code
     - cmake
     - curl
     - dconf
@@ -68,6 +70,11 @@
     - python3-dbus
     - readline-devel
     - redhat-rpm-config
+    - rls  # Rust Language Server for IDE integration
+    - rust
+    - rust-gdb  # GDB pretty printers for Rust
+    - rust-lldb  # LLDB pretty printers for Rust
+    - rustfmt  # Tool to find and fix Rust formatting issues
     - samba-client
     - seahorse  # key management
     - setools-console
