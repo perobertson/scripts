@@ -134,6 +134,7 @@ build:fedora:34:
 build:fedora:35:
   extends:
     - .build_img
+    - .rules_eol
   script:
     - ./.gitlab/build_image.sh fedora 35
 
@@ -148,6 +149,12 @@ build:fedora:37:
     - .build_img
   script:
     - ./.gitlab/build_image.sh fedora 37
+
+build:fedora:38:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh fedora 38
 
 build:fedora:rawhide:
   extends:
@@ -283,7 +290,7 @@ test:fedora:35:
   # EOL: 2022-11-15
   extends:
     - .test
-    - .rules_redhat
+    - .rules_eol
   image: ${CI_REGISTRY}/perobertson/scripts/fedora:35-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:fedora:35
@@ -311,6 +318,18 @@ test:fedora:37:
   image: ${CI_REGISTRY}/perobertson/scripts/fedora:37-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:fedora:37
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
+
+test:fedora:38:
+  # EOL: TBD
+  extends:
+    - .test
+    - .rules_redhat
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:38-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:fedora:38
       artifacts: false
     - job: lint:ansible
       artifacts: false

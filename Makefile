@@ -51,10 +51,6 @@ dockerfiles/dist/debian/debian-11.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/debian/debian-11.tar: dockerfiles/debian.dockerfile
 	$(call build_image,debian,11)
 
-dockerfiles/dist/fedora/fedora-35.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/fedora/fedora-35.tar: dockerfiles/fedora.dockerfile
-	$(call build_image,fedora,35)
-
 dockerfiles/dist/fedora/fedora-36.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/fedora/fedora-36.tar: dockerfiles/fedora.dockerfile
 	$(call build_image,fedora,36)
@@ -62,6 +58,10 @@ dockerfiles/dist/fedora/fedora-36.tar: dockerfiles/fedora.dockerfile
 dockerfiles/dist/fedora/fedora-37.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/fedora/fedora-37.tar: dockerfiles/fedora.dockerfile
 	$(call build_image,fedora,37)
+
+dockerfiles/dist/fedora/fedora-38.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/fedora/fedora-38.tar: dockerfiles/fedora.dockerfile
+	$(call build_image,fedora,38)
 
 dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: dockerfiles/manjarolinux.dockerfile
@@ -184,10 +184,6 @@ test-debian-10: dockerfiles/dist/debian/debian-10.tar
 test-debian-11: dockerfiles/dist/debian/debian-11.tar
 	$(call test_os,debian,11)
 
-.PHONY: test-fedora-35
-test-fedora-35: dockerfiles/dist/fedora/fedora-35.tar
-	$(call test_os,fedora,35)
-
 .PHONY: test-fedora-36
 test-fedora-36: dockerfiles/dist/fedora/fedora-36.tar
 	$(call test_os,fedora,36)
@@ -195,6 +191,10 @@ test-fedora-36: dockerfiles/dist/fedora/fedora-36.tar
 .PHONY: test-fedora-37
 test-fedora-37: dockerfiles/dist/fedora/fedora-37.tar
 	$(call test_os,fedora,37)
+
+.PHONY: test-fedora-38
+test-fedora-38: dockerfiles/dist/fedora/fedora-38.tar
+	$(call test_os,fedora,38)
 
 .PHONY: test-manjarolinux-latest
 test-manjarolinux-latest: dockerfiles/dist/manjarolinux/manjarolinux-latest.tar
