@@ -43,7 +43,8 @@ rust-gdb --version
 rustc --version
 rustdoc --version
 rustfmt --version
-rustup --version
+rustup.sh --version
+rustup --version || echo 'rustup unavailable'
 shellcheck --version || echo 'shellcheck unavailable'
 ssh -V
 tar --version
