@@ -2,8 +2,8 @@
 - name: RedHat - install script for checking metered connections
   tags: [systemd]
   ansible.builtin.copy:
-    src: files/usr/local/bin/non_metered_connection.bash
-    dest: /usr/local/bin/non_metered_connection.bash
+    src: files/usr/local/bin/non-metered-connection.bash
+    dest: /usr/local/bin/non-metered-connection.bash
     mode: '0755'
 
 - name: RedHat - create dnf-automatic drop in directories

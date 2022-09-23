@@ -54,6 +54,8 @@
       mode: '0700'
     - name: rbenv-update
       mode: '0700'
+    - name: rust-tools-update
+      mode: '0700'
     - name: tfenv-update
       mode: '0700'
 

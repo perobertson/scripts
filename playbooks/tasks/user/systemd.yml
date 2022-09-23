@@ -13,24 +13,26 @@
   ansible.builtin.copy:
     src: "files/home/user/.config/systemd/user/{{ item.name }}"
     dest: "$HOME/.config/systemd/user/{{ item.name }}"
-    mode: "{{ item.mode }}"
+    mode: "0600"
   loop:
     - name: logout-podman-stop.service
-      mode: '0600'
 
+# These need to be templated because the path to the files are in the users home
+# When the services are enabled they run at boot which is before user shell
+# customizations happen.
+# Searched directories include /usr/local/bin/, /usr/bin/, /bin/
+# and their sbin/ counterparts
 - name: All - Create user templated services
   diff: true
   ansible.builtin.template:
     src: "files/home/user/.config/systemd/user/{{ item.name }}.j2"
     dest: "$HOME/.config/systemd/user/{{ item.name }}"
-    mode: "{{ item.mode }}"
+    mode: "0600"
   loop:
     - name: pkenv-update.service
-      mode: '0600'
     - name: pyenv-update.service
-      mode: '0600'
+    - name: rust-tools-update.service
     - name: tfenv-update.service
-      mode: '0600'
 
 - name: All - Enable user services
   ansible.builtin.systemd:
@@ -45,6 +47,7 @@
     - logout-podman-stop.service
     - pkenv-update.service
     - pyenv-update.service
+    - rust-tools-update.service
     - tfenv-update.service
   # TODO: figure out how to get `systemd --user` running
   # Failed to connect to bus: No such file or directory
