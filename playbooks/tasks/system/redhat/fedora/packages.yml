@@ -36,7 +36,6 @@
     - python3-psutil
     - ShellCheck
     - sqlitebrowser
-    - starship  # CLI prompt
     - tealdeer  # tldr writen in rust
     - texlive-montserrat
     - yubikey-manager
