@@ -1,0 +1,45 @@
+---
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  debug:
+    desc: Run the debug tasks in the playbook
+    cmds:
+      - ansible-playbook -v setup.yml --tags=debug {{.CLI_ARGS}}
+
+  flatpaks:
+    desc: Install flatpaks
+    cmds:
+      - ansible-playbook -v flatpaks.yml {{.CLI_ARGS}}
+
+  gcloud:
+    desc: Install Google cloud tools
+    cmds:
+      - ansible-playbook --ask-become-pass -v gcloud.yml {{.CLI_ARGS}}
+
+  kubernetes:
+    desc: Install Kubernetes for development
+    cmds:
+      - ansible-playbook --ask-become-pass -v kubernetes.yml {{.CLI_ARGS}}
+
+  razer:
+    desc: Install Razer tools
+    cmds:
+      - ansible-playbook --ask-become-pass -v razer.yml {{.CLI_ARGS}}
+
+  setup:
+    desc: Run the setup script
+    cmds:
+      - ansible-playbook --ask-become-pass -v setup.yml {{.CLI_ARGS}}
+
+  setup_system:
+    desc: Run the system portion of the setup script
+    cmds:
+      - ansible-playbook --ask-become-pass -v setup.yml --tags=system {{.CLI_ARGS}}
+
+  setup_user:
+    desc: Run the user portion of the setup script
+    cmds:
+      - ansible-playbook -v setup.yml --tags=user {{.CLI_ARGS}}

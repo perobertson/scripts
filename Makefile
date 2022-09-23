@@ -4,6 +4,7 @@ MAKEFLAGS=--warn-undefined-variables
 playbooks:=$(wildcard playbooks/*.yml)
 kaniko_img:=gcr.io/kaniko-project/executor:v1.9.0-debug
 
+# TODO: is this still needed?
 export ANSIBLE_CONFIG="./playbooks/config/ansible.cfg"
 
 ifneq ("$(shell command -v podman)", "")
@@ -90,42 +91,6 @@ ansible-lint:
 
 .PHONY: git_hooks
 git_hooks: .git/hooks/pre-commit
-
-.PHONY: install
-install:
-	./setup.sh
-
-.PHONY: install_flatpaks
-install_flatpaks:
-	ansible-playbook -v playbooks/flatpaks.yml
-
-.PHONY: install_gcloud
-install_gcloud:
-	ansible-playbook --ask-become-pass -v playbooks/gcloud.yml
-
-.PHONY: install_kubernetes
-install_kubernetes:
-	ansible-playbook --ask-become-pass -v playbooks/kubernetes.yml
-
-.PHONY: install_razer
-install_razer:
-	ansible-playbook --ask-become-pass -v playbooks/razer.yml
-
-.PHONY: install_rust_crates
-install_rust_crates:
-	./extras.sh
-
-.PHONY: install_setup
-install_setup:
-	ansible-playbook --ask-become-pass -v playbooks/setup.yml
-
-.PHONY: install_setup_system
-install_setup_system:
-	ansible-playbook --ask-become-pass -v playbooks/setup.yml --tags=system
-
-.PHONY: install_setup_user
-install_setup_user:
-	ansible-playbook -v playbooks/setup.yml --tags=user
 
 define test_os
 	@# $1 is the OS
