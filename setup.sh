@@ -144,13 +144,14 @@ switch_dir
 bootstrap
 
 # Run the setup
-ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/setup.yml
+cd playbooks
+ansible-playbook -v setup.yml
 
 if [[ -n "${CI:-}" ]]; then
-    ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/flatpaks.yml
-    ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/gcloud.yml
-    ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/kubernetes.yml
-    ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/razer.yml
+    ansible-playbook -v flatpaks.yml
+    ansible-playbook -v gcloud.yml
+    ansible-playbook -v kubernetes.yml
+    ansible-playbook -v razer.yml
 fi
 
 echo ''

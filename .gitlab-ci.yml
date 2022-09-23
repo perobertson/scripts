@@ -15,7 +15,6 @@ stages:
   - deploy
 
 variables:
-  ANSIBLE_CONFIG: "./playbooks/config/ansible.cfg"
   ANSIBLE_FORCE_COLOR: "1"
   # https://bixense.com/clicolors/ standard for enabling colours in CI
   CLICOLOR: "1"

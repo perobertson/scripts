@@ -4,9 +4,6 @@ MAKEFLAGS=--warn-undefined-variables
 playbooks:=$(wildcard playbooks/*.yml)
 kaniko_img:=gcr.io/kaniko-project/executor:v1.9.0-debug
 
-# TODO: is this still needed?
-export ANSIBLE_CONFIG="./playbooks/config/ansible.cfg"
-
 ifneq ("$(shell command -v podman)", "")
 CONTAINER?=podman
 else ifneq ("$(shell command -v docker)", "")

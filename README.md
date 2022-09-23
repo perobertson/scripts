@@ -43,15 +43,9 @@ Using `wget`:
 ## Installing Extras
 
 There are additional packages that can also be installed.
-This is done though supplementary playbooks, each with their own make target.
-
-- `make instal_gcloud`
-- `make instal_kubernetes`
-- `make instal_razer`
-
-There are also additional rust crates that can be installed.
-
-- `make install_rust_crates`
+This is done though supplementary playbooks, or script.
+They can be invoked through tasks.
+Run `go-task -a` to see the full list.
 
 ## Updating
 
