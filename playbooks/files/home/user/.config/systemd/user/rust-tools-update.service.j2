@@ -1,0 +1,14 @@
+[Unit]
+Description=Rust tools updater
+After=network-online.target
+
+[Service]
+Type=simple
+Environment=CARGO_INSTALL_ROOT={{ lookup('env', 'HOME') }}/.local
+ExecCondition=non-metered-connection.bash
+ExecStart={{ lookup('env', 'HOME') }}/.local/bin/rust-tools-update
+
+[Install]
+# https://www.freedesktop.org/software/systemd/man/systemd.special.html#default.target1
+# The main target for user sessions
+WantedBy=default.target
