@@ -11,7 +11,8 @@ RUN dnf install -y \
         --create-home \
         --groups=wheel \
         --shell=/bin/bash \
-        public
+        public \
+    && dnf clean all
 
 # Systemd must run as root when the system boots
 # This means USER cannot be set
