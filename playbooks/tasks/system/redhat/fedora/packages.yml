@@ -8,7 +8,6 @@
   register: fedora_install_packages
   until: fedora_install_packages is succeeded
   loop:
-    - bat  # rust version of cat
     - community-mysql-devel  # from fedora modular
     - dbus-daemon
     - dbus-tools
@@ -36,7 +35,5 @@
     - python3-psutil
     - ShellCheck
     - sqlitebrowser
-    - tealdeer  # tldr writen in rust
     - texlive-montserrat
     - yubikey-manager
-    - zoxide  # A faster way to navigate your filesystem
