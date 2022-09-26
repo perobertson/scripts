@@ -11,9 +11,7 @@
     - aws-vault
     - bash
     - bash-completion
-    - bat  # rust version of cat
     - curl
-    - exa
     - fd
     - ffmpeg  # Improves video playback
     - flameshot

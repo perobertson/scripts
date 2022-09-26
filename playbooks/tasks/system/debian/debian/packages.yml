@@ -25,4 +25,3 @@
     - python3-cairo  # required to fix default python
     # TODO: install yubikey-manager when debian finally updates to a non alpha
     # - yubikey-manager
-    - zoxide  # A faster way to navigate your filesystem

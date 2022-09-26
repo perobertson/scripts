@@ -114,7 +114,6 @@
     - crudini
     - dconf-editor
     - dkms
-    - exa  # like ls but more functionality
     - ffmpeg  # Improves video playback
     - fuse-sshfs
     - go-task  # CLI tool for taskfiles

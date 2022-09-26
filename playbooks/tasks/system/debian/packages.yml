@@ -12,7 +12,6 @@
     - 1password-cli
     - bash
     - bash-completion
-    - bat  # rust version of cat
     - crudini
     - dconf-cli
     - ffmpeg  # Improves video playback
@@ -55,7 +54,6 @@
     state: present
   loop:
     - dconf-editor
-    - exa
     - fd-find
     - neofetch
     - ripgrep
