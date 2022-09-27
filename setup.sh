@@ -78,6 +78,9 @@ keyscan(){
 }
 
 fetch_scripts(){
+    if [[ ! -d "${HOME}/Applications" ]]; then
+        mkdir -pv "${HOME}/Applications"
+    fi
     # Fetch the scripts
     if [[ ! -d "${HOME}/Applications/scripts" ]]; then
         git clone https://gitlab.com/perobertson/scripts.git \
@@ -130,12 +133,6 @@ if [[ $(id -u) -eq 0 ]]; then
     echo 'ERROR: This script must be run as a normal user.' >&2
     exit 1
 fi
-
-# Set up app directories
-mkdir -pv \
-    "${HOME}/Applications" \
-    "${HOME}/Downloads" \
-    "${HOME}/workspace"
 
 install_git
 keyscan # TODO: is this needed?
