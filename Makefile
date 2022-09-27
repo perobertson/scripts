@@ -2,7 +2,7 @@
 MAKEFLAGS=--warn-undefined-variables
 
 playbooks:=$(wildcard playbooks/*.yml)
-kaniko_img:=gcr.io/kaniko-project/executor:v1.9.0-debug
+kaniko_img:=gcr.io/kaniko-project/executor:v1.9.1-debug
 
 ifneq ("$(shell command -v podman)", "")
 CONTAINER?=podman
