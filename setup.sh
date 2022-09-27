@@ -78,6 +78,9 @@ keyscan(){
 }
 
 fetch_scripts(){
+    if [[ ! -d "${HOME}/Applications" ]]; then
+        mkdir -pv "${HOME}/Applications"
+    fi
     # Fetch the scripts
     if [[ ! -d "${HOME}/Applications/scripts" ]]; then
         git clone https://gitlab.com/perobertson/scripts.git \
@@ -131,12 +134,6 @@ if [[ $(id -u) -eq 0 ]]; then
     exit 1
 fi
 
-# Set up app directories
-mkdir -pv \
-    "${HOME}/Applications" \
-    "${HOME}/Downloads" \
-    "${HOME}/workspace"
-
 install_git
 keyscan # TODO: is this needed?
 fetch_scripts
@@ -144,13 +141,14 @@ switch_dir
 bootstrap
 
 # Run the setup
-ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/setup.yml
+cd playbooks
+ansible-playbook -v setup.yml
 
 if [[ -n "${CI:-}" ]]; then
-    ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/flatpaks.yml
-    ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/gcloud.yml
-    ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/kubernetes.yml
-    ANSIBLE_CONFIG="./playbooks/config/ansible.cfg" ansible-playbook -v playbooks/razer.yml
+    ansible-playbook -v flatpaks.yml
+    ansible-playbook -v gcloud.yml
+    ansible-playbook -v kubernetes.yml
+    ansible-playbook -v razer.yml
 fi
 
 echo ''

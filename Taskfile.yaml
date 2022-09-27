@@ -1,0 +1,22 @@
+---
+# https://taskfile.dev
+
+version: "3"
+
+includes:
+  ans:
+    taskfile: ./playbooks/Taskfile.yaml
+    dir: playbooks
+
+tasks:
+  default: go-task -a 2>/dev/null || task -a
+
+  install_rust_crates:
+    desc: Install extra Rust crates
+    cmds:
+      - ./extras.sh
+
+  setup:
+    desc: Run the full setup
+    cmds:
+      - ./setup.sh

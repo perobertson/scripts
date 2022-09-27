@@ -15,7 +15,6 @@ stages:
   - deploy
 
 variables:
-  ANSIBLE_CONFIG: "./playbooks/config/ansible.cfg"
   ANSIBLE_FORCE_COLOR: "1"
   # https://bixense.com/clicolors/ standard for enabling colours in CI
   CLICOLOR: "1"
@@ -39,6 +38,9 @@ workflow:
 .test:
   stage: test
   script:
+    # GitLab clones the project as writable by everyone
+    # This breaks checks that are done inside the tools
+    - chmod -R go-w .
     # Container runs as root to support systemd as the init system
     # switch to the test user 'public' to run the scripts like a user would
     - su public --command="./setup.sh"
