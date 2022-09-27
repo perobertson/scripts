@@ -40,5 +40,5 @@ else
         --image-name-with-digest-file="dockerfiles/dist/${OS}/${OS}-${OS_VERSION}.name-digest.txt" \
         --no-push \
         --reproducible \
-        --tarPath="dockerfiles/dist/${OS}/${OS}-${OS_VERSION}.tar"
+        --tar-path="dockerfiles/dist/${OS}/${OS}-${OS_VERSION}.tar"
 fi
