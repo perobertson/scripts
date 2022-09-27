@@ -74,6 +74,7 @@
     - rust
     - rust-gdb  # GDB pretty printers for Rust
     - rust-lldb  # LLDB pretty printers for Rust
+    - rust-src  # Rust systems programming language - source code
     - rustfmt  # Tool to find and fix Rust formatting issues
     - samba-client
     - seahorse  # key management
