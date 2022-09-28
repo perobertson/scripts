@@ -5,7 +5,6 @@ cargo install bandwhich
 cargo install bottom
 cargo install du-dust
 cargo install fd-find
-cargo install git-delta
 cargo install gitui
 cargo install grex
 cargo install hyperfine

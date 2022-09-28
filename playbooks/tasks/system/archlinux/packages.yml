@@ -18,7 +18,6 @@
     - flatpak
     - gcc
     - gdb
-    - git-delta  # Syntax-highlighting pager for git
     - gzip
     - hyperfine  # CLI benchmarking
     - jq

@@ -15,7 +15,6 @@
     - flameshot
     - fzf
     - gdouros-symbola-fonts
-    - git-delta  # Syntax-highlighting pager for git
     - google-noto-sans-display-fonts
     - google-noto-sans-display-vf-fonts
     - google-noto-sans-mono-fonts
