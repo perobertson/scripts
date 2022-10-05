@@ -28,10 +28,3 @@ for bin in "${RBENV_ROOT}/bin/"*; do
         ln -s "${RBENV_ROOT}/bin/${bin}" "${HOME}/.local/bin/${bin}"
     fi
 done
-
-# Configure rbenv
-cd "${RBENV_ROOT}"
-./src/configure
-
-# Make rbenv
-make -C src
