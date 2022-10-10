@@ -2,7 +2,7 @@
 
 This repo is a collection of scripts that are handy for setting up a new pc.
 
-[![pipeline status](https://gitlab.com/perobertson/scripts/badges/main/pipeline.svg)](https://gitlab.com/perobertson/scripts/pipelines?scope=branches&ref=main)
+[![pipeline status](https://gitlab.com/perobertson/scripts2/badges/main/pipeline.svg)](https://gitlab.com/perobertson/scripts2/pipelines?scope=branches&ref=main)
 
 ## Supported Operating Systems
 
@@ -21,7 +21,7 @@ manual jobs in the CI pipeline and will be cleaned up after a period of time.
 
 Please see the [latest pipeline] for `main` for the complete list.
 
-[latest pipeline]: https://gitlab.com/perobertson/scripts/pipelines?scope=branches&ref=main
+[latest pipeline]: https://gitlab.com/perobertson/scripts2/pipelines?scope=branches&ref=main
 
 ## Usage
 
@@ -31,13 +31,13 @@ This will checkout the project to `"${HOME}/Applications/scripts"` before applyi
 Using `curl`:
 
 ```bash
-/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/main/setup.sh | bash
+/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts2/raw/main/setup.sh | bash
 ```
 
 Using `wget`:
 
 ```bash
-/usr/bin/wget -qO- https://gitlab.com/perobertson/scripts/raw/main/setup.sh | bash
+/usr/bin/wget -qO- https://gitlab.com/perobertson/scripts2/raw/main/setup.sh | bash
 ```
 
 ## Installing Extras
