@@ -221,7 +221,7 @@ test:archlinux:latest:
   extends:
     - .test
     - .rules_archlinux
-  image: ${CI_REGISTRY}/perobertson/scripts2/archlinux:latest-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/archlinux:latest-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:archlinux:latest
       artifacts: false
@@ -235,7 +235,7 @@ test:centos:stream8:
   extends:
     - .test
     - .rules_eol
-  image: ${CI_REGISTRY}/perobertson/scripts2/centos:stream8-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/centos:stream8-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:centos:stream8
       artifacts: false
@@ -246,7 +246,7 @@ test:centos:stream9:
   extends:
     - .test
     - .rules_redhat
-  image: ${CI_REGISTRY}/perobertson/scripts2/centos:stream9-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/centos:stream9-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:centos:stream9
       artifacts: false
@@ -258,7 +258,7 @@ test:debian:10:
   extends:
     - .test
     - .rules_eol
-  image: ${CI_REGISTRY}/perobertson/scripts2/debian:10-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/debian:10-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:debian:10
       artifacts: false
@@ -269,7 +269,7 @@ test:debian:11:
   extends:
     - .test
     - .rules_debian
-  image: ${CI_REGISTRY}/perobertson/scripts2/debian:11-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/debian:11-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:debian:11
       artifacts: false
@@ -281,7 +281,7 @@ test:fedora:34:
   extends:
     - .test
     - .rules_eol
-  image: ${CI_REGISTRY}/perobertson/scripts2/fedora:34-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:34-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:fedora:34
       artifacts: false
@@ -293,7 +293,7 @@ test:fedora:35:
   extends:
     - .test
     - .rules_eol
-  image: ${CI_REGISTRY}/perobertson/scripts2/fedora:35-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:35-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:fedora:35
       artifacts: false
@@ -305,7 +305,7 @@ test:fedora:36:
   extends:
     - .test
     - .rules_redhat
-  image: ${CI_REGISTRY}/perobertson/scripts2/fedora:36-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:36-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:fedora:36
       artifacts: false
@@ -317,7 +317,7 @@ test:fedora:37:
   extends:
     - .test
     - .rules_redhat
-  image: ${CI_REGISTRY}/perobertson/scripts2/fedora:37-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:37-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:fedora:37
       artifacts: false
@@ -329,7 +329,7 @@ test:fedora:38:
   extends:
     - .test
     - .rules_redhat
-  image: ${CI_REGISTRY}/perobertson/scripts2/fedora:38-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:38-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:fedora:38
       artifacts: false
@@ -342,7 +342,7 @@ test:fedora:rawhide:
   extends:
     - .test
     - .rules_redhat
-  image: ${CI_REGISTRY}/perobertson/scripts2/fedora:rawhide-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:rawhide-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:fedora:rawhide
       artifacts: false
@@ -355,7 +355,7 @@ test:manjarolinux:latest:
   extends:
     - .test
     - .rules_archlinux
-  image: ${CI_REGISTRY}/perobertson/scripts2/manjarolinux:latest-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/manjarolinux:latest-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:manjarolinux:latest
       artifacts: false
@@ -370,7 +370,7 @@ test:ubuntu:18.04:
   extends:
     - .test
     - .rules_eol
-  image: ${CI_REGISTRY}/perobertson/scripts2/ubuntu:18.04-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:18.04-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:ubuntu:18.04
       artifacts: false
@@ -382,7 +382,7 @@ test:ubuntu:20.04:
   extends:
     - .test
     - .rules_eol  # non current TLS release
-  image: ${CI_REGISTRY}/perobertson/scripts2/ubuntu:20.04-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:20.04-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:ubuntu:20.04
       artifacts: false
@@ -394,7 +394,7 @@ test:ubuntu:22.04:
   extends:
     - .test
     - .rules_debian
-  image: ${CI_REGISTRY}/perobertson/scripts2/ubuntu:22.04-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:22.04-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:ubuntu:22.04
       artifacts: false
@@ -407,7 +407,7 @@ test:ubuntu:22.10:
   extends:
     - .test
     - .rules_only_warn
-  image: ${CI_REGISTRY}/perobertson/scripts2/ubuntu:22.10-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:22.10-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:ubuntu:22.10
       artifacts: false

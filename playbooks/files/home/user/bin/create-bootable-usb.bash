@@ -5,7 +5,7 @@
 #
 #
 # As outlined in:
-# https://gitlab.com/perobertson/scripts2/-/issues/29
+# https://gitlab.com/perobertson/scripts/-/issues/29
 # It is intented to take an ISO as the first parameter and write it out to the disk specified in the second parameter.
 set -euo pipefail
 

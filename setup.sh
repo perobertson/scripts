@@ -83,7 +83,7 @@ fetch_scripts(){
     fi
     # Fetch the scripts
     if [[ ! -d "${HOME}/Applications/scripts" ]]; then
-        git clone https://gitlab.com/perobertson/scripts2.git \
+        git clone https://gitlab.com/perobertson/scripts.git \
             "${HOME}/Applications/scripts"
     elif [[ -z "${CMD:-}" ]]; then
         # user reran the curl command
@@ -118,7 +118,7 @@ bootstrap(){
         ubuntu)  source "bootstrap/ubuntu.bash"  ;;
         *)
             echo "WARNING: ${os} is not supported" >&2
-            echo "Please submit an issue at https://gitlab.com/perobertson/scripts2/issues" >&2
+            echo "Please submit an issue at https://gitlab.com/perobertson/scripts/issues" >&2
             echo "Attempting to run ansible-playbook anyways..." >&2
         ;;
     esac
