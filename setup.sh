@@ -23,6 +23,9 @@ shopt -s globstar
 # The install of the dotfiles will make it permanent
 PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${HOME}/bin:$PATH"
 
+# Set the code path if its not set to where all code will be cloned into
+: "${CODE_PATH:=${HOME}/workspace}"
+
 install_ssh_keyscan(){
     # Check if ssh-keyscan needs installed
     if [[ ! -x "$(command -v ssh-keyscan)" ]]; then
@@ -78,16 +81,16 @@ keyscan(){
 }
 
 fetch_scripts(){
-    if [[ ! -d "${HOME}/Applications" ]]; then
-        mkdir -pv "${HOME}/Applications"
+    if [[ ! -d "${CODE_PATH}/perobertson" ]]; then
+        mkdir -pv "${CODE_PATH}/perobertson"
     fi
     # Fetch the scripts
-    if [[ ! -d "${HOME}/Applications/scripts" ]]; then
+    if [[ ! -d "${CODE_PATH}/perobertson/scripts" ]]; then
         git clone https://gitlab.com/perobertson/scripts.git \
-            "${HOME}/Applications/scripts"
+            "${CODE_PATH}/perobertson/scripts"
     elif [[ -z "${CMD:-}" ]]; then
         # user reran the curl command
-        cd "${HOME}/Applications/scripts"
+        cd "${CODE_PATH}/perobertson/scripts"
         git pull --rebase --stat
         cd -
     fi
@@ -95,11 +98,11 @@ fetch_scripts(){
 
 switch_dir(){
     # Possible playbook locations:
-    # - ${HOME}/Applications/scripts
+    # - ${CODE_PATH}/perobertson/scripts
     # - current directory
     if [[ -z "${CMD:-}" ]]; then
         # piped into bash, so use the fetched location
-        cd "${HOME}/Applications/scripts"
+        cd "${CODE_PATH}/perobertson/scripts"
     else
         # otherwise it was invoked from a shell
         HERE="$( cd "$( dirname "${CMD}" )" >/dev/null 2>&1 && pwd )"
