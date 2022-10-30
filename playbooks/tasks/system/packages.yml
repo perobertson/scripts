@@ -30,3 +30,13 @@
   # Arch is the only platform which has a package
   # It also comes with docs and completions
   when: ansible_os_family != 'Archlinux'
+
+- name: All - Install custom scripts
+  tags: [systemd]
+  ansible.builtin.copy:
+    src: files/usr/local/bin/{{ item }}
+    dest: /usr/local/bin/{{ item }}
+    mode: '0755'
+  loop:
+    - create-bootable-usb.bash
+    - non-metered-connection.bash
