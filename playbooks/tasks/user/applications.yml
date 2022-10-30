@@ -14,7 +14,6 @@
     mode: '0700'
 
 - name: All - Populate ~/bin
-  tags: [systemd]
   diff: true
   ansible.builtin.file:
     src: "{{ playbook_dir }}/files/home/user/bin/{{ item }}"
@@ -23,7 +22,6 @@
   loop:
     - README.md
     - aws_iam_to_ses.py
-    - create-bootable-usb.bash
     - install-aws.bash
     - install-nvidia.bash
     - mcode.bash
