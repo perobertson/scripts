@@ -44,15 +44,19 @@
     - zsh
 
 - name: Archlinux - Install non WSL packages
-  ansible.builtin.pacman:
+  community.general.pacman:
     pkg: "{{ item }}"
     state: present
+  retries: 3
+  delay: 5
+  register: archlinux_install_non_wsl_packages
+  until: archlinux_install_non_wsl_packages is succeeded
   loop:
     - code  # VSCode
   when: not running_in_wsl
 
 - name: Archlinux - Best effort to install optional packages
-  ansible.builtin.pacman:
+  community.general.pacman:
     pkg: "{{ item }}"
     state: present
   loop:
