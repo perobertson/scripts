@@ -1,10 +1,4 @@
 ---
-- name: All - Git update tools  # noqa git-latest
-  diff: false
-  ansible.builtin.git:
-    repo: https://gitlab.com/perobertson/cli-tools.git
-    dest: ~/Applications/cli-tools
-
 # Needed for user systemd scripts
 - name: All - Create ~/bin
   tags: [systemd]

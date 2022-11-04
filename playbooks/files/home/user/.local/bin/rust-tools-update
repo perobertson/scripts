@@ -7,3 +7,5 @@ cargo install --jobs=$JOBS git-delta # Syntax-highlighting pager for git
 cargo install --jobs=$JOBS starship # The cross-shell prompt for astronauts
 cargo install --jobs=$JOBS tealdeer # A fast tldr client in Rust
 cargo install --jobs=$JOBS zoxide # A faster way to navigate your filesystem
+
+cargo install --jobs=$JOBS --git https://gitlab.com/perobertson/cli-tools.git
