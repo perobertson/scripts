@@ -21,4 +21,8 @@
     url: https://packagecontrol.io/Package%20Control.sublime-package
     dest: $HOME/.config/sublime-text-3/Installed Packages/Package Control.sublime-package
     mode: '0600'
+  retries: 3
+  delay: 5
+  register: install_sublime_package_control
+  until: install_sublime_package_control is succeeded
   when: not sublime_package_control.stat.exists
