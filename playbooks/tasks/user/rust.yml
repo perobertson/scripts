@@ -34,8 +34,3 @@
   when: file_rustup.stat.exists
   register: rustup_result
   changed_when: "'linux-gnu unchanged - rustc' not in rustup_result.stdout"
-
-- name: All - Install 'tools'
-  community.general.make:
-    chdir: ${HOME}/Applications/cli-tools
-    target: install
