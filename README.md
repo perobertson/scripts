@@ -8,16 +8,17 @@ This repo is a collection of scripts that are handy for setting up a new pc.
 
 Python3 is a main component of the tools that are installed and used. This
 limits which OS versions that are supported since Python2 is EOL. In general,
-this list will be the latest LTS release, and one fast release for the
-distribution. OSes that become EOL or use EOL languages can still be run as
-manual jobs in the CI pipeline and will be cleaned up after a period of time.
+this list will be the latest LTS release for the distribution. OSes that become
+EOL or use EOL languages can still be run as manual jobs in the CI pipeline and
+will be cleaned up after a period of time. Other versions may still work, they
+are just not tested in CI.
 
 - Archlinux
 - CentOS: stream9
 - Debian: 11
 - Fedora: 36, 37
 - Manjaro
-- Ubuntu: 22.04(LTS), 22.10
+- Ubuntu: 22.04(LTS)
 
 Please see the [latest pipeline] for `main` for the complete list.
 
