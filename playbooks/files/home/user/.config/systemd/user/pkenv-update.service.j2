@@ -4,7 +4,7 @@ After=default.target
 
 [Service]
 Type=simple
-ExecStart={{ lookup('env', 'HOME') }}/.local/bin/pkenv-update
+ExecStart={{ lookup('ansible.builtin.env', 'HOME') }}/.local/bin/pkenv-update
 
 [Install]
 # https://www.freedesktop.org/software/systemd/man/systemd.special.html#default.target1
