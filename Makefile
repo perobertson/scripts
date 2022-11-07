@@ -61,14 +61,6 @@ dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: dockerfiles/manjarolinux.dockerfile
 	$(call build_image,manjarolinux,latest)
 
-dockerfiles/dist/ubuntu/ubuntu-18.04.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/ubuntu/ubuntu-18.04.tar: dockerfiles/ubuntu.dockerfile
-	$(call build_image,ubuntu,18.04)
-
-dockerfiles/dist/ubuntu/ubuntu-20.04.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/ubuntu/ubuntu-20.04.tar: dockerfiles/ubuntu.dockerfile
-	$(call build_image,ubuntu,20.04)
-
 dockerfiles/dist/ubuntu/ubuntu-22.04.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/ubuntu/ubuntu-22.04.tar: dockerfiles/ubuntu.dockerfile
 	$(call build_image,ubuntu,22.04)
@@ -149,14 +141,6 @@ test-fedora-38: dockerfiles/dist/fedora/fedora-38.tar
 .PHONY: test-manjarolinux-latest
 test-manjarolinux-latest: dockerfiles/dist/manjarolinux/manjarolinux-latest.tar
 	$(call test_os,manjarolinux,latest)
-
-.PHONY: test-ubuntu-18.04
-test-ubuntu-18.04: dockerfiles/dist/ubuntu/ubuntu-18.04.tar
-	$(call test_os,ubuntu,18.04)
-
-.PHONY: test-ubuntu-20.04
-test-ubuntu-20.04: dockerfiles/dist/ubuntu/ubuntu-20.04.tar
-	$(call test_os,ubuntu,20.04)
 
 .PHONY: test-ubuntu-22.04
 test-ubuntu-22.04: dockerfiles/dist/ubuntu/ubuntu-22.04.tar

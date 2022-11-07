@@ -155,20 +155,6 @@ build:manjarolinux:latest:
   script:
     - ./.gitlab/build_image.sh manjarolinux latest
 
-build:ubuntu:18.04:
-  extends:
-    - .build_img
-    - .rules_eol
-  script:
-    - ./.gitlab/build_image.sh ubuntu 18.04
-
-build:ubuntu:20.04:
-  extends:
-    - .build_img
-    - .rules_eol
-  script:
-    - ./.gitlab/build_image.sh ubuntu 20.04
-
 build:ubuntu:22.04:
   extends:
     - .build_img
@@ -308,31 +294,6 @@ test:manjarolinux:latest:
       artifacts: false
   # TODO: remove this when the upstream packaging issue is fixed
   allow_failure: true
-
-test:ubuntu:18.04:
-  # EOL: 2023-04
-  # Python 3.6 EOL: 2021-12-23
-  extends:
-    - .test
-    - .rules_eol
-  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:18.04-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:ubuntu:18.04
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
-
-test:ubuntu:20.04:
-  # EOL: 2025-04
-  extends:
-    - .test
-    - .rules_eol  # non current TLS release
-  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:20.04-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:ubuntu:20.04
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
 
 test:ubuntu:22.04:
   # EOL: 2027-04
