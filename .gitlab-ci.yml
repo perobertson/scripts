@@ -113,13 +113,6 @@ build:centos:stream9:
   script:
     - ./.gitlab/build_image.sh centos stream9
 
-build:debian:10:
-  extends:
-    - .build_img
-    - .rules_eol
-  script:
-    - ./.gitlab/build_image.sh debian 10
-
 build:debian:11:
   extends:
     - .build_img
@@ -235,18 +228,6 @@ test:centos:stream9:
   image: ${CI_REGISTRY}/perobertson/scripts/centos:stream9-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:centos:stream9
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
-
-test:debian:10:
-  # EOL: ~2022-08
-  extends:
-    - .test
-    - .rules_eol
-  image: ${CI_REGISTRY}/perobertson/scripts/debian:10-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:debian:10
       artifacts: false
     - job: lint:ansible
       artifacts: false

@@ -41,10 +41,6 @@ dockerfiles/dist/centos/centos-stream9.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/centos/centos-stream9.tar: dockerfiles/centos.dockerfile
 	$(call build_image,centos,stream9)
 
-dockerfiles/dist/debian/debian-10.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/debian/debian-10.tar: dockerfiles/debian.dockerfile
-	$(call build_image,debian,10)
-
 dockerfiles/dist/debian/debian-11.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/debian/debian-11.tar: dockerfiles/debian.dockerfile
 	$(call build_image,debian,11)
@@ -133,10 +129,6 @@ test-centos-stream8: dockerfiles/dist/centos/centos-stream8.tar
 .PHONY: test-centos-stream9
 test-centos-stream9: dockerfiles/dist/centos/centos-stream9.tar
 	$(call test_os,centos,stream9)
-
-.PHONY: test-debian-10
-test-debian-10: dockerfiles/dist/debian/debian-10.tar
-	$(call test_os,debian,10)
 
 .PHONY: test-debian-11
 test-debian-11: dockerfiles/dist/debian/debian-11.tar
