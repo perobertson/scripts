@@ -10,31 +10,6 @@
   loop:
     - dbus-daemon
     - kubectl
+    - python3-psutil
     # TODO: install yubikey-manager when it becomes available
     # - yubikey-manager
-
-- name: CentOS - Install stream8 packages
-  ansible.builtin.dnf:
-    name: "{{ item }}"
-    state: present
-  retries: 3
-  delay: 5
-  register: centos8_install_packages
-  until: centos8_install_packages is succeeded
-  loop:
-    - python39-psutil
-  when:
-    - ansible_distribution_major_version|int <= 8
-
-- name: CentOS - Install stream9 packages
-  ansible.builtin.dnf:
-    name: "{{ item }}"
-    state: present
-  retries: 3
-  delay: 5
-  register: centos9_install_packages
-  until: centos9_install_packages is succeeded
-  loop:
-    - python3-psutil
-  when:
-    - ansible_distribution_major_version|int >= 9

@@ -100,13 +100,6 @@ build:archlinux:latest:
   script:
     - ./.gitlab/build_image.sh archlinux latest
 
-build:centos:stream8:
-  extends:
-    - .build_img
-    - .rules_eol
-  script:
-    - ./.gitlab/build_image.sh centos stream8
-
 build:centos:stream9:
   extends:
     - .build_img
@@ -194,18 +187,6 @@ test:archlinux:latest:
       artifacts: false
   # TODO: remove this when the upstream packaging issue is fixed
   allow_failure: true
-
-test:centos:stream8:
-  # EOL: 2024-05-31
-  extends:
-    - .test
-    - .rules_eol
-  image: ${CI_REGISTRY}/perobertson/scripts/centos:stream8-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:centos:stream8
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
 
 test:centos:stream9:
   extends:

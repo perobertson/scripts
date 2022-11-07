@@ -33,10 +33,6 @@ dockerfiles/dist/archlinux/archlinux-latest.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/archlinux/archlinux-latest.tar: dockerfiles/archlinux.dockerfile
 	$(call build_image,archlinux,latest)
 
-dockerfiles/dist/centos/centos-stream8.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/centos/centos-stream8.tar: dockerfiles/centos.dockerfile
-	$(call build_image,centos,stream8)
-
 dockerfiles/dist/centos/centos-stream9.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/centos/centos-stream9.tar: dockerfiles/centos.dockerfile
 	$(call build_image,centos,stream9)
@@ -113,10 +109,6 @@ endef
 .PHONY: test-archlinux-latest
 test-archlinux-latest: dockerfiles/dist/archlinux/archlinux-latest.tar
 	$(call test_os,archlinux,latest)
-
-.PHONY: test-centos-stream8
-test-centos-stream8: dockerfiles/dist/centos/centos-stream8.tar
-	$(call test_os,centos,stream8)
 
 .PHONY: test-centos-stream9
 test-centos-stream9: dockerfiles/dist/centos/centos-stream9.tar
