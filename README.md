@@ -41,13 +41,6 @@ Using `wget`:
 /usr/bin/wget -qO- https://gitlab.com/perobertson/scripts/raw/main/setup.sh | bash
 ```
 
-## Installing Extras
-
-There are additional packages that can also be installed.
-This is done though supplementary playbooks, or script.
-They can be invoked through tasks.
-Run `go-task -a` to see the full list.
-
 ## Updating
 
 The scripts are designed to be rerun to get the latest updates.

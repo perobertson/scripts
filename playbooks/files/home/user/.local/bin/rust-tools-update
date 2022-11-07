@@ -1,12 +1,38 @@
 #!/usr/bin/env bash
 set -euo pipefail
 JOBS=$(( $(nproc --all) / 2))
-cargo install --jobs=$JOBS bat # Cat clone with syntax highlighting and git integration
-cargo install --jobs=$JOBS exa # Modern replacement for ls
-cargo install --jobs=$JOBS git-delta # Syntax-highlighting pager for git
-cargo install --jobs=$JOBS starship # The cross-shell prompt for astronauts
-cargo install --jobs=$JOBS tealdeer # A fast tldr client in Rust
-cargo install --jobs=$JOBS zoxide # A faster way to navigate your filesystem
 
 cargo install --jobs=$JOBS --git https://gitlab.com/perobertson/cli-tools.git
 cargo install --jobs=$JOBS --git https://gitlab.com/perobertson/gitlab-tools.git
+
+# bat: Cat clone with syntax highlighting and git integration
+# du-dust: Like du but more intuitive
+# exa: Modern replacement for ls
+# fd-find: Program to find entries in your filesystem
+# git-delta: Syntax-highlighting pager for git
+# gitui: Terminal-ui for git
+# hyperfine: Command-line benchmarking tool
+# ripgrep: Line-oriented search tool that recursively searches the current directory for a regex pattern
+# sedo: Process runner that securly populates environment variables
+# starship: The cross-shell prompt for astronauts
+# tealdeer: Fast tldr client in Rust
+# tokei: Program that displays statistics about your code
+# zoxide: Faster way to navigate your filesystem
+crates=(
+    bat
+    du-dust
+    exa
+    fd-find
+    git-delta
+    gitui
+    hyperfine
+    ripgrep
+    sedo
+    starship
+    tealdeer
+    tokei
+    zoxide
+)
+# Installing all at once allows for the successful compiles to be installed
+# The command will then exit with an error and a message about the failed ones
+cargo install --jobs=$JOBS "${crates[@]}"
