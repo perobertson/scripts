@@ -126,20 +126,6 @@ build:debian:11:
   script:
     - ./.gitlab/build_image.sh debian 11
 
-build:fedora:34:
-  extends:
-    - .build_img
-    - .rules_eol
-  script:
-    - ./.gitlab/build_image.sh fedora 34
-
-build:fedora:35:
-  extends:
-    - .build_img
-    - .rules_eol
-  script:
-    - ./.gitlab/build_image.sh fedora 35
-
 build:fedora:36:
   extends:
     - .build_img
@@ -157,12 +143,18 @@ build:fedora:38:
     - .build_img
   script:
     - ./.gitlab/build_image.sh fedora 38
+  # unreleased
+  when: manual
+  allow_failure: true
 
 build:fedora:rawhide:
   extends:
     - .build_img
   script:
     - ./.gitlab/build_image.sh fedora rawhide
+  # unreleased
+  when: manual
+  allow_failure: true
 
 build:manjarolinux:latest:
   extends:
@@ -270,30 +262,6 @@ test:debian:11:
     - job: lint:ansible
       artifacts: false
 
-test:fedora:34:
-  # EOL: 2022-05-17
-  extends:
-    - .test
-    - .rules_eol
-  image: ${CI_REGISTRY}/perobertson/scripts/fedora:34-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:fedora:34
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
-
-test:fedora:35:
-  # EOL: 2022-11-15
-  extends:
-    - .test
-    - .rules_eol
-  image: ${CI_REGISTRY}/perobertson/scripts/fedora:35-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:fedora:35
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
-
 test:fedora:36:
   # EOL: 2023-06-10
   extends:
@@ -330,6 +298,7 @@ test:fedora:38:
     - job: lint:ansible
       artifacts: false
   # unreleased
+  when: manual
   allow_failure: true
 
 test:fedora:rawhide:
@@ -343,6 +312,7 @@ test:fedora:rawhide:
     - job: lint:ansible
       artifacts: false
   # unreleased
+  when: manual
   allow_failure: true
 
 test:manjarolinux:latest:
