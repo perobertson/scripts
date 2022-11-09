@@ -114,6 +114,7 @@
   loop:
     - crudini
     - dconf-editor
+    - dejavu-sans-fonts
     - dkms
     - ffmpeg  # Improves video playback
     - fuse-sshfs
