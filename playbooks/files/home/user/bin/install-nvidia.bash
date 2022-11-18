@@ -54,6 +54,13 @@ install_nvidia_dependencies(){
 }
 
 disable_nouveau(){
+    # Check for an available installer before removing the current driver
+    installer=$(find /opt/nvidia -name 'NVIDIA-*.run' | sort | tail -n 1)
+    if [[ ! -x "${installer}" ]]; then
+        echo "No installer found in /opt/nvidia"
+        echo "See: https://www.nvidia.com/en-us/drivers/unix/"
+        exit 3
+    fi
     if ! grep "blacklist nouveau" /etc/modprobe.d/*; then
         echo "blacklist nouveau" | sudo tee /etc/modprobe.d/disable_nouveau.conf
     fi
