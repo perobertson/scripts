@@ -30,7 +30,7 @@ generate_signing_key(){
 }
 
 enroll_signing_key(){
-    if [[ ! -f /opt/driver_signing/driver-signing.der ]]; then
+    if sudo bash -c '[[ ! -f /opt/driver_signing/driver-signing.der ]]'; then
         generate_signing_key
     fi
     sudo mokutil --import /opt/driver_signing/driver-signing.der
