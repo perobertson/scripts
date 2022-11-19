@@ -40,6 +40,7 @@ enroll_signing_key(){
 install_nvidia_dependencies(){
     sudo dnf install \
         acpid \
+        curl \
         dkms \
         gcc \
         kernel-devel \
@@ -50,7 +51,21 @@ install_nvidia_dependencies(){
         make \
         pkgconfig
     sudo dnf update
+    download_driver
     echo "dependencies installed be sure to reboot"
+}
+
+download_driver(){
+    local version=515.76
+    local filename=NVIDIA-Linux-x86_64-${version}.run
+    local driver=/opt/nvidia/${filename}
+    if [[ -x "${driver}" ]]; then
+        return
+    fi
+    sudo mkdir -p /opt/nvidia
+    sudo curl -o "${driver}" \
+        "https://us.download.nvidia.com/XFree86/Linux-x86_64/${version}/${filename}"
+    sudo chmod +x "${driver}"
 }
 
 disable_nouveau(){
