@@ -49,7 +49,8 @@ install_nvidia_dependencies(){
         libglvnd-glx \
         libglvnd-opengl \
         make \
-        pkgconfig
+        pkgconfig \
+        xz
     sudo dnf update
     download_driver
     echo "dependencies installed be sure to reboot"
