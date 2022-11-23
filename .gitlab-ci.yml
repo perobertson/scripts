@@ -112,12 +112,6 @@ build:debian:11:
   script:
     - ./.gitlab/build_image.sh debian 11
 
-build:fedora:36:
-  extends:
-    - .build_img
-  script:
-    - ./.gitlab/build_image.sh fedora 36
-
 build:fedora:37:
   extends:
     - .build_img
@@ -210,20 +204,8 @@ test:debian:11:
     - job: lint:ansible
       artifacts: false
 
-test:fedora:36:
-  # EOL: 2023-06-10
-  extends:
-    - .test
-    - .rules_redhat
-  image: ${CI_REGISTRY}/perobertson/scripts/fedora:36-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:fedora:36
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
-
 test:fedora:37:
-  # EOL: ~2023-11-25
+  # EOL: 2023-11-14
   extends:
     - .test
     - .rules_redhat
@@ -235,7 +217,7 @@ test:fedora:37:
       artifacts: false
 
 test:fedora:38:
-  # EOL: TBD
+  # EOL: 2024-05-14
   extends:
     - .test
     - .rules_redhat
