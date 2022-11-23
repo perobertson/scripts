@@ -64,6 +64,12 @@ workflow:
 .rules_redhat:
   rules: *rules_default
 
+# This rule set is for any OS which is not used as my primary
+.rules_secondary_os:
+  rules:
+    - when: manual
+      allow_failure: true
+
 # This is used for distributions which are used as flags for upcoming errors
 .rules_only_warn:
   rules:
@@ -97,18 +103,21 @@ build:linter:
 build:archlinux:latest:
   extends:
     - .build_img
+    - .rules_secondary_os
   script:
     - ./.gitlab/build_image.sh archlinux latest
 
 build:centos:stream9:
   extends:
     - .build_img
+    - .rules_secondary_os
   script:
     - ./.gitlab/build_image.sh centos stream9
 
 build:debian:11:
   extends:
     - .build_img
+    - .rules_secondary_os
   script:
     - ./.gitlab/build_image.sh debian 11
 
@@ -172,7 +181,7 @@ lint:ansible:
 test:archlinux:latest:
   extends:
     - .test
-    - .rules_archlinux
+    - .rules_secondary_os
   image: ${CI_REGISTRY}/perobertson/scripts/archlinux:latest-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:archlinux:latest
@@ -185,7 +194,7 @@ test:archlinux:latest:
 test:centos:stream9:
   extends:
     - .test
-    - .rules_redhat
+    - .rules_secondary_os
   image: ${CI_REGISTRY}/perobertson/scripts/centos:stream9-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:centos:stream9
@@ -196,7 +205,7 @@ test:centos:stream9:
 test:debian:11:
   extends:
     - .test
-    - .rules_debian
+    - .rules_secondary_os
   image: ${CI_REGISTRY}/perobertson/scripts/debian:11-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:debian:11
