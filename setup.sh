@@ -82,16 +82,16 @@ keyscan(){
 }
 
 fetch_scripts(){
-    if [[ ! -d "${CODE_PATH}/perobertson" ]]; then
-        mkdir -pv "${CODE_PATH}/perobertson"
+    if [[ ! -d "${CODE_PATH}/gitlab.com/perobertson" ]]; then
+        mkdir -pv "${CODE_PATH}/gitlab.com/perobertson"
     fi
     # Fetch the scripts
-    if [[ ! -d "${CODE_PATH}/perobertson/scripts" ]]; then
+    if [[ ! -d "${CODE_PATH}/gitlab.com/perobertson/scripts" ]]; then
         git clone https://gitlab.com/perobertson/scripts.git \
-            "${CODE_PATH}/perobertson/scripts"
+            "${CODE_PATH}/gitlab.com/perobertson/scripts"
     elif [[ -z "${CMD:-}" ]]; then
         # user reran the curl command
-        cd "${CODE_PATH}/perobertson/scripts"
+        cd "${CODE_PATH}/gitlab.com/perobertson/scripts"
         git pull --rebase --stat
         cd -
     fi
@@ -99,11 +99,11 @@ fetch_scripts(){
 
 switch_dir(){
     # Possible playbook locations:
-    # - ${CODE_PATH}/perobertson/scripts
+    # - ${CODE_PATH}/gitlab.com/perobertson/scripts
     # - current directory
     if [[ -z "${CMD:-}" ]]; then
         # piped into bash, so use the fetched location
-        cd "${CODE_PATH}/perobertson/scripts"
+        cd "${CODE_PATH}/gitlab.com/perobertson/scripts"
     else
         # otherwise it was invoked from a shell
         HERE="$( cd "$( dirname "${CMD}" )" >/dev/null 2>&1 && pwd )"

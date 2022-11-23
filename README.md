@@ -27,7 +27,7 @@ Please see the [latest pipeline] for `main` for the complete list.
 ## Usage
 
 To run the script, all you need to do is run this from a console on the machine that you are setting up.
-This will checkout the project to `"${CODE_PATH:-~/workspace}/perobertson/scripts"` before applying other changes.
+This will checkout the project to `"${CODE_PATH:-~/workspace}/gitlab.com/perobertson/scripts"` before applying other changes.
 
 Using `curl`:
 
@@ -46,7 +46,7 @@ Using `wget`:
 The scripts are designed to be rerun to get the latest updates.
 
 ```bash
-cd "${CODE_PATH:-~/workspace}/perobertson/scripts"
+cd "${CODE_PATH:-~/workspace}/gitlab.com/perobertson/scripts"
 git pull --rebase
 ./setup.sh
 ```
