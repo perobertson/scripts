@@ -57,7 +57,7 @@ install_nvidia_dependencies(){
 }
 
 download_driver(){
-    local version=515.76
+    local version=525.60.11
     local filename=NVIDIA-Linux-x86_64-${version}.run
     local driver=/opt/nvidia/${filename}
     if [[ -x "${driver}" ]]; then
