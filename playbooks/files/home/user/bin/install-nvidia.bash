@@ -57,7 +57,7 @@ install_nvidia_dependencies(){
 }
 
 download_driver(){
-    local version=515.76
+    local version=525.60.11
     local filename=NVIDIA-Linux-x86_64-${version}.run
     local driver=/opt/nvidia/${filename}
     if [[ -x "${driver}" ]]; then
@@ -82,7 +82,7 @@ disable_nouveau(){
     fi
 
     # prevent the nouveau driver from loading
-    if ! grep "^GRUB_CMDLINE_LINUX=.*rd.driver.blacklist=nouveau" /etc/default/grub; then
+    if ! grep "^GRUB_CMDLINE_LINUX=.*rd.driver.blacklist=nouveau" /etc/default/grub >/dev/null; then
         sudo sed --in-place=.bak 's/^\(GRUB_CMDLINE_LINUX=".*\)"$/\1 rd.driver.blacklist=nouveau"/' /etc/default/grub
 
         # for both BIOS and UEFI after fedora 34
@@ -105,7 +105,27 @@ disable_nouveau(){
     echo "Runlevel changed. Time to reboot and install the NVIDIA driver."
 }
 
+enable_nouveau(){
+  sudo dnf install xorg-x11-drv-nouveau
+  sudo rm -f /etc/modprobe.d/disable_nouveau.conf
+  if grep "^GRUB_CMDLINE_LINUX=.*rd.driver.blacklist=nouveau" /etc/default/grub >/dev/null; then
+    sudo sed --in-place=.bak 's/rd.driver.blacklist=nouveau//' /etc/default/grub
+    sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+  fi
+  sudo mv "/boot/initramfs-$(uname -r).img" "/boot/initramfs-$(uname -r)-nvidia.img"
+  sudo dracut "/boot/initramfs-$(uname -r).img" "$(uname -r)"
+  echo "Changing runlevel back to graphical"
+  sudo systemctl set-default graphical.target
+  echo "Runlevel changed. Time to reboot."
+}
+
 install_nvidia(){
+    if [[ "N 3" != "$(runlevel)" ]]; then
+        echo "Changing runlevel to multi-user"
+        sudo systemctl set-default multi-user.target
+        echo "Please reboot and run this command again"
+        return
+    fi
     installer=$(find /opt/nvidia -name 'NVIDIA-*.run' | sort | tail -n 1)
     if [[ ! -x "${installer}" ]]; then
         echo "No installer found in /opt/nvidia"
@@ -129,6 +149,26 @@ install_video_acceleration(){
         vdpauinfo
 }
 
+uninstall_nvidia(){
+  if [[ "N 3" != "$(runlevel)" ]]; then
+    echo "Changing runlevel to multi-user"
+    sudo systemctl set-default multi-user.target
+    echo "Please reboot and run this command again"
+    return
+  fi
+  sudo dnf remove \
+    libva-utils \
+    libva-vdpau-driver \
+    vdpauinfo
+  installer=$(find /opt/nvidia -name 'NVIDIA-*.run' | sort | tail -n 1)
+  if [[ ! -x "${installer}" ]]; then
+    echo "WARNING: No installer found in /opt/nvidia. Skipping uninstall."
+    return
+  fi
+  sudo "${installer}" --uninstall
+}
+
+
 help(){
    # Display Help
    echo "Multi step script to installing the NVIDA drivers."
@@ -143,9 +183,11 @@ help(){
    echo "-n     Step4: Disable nouveau driver."
    echo "-i     Step5: Install NVIDIA driver."
    echo "-a     Step6: Install video acceleration support."
+   echo ""
+   echo "-r     Restore nouveau driver"
 }
 
-while getopts ":adeghin" option; do
+while getopts ":adeghinr" option; do
    case $option in
         a)
             install_video_acceleration
@@ -173,6 +215,11 @@ while getopts ":adeghin" option; do
         ;;
         n)
             disable_nouveau
+            exit
+        ;;
+        r)
+            uninstall_nvidia
+            enable_nouveau
             exit
         ;;
         *)
