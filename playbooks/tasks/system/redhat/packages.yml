@@ -42,7 +42,7 @@
     - bzip2-devel
     - cargo  # Rust's package manager and build tool
     - clippy  # Lints to catch common mistakes and improve your Rust code
-    - cmake
+    - cmake  # Needed for installing some rust crates
     - curl
     - dconf
     - dnf-automatic

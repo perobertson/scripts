@@ -12,6 +12,7 @@
     - 1password-cli
     - bash
     - bash-completion
+    - cmake  # Needed for installing some rust crates
     - crudini
     - dconf-cli
     - ffmpeg  # Improves video playback

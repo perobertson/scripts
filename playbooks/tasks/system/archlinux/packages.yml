@@ -11,6 +11,7 @@
     - aws-vault
     - bash
     - bash-completion
+    - cmake  # Needed for installing some rust crates
     - curl
     - fd
     - ffmpeg  # Improves video playback
