@@ -7,7 +7,6 @@ PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${HOME}/bin:$PATH"
 
 # Check the version of installed tools
 1password --version || echo '1password unavailable'
-ansible --version
 aws-vault --version
 bash --version
 bat --version || echo 'bat unavailable'
@@ -53,5 +52,6 @@ ykman --version || echo 'ykman unavailable'
 zoxide --version || echo 'zoxide unavailable'
 zsh --version
 # These commands do not have a version option or cause side effects
+command -v ansible
 command -v gitk
 command -v rustup.sh
