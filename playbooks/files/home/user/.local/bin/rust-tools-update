@@ -14,7 +14,6 @@ cargo install --jobs=$JOBS --git https://gitlab.com/perobertson/gitlab-tools.git
 # hyperfine: Command-line benchmarking tool
 # ripgrep: Line-oriented search tool that recursively searches the current directory for a regex pattern
 # sedo: Process runner that securly populates environment variables
-# starship: The cross-shell prompt for astronauts
 # tealdeer: Fast tldr client in Rust
 # tokei: Program that displays statistics about your code
 # zoxide: Faster way to navigate your filesystem
@@ -28,7 +27,6 @@ crates=(
     hyperfine
     ripgrep
     sedo
-    starship
     tealdeer
     tokei
     zoxide
@@ -36,3 +34,12 @@ crates=(
 # Installing all at once allows for the successful compiles to be installed
 # The command will then exit with an error and a message about the failed ones
 cargo install --jobs=$JOBS "${crates[@]}"
+
+# Some crates are more prone to compile failures.
+# This can happen when their dependency constraints are too loose.
+# Use --locked to install what they tested with when publishing the version
+# starship: The cross-shell prompt for astronauts
+crates=(
+    starship
+)
+cargo install --jobs=$JOBS --locked "${crates[@]}"
