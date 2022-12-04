@@ -65,6 +65,16 @@
       ansible.builtin.set_fact:
         running_in_wsl: "{{ ansible_kernel.endswith('-WSL') or ansible_kernel.endswith('-WSL2') }}"
 
+    - name: Ensure "systemd=true is in section "[boot]" in /etc/wsl.conf
+      become: true
+      community.general.ini_file:
+        path: /etc/wsl.conf
+        section: boot
+        option: systemd
+        value: true
+        mode: '0644'
+      when: running_in_wsl
+
     ### --- System ---
     - name: Repositories
       tags: [system, dev, repo]
