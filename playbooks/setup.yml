@@ -88,6 +88,10 @@
       become: true
       ansible.builtin.import_tasks: tasks/system/packages.yml
 
+    - name: Rust
+      ansible.builtin.import_tasks: tasks/system/rust.yml
+      tags: [system, dev, rust]
+
     - name: Security Settings
       tags: [system, security]
       become: true
@@ -107,9 +111,6 @@
     - name: User python
       ansible.builtin.import_tasks: tasks/user/python.yml
       tags: [user, python]
-    - name: User rust
-      ansible.builtin.import_tasks: tasks/user/rust.yml
-      tags: [user, rust]
     - name: User UI
       ansible.builtin.import_tasks: tasks/user/ui.yml
       tags: [user, ui]
