@@ -50,3 +50,16 @@
   when: file_rustup.stat.exists
   register: rustup_result
   changed_when: "'linux-gnu unchanged - rustc' not in rustup_result.stdout"
+
+- name: All - find rust binaries
+  ansible.builtin.find:
+    paths: /var/lib/cargo/bin/
+  register: rust_binaries
+
+- name: All - link rust binaries to /usr/local/bin
+  become: true
+  ansible.builtin.file:
+    src: "{{ item.path }}"
+    dest: "/usr/local/bin/{{ item.path | basename }}"
+    state: link
+  with_items: "{{ rust_binaries.files }}"
