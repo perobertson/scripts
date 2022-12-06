@@ -6,7 +6,7 @@
 
 - name: All - Check if rustup exists
   ansible.builtin.stat:
-    path: ${HOME}/.cargo/bin/rustup
+    path: "{{ cargo_home }}/bin/rustup"
   register: file_rustup
 
 # This is a shell script which is used for bootstrapping
@@ -15,14 +15,14 @@
   ansible.builtin.get_url:
     url: https://sh.rustup.rs
     dest: ${HOME}/.local/bin/rustup.sh
-    mode: '0775'
+    mode: '0700'
   retries: 3
   delay: 5
   register: download_rustup_sh
   until: download_rustup_sh is succeeded
 
 - name: All - Setup rustup
-  ansible.builtin.command: rustup.sh -y -q --no-modify-path
+  ansible.builtin.command: ${HOME}/.local/bin/rustup.sh -y -q --no-modify-path
   when:
     # prefer the system compiler so all packages match
     - not file_rustc.stat.exists

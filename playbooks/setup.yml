@@ -4,8 +4,10 @@
     ansible_connection: local
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
     aws_vault_version: 6.6.0
+    cargo_home: "{{ lookup('ansible.builtin.env','CARGO_HOME', default='~/.cargo') }}"
     code_path: "{{ lookup('ansible.builtin.env', 'CODE_PATH', default='~/workspace') }}"
     dive_version: 0.10.0
+    home: "{{ lookup('ansible.builtin.env','HOME', default='~') }}"
     signing_keys:
       epel:  # https://getfedora.org/security/
         "8":
