@@ -4,8 +4,10 @@
     ansible_connection: local
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
     aws_vault_version: 6.6.0
+    cargo_home: "{{ lookup('ansible.builtin.env','CARGO_HOME', default='~/.cargo') }}"
     code_path: "{{ lookup('ansible.builtin.env', 'CODE_PATH', default='~/workspace') }}"
     dive_version: 0.10.0
+    home: "{{ lookup('ansible.builtin.env','HOME', default='~') }}"
     signing_keys:
       epel:  # https://getfedora.org/security/
         "8":
@@ -65,6 +67,16 @@
       ansible.builtin.set_fact:
         running_in_wsl: "{{ ansible_kernel.endswith('-WSL') or ansible_kernel.endswith('-WSL2') }}"
 
+    - name: Ensure "systemd=true is in section "[boot]" in /etc/wsl.conf
+      become: true
+      community.general.ini_file:
+        path: /etc/wsl.conf
+        section: boot
+        option: systemd
+        value: true
+        mode: '0644'
+      when: running_in_wsl
+
     ### --- System ---
     - name: Repositories
       tags: [system, dev, repo]
@@ -75,6 +87,10 @@
       tags: [system, dev, packages]
       become: true
       ansible.builtin.import_tasks: tasks/system/packages.yml
+
+    - name: Rust
+      ansible.builtin.import_tasks: tasks/system/rust.yml
+      tags: [system, dev, rust]
 
     - name: Security Settings
       tags: [system, security]
@@ -95,9 +111,6 @@
     - name: User python
       ansible.builtin.import_tasks: tasks/user/python.yml
       tags: [user, python]
-    - name: User rust
-      ansible.builtin.import_tasks: tasks/user/rust.yml
-      tags: [user, rust]
     - name: User UI
       ansible.builtin.import_tasks: tasks/user/ui.yml
       tags: [user, ui]

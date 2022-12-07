@@ -10,8 +10,6 @@ PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${HOME}/bin:$PATH"
 aws-vault --version
 bash --version
 bat --version || echo 'bat unavailable'
-cargo --version
-cargo-clippy --version
 code --version
 curl --version
 docker --version || echo 'docker unavailable'
@@ -37,10 +35,6 @@ podman --version
 podman-compose --version || echo 'podman-compose unavailable'
 python --version || echo 'python unavailable'
 python3 --version
-rust-gdb --version
-rustc --version
-rustdoc --version
-rustfmt --version
 shellcheck --version || echo 'shellcheck unavailable'
 ssh -V
 tar --version
@@ -53,5 +47,11 @@ zoxide --version || echo 'zoxide unavailable'
 zsh --version
 # These commands do not have a version option or cause side effects
 command -v ansible
+command -v cargo
+command -v cargo-clippy
 command -v gitk
+command -v rust-gdb
+command -v rustc
+command -v rustdoc
+command -v rustfmt
 command -v rustup.sh
