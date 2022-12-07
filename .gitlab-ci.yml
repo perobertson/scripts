@@ -188,8 +188,6 @@ test:archlinux:latest:
       artifacts: false
     - job: lint:ansible
       artifacts: false
-  # TODO: remove this when the upstream packaging issue is fixed
-  allow_failure: true
 
 test:centos:stream9:
   extends:
@@ -264,8 +262,6 @@ test:manjarolinux:latest:
       artifacts: false
     - job: lint:ansible
       artifacts: false
-  # TODO: remove this when the upstream packaging issue is fixed
-  allow_failure: true
 
 test:ubuntu:22.04:
   # EOL: 2027-04
