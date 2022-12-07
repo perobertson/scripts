@@ -10,7 +10,6 @@ PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${HOME}/bin:$PATH"
 aws-vault --version
 bash --version
 bat --version || echo 'bat unavailable'
-code --version
 curl --version
 docker --version || echo 'docker unavailable'
 docker compose version || echo 'docker compose unavailable'
@@ -49,6 +48,7 @@ zsh --version
 command -v ansible
 command -v cargo
 command -v cargo-clippy
+command -v code
 command -v gitk
 command -v rust-gdb
 command -v rustc
