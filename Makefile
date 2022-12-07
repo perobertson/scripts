@@ -60,7 +60,7 @@ dockerfiles/dist/ubuntu/ubuntu-22.04.tar: dockerfiles/ubuntu.dockerfile
 .PHONY: ansible-lint
 ansible-lint:
 	ansible-playbook --syntax-check $(playbooks)
-	ansible-lint -p $(playbooks)
+	ansible-lint -s -p playbooks
 
 .PHONY: git_hooks
 git_hooks: .git/hooks/pre-commit
