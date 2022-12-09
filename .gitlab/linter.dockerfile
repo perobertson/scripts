@@ -2,13 +2,17 @@ FROM docker.io/python:3.10-slim
 
 RUN apt-get update && apt-get install -y \
         bash \
-        go-task \
-        make \
+        curl \
     && useradd \
         --user-group \
         --create-home \
         --shell=/bin/bash \
-        linter
+        linter \
+    && cd /tmp \
+    && curl -sSLO https://github.com/go-task/task/releases/download/v3.19.0/task_linux_amd64.deb \
+    && apt-get install ./task_linux_amd64.deb \
+    && ln -s /usr/bin/task /usr/local/bin/go-task \
+    && rm task_linux_amd64.deb
 
 USER linter
 WORKDIR /home/linter
