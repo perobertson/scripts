@@ -174,7 +174,7 @@ lint:ansible:
     - job: build:linter
       artifacts: false
   script:
-    - make ansible-lint
+    - go-task ans:lint
     # Also check all other non ansible files
     - yamllint -f parsable .
 

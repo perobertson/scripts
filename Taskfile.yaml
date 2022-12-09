@@ -5,11 +5,23 @@ version: "3"
 
 includes:
   ans:
-    taskfile: ./playbooks/Taskfile.yaml
+    taskfile: ./AnsibleTasks.yaml
     dir: playbooks
 
 tasks:
   default: go-task -a 2>/dev/null || task -a
+
+  # This needs to be run from the root of the project to detect all files
+  # Im not sure why that is
+  ans:lint:
+    cmds:
+      - ansible-playbook --syntax-check playbooks/*.yml
+      - ansible-lint -s -p playbooks
+
+  install_git_hooks:
+    desc: Install git commit hooks
+    cmds:
+      - pre-commit install
 
   setup:
     desc: Run the full setup

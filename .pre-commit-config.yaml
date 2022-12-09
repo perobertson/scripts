@@ -31,9 +31,9 @@ repos:
         types: [shell]
       - id: ansible-lint
         name: Ansible Lint
-        entry: make
+        entry: go-task
         args:
-          - ansible-lint
+          - ans:lint
         language: system
         types: [yaml]
         pass_filenames: false
