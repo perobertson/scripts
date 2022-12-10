@@ -1,13 +1,13 @@
 ---
 ### --- Family Specific Setup
 - name: Archlinux GCloud
-  ansible.builtin.import_tasks: archlinux/gcloud.yml
+  ansible.builtin.import_tasks: system_archlinux_gcloud.yml
   when: ansible_os_family == 'Archlinux'
 
 - name: Debian GCloud
-  ansible.builtin.import_tasks: debian/gcloud.yml
+  ansible.builtin.import_tasks: system_debian_gcloud.yml
   when: ansible_os_family == 'Debian'
 
 - name: RedHat GCloud
-  ansible.builtin.import_tasks: redhat/gcloud.yml
+  ansible.builtin.import_tasks: system_redhat_gcloud.yml
   when: ansible_os_family == 'RedHat'
