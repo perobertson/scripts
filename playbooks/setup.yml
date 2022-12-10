@@ -81,15 +81,15 @@
     - name: Repositories
       tags: [system, dev, repo]
       become: true
-      ansible.builtin.import_tasks: tasks/system/repositories.yml
+      ansible.builtin.import_tasks: tasks/system_repositories.yml
 
     - name: Packages
       tags: [system, dev, packages]
       become: true
-      ansible.builtin.import_tasks: tasks/system/packages.yml
+      ansible.builtin.import_tasks: tasks/system_packages.yml
 
     - name: Rust
-      ansible.builtin.import_tasks: tasks/system/rust.yml
+      ansible.builtin.import_tasks: tasks/system_rust.yml
       tags: [system, dev, rust]
 
     - name: Systemd - system
@@ -100,7 +100,7 @@
     - name: Security Settings
       tags: [system, security]
       become: true
-      ansible.builtin.import_tasks: tasks/system/security.yml
+      ansible.builtin.import_tasks: tasks/system_security.yml
 
     ### --- Userspace ---
     # Install dotfiles first so CI can detect drift
