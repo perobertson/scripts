@@ -75,6 +75,21 @@
   register: tfenv_update_result
   changed_when: tfenv_update_result.stdout_lines | unique != ['Already up to date.']
 
+# This is for the side effect of checking if a default toolchain is set
+- name: All - check cargo version
+  tags: [systemd]
+  ansible.builtin.command:
+    cmd: cargo --version
+  register: cargo_version
+  ignore_errors: true
+  changed_when: false
+
+- name: All - rustup set default toolchain
+  tags: [systemd]
+  ansible.builtin.command:
+    cmd: rustup default stable
+  when: "'rustup default stable' in cargo_version.stderr"
+
 # There is no option to install from a git source
 # https://docs.ansible.com/ansible/latest/collections/community/general/cargo_module.html
 - name: All - user-updates

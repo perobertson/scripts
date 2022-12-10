@@ -51,14 +51,6 @@
   register: rustup_result
   changed_when: "'linux-gnu unchanged - rustc' not in rustup_result.stdout"
 
-- name: All - rustup set default toolchain
-  become: true
-  ansible.builtin.command:
-    cmd: /var/lib/cargo/bin/rustup default stable
-  environment:
-    CARGO_HOME: /var/lib/cargo
-  when: not file_rustc.stat.exists
-
 - name: All - find rust binaries
   ansible.builtin.find:
     paths: /var/lib/cargo/bin/
