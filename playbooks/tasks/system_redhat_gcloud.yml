@@ -1,6 +1,6 @@
 ---
 - name: RedHat - rpm keys for Google
-  ansible.builtin.import_tasks: rpm_keys_google.yml
+  ansible.builtin.import_tasks: system_redhat_rpm_keys_google.yml
 
 - name: RedHat - Import google-cloud-cli repository key - 1
   ansible.builtin.rpm_key:

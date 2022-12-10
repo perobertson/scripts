@@ -81,15 +81,15 @@
     - name: Repositories
       tags: [system, dev, repo]
       become: true
-      ansible.builtin.import_tasks: tasks/system/repositories.yml
+      ansible.builtin.import_tasks: tasks/system_repositories.yml
 
     - name: Packages
       tags: [system, dev, packages]
       become: true
-      ansible.builtin.import_tasks: tasks/system/packages.yml
+      ansible.builtin.import_tasks: tasks/system_packages.yml
 
     - name: Rust
-      ansible.builtin.import_tasks: tasks/system/rust.yml
+      ansible.builtin.import_tasks: tasks/system_rust.yml
       tags: [system, dev, rust]
 
     - name: Systemd - system
@@ -100,30 +100,30 @@
     - name: Security Settings
       tags: [system, security]
       become: true
-      ansible.builtin.import_tasks: tasks/system/security.yml
+      ansible.builtin.import_tasks: tasks/system_security.yml
 
     ### --- Userspace ---
     # Install dotfiles first so CI can detect drift
     - name: User dotfiles
-      ansible.builtin.import_tasks: tasks/user/dotfiles.yml
+      ansible.builtin.import_tasks: tasks/user_dotfiles.yml
       tags: [user, dotfiles]
     - name: User applications
-      ansible.builtin.import_tasks: tasks/user/applications.yml
+      ansible.builtin.import_tasks: tasks/user_applications.yml
       tags: [user, applications]
     - name: User autostart
-      ansible.builtin.import_tasks: tasks/user/autostart.yml
+      ansible.builtin.import_tasks: tasks/user_autostart.yml
       tags: [user, autostart]
     - name: User python
-      ansible.builtin.import_tasks: tasks/user/python.yml
+      ansible.builtin.import_tasks: tasks/user_python.yml
       tags: [user, python]
     - name: User UI
-      ansible.builtin.import_tasks: tasks/user/ui.yml
+      ansible.builtin.import_tasks: tasks/user_ui.yml
       tags: [user, ui]
     - name: User ides
-      ansible.builtin.import_tasks: tasks/user/ides.yml
+      ansible.builtin.import_tasks: tasks/user_ides.yml
       tags: [user, ides]
     - name: User systemd
-      ansible.builtin.import_tasks: tasks/user/systemd.yml
+      ansible.builtin.import_tasks: tasks/user_systemd.yml
       tags: [user, systemd]
       when:
         - stat_run_systemd.stat.exists

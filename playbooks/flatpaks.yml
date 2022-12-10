@@ -13,7 +13,7 @@
 
     - name: Flatpaks
       tags: [user]
-      ansible.builtin.import_tasks: tasks/user/flatpaks.yml
+      ansible.builtin.import_tasks: tasks/user_flatpaks.yml
   handlers:
     - name: Reload systemd --user
       ansible.builtin.systemd:
