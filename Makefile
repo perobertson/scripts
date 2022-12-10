@@ -12,9 +12,6 @@ else
 $(warning no container platform found. Cannot run test targets.)
 endif
 
-.git/hooks/pre-commit: .pre-commit-config.yaml
-	pre-commit install
-
 define build_image
 	@# $1 is the OS
 	@# $2 is the OS_VERSION
@@ -60,10 +57,7 @@ dockerfiles/dist/ubuntu/ubuntu-22.04.tar: dockerfiles/ubuntu.dockerfile
 .PHONY: ansible-lint
 ansible-lint:
 	ansible-playbook --syntax-check $(playbooks)
-	ansible-lint -p $(playbooks)
-
-.PHONY: git_hooks
-git_hooks: .git/hooks/pre-commit
+	ansible-lint -s -p playbooks
 
 define test_os
 	@# $1 is the OS

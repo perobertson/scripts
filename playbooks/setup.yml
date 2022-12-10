@@ -1,10 +1,10 @@
 ---
-- hosts: localhost
+- name: Primary playbook
+  hosts: localhost
   vars:
     ansible_connection: local
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
     aws_vault_version: 6.6.0
-    cargo_home: "{{ lookup('ansible.builtin.env','CARGO_HOME', default='~/.cargo') }}"
     code_path: "{{ lookup('ansible.builtin.env', 'CODE_PATH', default='~/workspace') }}"
     dive_version: 0.10.0
     home: "{{ lookup('ansible.builtin.env','HOME', default='~') }}"
@@ -91,6 +91,11 @@
     - name: Rust
       ansible.builtin.import_tasks: tasks/system/rust.yml
       tags: [system, dev, rust]
+
+    - name: Systemd - system
+      ansible.builtin.import_tasks: tasks/system_systemd.yml
+      tags: [system, systemd]
+      become: true
 
     - name: Security Settings
       tags: [system, security]

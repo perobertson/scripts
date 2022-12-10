@@ -1,0 +1,46 @@
+---
+- name: All - create systemd directories
+  tags: [systemd]
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - /etc
+    - /etc/systemd
+    - /etc/systemd/system
+    - /etc/systemd/user
+
+- name: All - configure systemd units
+  diff: true
+  tags: [systemd]
+  ansible.builtin.copy:
+    src: "files{{ item }}"
+    dest: "{{ item }}"
+    mode: '0644'
+  loop:
+    - /etc/systemd/user/user-updates.service
+    - /etc/systemd/user/user-updates.timer
+
+- name: All - Enable user updates
+  tags: [systemd]
+  ansible.builtin.systemd:
+    name: user-updates.timer
+    enabled: true
+    daemon_reload: true
+    scope: user
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir
+
+- name: All - Run user updates timer
+  tags: [systemd]
+  ansible.builtin.systemd:
+    name: user-updates.timer
+    enabled: true
+    state: started
+    daemon_reload: true
+    scope: user
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir

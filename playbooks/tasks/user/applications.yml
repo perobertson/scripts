@@ -5,7 +5,7 @@
   ansible.builtin.file:
     path: $HOME/bin
     state: directory
-    mode: '0700'
+    mode: "0700"
 
 - name: All - Populate ~/bin
   diff: true
@@ -27,7 +27,7 @@
   ansible.builtin.file:
     path: "$HOME/{{ item }}"
     state: directory
-    mode: '0700'
+    mode: "0700"
   loop:
     - .local/bin
     - .local/lib
@@ -41,15 +41,15 @@
     mode: "{{ item.mode }}"
   loop:
     - name: pkenv-update
-      mode: '0700'
+      mode: "0700"
     - name: pyenv-update
-      mode: '0700'
+      mode: "0700"
     - name: rbenv-update
-      mode: '0700'
+      mode: "0700"
     - name: rust-tools-update
-      mode: '0700'
+      mode: "0700"
     - name: tfenv-update
-      mode: '0700'
+      mode: "0700"
 
 - name: All - pkenv-update
   ansible.builtin.command:
@@ -74,3 +74,28 @@
     cmd: "$HOME/.local/bin/tfenv-update"
   register: tfenv_update_result
   changed_when: tfenv_update_result.stdout_lines | unique != ['Already up to date.']
+
+# This is for the side effect of checking if a default toolchain is set
+- name: All - check cargo version
+  tags: [systemd]
+  ansible.builtin.command:
+    cmd: cargo --version
+  register: cargo_version
+  ignore_errors: true
+  changed_when: false
+
+- name: All - rustup set default toolchain
+  tags: [systemd]
+  ansible.builtin.command:
+    cmd: rustup default stable
+  when: "'rustup default stable' in cargo_version.stderr"
+
+# There is no option to install from a git source
+# https://docs.ansible.com/ansible/latest/collections/community/general/cargo_module.html
+- name: All - user-updates
+  tags: [systemd]
+  ansible.builtin.command:
+    cmd: cargo install --git https://gitlab.com/perobertson/user-updates.git
+    creates: "{{ lookup('ansible.builtin.env', 'HOME') }}/.local/bin/user-updates"
+  environment:
+    CARGO_INSTALL_ROOT: "{{ lookup('ansible.builtin.env', 'HOME') }}/.local"

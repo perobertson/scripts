@@ -1,3 +1,5 @@
 ---
+exclude_paths:
+  - playbooks/Taskfile.yaml
 skip_list:
   - line-length  # Lines should be no longer than 160 chars'
