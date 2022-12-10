@@ -1,15 +1,15 @@
 ---
 ### --- Family Specific Packages
 - name: Archlinux Packages
-  ansible.builtin.import_tasks: archlinux/packages.yml
+  ansible.builtin.import_tasks: system_archlinux_packages.yml
   when: ansible_os_family == 'Archlinux'
 
 - name: Debian Packages
-  ansible.builtin.import_tasks: debian/packages.yml
+  ansible.builtin.import_tasks: system_debian_packages.yml
   when: ansible_os_family == 'Debian'
 
 - name: RedHat Packages
-  ansible.builtin.import_tasks: redhat/packages.yml
+  ansible.builtin.import_tasks: system_redhat_packages.yml
   when: ansible_os_family == 'RedHat'
 
 ### --- Settings that require packages to be installed first

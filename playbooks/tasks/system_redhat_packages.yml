@@ -151,9 +151,9 @@
 ### --- Distro specific ---
 
 - name: CentOS Packages
-  ansible.builtin.import_tasks: centos/packages.yml
+  ansible.builtin.import_tasks: redhat/centos/packages.yml
   when: ansible_distribution == 'CentOS'
 
 - name: Fedora Packages
-  ansible.builtin.import_tasks: fedora/packages.yml
+  ansible.builtin.import_tasks: redhat/fedora/packages.yml
   when: ansible_distribution == 'Fedora'
