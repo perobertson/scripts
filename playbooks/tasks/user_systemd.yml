@@ -3,7 +3,7 @@
   ansible.builtin.file:
     path: "$HOME/{{ item }}"
     state: directory
-    mode: '0700'
+    mode: "0700"
   loop:
     - .config/systemd
     - .config/systemd/user
@@ -49,6 +49,18 @@
     - pyenv-update.service
     - rust-tools-update.service
     - tfenv-update.service
-  # TODO: figure out how to get `systemd --user` running
-  # Failed to connect to bus: No such file or directory
-  failed_when: false
+    - user-updates.timer
+
+# Just the timer units should be started here
+- name: All - Run user services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+    daemon_reload: true
+    scope: user
+  loop:
+    - user-updates.timer
+  when:
+    - stat_run_systemd.stat.exists
+    - stat_run_systemd.stat.isdir
