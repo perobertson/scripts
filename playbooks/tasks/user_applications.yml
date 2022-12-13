@@ -40,8 +40,6 @@
     dest: "$HOME/.local/bin/{{ item.name }}"
     mode: "{{ item.mode }}"
   loop:
-    - name: pkenv-update
-      mode: "0700"
     - name: pyenv-update
       mode: "0700"
     - name: rbenv-update
@@ -50,12 +48,6 @@
       mode: "0700"
     - name: tfenv-update
       mode: "0700"
-
-- name: All - pkenv-update
-  ansible.builtin.command:
-    cmd: "$HOME/.local/bin/pkenv-update"
-  register: pkenv_update_result
-  changed_when: pkenv_update_result.stdout_lines | unique != ['Already up to date.']
 
 - name: All - pyenv-update
   ansible.builtin.command:
