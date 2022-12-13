@@ -22,7 +22,6 @@
   loop:
     - name: pyenv-update.service
     - name: rust-tools-update.service
-    - name: tfenv-update.service
 
 - name: All - Enable user services
   ansible.builtin.systemd:
@@ -36,7 +35,6 @@
   loop:
     - pyenv-update.service
     - rust-tools-update.service
-    - tfenv-update.service
     - user-updates.timer
 
 # Just the timer units should be started here

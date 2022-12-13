@@ -46,8 +46,6 @@
       mode: "0700"
     - name: rust-tools-update
       mode: "0700"
-    - name: tfenv-update
-      mode: "0700"
 
 - name: All - pyenv-update
   ansible.builtin.command:
@@ -60,12 +58,6 @@
     cmd: "$HOME/.local/bin/rbenv-update"
   register: rbenv_update_result
   changed_when: rbenv_update_result.stdout_lines | unique != ['Already up to date.']
-
-- name: All - tfenv-update
-  ansible.builtin.command:
-    cmd: "$HOME/.local/bin/tfenv-update"
-  register: tfenv_update_result
-  changed_when: tfenv_update_result.stdout_lines | unique != ['Already up to date.']
 
 # This is for the side effect of checking if a default toolchain is set
 - name: All - check cargo version
