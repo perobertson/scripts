@@ -40,18 +40,10 @@
     dest: "$HOME/.local/bin/{{ item.name }}"
     mode: "{{ item.mode }}"
   loop:
-    - name: pyenv-update
-      mode: "0700"
     - name: rbenv-update
       mode: "0700"
     - name: rust-tools-update
       mode: "0700"
-
-- name: All - pyenv-update
-  ansible.builtin.command:
-    cmd: "$HOME/.local/bin/pyenv-update"
-  register: pyenv_update_result
-  changed_when: pyenv_update_result.stdout_lines | unique != ['Already up to date.']
 
 - name: All - rbenv-update
   ansible.builtin.command:

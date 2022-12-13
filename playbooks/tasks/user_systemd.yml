@@ -20,7 +20,6 @@
     dest: "$HOME/.config/systemd/user/{{ item.name }}"
     mode: "0600"
   loop:
-    - name: pyenv-update.service
     - name: rust-tools-update.service
 
 - name: All - Enable user services
@@ -33,7 +32,6 @@
     - stat_run_systemd.stat.exists
     - stat_run_systemd.stat.isdir
   loop:
-    - pyenv-update.service
     - rust-tools-update.service
     - user-updates.timer
 
