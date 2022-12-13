@@ -8,15 +8,6 @@
     - .config/systemd
     - .config/systemd/user
 
-- name: All - Create user services
-  diff: true
-  ansible.builtin.copy:
-    src: "files/home/user/.config/systemd/user/{{ item.name }}"
-    dest: "$HOME/.config/systemd/user/{{ item.name }}"
-    mode: "0600"
-  loop:
-    - name: logout-podman-stop.service
-
 # These need to be templated because the path to the files are in the users home
 # When the services are enabled they run at boot which is before user shell
 # customizations happen.
@@ -44,7 +35,6 @@
     - stat_run_systemd.stat.exists
     - stat_run_systemd.stat.isdir
   loop:
-    - logout-podman-stop.service
     - pkenv-update.service
     - pyenv-update.service
     - rust-tools-update.service
