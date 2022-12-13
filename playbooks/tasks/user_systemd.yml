@@ -20,7 +20,6 @@
     dest: "$HOME/.config/systemd/user/{{ item.name }}"
     mode: "0600"
   loop:
-    - name: pkenv-update.service
     - name: pyenv-update.service
     - name: rust-tools-update.service
     - name: tfenv-update.service
@@ -35,7 +34,6 @@
     - stat_run_systemd.stat.exists
     - stat_run_systemd.stat.isdir
   loop:
-    - pkenv-update.service
     - pyenv-update.service
     - rust-tools-update.service
     - tfenv-update.service
