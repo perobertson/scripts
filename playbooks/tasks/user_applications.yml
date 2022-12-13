@@ -32,17 +32,6 @@
     - .local/bin
     - .local/lib
 
-- name: All - Populate user systemd scripts
-  tags: [systemd]
-  diff: true
-  ansible.builtin.copy:
-    src: "files/home/user/.local/bin/{{ item.name }}"
-    dest: "$HOME/.local/bin/{{ item.name }}"
-    mode: "{{ item.mode }}"
-  loop:
-    - name: rust-tools-update
-      mode: "0700"
-
 # This is for the side effect of checking if a default toolchain is set
 - name: All - check cargo version
   tags: [systemd]
