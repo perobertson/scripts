@@ -21,13 +21,6 @@
     - key: /org/nemo/preferences/default-folder-viewer
       value: "'list-view'"
 
-- name: All - Configure Xresources
-  diff: true
-  ansible.builtin.copy:
-    src: files/home/user/.Xresources
-    dest: ~/.Xresources
-    mode: '0664'
-
 - name: All - Set terminal settings
   tags: [terminal]
   community.general.dconf:

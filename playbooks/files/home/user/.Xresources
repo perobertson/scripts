@@ -1,4 +1,0 @@
-! After changing settings in this file you need to relogin
-
-! Cleans up fonts in Firefox and potentially other apps
-Xft.lcdfilter: lcddefault
