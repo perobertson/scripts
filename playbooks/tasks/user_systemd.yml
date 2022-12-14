@@ -8,22 +8,6 @@
     - .config/systemd
     - .config/systemd/user
 
-# These need to be templated because the path to the files are in the users home
-# When the services are enabled they run at boot which is before user shell
-# customizations happen.
-# Searched directories include /usr/local/bin/, /usr/bin/, /bin/
-# and their sbin/ counterparts
-- name: All - Create user templated services
-  diff: true
-  ansible.builtin.template:
-    src: "files/home/user/.config/systemd/user/{{ item.name }}.j2"
-    dest: "$HOME/.config/systemd/user/{{ item.name }}"
-    mode: "0600"
-  loop:
-    - name: pyenv-update.service
-    - name: rust-tools-update.service
-    - name: tfenv-update.service
-
 - name: All - Enable user services
   ansible.builtin.systemd:
     name: "{{ item }}"
@@ -34,9 +18,6 @@
     - stat_run_systemd.stat.exists
     - stat_run_systemd.stat.isdir
   loop:
-    - pyenv-update.service
-    - rust-tools-update.service
-    - tfenv-update.service
     - user-updates.timer
 
 # Just the timer units should be started here
