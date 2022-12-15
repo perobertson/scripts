@@ -17,7 +17,6 @@
     - README.md
     - aws_iam_to_ses.py
     - install-aws.bash
-    - install-nvidia.bash
 
 # For user systemd
 # https://www.freedesktop.org/software/systemd/man/file-hierarchy.html#Home%20Directory
