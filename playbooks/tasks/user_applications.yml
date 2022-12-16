@@ -1,23 +1,4 @@
 ---
-# Needed for user systemd scripts
-- name: All - Create ~/bin
-  tags: [systemd]
-  ansible.builtin.file:
-    path: $HOME/bin
-    state: directory
-    mode: "0700"
-
-- name: All - Populate ~/bin
-  diff: true
-  ansible.builtin.file:
-    src: "{{ playbook_dir }}/files/home/user/bin/{{ item }}"
-    dest: "$HOME/bin/{{ item }}"
-    state: link
-  loop:
-    - README.md
-    - aws_iam_to_ses.py
-    - install-aws.bash
-
 # For user systemd
 # https://www.freedesktop.org/software/systemd/man/file-hierarchy.html#Home%20Directory
 - name: All - Create ~/.local/bin
