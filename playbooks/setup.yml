@@ -116,9 +116,6 @@
     - name: User UI
       ansible.builtin.import_tasks: tasks/user_ui.yml
       tags: [user, ui]
-    - name: User ides
-      ansible.builtin.import_tasks: tasks/user_ides.yml
-      tags: [user, ides]
     - name: User systemd
       ansible.builtin.import_tasks: tasks/user_systemd.yml
       tags: [user, systemd]

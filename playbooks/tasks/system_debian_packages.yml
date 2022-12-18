@@ -33,8 +33,6 @@
     - seahorse  # key management
     - shellcheck
     - sqlitebrowser
-    - sublime-merge
-    - sublime-text
     - sysstat  # iostat
     - tree
     - unzip

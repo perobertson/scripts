@@ -80,8 +80,6 @@
     - seahorse  # key management
     - setools-console
     - sqlite-devel
-    - sublime-merge
-    - sublime-text
     - sysstat  # iostat
     - tree
     - unzip

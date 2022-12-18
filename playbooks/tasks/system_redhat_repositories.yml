@@ -70,30 +70,6 @@
     - rpm_key_keybase is succeeded
     - rpm_key_keybase.changed
 
-- name: RedHat - Import Sublime-Text signing key
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://download.sublimetext.com/sublimehq-rpm-pub.gpg
-    fingerprint: 1B64279675A4299DCFC70858CA464A9A222D23D0
-  register: rpm_key_sublimetext
-
-- name: RedHat - Add Sublime-Text repository
-  ansible.builtin.yum_repository:
-    file: sublime-text
-    name: sublime-text
-    description: Sublime Text - x86_64 - Stable
-    baseurl: https://download.sublimetext.com/rpm/stable/x86_64
-    enabled: true
-    gpgcheck: true
-    gpgkey:
-      - https://download.sublimetext.com/sublimehq-rpm-pub.gpg
-    repo_gpgcheck: true
-
-# TODO: remove this workaround when dnf uses the rpm key database
-- name: RedHat - refresh dnf keys for SublimeText  # noqa no-handler
-  ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='sublime-text'"
-  when: rpm_key_sublimetext.changed
-
 - name: RedHat - Import VSCode signing key
   ansible.builtin.rpm_key:
     state: present
