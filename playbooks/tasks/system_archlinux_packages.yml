@@ -29,6 +29,8 @@
     - make
     - nodejs
     - npm
+    # Used when compiling rust tools
+    - pkgconf  # Helper for configuring compiler and linker flags
     - podman
     - podman-compose  # emulate docker-compose
     - podman-docker  # emulate docker
