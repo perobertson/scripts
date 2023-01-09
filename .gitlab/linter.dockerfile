@@ -1,8 +1,9 @@
-FROM docker.io/python:3.10-slim
+FROM docker.io/python:3.11-slim
 
 RUN apt-get update && apt-get install -y \
         bash \
         curl \
+        git-core \
     && useradd \
         --user-group \
         --create-home \
