@@ -8,6 +8,7 @@
     code_path: "{{ lookup('ansible.builtin.env', 'CODE_PATH', default='~/workspace') }}"
     dive_version: 0.10.0
     home: "{{ lookup('ansible.builtin.env','HOME', default='~') }}"
+    config_dir: "{{ lookup('ansible.builtin.env', 'XDG_CONFIG_HOME') | default(home, true) + '/.config' }}"
     signing_keys:
       epel:  # https://getfedora.org/security/
         "8":

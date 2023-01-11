@@ -1,4 +1,29 @@
 ---
+- name: All - Check if user-updates settings exist
+  tags: [systemd]
+  ansible.builtin.stat:
+    path: "{{ config_dir }}/user-updates/settings.yml"
+  register: user_updates_settings
+
+- name: All - Create user-updates dirs
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0700'
+  when: not user_updates_settings.stat.exists
+  loop:
+    - "{{ config_dir }}"
+    - "{{ config_dir }}/user-updates"
+
+- name: All - Configure user-updates
+  diff: true
+  tags: [systemd]
+  ansible.builtin.copy:
+    src: "files/XDG_CONFIG_HOME/user-updates/settings.yml"
+    dest: "{{ config_dir }}/user-updates/settings.yml"
+    mode: '0600'
+  when: not user_updates_settings.stat.exists
+
 - name: All - Check if dotfiles exist
   ansible.builtin.stat:
     path: "{{ code_path }}/gitlab.com/perobertson/dotfiles"
@@ -9,7 +34,9 @@
   ansible.builtin.command:
     chdir: "{{ code_path }}/gitlab.com/perobertson/dotfiles"
     cmd: git stash
-  when: dotfiles.stat.isdir is defined and dotfiles.stat.isdir
+  when:
+    - dotfiles.stat.isdir is defined
+    - dotfiles.stat.isdir
   register: stashed_changes
   changed_when: "'No local changes to save' not in stashed_changes.stdout"
 
@@ -25,7 +52,9 @@
   ansible.builtin.command:
     chdir: "{{ code_path }}/gitlab.com/perobertson/dotfiles"
     cmd: git stash pop
-  when: stashed_changes.stdout is defined and stashed_changes.stdout != 'No local changes to save'
+  when:
+    - stashed_changes.stdout is defined
+    - stashed_changes.stdout != 'No local changes to save'
 
 - name: All - Install Dotfiles  # noqa no-handler
   ansible.builtin.command: "{{ code_path }}/gitlab.com/perobertson/dotfiles/install.py"
