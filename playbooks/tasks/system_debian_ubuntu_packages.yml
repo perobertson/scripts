@@ -9,7 +9,6 @@
   until: ubuntu_install_packages is succeeded
   loop:
     - podman-docker  # emulate docker
-    - yubikey-manager
 
 - name: Ubuntu >=18 - Install packages
   ansible.builtin.apt:

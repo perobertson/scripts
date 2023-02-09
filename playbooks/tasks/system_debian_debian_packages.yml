@@ -23,5 +23,3 @@
   loop:
     - kubernetes-client  # kubectl
     - python3-cairo  # required to fix default python
-    # TODO: install yubikey-manager when debian finally updates to a non alpha
-    # - yubikey-manager

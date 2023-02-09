@@ -11,5 +11,3 @@
     - dbus-daemon
     - kubectl
     - python3-psutil
-    # TODO: install yubikey-manager when it becomes available
-    # - yubikey-manager
