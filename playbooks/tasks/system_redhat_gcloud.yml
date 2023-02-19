@@ -42,6 +42,7 @@
     or import_glcoud_package_key.changed
     or import_glcoud_repository_key1.changed
     or import_glcoud_repository_key2.changed
+  changed_when: false
 
 - name: RedHat - Best effort to install gcloud
   ansible.builtin.dnf:

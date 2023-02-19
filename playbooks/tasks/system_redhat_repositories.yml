@@ -39,6 +39,7 @@
     dnf -q makecache -y --disablerepo='*'
     --enablerepo='1password-beta' --enablerepo='1password-stable'
   when: rpm_key_1password.changed
+  changed_when: false
 
 - name: RedHat - Import Keybase signing key
   ansible.builtin.rpm_key:
@@ -69,6 +70,7 @@
   when:
     - rpm_key_keybase is succeeded
     - rpm_key_keybase.changed
+  changed_when: false
 
 - name: RedHat - Import VSCode signing key
   ansible.builtin.rpm_key:
@@ -92,6 +94,7 @@
 - name: RedHat - refresh dnf keys for VSCode  # noqa no-handler
   ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='code'"
   when: rpm_key_microsoft.changed
+  changed_when: false
 
 - name: RedHat - Import Zoom signing key
   ansible.builtin.rpm_key:

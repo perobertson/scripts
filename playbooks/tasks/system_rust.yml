@@ -48,8 +48,8 @@
   environment:
     CARGO_HOME: /var/lib/cargo
   when: file_rustup.stat.exists
-  register: rustup_result
-  changed_when: "'linux-gnu unchanged - rustc' not in rustup_result.stdout"
+  register: rustup_update_result
+  changed_when: "'linux-gnu unchanged - rustc' not in rustup_update_result.stdout"
 
 - name: All - find rust binaries
   ansible.builtin.find:

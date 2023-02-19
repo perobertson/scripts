@@ -56,6 +56,7 @@
     or import_kubernetes_repository_key1.changed
     or import_kubernetes_repository_key2.changed
     or import_glcoud_package_key.changed
+  changed_when: false
 
 - name: CentOS - Import RPM-GPG-KEY-rpmfusion-free signing key
   ansible.builtin.rpm_key:
