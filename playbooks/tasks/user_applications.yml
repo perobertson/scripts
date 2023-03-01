@@ -24,7 +24,9 @@
   tags: [systemd]
   ansible.builtin.command:
     cmd: rustup default stable
+  register: rustup_set_default_result
   when: "'rustup default stable' in cargo_version.stderr"
+  changed_when: rustup_set_default_result.rc == 0
 
 # There is no option to install from a git source
 # https://docs.ansible.com/ansible/latest/collections/community/general/cargo_module.html

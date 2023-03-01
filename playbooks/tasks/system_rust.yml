@@ -33,6 +33,7 @@
 - name: All - Setup rustup
   become: true
   ansible.builtin.command: rustup.sh -y -q --no-modify-path
+  register: rustup_result
   environment:
     CARGO_HOME: /var/lib/cargo
   when:
@@ -40,6 +41,7 @@
     - not file_rustc.stat.exists
     # If the binary exists, use that instead
     - not file_rustup.stat.exists
+  changed_when: rustup_result.rc == 0
 
 - name: All - rustup update
   become: true
