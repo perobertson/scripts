@@ -179,7 +179,7 @@ lint:ansible:
     - echo $CI_BUILDS_DIR
     - echo $CI_PROJECT_DIR
     # ansible-lint uses git which checks directory ownership before running
-    # - git config --add safe.directory $CI_PROJECT_DIR
+    - git config --global --add safe.directory $CI_PROJECT_DIR
     - go-task ans:lint
     # Also check all other non ansible files
     - yamllint -f parsable .
