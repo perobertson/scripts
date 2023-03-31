@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
         --shell=/bin/bash \
         linter \
     && cd /tmp \
-    && curl -sSLO https://github.com/go-task/task/releases/download/v3.19.0/task_linux_amd64.deb \
+    && curl -sSLO https://github.com/go-task/task/releases/download/v3.23.0/task_linux_amd64.deb \
     && apt-get install ./task_linux_amd64.deb \
     && ln -s /usr/bin/task /usr/local/bin/go-task \
     && rm task_linux_amd64.deb
