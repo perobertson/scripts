@@ -39,6 +39,7 @@
     # rust provides cargo, cargo-clippy, debuggers, language server, etc.
     # this is different than RedHat which split those components up
     - rust
+    - rust-analyzer  # Rust Language Server for IDE integration
     - rust-src  # Rust systems programming language - source code
     - shellcheck
     - tk  # windowing toolkit needed for gitk
