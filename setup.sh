@@ -150,7 +150,6 @@ ansible-playbook -v setup.yml
 
 if [[ -n "${CI:-}" ]]; then
     ansible-playbook -v flatpaks.yml
-    ansible-playbook -v gcloud.yml
     ansible-playbook -v kubernetes.yml
     ansible-playbook -v razer.yml
 fi
