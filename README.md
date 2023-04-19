@@ -16,7 +16,7 @@ are just not tested in CI.
 - Archlinux
 - CentOS: stream9
 - Debian: 11
-- Fedora: 37
+- Fedora: 37, 38
 - Manjaro
 - Ubuntu: 22.04(LTS)
 

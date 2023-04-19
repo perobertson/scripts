@@ -146,11 +146,11 @@ bootstrap
 
 # Run the setup
 cd playbooks
+ansible-galaxy collection install -r config/collections.yml
 ansible-playbook -v setup.yml
 
 if [[ -n "${CI:-}" ]]; then
     ansible-playbook -v flatpaks.yml
-    ansible-playbook -v gcloud.yml
     ansible-playbook -v kubernetes.yml
     ansible-playbook -v razer.yml
 fi

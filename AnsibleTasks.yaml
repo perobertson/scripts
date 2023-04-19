@@ -14,11 +14,6 @@ tasks:
     cmds:
       - ansible-playbook -v flatpaks.yml {{.CLI_ARGS}}
 
-  gcloud:
-    desc: Install Google cloud tools
-    cmds:
-      - ansible-playbook --ask-become-pass -v gcloud.yml {{.CLI_ARGS}}
-
   kubernetes:
     desc: Install Kubernetes for development
     cmds:
