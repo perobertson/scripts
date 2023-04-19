@@ -1,0 +1,6 @@
+---
+collections:
+  - name: community.general
+    # 6.5.0 has a bug which prevents dconf from working
+    # https://github.com/ansible-collections/community.general/issues/6271
+    version: 6.4.0

@@ -146,6 +146,7 @@ bootstrap
 
 # Run the setup
 cd playbooks
+ansible-galaxy collection install -r config/collections.yml
 ansible-playbook -v setup.yml
 
 if [[ -n "${CI:-}" ]]; then
