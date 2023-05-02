@@ -20,6 +20,10 @@ repos:
       - id: mixed-line-ending
       - id: no-commit-to-branch
       - id: trailing-whitespace
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.22.0
+    hooks:
+      - id: check-gitlab-ci
   - repo: local
     hooks:
       - id: autoupdate
