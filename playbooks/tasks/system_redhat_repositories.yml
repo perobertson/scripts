@@ -126,7 +126,7 @@
   register: rpmfusion_nonfree_updates_repo
 
 # Install of dependencies is specific to the os family
-- name: RedHat - update zoom-yum-repo  # noqa git-latest
+- name: RedHat - update zoom-yum-repo  # noqa latest
   diff: false
   ansible.builtin.git:
     repo: https://gitlab.com/perobertson/zoom-yum-repo.git
