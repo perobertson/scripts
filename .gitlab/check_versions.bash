@@ -44,6 +44,7 @@ xz --version
 ykman --version || echo 'ykman unavailable'
 zoxide --version || echo 'zoxide unavailable'
 zsh --version
+zstd --version
 # These commands do not have a version option or cause side effects
 command -v ansible
 command -v cargo

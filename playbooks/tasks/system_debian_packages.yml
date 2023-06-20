@@ -38,6 +38,7 @@
     - unzip
     - wget
     - zsh
+    - zstd  # Zstandard - Fast real-time compression algorithm
 
 - name: Debian - Install non WSL packages
   ansible.builtin.apt:

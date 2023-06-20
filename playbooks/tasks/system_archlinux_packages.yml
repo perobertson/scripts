@@ -49,6 +49,7 @@
     - wget
     - xz
     - zsh
+    - zstd  # Zstandard - Fast real-time compression algorithm
 
 - name: Archlinux - Install non WSL packages
   community.general.pacman:

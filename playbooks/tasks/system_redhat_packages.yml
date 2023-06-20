@@ -98,6 +98,7 @@
     - xz-devel
     - zlib-devel
     - zsh
+    - zstd  # Zstandard - Fast real-time compression algorithm
 
 - name: RedHat - Install non WSL packages
   ansible.builtin.dnf:
