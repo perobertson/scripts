@@ -19,11 +19,6 @@ tasks:
     cmds:
       - ansible-playbook --ask-become-pass -v kubernetes.yml {{.CLI_ARGS}}
 
-  razer:
-    desc: Install Razer tools
-    cmds:
-      - ansible-playbook --ask-become-pass -v razer.yml {{.CLI_ARGS}}
-
   setup:
     desc: Run the setup script
     cmds:
