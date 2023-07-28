@@ -22,17 +22,6 @@
     gpgkey: https://downloads.1password.com/linux/keys/1password.asc
     repo_gpgcheck: true
 
-- name: RedHat - Add 1Password stable repository
-  ansible.builtin.yum_repository:
-    file: 1password-ansible
-    name: 1password-stable
-    description: 1Password - Stable
-    baseurl: https://downloads.1password.com/linux/rpm/stable/$basearch
-    enabled: true
-    gpgcheck: true
-    gpgkey: https://downloads.1password.com/linux/keys/1password.asc
-    repo_gpgcheck: true
-
 # TODO: remove this workaround when dnf uses the rpm key database
 - name: RedHat - refresh dnf keys for 1Password  # noqa no-handler
   ansible.builtin.command: >
