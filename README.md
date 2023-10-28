@@ -13,11 +13,9 @@ EOL or use EOL languages can still be run as manual jobs in the CI pipeline and
 will be cleaned up after a period of time. Other versions may still work, they
 are just not tested in CI.
 
-- Archlinux
 - CentOS: stream9
 - Debian: 11
 - Fedora: 37, 38
-- Manjaro
 - Ubuntu: 22.04(LTS)
 
 Please see the [latest pipeline] for `main` for the complete list.

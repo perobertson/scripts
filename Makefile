@@ -26,10 +26,6 @@ define build_image
 	$(CONTAINER) load -i dockerfiles/dist/$(1)/$(1)-$(2).tar
 endef
 
-dockerfiles/dist/archlinux/archlinux-latest.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/archlinux/archlinux-latest.tar: dockerfiles/archlinux.dockerfile
-	$(call build_image,archlinux,latest)
-
 dockerfiles/dist/centos/centos-stream9.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/centos/centos-stream9.tar: dockerfiles/centos.dockerfile
 	$(call build_image,centos,stream9)
@@ -49,10 +45,6 @@ dockerfiles/dist/fedora/fedora-38.tar: dockerfiles/fedora.dockerfile
 dockerfiles/dist/fedora/fedora-39.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/fedora/fedora-39.tar: dockerfiles/fedora.dockerfile
 	$(call build_image,fedora,39)
-
-dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/manjarolinux/manjarolinux-latest.tar: dockerfiles/manjarolinux.dockerfile
-	$(call build_image,manjarolinux,latest)
 
 dockerfiles/dist/ubuntu/ubuntu-22.04.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/ubuntu/ubuntu-22.04.tar: dockerfiles/ubuntu.dockerfile
@@ -100,10 +92,6 @@ define test_os
 	$(CONTAINER) stop "scripts-$(1)-$(2)"
 endef
 
-.PHONY: test-archlinux-latest
-test-archlinux-latest: dockerfiles/dist/archlinux/archlinux-latest.tar
-	$(call test_os,archlinux,latest)
-
 .PHONY: test-centos-stream9
 test-centos-stream9: dockerfiles/dist/centos/centos-stream9.tar
 	$(call test_os,centos,stream9)
@@ -123,10 +111,6 @@ test-fedora-38: dockerfiles/dist/fedora/fedora-38.tar
 .PHONY: test-fedora-39
 test-fedora-39: dockerfiles/dist/fedora/fedora-39.tar
 	$(call test_os,fedora,39)
-
-.PHONY: test-manjarolinux-latest
-test-manjarolinux-latest: dockerfiles/dist/manjarolinux/manjarolinux-latest.tar
-	$(call test_os,manjarolinux,latest)
 
 .PHONY: test-ubuntu-22.04
 test-ubuntu-22.04: dockerfiles/dist/ubuntu/ubuntu-22.04.tar
