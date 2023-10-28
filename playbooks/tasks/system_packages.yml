@@ -1,9 +1,5 @@
 ---
 ### --- Family Specific Packages
-- name: Archlinux Packages
-  ansible.builtin.import_tasks: system_archlinux_packages.yml
-  when: ansible_os_family == 'Archlinux'
-
 - name: Debian Packages
   ansible.builtin.import_tasks: system_debian_packages.yml
   when: ansible_os_family == 'Debian'
@@ -27,9 +23,6 @@
     owner: root
     url: https://github.com/99designs/aws-vault/releases/download/v{{ aws_vault_version }}/aws-vault-linux-amd64
     mode: "0755"
-  # Arch is the only platform which has a package
-  # It also comes with docs and completions
-  when: ansible_os_family != 'Archlinux'
 
 - name: All - Install custom scripts
   tags: [systemd]

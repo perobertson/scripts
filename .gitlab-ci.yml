@@ -47,9 +47,6 @@ workflow:
     - su public --command="./.gitlab/check_versions.bash"
     - su public --command="./.gitlab/verify_no_changes.sh"
 
-.rules_archlinux:
-  rules: *rules_default
-
 .rules_debian:
   rules: *rules_default
 
@@ -100,13 +97,6 @@ build:linter:
       --destination $CI_REGISTRY_IMAGE/linter:$CI_COMMIT_REF_SLUG
       --dockerfile $CI_PROJECT_DIR/.gitlab/linter.dockerfile
 
-build:archlinux:latest:
-  extends:
-    - .build_img
-    - .rules_secondary_os
-  script:
-    - ./.gitlab/build_image.sh archlinux latest
-
 build:centos:stream9:
   extends:
     - .build_img
@@ -151,12 +141,6 @@ build:fedora:rawhide:
   when: manual
   allow_failure: true
 
-build:manjarolinux:latest:
-  extends:
-    - .build_img
-  script:
-    - ./.gitlab/build_image.sh manjarolinux latest
-
 build:ubuntu:22.04:
   extends:
     - .build_img
@@ -186,17 +170,6 @@ lint:ansible:
     - go-task ans:lint
     # Also check all other non ansible files
     - yamllint -f parsable .
-
-test:archlinux:latest:
-  extends:
-    - .test
-    - .rules_secondary_os
-  image: ${CI_REGISTRY}/perobertson/scripts/archlinux:latest-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:archlinux:latest
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
 
 test:centos:stream9:
   extends:
@@ -272,17 +245,6 @@ test:fedora:rawhide:
   # unreleased
   when: manual
   allow_failure: true
-
-test:manjarolinux:latest:
-  extends:
-    - .test
-    - .rules_archlinux
-  image: ${CI_REGISTRY}/perobertson/scripts/manjarolinux:latest-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:manjarolinux:latest
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
 
 test:ubuntu:22.04:
   # EOL: 2027-04
