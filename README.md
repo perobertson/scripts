@@ -15,7 +15,7 @@ are just not tested in CI.
 
 - CentOS: stream9
 - Debian: 11
-- Fedora: 37, 38
+- Fedora: 38, 39
 - Ubuntu: 22.04(LTS)
 
 Please see the [latest pipeline] for `main` for the complete list.

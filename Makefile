@@ -34,10 +34,6 @@ dockerfiles/dist/debian/debian-11.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/debian/debian-11.tar: dockerfiles/debian.dockerfile
 	$(call build_image,debian,11)
 
-dockerfiles/dist/fedora/fedora-37.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/fedora/fedora-37.tar: dockerfiles/fedora.dockerfile
-	$(call build_image,fedora,37)
-
 dockerfiles/dist/fedora/fedora-38.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/fedora/fedora-38.tar: dockerfiles/fedora.dockerfile
 	$(call build_image,fedora,38)
@@ -45,6 +41,10 @@ dockerfiles/dist/fedora/fedora-38.tar: dockerfiles/fedora.dockerfile
 dockerfiles/dist/fedora/fedora-39.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/fedora/fedora-39.tar: dockerfiles/fedora.dockerfile
 	$(call build_image,fedora,39)
+
+dockerfiles/dist/fedora/fedora-40.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/fedora/fedora-40.tar: dockerfiles/fedora.dockerfile
+	$(call build_image,fedora,40)
 
 dockerfiles/dist/ubuntu/ubuntu-22.04.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/ubuntu/ubuntu-22.04.tar: dockerfiles/ubuntu.dockerfile
@@ -100,10 +100,6 @@ test-centos-stream9: dockerfiles/dist/centos/centos-stream9.tar
 test-debian-11: dockerfiles/dist/debian/debian-11.tar
 	$(call test_os,debian,11)
 
-.PHONY: test-fedora-37
-test-fedora-37: dockerfiles/dist/fedora/fedora-37.tar
-	$(call test_os,fedora,37)
-
 .PHONY: test-fedora-38
 test-fedora-38: dockerfiles/dist/fedora/fedora-38.tar
 	$(call test_os,fedora,38)
@@ -111,6 +107,10 @@ test-fedora-38: dockerfiles/dist/fedora/fedora-38.tar
 .PHONY: test-fedora-39
 test-fedora-39: dockerfiles/dist/fedora/fedora-39.tar
 	$(call test_os,fedora,39)
+
+.PHONY: test-fedora-40
+test-fedora-40: dockerfiles/dist/fedora/fedora-40.tar
+	$(call test_os,fedora,40)
 
 .PHONY: test-ubuntu-22.04
 test-ubuntu-22.04: dockerfiles/dist/ubuntu/ubuntu-22.04.tar
