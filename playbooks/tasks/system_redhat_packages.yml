@@ -73,7 +73,6 @@
     - openssl-devel
     - patch
     - pcp-system-tools  # dstat
-    - perl
     - podman
     - podman-docker  # emulate docker
     - python3-dbus
