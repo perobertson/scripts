@@ -6,10 +6,10 @@
     id: 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
     keyring: /usr/share/keyrings/1password-archive-keyring.gpg
 
-- name: Debian - Add 1Password Beta Repo
+- name: Debian - Add 1Password Stable Repo
   ansible.builtin.apt_repository:
     repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg]
-      https://downloads.1password.com/linux/debian/amd64 beta main"
+      https://downloads.1password.com/linux/debian/amd64 stable main"
     filename: 1password
     state: present
 

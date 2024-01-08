@@ -11,12 +11,12 @@
     fingerprint: 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
   register: rpm_key_1password
 
-- name: RedHat - Add 1Password beta repository
+- name: RedHat - Add 1Password stable repository
   ansible.builtin.yum_repository:
     file: 1password-ansible
-    name: 1password-beta
-    description: 1Password - Beta
-    baseurl: https://downloads.1password.com/linux/rpm/beta/$basearch
+    name: 1password-stable
+    description: 1Password - Stable
+    baseurl: https://downloads.1password.com/linux/rpm/stable/$basearch
     enabled: true
     gpgcheck: true
     gpgkey: https://downloads.1password.com/linux/keys/1password.asc
@@ -26,7 +26,7 @@
 - name: RedHat - refresh dnf keys for 1Password  # noqa no-handler
   ansible.builtin.command: >
     dnf -q makecache -y --disablerepo='*'
-    --enablerepo='1password-beta'
+    --enablerepo='1password-stable'
   when: rpm_key_1password.changed
   changed_when: false
 
