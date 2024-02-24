@@ -85,6 +85,30 @@
   when: rpm_key_microsoft.changed
   changed_when: false
 
+- name: RedHat - Import Warp signing key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://releases.warp.dev/linux/keys/warp.asc
+    fingerprint: 0913165C78D5B7A41B42AC657FF7AB39D60F803F
+  register: rpm_key_warp
+
+- name: RedHat - Add Warp repository
+  ansible.builtin.yum_repository:
+    file: warpdotdev
+    name: warpdotdev
+    description: warpdotdev
+    baseurl: https://releases.warp.dev/linux/rpm/stable
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://releases.warp.dev/linux/keys/warp.asc
+    repo_gpgcheck: true
+
+# TODO: remove this workaround when dnf uses the rpm key database
+- name: RedHat - refresh dnf keys for Warp  # noqa no-handler
+  ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='warpdotdev'"
+  when: rpm_key_warp.changed
+  changed_when: false
+
 - name: RedHat - Import Zoom signing key
   ansible.builtin.rpm_key:
     state: present
