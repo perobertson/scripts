@@ -70,6 +70,7 @@
     - make
     - nodejs
     - npm
+    - nvtop  # Top for GPUs
     - openssl-devel
     - patch
     - pcp-system-tools  # dstat
