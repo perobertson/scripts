@@ -49,6 +49,7 @@
     - bzip2
     - bzip2-devel
     - cargo  # Rust's package manager and build tool
+    - clang  # Front-end for the LLVM compiler
     - clippy  # Lints to catch common mistakes and improve your Rust code
     - cmake  # Needed for installing some rust crates
     - curl
@@ -68,6 +69,7 @@
     - libnotify
     - libtool
     - make
+    - mold  # Faster linker for compiling
     - nodejs
     - npm
     - nvtop  # Top for GPUs
