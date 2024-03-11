@@ -111,12 +111,6 @@ build:debian:11:
   script:
     - ./.gitlab/build_image.sh debian 11
 
-build:fedora:38:
-  extends:
-    - .build_img
-  script:
-    - ./.gitlab/build_image.sh fedora 38
-
 build:fedora:39:
   extends:
     - .build_img
@@ -128,6 +122,12 @@ build:fedora:40:
     - .build_img
   script:
     - ./.gitlab/build_image.sh fedora 40
+
+build:fedora:41:
+  extends:
+    - .build_img
+  script:
+    - ./.gitlab/build_image.sh fedora 41
   # unreleased
   when: manual
   allow_failure: true
@@ -193,18 +193,6 @@ test:debian:11:
     - job: lint:ansible
       artifacts: false
 
-test:fedora:38:
-  # EOL: 2024-05-14
-  extends:
-    - .test
-    - .rules_redhat
-  image: ${CI_REGISTRY}/perobertson/scripts/fedora:38-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:fedora:38
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
-
 test:fedora:39:
   # EOL: 2024-11-12
   extends:
@@ -225,6 +213,18 @@ test:fedora:40:
   image: ${CI_REGISTRY}/perobertson/scripts/fedora:40-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:fedora:40
+      artifacts: false
+    - job: lint:ansible
+      artifacts: false
+
+test:fedora:41:
+  # EOL: ~2025-10-22
+  extends:
+    - .test
+    - .rules_redhat
+  image: ${CI_REGISTRY}/perobertson/scripts/fedora:41-${CI_COMMIT_REF_SLUG}
+  needs:
+    - job: build:fedora:41
       artifacts: false
     - job: lint:ansible
       artifacts: false
