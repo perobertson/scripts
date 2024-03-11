@@ -12,6 +12,7 @@
     - 1password-cli
     - bash
     - bash-completion
+    - clang  # Front-end for the LLVM compiler
     - cmake  # Needed for installing some rust crates
     - crudini
     - dconf-cli
@@ -25,6 +26,7 @@
     - jq
     - libcairo2-dev
     - lynis  # Security scanning tool
+    - mold  # Faster linker for compiling
     - nodejs
     - pkg-config
     - podman
