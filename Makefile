@@ -30,9 +30,9 @@ dockerfiles/dist/centos/centos-stream9.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/centos/centos-stream9.tar: dockerfiles/centos.dockerfile
 	$(call build_image,centos,stream9)
 
-dockerfiles/dist/debian/debian-11.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/debian/debian-11.tar: dockerfiles/debian.dockerfile
-	$(call build_image,debian,11)
+dockerfiles/dist/debian/debian-12.tar: ./.gitlab/build_image.sh
+dockerfiles/dist/debian/debian-12.tar: dockerfiles/debian.dockerfile
+	$(call build_image,debian,12)
 
 
 dockerfiles/dist/fedora/fedora-39.tar: ./.gitlab/build_image.sh
@@ -97,9 +97,9 @@ endef
 test-centos-stream9: dockerfiles/dist/centos/centos-stream9.tar
 	$(call test_os,centos,stream9)
 
-.PHONY: test-debian-11
-test-debian-11: dockerfiles/dist/debian/debian-11.tar
-	$(call test_os,debian,11)
+.PHONY: test-debian-12
+test-debian-12: dockerfiles/dist/debian/debian-12.tar
+	$(call test_os,debian,12)
 
 .PHONY: test-fedora-39
 test-fedora-39: dockerfiles/dist/fedora/fedora-39.tar
