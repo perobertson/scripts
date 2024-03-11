@@ -8,7 +8,6 @@
   register: ubuntu_install_packages
   until: ubuntu_install_packages is succeeded
   loop:
-    - mold  # Faster linker for compiling
     - podman-docker  # emulate docker
 
 - name: Ubuntu >=18 - Install packages

@@ -26,6 +26,7 @@
     - jq
     - libcairo2-dev
     - lynis  # Security scanning tool
+    - mold  # Faster linker for compiling
     - nodejs
     - pkg-config
     - podman
