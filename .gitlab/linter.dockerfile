@@ -22,8 +22,8 @@ ENV PATH="/home/linter/.local/bin:${PATH}"
 
 COPY --chown=linter:linter bootstrap/install_ansible.bash /tmp
 RUN /tmp/install_ansible.bash \
-    && pipx inject ansible ansible-lint \
-    && pipx inject ansible yamllint \
+    && pipx inject --include-deps ansible ansible-lint \
+    && pipx inject --include-deps ansible yamllint \
     && ansible-lint --version \
     && yamllint --version \
     && rm /tmp/install_ansible.bash
