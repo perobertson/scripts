@@ -9,5 +9,4 @@
   until: centos_install_packages is succeeded
   loop:
     - dbus-daemon
-    - kubectl
     - python3-psutil
