@@ -39,11 +39,9 @@ esac
 case "${VERSION_ID}" in
     22.04)
         # 22.04 ships with a broken python and no clear way to fix it
-        if [[ -n "${CI:-}" ]]; then
-            if ! pip3 check; then
-                # TODO: remove the 22.04 override
-                exit 1
-            fi
+        if [[ -n "${CI:-}" ]] && pip3 check; then
+            # TODO: remove the 22.04 override
+            exit 1
         fi
     ;;
     *)
