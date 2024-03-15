@@ -27,24 +27,6 @@ PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${HOME}/bin:$PATH"
 # Set the code path if its not set to where all code will be cloned into
 : "${CODE_PATH:=${HOME}/workspace}"
 
-install_ssh_keyscan(){
-    # Check if ssh-keyscan needs installed
-    if [[ ! -x "$(command -v ssh-keyscan)" ]]; then
-        if [[ -x "$(command -v dnf)" ]]; then
-            sudo dnf install -y openssh-clients
-        elif [[ -x "$(command -v apt-get)" ]]; then
-            sudo apt-get update
-            sudo apt-get install -y apt-transport-https
-            sudo apt-get install -y openssh-client
-        elif [[ -x "$(command -v pacman)" ]]; then
-            sudo pacman -Syu --noconfirm
-            sudo pacman -S --noconfirm openssh
-        else
-            echo "WARNING: could not locate ssh-keyscan" >&2
-        fi
-    fi
-}
-
 install_git(){
     # Check if git needs installed
     if [[ ! -x "$(command -v git)" ]]; then
@@ -61,23 +43,6 @@ install_git(){
         else
             echo "WARNING: could not locate git" >&2
         fi
-    fi
-}
-
-keyscan(){
-    # Setup ssh
-    if [[ ! -d "${HOME}/.ssh" ]]; then
-        mkdir "${HOME}/.ssh"
-        chmod 700 "${HOME}/.ssh"
-    fi
-    touch "$HOME/.ssh/known_hosts"
-    if [[ "$(grep ^gitlab.com "${HOME}/.ssh/known_hosts")" = '' ]]; then
-        install_ssh_keyscan
-        ssh-keyscan -v 'gitlab.com' >> "${HOME}/.ssh/known_hosts" 2>/dev/null
-    fi
-    if [[ "$(grep ^github.com "${HOME}/.ssh/known_hosts")" = '' ]]; then
-        install_ssh_keyscan
-        ssh-keyscan -v 'github.com' >> "${HOME}/.ssh/known_hosts" 2>/dev/null
     fi
 }
 
@@ -137,7 +102,6 @@ if [[ $(id -u) -eq 0 ]]; then
 fi
 
 install_git
-keyscan # TODO: is this needed?
 fetch_scripts
 switch_dir
 bootstrap
