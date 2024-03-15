@@ -4,14 +4,10 @@ set -euo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 sudo dnf -y install \
+    pipx \
     python3-devel \
     python3-dnf \
     python3-pip
-
-# required to install dependencies of ansible
-sudo dnf -y install \
-    gcc \
-    libffi-devel
 
 # Setup ansible
 "${SCRIPT_DIR}/install_ansible.bash"

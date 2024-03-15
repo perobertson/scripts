@@ -29,7 +29,7 @@ workflow:
   stage: build
   image:
     # debug image has a shell
-    name: gcr.io/kaniko-project/executor:v1.9.1-debug
+    name: gcr.io/kaniko-project/executor:v1.21.1-debug
     entrypoint: [""]
   needs:
     - job: lint:shellcheck
@@ -104,12 +104,12 @@ build:centos:stream9:
   script:
     - ./.gitlab/build_image.sh centos stream9
 
-build:debian:11:
+build:debian:12:
   extends:
     - .build_img
     - .rules_secondary_os
   script:
-    - ./.gitlab/build_image.sh debian 11
+    - ./.gitlab/build_image.sh debian 12
 
 build:fedora:39:
   extends:
@@ -182,13 +182,13 @@ test:centos:stream9:
     - job: lint:ansible
       artifacts: false
 
-test:debian:11:
+test:debian:12:
   extends:
     - .test
     - .rules_secondary_os
-  image: ${CI_REGISTRY}/perobertson/scripts/debian:11-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY}/perobertson/scripts/debian:12-${CI_COMMIT_REF_SLUG}
   needs:
-    - job: build:debian:11
+    - job: build:debian:12
       artifacts: false
     - job: lint:ansible
       artifacts: false
