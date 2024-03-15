@@ -29,10 +29,25 @@ VERSION_ID="$(. /etc/os-release && echo "${VERSION_ID}")"
 case "${VERSION_ID}" in
         11)
         ;;
+        12)
+        ;;
         *)
             install_cairo
         ;;
 esac
 
 # make sure all dependencies are satisfied
-pip3 check
+case "${VERSION_ID}" in
+        12)
+            # 12 ships with a broken python and no clear way to fix it
+            if [[ -n "${CI:-}" ]]; then
+                if ! pip3 check; then
+                    # TODO: remove the v12 override
+                    exit 1
+                fi
+            fi
+        ;;
+        *)
+            pip3 check
+        ;;
+esac
