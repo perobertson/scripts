@@ -9,6 +9,7 @@ sudo apt-get update
 sudo apt-get install -y apt-transport-https
 
 sudo apt-get install -y \
+    pipx \
     python3 \
     python3-pip
 
