@@ -4,22 +4,10 @@ set -euo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 sudo dnf -y install \
-    python3-dnf
-
-if [[ "$(source /etc/os-release && echo "$VERSION_ID")" = "8" ]]; then
-    sudo dnf -y install \
-        python39-devel \
-        python39-pip
-else
-    sudo dnf -y install \
-        python3-devel \
-        python3-pip
-fi
-
-# required to install dependencies of ansible
-sudo dnf -y install \
-    gcc \
-    libffi-devel
+    pipx \
+    python3-dnf \
+    python3-devel \
+    python3-pip
 
 # Setup ansible
 "${SCRIPT_DIR}/install_ansible.bash"
