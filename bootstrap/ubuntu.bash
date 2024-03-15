@@ -8,7 +8,11 @@ sudo apt-get update
 # Make sure packages are installed over https
 sudo apt-get install -y apt-transport-https
 
+# Install tzdata with the default settings for the system
+DEBIAN_FRONTEND=noninteractive sudo -E apt-get install -y --no-install-recommends tzdata
+
 sudo apt-get install -y \
+    pipx \
     python3 \
     python3-pip
 
@@ -26,10 +30,23 @@ install_cairo(){
 
 VERSION_ID="$(. /etc/os-release && echo "${VERSION_ID}")"
 case "${VERSION_ID}" in
-        *)
-            install_cairo
-        ;;
+    *)
+        install_cairo
+    ;;
 esac
 
 # make sure all dependencies are satisfied
-pip3 check
+case "${VERSION_ID}" in
+    22.04)
+        # 22.04 ships with a broken python and no clear way to fix it
+        if [[ -n "${CI:-}" ]]; then
+            if ! pip3 check; then
+                # TODO: remove the 22.04 override
+                exit 1
+            fi
+        fi
+    ;;
+    *)
+        pip3 check
+    ;;
+esac
