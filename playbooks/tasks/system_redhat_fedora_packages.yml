@@ -8,7 +8,6 @@
   register: fedora_install_packages
   until: fedora_install_packages is succeeded
   loop:
-    - community-mysql-devel  # from fedora modular
     - dbus-daemon
     - dbus-tools
     - fd-find
