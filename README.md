@@ -14,7 +14,7 @@ will be cleaned up after a period of time. Other versions may still work, they
 are just not tested in CI.
 
 - Debian: 12
-- Fedora: 39, 40
+- Fedora: 40
 - Ubuntu: 22.04(LTS)
 
 Please see the [latest pipeline] for `main` for the complete list.

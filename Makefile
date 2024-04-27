@@ -35,10 +35,6 @@ dockerfiles/dist/debian/debian-12.tar: dockerfiles/debian.dockerfile
 	$(call build_image,debian,12)
 
 
-dockerfiles/dist/fedora/fedora-39.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/fedora/fedora-39.tar: dockerfiles/fedora.dockerfile
-	$(call build_image,fedora,39)
-
 dockerfiles/dist/fedora/fedora-40.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/fedora/fedora-40.tar: dockerfiles/fedora.dockerfile
 	$(call build_image,fedora,40)
@@ -100,10 +96,6 @@ test-centos-stream9: dockerfiles/dist/centos/centos-stream9.tar
 .PHONY: test-debian-12
 test-debian-12: dockerfiles/dist/debian/debian-12.tar
 	$(call test_os,debian,12)
-
-.PHONY: test-fedora-39
-test-fedora-39: dockerfiles/dist/fedora/fedora-39.tar
-	$(call test_os,fedora,39)
 
 .PHONY: test-fedora-40
 test-fedora-40: dockerfiles/dist/fedora/fedora-40.tar
