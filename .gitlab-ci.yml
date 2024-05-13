@@ -5,8 +5,8 @@
 ---
 default:
   interruptible: true
-  tags:
-    - shared
+# tags:
+#   - shared
 
 stages:
   - build
