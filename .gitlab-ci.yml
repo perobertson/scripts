@@ -6,7 +6,7 @@
 default:
   interruptible: true
   tags:
-    - docker
+    - shared
 
 stages:
   - build
