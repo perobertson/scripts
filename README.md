@@ -15,7 +15,7 @@ are just not tested in CI.
 
 - Debian: 12
 - Fedora: 40
-- Ubuntu: 22.04(LTS)
+- Ubuntu: 22.04(LTS), 24.04(LTS)
 
 Please see the [latest pipeline] for `main` for the complete list.
 
