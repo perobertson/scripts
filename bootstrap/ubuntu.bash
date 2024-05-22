@@ -30,6 +30,9 @@ install_cairo(){
 
 VERSION_ID="$(. /etc/os-release && echo "${VERSION_ID}")"
 case "${VERSION_ID}" in
+    24.04)
+        # no need to install cairo
+    ;;
     *)
         install_cairo
     ;;
