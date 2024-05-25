@@ -8,22 +8,11 @@
   register: ubuntu_install_packages
   until: ubuntu_install_packages is succeeded
   loop:
+    - flameshot
+    - npm
     - podman-docker  # emulate docker
 
-- name: Ubuntu >=18 - Install packages
-  ansible.builtin.apt:
-    pkg: "{{ item }}"
-    state: present
-  retries: 3
-  delay: 5
-  register: ubuntu18_install_packages
-  until: ubuntu18_install_packages is succeeded
-  when: ansible_distribution_major_version | int >= 18
-  loop:
-    - flameshot
-    - libasound2
-    - npm
-
+# EOL: 2025-04
 - name: Ubuntu >=20 - Install packages
   ansible.builtin.apt:
     pkg: "{{ item }}"
@@ -38,6 +27,7 @@
     - python3-launchpadlib
     - python3-testresources
 
+# EOL: 2027-06
 - name: Ubuntu >=22 - Install packages
   ansible.builtin.apt:
     pkg: "{{ item }}"
