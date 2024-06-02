@@ -28,9 +28,11 @@
     - mozilla-fira-mono-fonts
     - mozilla-fira-sans-fonts
     - open-policy-agent
-    # TODO: move this to redhat when centos gets support
-    - podman-compose  # emulate docker-compose
     - python3-psutil
     - ShellCheck
     - sqlitebrowser
+    - tenv  # OpenTofu version manager
     - texlive-montserrat
+
+    # TODO: move this to redhat when centos gets support
+    - podman-compose  # emulate docker-compose
