@@ -2,7 +2,8 @@
 Description=User updates timer
 
 [Timer]
-OnBootSec=15min
+# Need to wait a few minutes for the binary to be available the first time
+OnBootSec=4min
 OnUnitActiveSec=1h
 
 [Install]
