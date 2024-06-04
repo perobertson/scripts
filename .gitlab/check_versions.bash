@@ -24,7 +24,6 @@ gitui --version || echo 'gitui unavailable'
 go-task --version || echo 'go-task unavailable'
 gzip --version
 jq --version
-keybase --version || echo 'keybase unavailable'
 make --version
 node --version
 npm --version
