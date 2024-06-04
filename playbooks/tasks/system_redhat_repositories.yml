@@ -30,37 +30,6 @@
   when: rpm_key_1password.changed
   changed_when: false
 
-- name: RedHat - Import Keybase signing key
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://keybase.io/docs/server_security/code_signing_key.asc
-    fingerprint: 222B85B0F90BE2D24CFEB93F47484E50656D16C7
-  register: rpm_key_keybase
-  ignore_errors: true
-
-- name: RedHat - Add Keybase repository
-  ansible.builtin.yum_repository:
-    file: keybase
-    name: keybase
-    description: keybase
-    baseurl: http://prerelease.keybase.io/rpm/x86_64
-    enabled: true
-    gpgcheck: true
-    gpgkey: https://keybase.io/docs/server_security/code_signing_key.asc
-    metadata_expire: '60'
-    # This repo was previously signed with the key but they no longer sign the
-    # repo when publishing new releases. This causes a bad signature.
-    repo_gpgcheck: false
-  when: rpm_key_keybase is succeeded
-
-# TODO: remove this workaround when dnf uses the rpm key database
-- name: RedHat - refresh dnf keys for Keybase  # noqa no-handler
-  ansible.builtin.command: "dnf -q makecache -y --disablerepo='*' --enablerepo='keybase'"
-  when:
-    - rpm_key_keybase is succeeded
-    - rpm_key_keybase.changed
-  changed_when: false
-
 - name: RedHat - Import VSCode signing key
   ansible.builtin.rpm_key:
     state: present

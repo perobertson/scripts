@@ -110,13 +110,6 @@
     - code  # VSCode
   when: not running_in_wsl
 
-- name: RedHat - Best effort to install keybase
-  ansible.builtin.dnf:
-    name:
-      - keybase
-    state: present
-  when: rpm_key_keybase is succeeded
-
 - name: RedHat - Best effort to install optional packages
   ansible.builtin.dnf:
     name: "{{ item }}"
