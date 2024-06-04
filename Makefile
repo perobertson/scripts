@@ -43,10 +43,6 @@ dockerfiles/dist/fedora/fedora-41.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/fedora/fedora-41.tar: dockerfiles/fedora.dockerfile
 	$(call build_image,fedora,41)
 
-dockerfiles/dist/ubuntu/ubuntu-22.04.tar: ./.gitlab/build_image.sh
-dockerfiles/dist/ubuntu/ubuntu-22.04.tar: dockerfiles/ubuntu.dockerfile
-	$(call build_image,ubuntu,22.04)
-
 dockerfiles/dist/ubuntu/ubuntu-24.04.tar: ./.gitlab/build_image.sh
 dockerfiles/dist/ubuntu/ubuntu-24.04.tar: dockerfiles/ubuntu.dockerfile
 	$(call build_image,ubuntu,24.04)
@@ -108,10 +104,6 @@ test-fedora-40: dockerfiles/dist/fedora/fedora-40.tar
 .PHONY: test-fedora-41
 test-fedora-41: dockerfiles/dist/fedora/fedora-41.tar
 	$(call test_os,fedora,41)
-
-.PHONY: test-ubuntu-22.04
-test-ubuntu-22.04: dockerfiles/dist/ubuntu/ubuntu-22.04.tar
-	$(call test_os,ubuntu,22.04)
 
 .PHONY: test-ubuntu-24.04
 test-ubuntu-24.04: dockerfiles/dist/ubuntu/ubuntu-24.04.tar

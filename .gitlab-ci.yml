@@ -135,12 +135,6 @@ build:fedora:rawhide:
   when: manual
   allow_failure: true
 
-build:ubuntu:22.04:
-  extends:
-    - .build_img
-  script:
-    - ./.gitlab/build_image.sh ubuntu 22.04
-
 build:ubuntu:24.04:
   extends:
     - .build_img
@@ -233,18 +227,6 @@ test:fedora:rawhide:
   # unreleased
   when: manual
   allow_failure: true
-
-test:ubuntu:22.04:
-  # EOL: 2027-05
-  extends:
-    - .test
-    - .rules_debian
-  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:22.04-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:ubuntu:22.04
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
 
 test:ubuntu:24.04:
   # EOL: 2029-06
