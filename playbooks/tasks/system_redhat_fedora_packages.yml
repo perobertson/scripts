@@ -33,6 +33,7 @@
     - sqlitebrowser
     - tenv  # OpenTofu version manager
     - texlive-montserrat
+    - zoom
 
     # TODO: move this to redhat when centos gets support
     - podman-compose  # emulate docker-compose

@@ -91,6 +91,23 @@
       - rpm
     state: present
 
+- name: Fedora - install zoom updater script
+  community.general.make:
+    chdir: /opt/zoom-yum-repo
+    target: install-script
+
+# Download the zoom packages and build a local yum repo
+- name: Fedora - run zoom updater
+  ansible.builtin.command: /usr/local/bin/zoom-yum-repo-update.bash
+  args:
+    creates: /var/lib/zoom-yum-repo/repodata/repomd.xml
+
+# Add the local yum repo config so dnf discovers zoom
+- name: Fedora - install zoom updater repo
+  community.general.make:
+    chdir: /opt/zoom-yum-repo
+    target: install-repo
+
 - name: Fedora - install zoom updater service
   community.general.make:
     chdir: /opt/zoom-yum-repo
