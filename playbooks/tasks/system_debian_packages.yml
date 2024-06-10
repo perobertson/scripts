@@ -24,7 +24,6 @@
     - gitk
     - htop
     - jq
-    - kubernetes-client  # kubectl
     - libcairo2-dev
     - lynis  # Security scanning tool
     - mold  # Faster linker for compiling
