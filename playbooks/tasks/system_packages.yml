@@ -15,15 +15,6 @@
     name: "{{ ansible_user_id }}"
     shell: /usr/bin/zsh
 
-- name: All - Install aws-vault
-  ansible.builtin.get_url:
-    checksum: sha256:https://github.com/99designs/aws-vault/releases/download/v{{ aws_vault_version }}/SHA256SUMS
-    dest: /usr/local/bin/aws-vault
-    group: root
-    owner: root
-    url: https://github.com/99designs/aws-vault/releases/download/v{{ aws_vault_version }}/aws-vault-linux-amd64
-    mode: "0755"
-
 - name: All - Install custom scripts
   tags: [systemd]
   ansible.builtin.copy:

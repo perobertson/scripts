@@ -7,7 +7,6 @@ PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${HOME}/bin:$PATH"
 
 # Check the version of installed tools
 1password --version || echo '1password unavailable'
-aws-vault --version
 bash --version
 bat --version || echo 'bat unavailable'
 curl --version
