@@ -22,7 +22,7 @@
       - vim
     state: present
 
-- name: RedHad - Remove conflicting packages
+- name: RedHat - Remove conflicting packages
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: absent
