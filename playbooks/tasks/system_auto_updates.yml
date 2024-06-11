@@ -1,0 +1,5 @@
+---
+### --- Family Specific Setup
+- name: RedHat Auto Updates
+  ansible.builtin.import_tasks: system_redhat_auto_updates.yml
+  when: ansible_os_family == 'RedHat'

@@ -6,7 +6,7 @@
     state: directory
     mode: '0755'
 
-- name: RedHat - Configure security updates
+- name: RedHat - Configure auto updates
   diff: true
   tags: [systemd]
   ansible.builtin.copy:
@@ -17,13 +17,13 @@
     - /etc/dnf/automatic.conf
     - /etc/systemd/system/dnf-automatic.service.d/non-metered.conf
 
-- name: RedHat - Configure security updates file permissions
+- name: RedHat - Configure auto updates file permissions
   tags: [systemd]
   ansible.builtin.file:
     path: /etc/dnf/automatic.conf
     mode: '0644'
 
-- name: RedHat - Enable security updates
+- name: RedHat - Enable auto updates
   become: true
   tags: [systemd]
   ansible.builtin.systemd:

@@ -1,5 +1,0 @@
----
-### --- Family Specific Setup
-- name: RedHat Security
-  ansible.builtin.import_tasks: system_redhat_security.yml
-  when: ansible_os_family == 'RedHat'
