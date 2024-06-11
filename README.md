@@ -13,7 +13,6 @@ EOL or use EOL languages can still be run as manual jobs in the CI pipeline and
 will be cleaned up after a period of time. Other versions may still work, they
 are just not tested in CI.
 
-- Debian: 12
 - Fedora: 40
 - Ubuntu: 24.04(LTS)
 

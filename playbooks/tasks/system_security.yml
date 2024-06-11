@@ -1,9 +1,5 @@
 ---
 ### --- Family Specific Setup
-- name: Debian Security
-  ansible.builtin.import_tasks: system_debian_security.yml
-  when: ansible_os_family == 'Debian'
-
 - name: RedHat Security
   ansible.builtin.import_tasks: system_redhat_security.yml
   when: ansible_os_family == 'RedHat'
