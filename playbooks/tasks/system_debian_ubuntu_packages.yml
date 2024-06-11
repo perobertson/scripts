@@ -9,6 +9,5 @@
   until: ubuntu_install_packages is succeeded
   loop:
     - flameshot
-    - npm
     - podman
     - podman-docker  # emulate docker

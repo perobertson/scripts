@@ -28,6 +28,7 @@
     - lynis  # Security scanning tool
     - mold  # Faster linker for compiling
     - nodejs
+    - npm
     - pkg-config
     - podman
     - python3-dbus
@@ -70,10 +71,6 @@
   failed_when: false
 
 ### --- Distro specific ---
-
-- name: Debian Packages
-  ansible.builtin.import_tasks: system_debian_debian_packages.yml
-  when: ansible_distribution == 'Debian'
 
 - name: Ubuntu Packages
   ansible.builtin.import_tasks: system_debian_ubuntu_packages.yml

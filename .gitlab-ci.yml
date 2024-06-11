@@ -1,5 +1,4 @@
 # CentOS EOL dates https://www.centos.org/centos-stream/
-# Debian EOL dates https://wiki.debian.org/DebianReleases/
 # Fedora EOL dates https://fedorapeople.org/groups/schedule/
 # Ubuntu EOL dates https://wiki.ubuntu.com/Releases/
 ---
@@ -47,7 +46,7 @@ workflow:
     - su public --command="./.gitlab/check_versions.bash"
     - su public --command="./.gitlab/verify_no_changes.sh"
 
-.rules_debian:
+.rules_ubuntu:
   rules: *rules_default
 
 .rules_eol:
@@ -103,13 +102,6 @@ build:centos:stream9:
     - .rules_secondary_os
   script:
     - ./.gitlab/build_image.sh centos stream9
-
-build:debian:12:
-  extends:
-    - .build_img
-    - .rules_secondary_os
-  script:
-    - ./.gitlab/build_image.sh debian 12
 
 build:fedora:40:
   extends:
@@ -176,17 +168,6 @@ test:centos:stream9:
     - job: lint:ansible
       artifacts: false
 
-test:debian:12:
-  extends:
-    - .test
-    - .rules_secondary_os
-  image: ${CI_REGISTRY}/perobertson/scripts/debian:12-${CI_COMMIT_REF_SLUG}
-  needs:
-    - job: build:debian:12
-      artifacts: false
-    - job: lint:ansible
-      artifacts: false
-
 test:fedora:40:
   # EOL: 2025-05-13
   extends:
@@ -232,7 +213,7 @@ test:ubuntu:24.04:
   # EOL: 2029-06
   extends:
     - .test
-    - .rules_debian
+    - .rules_ubuntu
   image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:24.04-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:ubuntu:24.04

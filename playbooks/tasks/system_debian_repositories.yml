@@ -29,10 +29,6 @@
 
 ### --- Distro specific ---
 
-- name: Debian Repositories
-  ansible.builtin.import_tasks: system_debian_debian_repositories.yml
-  when: ansible_distribution == 'Debian'
-
 - name: Ubuntu Repositories
   ansible.builtin.import_tasks: system_debian_ubuntu_repositories.yml
   when: ansible_distribution == 'Ubuntu'
