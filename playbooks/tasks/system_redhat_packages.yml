@@ -39,7 +39,6 @@
   register: redhat_install_packages
   until: redhat_install_packages is succeeded
   loop:
-    - 1password
     - 1password-cli
     - autoconf
     - automake
@@ -107,6 +106,7 @@
     pkg: "{{ item }}"
     state: present
   loop:
+    - 1password
     - code  # VSCode
   when: not running_in_wsl
 
@@ -119,7 +119,6 @@
   register: redhat_install_optional_packages
   until: redhat_install_optional_packages is succeeded
   loop:
-    - crudini
     - dconf-editor
     - dejavu-sans-fonts
     - dkms

@@ -3,7 +3,7 @@ set -xueo pipefail
 
 # Make sure the PATH has the location of rust and python bins
 # cargo/bin is needed for distros that need to use rustup.sh
-PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${HOME}/bin:$PATH"
+PATH="${HOME}/.cargo/bin:${HOME}/.local/bin:${HOME}/bin:${PATH}"
 
 # Check the version of installed tools
 1password --version || echo '1password unavailable'

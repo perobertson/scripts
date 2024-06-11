@@ -111,9 +111,6 @@
     - name: User applications
       ansible.builtin.import_tasks: tasks/user_applications.yml
       tags: [user, applications]
-    - name: User python
-      ansible.builtin.import_tasks: tasks/user_python.yml
-      tags: [user, python]
     - name: User UI
       ansible.builtin.import_tasks: tasks/user_ui.yml
       tags: [user, ui]
