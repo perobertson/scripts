@@ -77,10 +77,9 @@ switch_dir(){
 }
 
 bootstrap(){
-    os="$(. /etc/os-release && echo "${ID}")"
+    os="$(. /etc/os-release && echo "${ID:-}")"
     case "${os}" in
         centos)  source "bootstrap/centos.bash"  ;;
-        debian)  source "bootstrap/debian.bash"  ;;
         fedora)  source "bootstrap/fedora.bash"  ;;
         ubuntu)  source "bootstrap/ubuntu.bash"  ;;
         *)
