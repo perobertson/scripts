@@ -16,6 +16,7 @@ sudo apt-get install -y \
 # Setup ansible
 "${SCRIPT_DIR}/install_ansible.bash"
 
+VERSION_ID="$(. /etc/os-release && echo "${VERSION_ID}")"
 # make sure all dependencies are satisfied
 case "${VERSION_ID}" in
     12)
