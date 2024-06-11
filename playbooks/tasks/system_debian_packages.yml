@@ -37,7 +37,6 @@
     - tree
     - unzip
     - wget
-    - xz
     - zsh
     - zstd  # Zstandard - Fast real-time compression algorithm
 
