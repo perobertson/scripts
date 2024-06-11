@@ -14,11 +14,6 @@ tasks:
     cmds:
       - ansible-playbook -v flatpaks.yml {{.CLI_ARGS}}
 
-  kubernetes:
-    desc: Install Kubernetes for development
-    cmds:
-      - ansible-playbook --ask-become-pass -v kubernetes.yml {{.CLI_ARGS}}
-
   setup:
     desc: Run the setup script
     cmds:
