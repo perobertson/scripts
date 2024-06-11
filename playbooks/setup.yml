@@ -98,10 +98,10 @@
       tags: [system, systemd]
       become: true
 
-    - name: Security Settings
-      tags: [system, security]
+    - name: Automatic Updates
+      tags: [system, updates]
       become: true
-      ansible.builtin.import_tasks: tasks/system_security.yml
+      ansible.builtin.import_tasks: tasks/system_auto_updates.yml
 
     ### --- Userspace ---
     # Install dotfiles first so CI can detect drift
