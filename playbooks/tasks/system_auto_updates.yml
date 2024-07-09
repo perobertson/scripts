@@ -1,5 +1,9 @@
 ---
 ### --- Family Specific Setup
+- name: Debian Auto Updates
+  ansible.builtin.import_tasks: system_debian_auto_updates.yml
+  when: ansible_os_family == 'Debian'
+
 - name: RedHat Auto Updates
   ansible.builtin.import_tasks: system_redhat_auto_updates.yml
   when: ansible_os_family == 'RedHat'

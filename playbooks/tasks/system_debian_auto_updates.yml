@@ -1,0 +1,11 @@
+---
+- name: Debian - install unattended-upgrades
+  ansible.builtin.apt:
+    pkg: "{{ item }}"
+    state: present
+  retries: 3
+  delay: 5
+  register: debian_install_unattented_upgrades
+  until: debian_install_unattented_upgrades is succeeded
+  loop:
+    - unattended-upgrades
