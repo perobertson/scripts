@@ -39,7 +39,6 @@
   register: redhat_install_packages
   until: redhat_install_packages is succeeded
   loop:
-    - 1password-cli
     - autoconf
     - automake
     - bash
@@ -107,6 +106,7 @@
     state: present
   loop:
     - 1password
+    - 1password-cli
     - code  # VSCode
   when: not running_in_wsl
 

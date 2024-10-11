@@ -8,7 +8,6 @@
   register: debian_install_packages
   until: debian_install_packages is succeeded
   loop:
-    - 1password-cli
     - bash
     - bash-completion
     - clang  # Front-end for the LLVM compiler
@@ -46,6 +45,7 @@
     state: present
   loop:
     - 1password
+    - 1password-cli
     - code  # VSCode
   when: not running_in_wsl
 
