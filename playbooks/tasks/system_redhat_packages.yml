@@ -132,7 +132,6 @@
     - ImageMagick
     - libheif
     - libyaml-devel
-    - lynis  # Security scanning tool
     - mint-y-icons
     - mint-y-theme
     - ncdu

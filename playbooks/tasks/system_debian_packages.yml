@@ -21,7 +21,6 @@
     - gitk
     - htop
     - jq
-    - lynis  # Security scanning tool
     - mold  # Faster linker for compiling
     - nodejs
     - npm
