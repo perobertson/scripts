@@ -74,7 +74,7 @@
         path: /etc/wsl.conf
         section: boot
         option: systemd
-        value: true
+        value: 'true' # type: string
         mode: '0644'
       when: running_in_wsl
 
