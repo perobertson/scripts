@@ -7,6 +7,7 @@ sudo dnf -y install \
     pipx \
     python3-devel \
     python3-dnf \
+    python3-libdnf5 \
     python3-pip
 
 # Setup ansible
