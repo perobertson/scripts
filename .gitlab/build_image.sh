@@ -33,7 +33,7 @@ else
         --build-arg="OS_VERSION=${OS_VERSION}" \
         --cache-dir=/var/cache/kaniko \
         --cleanup \
-        --destination="localhost/scripts-${OS}:${OS_VERSION}" \
+        --destination="localhost/perobertson-setup-${OS}:${OS_VERSION}" \
         --digest-file="dockerfiles/dist/${OS}/${OS}-${OS_VERSION}.digest.txt" \
         --dockerfile="dockerfiles/${OS}.dockerfile" \
         --image-name-tag-with-digest-file="dockerfiles/dist/${OS}/${OS}-${OS_VERSION}.name-tag-digest.txt" \

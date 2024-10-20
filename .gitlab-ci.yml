@@ -159,7 +159,7 @@ test:centos:stream9:
   extends:
     - .test
     - .rules_secondary_os
-  image: ${CI_REGISTRY}/perobertson/scripts/centos:stream9-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY_IMAGE}/centos:stream9-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:centos:stream9
       artifacts: false
@@ -171,7 +171,7 @@ test:fedora:40:
   extends:
     - .test
     - .rules_redhat
-  image: ${CI_REGISTRY}/perobertson/scripts/fedora:40-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY_IMAGE}/fedora:40-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:fedora:40
       artifacts: false
@@ -183,7 +183,7 @@ test:fedora:41:
   extends:
     - .test
     - .rules_redhat
-  image: ${CI_REGISTRY}/perobertson/scripts/fedora:41-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY_IMAGE}/fedora:41-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:fedora:41
       artifacts: false
@@ -197,7 +197,7 @@ test:fedora:rawhide:
   extends:
     - .test
     - .rules_redhat
-  image: ${CI_REGISTRY}/perobertson/scripts/fedora:rawhide-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY_IMAGE}/fedora:rawhide-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:fedora:rawhide
       artifacts: false
@@ -212,7 +212,7 @@ test:ubuntu:24.04:
   extends:
     - .test
     - .rules_ubuntu
-  image: ${CI_REGISTRY}/perobertson/scripts/ubuntu:24.04-${CI_COMMIT_REF_SLUG}
+  image: ${CI_REGISTRY_IMAGE}/ubuntu:24.04-${CI_COMMIT_REF_SLUG}
   needs:
     - job: build:ubuntu:24.04
       artifacts: false
@@ -229,7 +229,7 @@ deploy:github:
     - echo "${GITHUB_KEY_PUB}" > ~/.ssh/id_rsa.pub
     - chmod 700 ~/.ssh/id_rsa*
     - ssh-keyscan 'github.com' >> ~/.ssh/known_hosts
-    - git remote add github -t main git@github.com:perobertson/scripts.git
+    - git remote add github -t main git@github.com:perobertson/setup.git
     - git fetch --all --verbose
     - git checkout -B "${CI_COMMIT_REF_NAME}"
     - git push --set-upstream github "${CI_COMMIT_REF_NAME}"
