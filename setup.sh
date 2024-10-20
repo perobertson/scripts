@@ -46,17 +46,17 @@ install_git(){
     fi
 }
 
-fetch_scripts(){
+fetch_setup(){
     if [[ ! -d "${CODE_PATH}/gitlab.com/perobertson" ]]; then
         mkdir -pv "${CODE_PATH}/gitlab.com/perobertson"
     fi
-    # Fetch the scripts
-    if [[ ! -d "${CODE_PATH}/gitlab.com/perobertson/scripts" ]]; then
-        git clone https://gitlab.com/perobertson/scripts.git \
-            "${CODE_PATH}/gitlab.com/perobertson/scripts"
+    # Fetch setup
+    if [[ ! -d "${CODE_PATH}/gitlab.com/perobertson/setup" ]]; then
+        git clone https://gitlab.com/perobertson/setup.git \
+            "${CODE_PATH}/gitlab.com/perobertson/setup"
     elif [[ -z "${CMD:-}" ]]; then
         # user reran the curl command
-        cd "${CODE_PATH}/gitlab.com/perobertson/scripts"
+        cd "${CODE_PATH}/gitlab.com/perobertson/setup"
         git pull --rebase --stat
         cd -
     fi
@@ -64,11 +64,11 @@ fetch_scripts(){
 
 switch_dir(){
     # Possible playbook locations:
-    # - ${CODE_PATH}/gitlab.com/perobertson/scripts
+    # - ${CODE_PATH}/gitlab.com/perobertson/setup
     # - current directory
     if [[ -z "${CMD:-}" ]]; then
         # piped into bash, so use the fetched location
-        cd "${CODE_PATH}/gitlab.com/perobertson/scripts"
+        cd "${CODE_PATH}/gitlab.com/perobertson/setup"
     else
         # otherwise it was invoked from a shell
         HERE="$( cd "$( dirname "${CMD}" )" >/dev/null 2>&1 && pwd )"
@@ -84,7 +84,7 @@ bootstrap(){
         ubuntu)  source "bootstrap/ubuntu.bash"  ;;
         *)
             echo "WARNING: ${os} is not supported" >&2
-            echo "Please submit an issue at https://gitlab.com/perobertson/scripts/issues" >&2
+            echo "Please submit an issue at https://gitlab.com/perobertson/setup/issues" >&2
             echo "Attempting to run ansible-playbook anyways..." >&2
         ;;
     esac
@@ -101,7 +101,7 @@ if [[ $(id -u) -eq 0 ]]; then
 fi
 
 install_git
-fetch_scripts
+fetch_setup
 switch_dir
 bootstrap
 

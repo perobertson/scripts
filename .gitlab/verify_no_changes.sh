@@ -4,7 +4,7 @@ set -xeu
 pwd
 git status --short && test "$(git status --short)" = ''
 
-cd '/home/public/workspace/gitlab.com/perobertson/scripts'
+cd '/home/public/workspace/gitlab.com/perobertson/setup'
 git status --short && test "$(git status --short)" = ''
 
 cd '/home/public/workspace/gitlab.com/perobertson/dotfiles'

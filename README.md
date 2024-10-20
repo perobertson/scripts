@@ -1,8 +1,8 @@
-# scripts
+# Setup
 
 This repo is a collection of scripts that are handy for setting up a new pc.
 
-[![pipeline status](https://gitlab.com/perobertson/scripts/badges/main/pipeline.svg)](https://gitlab.com/perobertson/scripts/pipelines?scope=branches&ref=main)
+[![pipeline status](https://gitlab.com/perobertson/setup/badges/main/pipeline.svg)](https://gitlab.com/perobertson/setup/pipelines?scope=branches&ref=main)
 
 ## Supported Operating Systems
 
@@ -18,23 +18,23 @@ are just not tested in CI.
 
 Please see the [latest pipeline] for `main` for the complete list.
 
-[latest pipeline]: https://gitlab.com/perobertson/scripts/pipelines?scope=branches&ref=main
+[latest pipeline]: https://gitlab.com/perobertson/setup/pipelines?scope=branches&ref=main
 
 ## Usage
 
 To run the script, all you need to do is run this from a console on the machine that you are setting up.
-This will checkout the project to `"${CODE_PATH:-~/workspace}/gitlab.com/perobertson/scripts"` before applying other changes.
+This will checkout the project to `"${CODE_PATH:-~/workspace}/gitlab.com/perobertson/setup"` before applying other changes.
 
 Using `curl`:
 
 ```bash
-/usr/bin/curl -sSL https://gitlab.com/perobertson/scripts/raw/main/setup.sh | bash
+/usr/bin/curl -sSL https://gitlab.com/perobertson/setup/raw/main/setup.sh | bash
 ```
 
 Using `wget`:
 
 ```bash
-/usr/bin/wget -qO- https://gitlab.com/perobertson/scripts/raw/main/setup.sh | bash
+/usr/bin/wget -qO- https://gitlab.com/perobertson/setup/raw/main/setup.sh | bash
 ```
 
 ## Updating
@@ -42,7 +42,7 @@ Using `wget`:
 The scripts are designed to be rerun to get the latest updates.
 
 ```bash
-cd "${CODE_PATH:-~/workspace}/gitlab.com/perobertson/scripts"
+cd "${CODE_PATH:-~/workspace}/gitlab.com/perobertson/setup"
 git pull --rebase
 ./setup.sh
 ```
