@@ -27,7 +27,6 @@
     - mozilla-fira-fonts-common
     - mozilla-fira-mono-fonts
     - mozilla-fira-sans-fonts
-    - open-policy-agent
     - python3-psutil
     - ShellCheck
     - sqlitebrowser
